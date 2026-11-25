@@ -1629,7 +1629,7 @@ function rainLevel() {
   const p = currentProfile();
   return p && p.level === "P4" ? 2 : 3;
 }
-const rain = { words: [], timer: null, dropTimer: null, spawnTimer: null, timeLeft: 60, score: 0, caught: 0, missed: 0, active: false, fallStep: 1.5, spawnMs: 3000, maxOnScreen: 6 };
+const rain = { words: [], pool: [], timer: null, dropTimer: null, spawnTimer: null, timeLeft: 60, score: 0, caught: 0, missed: 0, active: false, fallStep: 1.5, spawnMs: 3000, maxOnScreen: 6 };
 function startRain() {
   const p = passageById($("rainPassageSelect").value);
   if (!p) return;
@@ -1642,6 +1642,7 @@ function startRain() {
       seen.add(clean); words.push(clean);
     }
   }
+  rain.pool = words; // full unique-word list for this passage (shuffle() copies, so this stays intact)
   rain.words = shuffle(words).slice(0, 30);
   rain.score = 0; rain.caught = 0; rain.missed = 0; rain.timeLeft = 60; rain.active = true;
   $("rainArea").classList.remove("hidden");
@@ -1658,7 +1659,13 @@ function startRain() {
   // Words drop progressively, one at a time, at the chosen level's speed.
   rain.spawnTimer = setInterval(() => {
     if (!rain.active) return;
-    if (spawnIdx >= rain.words.length) return;
+    if (spawnIdx >= rain.words.length) {
+      // Batch used up (fast levels can run through 30 words before the 60s
+      // are over) — reshuffle the pool and keep going, so words keep
+      // appearing right to the end of the game.
+      rain.words = shuffle(rain.pool).slice(0, 30);
+      spawnIdx = 0;
+    }
     if (document.querySelectorAll(".rain-word").length >= rain.maxOnScreen) return;
     if (spawnRainWord(rain.words[spawnIdx])) spawnIdx++;
   }, rain.spawnMs);
