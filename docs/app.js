@@ -1611,7 +1611,7 @@ async function submitRace() {
 }
 
 /* --- Word Rain --- */
-const rain = { words: [], timer: null, dropTimer: null, timeLeft: 60, score: 0, caught: 0, missed: 0, active: false };
+const rain = { words: [], timer: null, dropTimer: null, spawnTimer: null, timeLeft: 60, score: 0, caught: 0, missed: 0, active: false };
 function startRain() {
   const p = passageById($("rainPassageSelect").value);
   if (!p) return;
@@ -1634,10 +1634,18 @@ function startRain() {
   $("rainTime").textContent = "60s left";
   $("rainInput").focus();
   let spawnIdx = 0;
+  // One new word every 2 seconds, so words drop progressively instead of
+  // all at once. A word falls the 320px board in about 12 seconds
+  // (2.7px every 100ms) — a steady speed a child can read and type.
+  rain.spawnTimer = setInterval(() => {
+    if (!rain.active) return;
+    if (spawnIdx >= rain.words.length) return;
+    if (document.querySelectorAll(".rain-word").length >= 6) return;
+    if (spawnRainWord(rain.words[spawnIdx])) spawnIdx++;
+  }, 2000);
   rain.dropTimer = setInterval(() => {
-    if (spawnIdx < rain.words.length) spawnRainWord(rain.words[spawnIdx++]);
     document.querySelectorAll(".rain-word").forEach((el) => {
-      const top = parseFloat(el.dataset.top || 0) + 1.6;
+      const top = parseFloat(el.dataset.top || 0) + 2.7;
       el.dataset.top = top;
       el.style.top = top + "px";
       if (top > 300) { el.remove(); rain.missed++; }
@@ -1656,9 +1664,25 @@ function spawnRainWord(word) {
   el.textContent = word;
   el.dataset.word = word;
   el.dataset.top = 0;
-  el.style.left = Math.floor(Math.random() * 70) + "%";
   el.style.top = "0px";
   board.appendChild(el);
+  const w = el.offsetWidth || 80;
+  const boardW = board.clientWidth || 600;
+  // Find a spot near the top that does not overlap a word already falling
+  // there, so words never pile up on top of each other.
+  for (let tries = 0; tries < 8; tries++) {
+    const left = Math.floor(Math.random() * Math.max(boardW - w - 8, 8));
+    const clash = Array.from(document.querySelectorAll(".rain-word")).some((o) => {
+      if (o === el) return false;
+      if (parseFloat(o.dataset.top || 0) > 90) return false;
+      const ol = parseFloat(o.style.left || 0);
+      const ow = o.offsetWidth || 80;
+      return left < ol + ow + 8 && ol < left + w + 8;
+    });
+    if (!clash) { el.style.left = left + "px"; return true; }
+  }
+  el.remove();
+  return false;
 }
 function rainSubmit() {
   const val = normWord($("rainInput").value.trim());
@@ -1677,22 +1701,26 @@ async function endRain() {
   rain.active = false;
   clearInterval(rain.timer);
   clearInterval(rain.dropTimer);
+  clearInterval(rain.spawnTimer);
   document.querySelectorAll(".rain-word").forEach((el) => el.remove());
   $("rainArea").classList.add("hidden");
   const total = rain.caught + rain.missed;
   const accuracy = total ? rain.caught / total * 100 : 0;
+  const minutes = Math.max((60 - rain.timeLeft) / 60, 0.05);
+  const wpm = rain.caught / minutes;
   const el = $("rainResult");
   el.innerHTML = "<h3>Word Rain finished!</h3>" +
     '<div class="score-grid">' +
     '<div class="score-box"><div class="num">' + rain.score + '</div><div class="lbl">points</div></div>' +
     '<div class="score-box"><div class="num">' + rain.caught + '</div><div class="lbl">words caught</div></div>' +
     '<div class="score-box"><div class="num">' + rain.missed + '</div><div class="lbl">words missed</div></div>' +
-    '<div class="score-box"><div class="num">' + Math.round(accuracy) + '%</div><div class="lbl">accuracy</div></div></div>' +
+    '<div class="score-box"><div class="num">' + Math.round(accuracy) + '%</div><div class="lbl">accuracy</div></div>' +
+    '<div class="score-box"><div class="num">' + Math.round(wpm) + '</div><div class="lbl">words per minute</div></div></div>' +
     '<p class="muted small">Result saved to your progress.</p>';
   el.classList.remove("hidden");
   const p = passageById($("rainPassageSelect").value);
   await saveSession({ kind: "typing", game: "Word Rain", passageTitle: p.num + " — " + p.title,
-    score: rain.score, caught: rain.caught, missed: rain.missed, accuracy: Math.round(accuracy) });
+    score: rain.score, caught: rain.caught, missed: rain.missed, accuracy: Math.round(accuracy), wpm: Math.round(wpm) });
 }
 
 /* --- Listen & Spell --- */
