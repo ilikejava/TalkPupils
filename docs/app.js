@@ -545,7 +545,8 @@ function renderProfiles() {
     }
     sel.value = state.currentProfileId;
   }
-  $("deleteProfileBtn").disabled = !state.currentProfileId;
+  const delBtn = $("deleteProfileBtn");
+  if (delBtn) delBtn.disabled = !state.currentProfileId;
 }
 function currentProfile() {
   return state.profiles.find((p) => p.id === state.currentProfileId) || null;
@@ -3474,7 +3475,8 @@ function initProfiles() {
     renderOralTopics();
     if ($("tab-progress").classList.contains("active")) renderProgress();
   });
-  $("deleteProfileBtn").addEventListener("click", async () => {
+  const delBtn = $("deleteProfileBtn");
+  if (delBtn) delBtn.addEventListener("click", async () => {
     const p = currentProfile();
     if (!p) return;
     if (!confirm('Delete the profile "' + p.name + '" and all of its sessions?')) return;

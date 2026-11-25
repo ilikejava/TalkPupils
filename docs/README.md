@@ -1,4 +1,4 @@
-# TalkPupils — website v10
+# TalkPupils — website v12
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -6,6 +6,9 @@ This is the website version: a static frontend on **GitHub Pages** with
 It is the same app as the laptop pilot, rebuilt for the web.
 
 Live site (after the steps below): **https://ilikejava.github.io/TalkPupils/**
+
+v12: the Delete pupil button is gone from the top bar, so a pupil
+profile can no longer be deleted by an accidental tap.
 
 ## What it does
 
