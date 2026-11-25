@@ -178,6 +178,15 @@
         <div class="row">
           <label for="rainPassageSelect">Passage</label>
           <select id="rainPassageSelect"></select>
+          <label for="rainLevelSelect">Speed</label>
+          <select id="rainLevelSelect">
+            <option value="1">Level 1 (slowest)</option>
+            <option value="2">Level 2</option>
+            <option value="3">Level 3</option>
+            <option value="4">Level 4</option>
+            <option value="5">Level 5</option>
+            <option value="6">Level 6 (fastest)</option>
+          </select>
           <button id="rainStartBtn" class="btn primary">Start Word Rain (60 seconds)</button>
         </div>
         <div id="rainArea" class="hidden">
@@ -456,8 +465,8 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v6</p>
+<p class="muted small" id="appVersion">TalkPupils web · v7</p>
 
-<script src="app.js?v=6"></script>
+<script src="app.js?v=7"></script>
 </body>
 </html>

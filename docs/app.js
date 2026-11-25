@@ -1611,7 +1611,25 @@ async function submitRace() {
 }
 
 /* --- Word Rain --- */
-const rain = { words: [], timer: null, dropTimer: null, spawnTimer: null, timeLeft: 60, score: 0, caught: 0, missed: 0, active: false };
+/* Word Rain speed levels 1–6, slowest to fastest. fall = px dropped every
+   100ms (a word falls the 320px board in ~30s at Level 1, ~10s at Level 6);
+   spawn = ms between new words; max = most words on screen at once. */
+const RAIN_LEVELS = [
+  { fall: 1.0, spawn: 5000, max: 4 },
+  { fall: 1.2, spawn: 4000, max: 5 },
+  { fall: 1.5, spawn: 3000, max: 6 },
+  { fall: 2.0, spawn: 2500, max: 6 },
+  { fall: 2.5, spawn: 2000, max: 6 },
+  { fall: 3.0, spawn: 1500, max: 7 },
+];
+function rainLevel() {
+  let saved = 0;
+  try { saved = parseInt(localStorage.getItem("talktupils_rain_level") || "0", 10) || 0; } catch (e) {}
+  if (saved >= 1 && saved <= 6) return saved;
+  const p = currentProfile();
+  return p && p.level === "P4" ? 2 : 3;
+}
+const rain = { words: [], timer: null, dropTimer: null, spawnTimer: null, timeLeft: 60, score: 0, caught: 0, missed: 0, active: false, fallStep: 1.5, spawnMs: 3000, maxOnScreen: 6 };
 function startRain() {
   const p = passageById($("rainPassageSelect").value);
   if (!p) return;
@@ -1633,19 +1651,20 @@ function startRain() {
   $("rainScore").textContent = "Score: 0";
   $("rainTime").textContent = "60s left";
   $("rainInput").focus();
+  const lvl = RAIN_LEVELS[rainLevel() - 1];
+  rain.fallStep = lvl.fall; rain.spawnMs = lvl.spawn; rain.maxOnScreen = lvl.max;
+  $("rainLevelSelect").value = String(rainLevel());
   let spawnIdx = 0;
-  // One new word every 3 seconds, so words drop progressively instead of
-  // all at once. A word falls the 320px board in about 20 seconds
-  // (1.5px every 100ms) — a slow, steady speed a child can read and type.
+  // Words drop progressively, one at a time, at the chosen level's speed.
   rain.spawnTimer = setInterval(() => {
     if (!rain.active) return;
     if (spawnIdx >= rain.words.length) return;
-    if (document.querySelectorAll(".rain-word").length >= 6) return;
+    if (document.querySelectorAll(".rain-word").length >= rain.maxOnScreen) return;
     if (spawnRainWord(rain.words[spawnIdx])) spawnIdx++;
-  }, 3000);
+  }, rain.spawnMs);
   rain.dropTimer = setInterval(() => {
     document.querySelectorAll(".rain-word").forEach((el) => {
-      const top = parseFloat(el.dataset.top || 0) + 1.5;
+      const top = parseFloat(el.dataset.top || 0) + rain.fallStep;
       el.dataset.top = top;
       el.style.top = top + "px";
       if (top > 300) { el.remove(); rain.missed++; }
@@ -1840,6 +1859,10 @@ function initType() {
   $("rainStartBtn").addEventListener("click", startRain);
   $("rainInput").addEventListener("keydown", (e) => {
     if (e.key === "Enter") rainSubmit();
+  });
+  $("rainLevelSelect").value = String(rainLevel());
+  $("rainLevelSelect").addEventListener("change", () => {
+    try { localStorage.setItem("talktupils_rain_level", $("rainLevelSelect").value); } catch (e) {}
   });
   $("spellStartBtn").addEventListener("click", startSpell);
   $("spellHearBtn").addEventListener("click", () => {
