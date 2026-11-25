@@ -86,6 +86,7 @@ select, input[type=text], input[type=password], textarea {
   background: #fff;
 }
 textarea { width: 100%; }
+#raceInput { font-size: 17px; resize: vertical; }
 input[type=text] { min-width: 220px; }
 input[type=password] { min-width: 280px; }
 .passage {

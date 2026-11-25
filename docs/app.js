@@ -1556,6 +1556,7 @@ function startRace() {
   $("raceArea").classList.remove("hidden");
   $("raceResult").classList.add("hidden");
   $("raceInput").value = "";
+  $("raceFeedback").textContent = "";
   showRaceSentence();
   $("raceInput").focus();
 }
@@ -1563,7 +1564,6 @@ function showRaceSentence() {
   const s = race.sentences[race.idx];
   $("raceSentence").textContent = s;
   $("raceProgress").textContent = "Sentence " + (race.idx + 1) + " of " + race.sentences.length;
-  $("raceFeedback").textContent = "";
   $("raceInput").value = "";
   $("raceInput").focus();
 }
@@ -1605,7 +1605,8 @@ async function submitRace() {
     await saveSession({ kind: "typing", game: "Sentence Race", passageTitle: p.num + " — " + p.title,
       wpm: Math.round(wpm), accuracy: Math.round(accuracy), points: race.points });
   } else {
-    setTimeout(showRaceSentence, 900);
+    // Roll straight into the next sentence — no pause — until the whole passage is done.
+    showRaceSentence();
   }
 }
 
@@ -1806,7 +1807,7 @@ function initType() {
   initTypeTabs();
   $("raceStartBtn").addEventListener("click", startRace);
   $("raceInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") submitRace();
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); submitRace(); }
   });
   $("rainStartBtn").addEventListener("click", startRain);
   $("rainInput").addEventListener("keydown", (e) => {
