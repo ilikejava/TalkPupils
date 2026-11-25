@@ -33,7 +33,10 @@ Live site (after the steps below): **https://ilikejava.github.io/TalkPupils/**
   pupil and use the whole app. Guest results stay only in that
   browser (localStorage); nothing is sent to Supabase and no account
   is created. A banner at the top says so, with a button to sign in
-  and save progress properly. Leaving guest mode clears the trial data.
+  and save progress properly. When the parent signs in on the same
+  browser, the pupils added in the trial (and their sessions and
+  progress) move into the parent account and show in the pupil list;
+  the built-in “Guest pupil” demo profile does not move across.
 
 ## Try it without signing in (guest trial)
 
@@ -66,8 +69,10 @@ URL.
 
 1. On the site, sign up with your email and a password (parent account).
    If it asks you to confirm your email, click the link in the email,
-   then sign in. (If the link does not arrive: Supabase → Authentication
-   → Providers → Email → turn off “Confirm email”.)
+   then sign in. (If the link does not arrive: tap “Resend confirmation
+   email” on the sign-in card, or in Supabase → Authentication
+   → Providers → Email → turn off “Confirm email” — with that off, a
+   new sign-up signs the parent straight in with no email step.)
 2. At the top right, tap **+ P6 pupil** — the name is already filled in
    as “P6”; change it to your child's name if you like, then **Save pupil**.
    Do the same with **+ P4 pupil**.

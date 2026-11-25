@@ -7,7 +7,11 @@
    (P6 or P4) whose data lives only in this browser's localStorage.
    In guest mode the app makes no Supabase calls at all — no sign-in,
    no tables, no storage uploads; answer audio stays as a blob URL in
-   the browser. Leaving guest mode clears the guest data. */
+   the browser. When the parent signs in on the same browser, the
+   pupil profiles created in the trial (and their sessions, progress
+   and added words/passages/topics) move into the parent account, and
+   the trial copy is then cleared. The built-in "Guest pupil" demo
+   profile itself does not move across. */
 "use strict";
 
 /* ---------------- Supabase (website) ---------------- */
@@ -287,8 +291,9 @@ async function apiDelete(path) {
    answer the same apiGet/apiPost/apiDelete shapes the signed-in layer
    answers, so the rest of the app works unchanged. Guest rows are kept
    in database-row shape so the mapProfile/mapSession/etc. mappers are
-   reused as-is. Leaving guest mode clears the guest data; it is never
-   migrated into an account. */
+   reused as-is. When the parent signs in on the same browser, the
+   pupils added in the trial move into the account (see
+   migrateGuestToAccount); until then the trial lives only here. */
 const GUEST_KEY = "talktupils_guest_v1";
 let guestMode = false;
 
@@ -3547,20 +3552,124 @@ async function init() {
       esc(err.message) + ". Check your internet connection and that you are signed in.</div>");
   }
 }
+/* Move a guest trial into the parent account, once, on sign-in.
+   Only pupil profiles the parent added in the trial move across
+   (Zeen, Zexi, …) — the built-in "Guest pupil" demo profile does
+   not. Their sessions, spaced-repetition progress, added words,
+   passages and picture topics move with them, and the trial's
+   marking requirements and Oral Partner settings carry over too
+   (only if the parent has no settings saved yet). The trial copy
+   is cleared only after the move succeeds, so a failed move can
+   be tried again on the next sign-in. If a profile with the same
+   name and level already exists in the account, it is reused
+   instead of adding a second one. Returns the moved profile names,
+   or null when there was nothing to move. */
+async function migrateGuestToAccount() {
+  const store = guestStore();
+  if (!store || !store.profiles || !store.profiles.length) return null;
+  const uid = await sbUserId();
+  const moving = store.profiles.filter((p) => p.name !== "Guest pupil" && String(p.id).indexOf("guest-") !== 0);
+  if (!moving.length) { guestClear(); return null; }
+  const { data: existing } = await sbClient.from("profiles").select("id, name, level").eq("parent_id", uid);
+  const idMap = {};
+  const movedNames = [];
+  for (const p of moving) {
+    const hit = (existing || []).find((e) => e.name === p.name && e.level === p.level);
+    if (hit) { idMap[p.id] = hit.id; continue; }
+    const { data, error } = await sbClient.from("profiles")
+      .insert({ parent_id: uid, name: String(p.name).slice(0, 60), level: String(p.level).slice(0, 10) })
+      .select().single();
+    if (error) throw new Error(error.message);
+    idMap[p.id] = data.id;
+    movedNames.push(p.name + " (" + p.level + ")");
+  }
+  const sessRows = (store.sessions || [])
+    .filter((s) => idMap[s.profile_id])
+    .map((s) => ({ profile_id: idMap[s.profile_id], kind: s.kind, details: s.details || {}, created_at: s.created_at }));
+  if (sessRows.length) {
+    const { error } = await sbClient.from("sessions").insert(sessRows);
+    if (error) throw new Error(error.message);
+  }
+  for (const oldId of Object.keys(idMap)) {
+    const m = (store.mastery || {})[oldId];
+    if (!m) continue;
+    const mrows = [];
+    for (const type of ["words", "passages", "oral"]) {
+      for (const key of Object.keys(m[type] || {})) {
+        const rec = m[type][key] || {};
+        mrows.push({ profile_id: idMap[oldId], item_type: type, item_key: key,
+          streak: rec.streak || 0, tested: rec.tested || 0,
+          last_tested: rec.lastTested || null, next_due: rec.nextDue || null });
+      }
+    }
+    if (mrows.length) {
+      const { error } = await sbClient.from("mastery").insert(mrows);
+      if (error) throw new Error(error.message);
+    }
+  }
+  for (const v of store.customVocab || []) {
+    const { error } = await sbClient.from("custom_vocab")
+      .insert({ parent_id: uid, word: String(v.word).slice(0, 80), meaning: String(v.meaning).slice(0, 160), unit: String(v.unit), category: v.category || "words & phrases" });
+    if (error) throw new Error(error.message);
+  }
+  for (const p of store.customPassages || []) {
+    const { error } = await sbClient.from("custom_passages")
+      .insert({ parent_id: uid, title: String(p.title).slice(0, 80), text: String(p.text).slice(0, 3000) });
+    if (error) throw new Error(error.message);
+  }
+  for (const t of store.customTopics || []) {
+    const { error } = await sbClient.from("custom_topics")
+      .insert({ parent_id: uid, title: String(t.title).slice(0, 80), image: String(t.image || ""), image_file: String(t.image_file || t.image || ""), linked_topic_id: String(t.linked_topic_id || "").slice(0, 20), keywords: t.keywords || [], questions: t.questions || [] });
+    if (error) throw new Error(error.message);
+  }
+  if (store.settings) {
+    const { data: own } = await sbClient.from("settings").select("parent_id").eq("parent_id", uid).maybeSingle();
+    if (!own) {
+      const patch = { parent_id: uid };
+      if (store.settings.marking_requirements) patch.marking_requirements = String(store.settings.marking_requirements).slice(0, 8000);
+      if (store.settings.oral_prep_seconds) patch.oral_prep_seconds = Math.max(30, Math.min(600, parseInt(store.settings.oral_prep_seconds, 10) || 120));
+      if (typeof store.settings.oral_save_audio === "boolean") patch.oral_save_audio = store.settings.oral_save_audio;
+      const { error } = await sbClient.from("settings").upsert(patch, { onConflict: "parent_id" });
+      if (error) throw new Error(error.message);
+    }
+  }
+  guestClear();
+  return movedNames;
+}
+
 /* ---------------- auth (parent sign-in) ---------------- */
+let pendingConfirmEmail = "";
+function showResend(show) {
+  const b = $("authResendBtn");
+  if (b) b.classList.toggle("hidden", !show);
+}
+function plainAuthError(err, mode) {
+  const m = String((err && err.message) || err || "");
+  if (/already registered|already exists/i.test(m)) return "This email already has an account — tap Sign in instead.";
+  if (/at least 6 characters|password.*short/i.test(m)) return "Use a password with at least 6 characters.";
+  if (/email not confirmed/i.test(m)) return "Your email is not confirmed yet — click the link in the confirmation email, or tap “Resend confirmation email” below.";
+  if (/invalid login credentials/i.test(m)) return "That email and password don't match — check them, or tap Sign up if you don't have an account yet.";
+  if (/email.*invalid|invalid.*email/i.test(m)) return "That email address doesn't look right — check it and try again.";
+  return "Could not sign in: " + m;
+}
 async function doAuth(mode) {
   const email = $("authEmail").value.trim();
   const password = $("authPassword").value;
   if (!email || !password) { $("authStatus").textContent = "Type your email and password first."; return; }
   if (!sbClient) { $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload, or try as a guest below."; return; }
   $("authStatus").textContent = mode === "signup" ? "Creating your account…" : "Signing in…";
+  showResend(false);
   try {
     let res;
     if (mode === "signup") {
       res = await sbClient.auth.signUp({ email: email, password: password });
       if (res.error) throw res.error;
       if (!res.data.session) {
+        // Email confirmation is on: the account exists but the parent
+        // must click the link in the email before signing in.
+        pendingConfirmEmail = email;
         $("authStatus").textContent = "Account created — check your email for a confirmation link, then tap Sign in.";
+        showResend(true);
         return;
       }
     } else {
@@ -3570,7 +3679,25 @@ async function doAuth(mode) {
     state.parentId = res.data.session.user.id;
     location.reload();
   } catch (err) {
-    $("authStatus").textContent = "Could not sign in: " + (err.message || err);
+    const msg = plainAuthError(err, mode);
+    $("authStatus").textContent = msg;
+    if (/not confirmed/i.test(String((err && err.message) || ""))) {
+      pendingConfirmEmail = email;
+      showResend(true);
+    }
+  }
+}
+async function resendConfirmation() {
+  const email = pendingConfirmEmail || $("authEmail").value.trim();
+  if (!email) { $("authStatus").textContent = "Type your email first, then tap Resend."; return; }
+  if (!sbClient) { $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load."; return; }
+  $("authStatus").textContent = "Sending the confirmation email…";
+  try {
+    const { error } = await sbClient.auth.resend({ type: "signup", email: email });
+    if (error) throw error;
+    $("authStatus").textContent = "Confirmation email sent to " + email + " — click the link in it, then tap Sign in.";
+  } catch (err) {
+    $("authStatus").textContent = plainAuthError(err, "signup");
   }
 }
 /* Delete answer recordings older than 7 days (runs when the parent signs in). */
@@ -3603,19 +3730,25 @@ async function enterGuest(level) {
   $("guestLevelLabel").textContent = profile.level;
   $("authSignOutBtn").classList.add("hidden");
   $("authEmailDisplay").textContent = "Guest — " + profile.level;
-  $("siteFooter").textContent = "Trying as a guest — results stay only in this browser. Sign in to save progress across devices.";
+  $("siteFooter").textContent = "Trying as a guest — results stay only in this browser. Sign in to save progress across devices; pupils you add here move into your account when you sign in.";
   $("backupNote").textContent = "You are trying as a guest — your results live only in this browser. Download a backup file to keep a copy, or restore one.";
   $("oralAudioNote").textContent = "Speak your answer, then tap “Done”. If the microphone is not available, type instead. Your voice stays only in this browser for this trial — it is not saved online.";
   $("oralSettingsNote").textContent = "In this guest trial, answer audio stays only in this browser so your child can listen back during the trial. Written answers and scores are kept in this browser too.";
   await init();
 }
 function exitGuest() {
-  guestClear(); // guest trial data is never kept or migrated into an account
+  // Go to the sign-in page WITHOUT deleting the trial: when the parent
+  // signs in, the trial pupils move into the account (see
+  // migrateGuestToAccount). A flag stops the guest trial resuming
+  // itself on the reload that follows.
+  try { sessionStorage.setItem("talktupils_exit_guest", "1"); } catch (err) { /* ignore */ }
   location.reload();
 }
 async function initAuth() {
   $("authSignUpBtn").addEventListener("click", () => doAuth("signup"));
   $("authSignInBtn").addEventListener("click", () => doAuth("signin"));
+  const resendBtn = $("authResendBtn");
+  if (resendBtn) resendBtn.addEventListener("click", resendConfirmation);
   $("authSignOutBtn").addEventListener("click", async () => { if (sbClient) await sbClient.auth.signOut(); location.reload(); });
   $("guestP6Btn").addEventListener("click", () => enterGuest("P6"));
   $("guestP4Btn").addEventListener("click", () => enterGuest("P4"));
@@ -3624,12 +3757,6 @@ async function initAuth() {
   if (guestParam === "P6" || guestParam === "P4") {
     // Direct link (?guest=P6) skips the sign-in page entirely.
     await enterGuest(guestParam);
-    return;
-  }
-  const store = guestStore();
-  if (store && store.profiles.length) {
-    // Resume the guest trial without touching Supabase at all.
-    await enterGuest(store.profiles[0].level || "P6");
     return;
   }
   if (!sbClient) {
@@ -3643,15 +3770,46 @@ async function initAuth() {
   const { data } = await sbClient.auth.getSession();
   if (data && data.session) {
     state.parentId = data.session.user.id;
+    // A guest trial in this browser moves into the account now.
+    // A failed move never blocks sign-in — the trial is kept and
+    // the move is tried again on the next sign-in.
+    let moved = null;
+    let moveError = "";
+    try { moved = await migrateGuestToAccount(); }
+    catch (err) { moveError = (err && err.message) || "move failed"; }
     $("authCard").classList.add("hidden");
     $("appShell").classList.remove("hidden");
     $("authSignOutBtn").classList.remove("hidden");
     $("authEmailDisplay").textContent = data.session.user.email || "";
     await init();
     cleanupOldAudio();
-  } else {
-    $("authCard").classList.remove("hidden");
-    $("appShell").classList.add("hidden");
+    if (moved && moved.length) {
+      document.querySelector("main").insertAdjacentHTML("afterbegin",
+        '<div class="card" style="border-color:#9dc89d;background:#eef7ee">Moved into your account from your guest trial: ' +
+        esc(moved.join(", ")) + ". They now show in the pupil list at the top right.</div>");
+    } else if (moveError) {
+      document.querySelector("main").insertAdjacentHTML("afterbegin",
+        '<div class="card" style="border-color:#e5a09a;background:#fdecea">Your guest trial pupils could not be moved into your account this time (' +
+        esc(moveError) + '). They are still in this browser — sign out and sign in again to try the move once more.</div>');
+    }
+    return;
   }
+  // No session: show the sign-in page — unless the guest trial is
+  // resuming (skipped when exitGuest sent the parent here to sign in).
+  let exitGuestFlag = null;
+  try {
+    exitGuestFlag = sessionStorage.getItem("talktupils_exit_guest");
+    sessionStorage.removeItem("talktupils_exit_guest");
+  } catch (err) { /* ignore */ }
+  if (!exitGuestFlag) {
+    const store = guestStore();
+    if (store && store.profiles.length) {
+      // Resume the guest trial without touching Supabase at all.
+      await enterGuest(store.profiles[0].level || "P6");
+      return;
+    }
+  }
+  $("authCard").classList.remove("hidden");
+  $("appShell").classList.add("hidden");
 }
 document.addEventListener("DOMContentLoaded", initAuth);
