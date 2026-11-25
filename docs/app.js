@@ -1105,13 +1105,17 @@ function autoGrammar(text) {
 function renderGrammarPassage() {
   const text = grammar.passage.text;
   const claims = [];
+  // Match whole words/phrases only. A plain indexOf also matches inside
+  // other words ("is" in "his", "in" in "going", "on" in "soon"), which
+  // splits words in half in the review. The lookarounds require a
+  // non-letter (or the start/end of the text) on both sides, so quotes
+  // and punctuation in a highlight still match.
+  const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   grammar.highlights.forEach((h, hi) => {
-    let from = 0;
-    for (;;) {
-      const at = text.indexOf(h.text, from);
-      if (at < 0) break;
-      claims.push({ start: at, end: at + h.text.length, hi });
-      from = at + Math.max(1, h.text.length);
+    const re = new RegExp("(?<![A-Za-z])" + escRe(h.text).replace(/\s+/g, "\\s+") + "(?![A-Za-z])", "gi");
+    let m;
+    while ((m = re.exec(text))) {
+      claims.push({ start: m.index, end: m.index + m[0].length, hi });
     }
   });
   const n = text.length;
