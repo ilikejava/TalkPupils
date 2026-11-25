@@ -1,8 +1,13 @@
 /* TalkPupils — website v1 (GitHub Pages + Supabase).
    Pupil data lives in Supabase (Auth + Postgres + Storage), one parent
-   account holding one or more pupil profiles. Nothing pupil-related is
-   kept in browser storage. Speech recognition / synthesis are browser
-   APIs (best in Google Chrome). No AI marking in v1. */
+   account holding one or more pupil profiles. Speech recognition /
+   synthesis are browser APIs (best in Google Chrome). No AI marking
+   in v1.
+   Guest mode ("Try without signing in") is the exception: a demo pupil
+   (P6 or P4) whose data lives only in this browser's localStorage.
+   In guest mode the app makes no Supabase calls at all — no sign-in,
+   no tables, no storage uploads; answer audio stays as a blob URL in
+   the browser. Leaving guest mode clears the guest data. */
 "use strict";
 
 /* ---------------- Supabase (website) ---------------- */
@@ -71,6 +76,7 @@ function mapCustomTopic(r) { return { id: r.id, title: r.title, image: r.image |
 function mapSettings(r) { return { markingRequirements: r ? r.marking_requirements : null, oralPrepSeconds: r ? r.oral_prep_seconds : 120, oralSaveAudio: r ? r.oral_save_audio !== false : true }; }
 
 async function apiGet(path) {
+  if (guestMode) return guestApiGet(path);
   const parts = path.split("?");
   const p = parts[0];
   const qs = new URLSearchParams(parts[1] || "");
@@ -133,6 +139,7 @@ async function apiGet(path) {
   throw new Error("GET " + path + " is not available on the website");
 }
 async function apiPost(path, body) {
+  if (guestMode) return guestApiPost(path, body);
   if (path === "/api/profiles") {
     const uid = await sbUserId();
     const name = (body.name || "").trim();
@@ -224,6 +231,7 @@ async function apiPost(path, body) {
   throw new Error("POST " + path + " is not available on the website");
 }
 async function apiDelete(path) {
+  if (guestMode) return guestApiDelete(path);
   const parts = path.split("/").filter(Boolean);
   const kind = parts[1];
   const id = decodeURIComponent(parts[2] || "");
@@ -235,6 +243,174 @@ async function apiDelete(path) {
   if (!table) throw new Error("DELETE " + path + " is not available on the website");
   const { error } = await supabase.from(table).delete().eq("id", id);
   if (error) throw new Error(error.message);
+  return { ok: true };
+}
+
+/* ---------------- guest mode ("Try without signing in") ----------------
+   A demo pupil (P6 or P4) with the full app, but all data in this
+   browser's localStorage and ZERO Supabase calls. These functions
+   answer the same apiGet/apiPost/apiDelete shapes the signed-in layer
+   answers, so the rest of the app works unchanged. Guest rows are kept
+   in database-row shape so the mapProfile/mapSession/etc. mappers are
+   reused as-is. Leaving guest mode clears the guest data; it is never
+   migrated into an account. */
+const GUEST_KEY = "talktupils_guest_v1";
+let guestMode = false;
+
+function guestStore() {
+  try {
+    const s = JSON.parse(localStorage.getItem(GUEST_KEY) || "null");
+    return (s && s.version === 1 && Array.isArray(s.profiles)) ? s : null;
+  } catch (err) { return null; }
+}
+function guestSave(store) {
+  try { localStorage.setItem(GUEST_KEY, JSON.stringify(store)); }
+  catch (err) { /* storage full or blocked: keep going in memory only */ }
+}
+function guestClear() {
+  try { localStorage.removeItem(GUEST_KEY); } catch (err) { /* ignore */ }
+}
+function guestId() {
+  return "g" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+}
+function guestNewStore(level) {
+  const now = new Date().toISOString();
+  return {
+    version: 1,
+    profiles: [{ id: "guest-" + level.toLowerCase(), name: "Guest pupil", level: level, created_at: now }],
+    sessions: [],            // {id, profile_id, kind, created_at, details}
+    mastery: {},             // profileId -> {words:{}, passages:{}, oral:{}}
+    customVocab: [],         // rows {id, word, meaning, unit, category, created_at}
+    customTopics: [],        // rows {id, title, image, image_file, linked_topic_id, keywords, questions, created_at}
+    customPassages: [],      // rows {id, title, text, created_at}
+    settings: { marking_requirements: null, oral_prep_seconds: 120, oral_save_audio: true },
+  };
+}
+function guestMastery(pid) {
+  const store = guestStore();
+  const m = (store && store.mastery && store.mastery[pid]) || { words: {}, passages: {}, oral: {} };
+  if (!m.words) m.words = {};
+  if (!m.passages) m.passages = {};
+  if (!m.oral) m.oral = {};
+  return m;
+}
+function guestRequireStore() {
+  const store = guestStore();
+  if (!store) throw new Error("Guest trial ended. Tap “Try without signing in” to start again.");
+  return store;
+}
+async function guestApiGet(path) {
+  const store = guestRequireStore();
+  const parts = path.split("?");
+  const p = parts[0];
+  const qs = new URLSearchParams(parts[1] || "");
+  if (p === "/api/profiles") return { ok: true, profiles: store.profiles.map(mapProfile) };
+  if (p === "/api/sessions") {
+    const pid = qs.get("profileId");
+    const rows = store.sessions.filter((s) => s.profile_id === pid)
+      .sort((a, b) => (a.created_at < b.created_at ? 1 : (a.created_at > b.created_at ? -1 : 0)));
+    return { ok: true, sessions: rows.map(mapSession) };
+  }
+  if (p === "/api/mastery") return { ok: true, mastery: guestMastery(qs.get("profileId")) };
+  if (p === "/api/custom-vocab") return { ok: true, customVocab: store.customVocab.map(mapCustomVocab) };
+  if (p === "/api/custom-topics") return { ok: true, customTopics: store.customTopics.map(mapCustomTopic) };
+  if (p === "/api/custom-passages") return { ok: true, customPassages: store.customPassages.map(mapCustomPassage) };
+  if (p === "/api/settings") return { ok: true, settings: mapSettings(store.settings) };
+  if (p === "/api/settings/marking") return { ok: true, markingRequirements: store.settings ? store.settings.marking_requirements : null };
+  if (p === "/api/ai-config") return { ok: true, config: { provider: "openai", model: "", enabled: false, keySaved: false, keyLast4: "" } };
+  throw new Error("GET " + path + " is not available in guest mode");
+}
+async function guestApiPost(path, body) {
+  const store = guestRequireStore();
+  const now = new Date().toISOString();
+  if (path === "/api/profiles") {
+    const name = (body.name || "").trim();
+    if (!name) throw new Error("name is required");
+    const row = { id: guestId(), name: name.slice(0, 60), level: (body.level || "P5").slice(0, 10), created_at: now };
+    store.profiles.push(row);
+    guestSave(store);
+    return { ok: true, profile: mapProfile(row), profiles: store.profiles.map(mapProfile) };
+  }
+  if (path === "/api/sessions") {
+    const profileId = body.profileId;
+    const kind = body.kind;
+    if (!profileId || !kind) throw new Error("profileId and kind are required");
+    const details = Object.assign({}, body);
+    delete details.profileId;
+    const row = { id: guestId(), profile_id: profileId, kind: kind, created_at: now, details: details };
+    store.sessions.unshift(row);
+    guestSave(store);
+    return { ok: true, session: mapSession(row) };
+  }
+  if (path === "/api/mastery") {
+    const pid = body.profileId;
+    if (!pid) throw new Error("profileId is required");
+    store.mastery[pid] = body.mastery || { words: {}, passages: {}, oral: {} };
+    guestSave(store);
+    return { ok: true, mastery: store.mastery[pid] };
+  }
+  if (path === "/api/custom-vocab") {
+    const word = (body.word || "").trim();
+    const meaning = (body.meaning || "").trim();
+    if (!word || !meaning) throw new Error("word and meaning are required");
+    const row = { id: guestId(), word: word.slice(0, 80), meaning: meaning.slice(0, 160), unit: String(body.unit), category: body.category || "words & phrases", created_at: now };
+    store.customVocab.unshift(row);
+    guestSave(store);
+    return { ok: true, entry: mapCustomVocab(row), customVocab: store.customVocab.map(mapCustomVocab) };
+  }
+  if (path === "/api/custom-passages") {
+    const title = (body.title || "").trim();
+    const text = (body.text || "").trim();
+    if (!title || text.length < 20) throw new Error("title and passage text (20+ chars) are required");
+    const row = { id: guestId(), title: title.slice(0, 80), text: text.slice(0, 3000), created_at: now };
+    store.customPassages.unshift(row);
+    guestSave(store);
+    return { ok: true, passage: mapCustomPassage(row), customPassages: store.customPassages.map(mapCustomPassage) };
+  }
+  if (path === "/api/custom-topics") {
+    const title = (body.title || "").trim();
+    const questions = (body.questions || []).slice(0, 5).map((q) => ({ q: String(q.q || "").slice(0, 500), type: ["picture", "experience", "opinion", "evaluative"].indexOf(q.type) >= 0 ? q.type : "opinion", model: String(q.model || "").slice(0, 2500) }));
+    if (!title) throw new Error("a title is required");
+    if (!questions.length) throw new Error("1 to 5 questions are required");
+    // No 500-char slice here (unlike the signed-in layer): a guest
+    // picture is a data URL kept in this browser, and slicing would
+    // break it. The 1 MB upload cap keeps the store small.
+    const row = { id: guestId(), title: title.slice(0, 80), image: String(body.imageFile || ""), image_file: String(body.imageFile || ""), linked_topic_id: String(body.linkedTopicId || "").slice(0, 20), keywords: (body.keywords || []).slice(0, 12), questions: questions, created_at: now };
+    store.customTopics.unshift(row);
+    guestSave(store);
+    return { ok: true, topic: mapCustomTopic(row), customTopics: store.customTopics.map(mapCustomTopic) };
+  }
+  if (path === "/api/settings") {
+    if (body.oralPrepSeconds != null) store.settings.oral_prep_seconds = Math.max(30, Math.min(600, parseInt(body.oralPrepSeconds, 10) || 120));
+    if (typeof body.oralSaveAudio === "boolean") store.settings.oral_save_audio = body.oralSaveAudio;
+    if (body.markingRequirements != null) store.settings.marking_requirements = String(body.markingRequirements).slice(0, 8000);
+    guestSave(store);
+    return { ok: true, settings: mapSettings(store.settings) };
+  }
+  if (path === "/api/settings/marking") {
+    store.settings.marking_requirements = String(body.markingRequirements || "").slice(0, 8000);
+    guestSave(store);
+    return { ok: true, settings: mapSettings(store.settings), markingRequirements: store.settings.marking_requirements };
+  }
+  if (path === "/api/ai-config" || path === "/api/ai-test") {
+    throw new Error("AI marking is not available on the website yet — it is coming in a later update.");
+  }
+  throw new Error("POST " + path + " is not available in guest mode");
+}
+async function guestApiDelete(path) {
+  const store = guestRequireStore();
+  const parts = path.split("/").filter(Boolean);
+  const kind = parts[1];
+  const id = decodeURIComponent(parts[2] || "");
+  if (kind === "profiles") {
+    store.profiles = store.profiles.filter((r) => r.id !== id);
+    store.sessions = store.sessions.filter((s) => s.profile_id !== id);
+    if (store.mastery) delete store.mastery[id];
+  } else if (kind === "custom-vocab") store.customVocab = store.customVocab.filter((r) => r.id !== id);
+  else if (kind === "custom-topics") store.customTopics = store.customTopics.filter((r) => r.id !== id);
+  else if (kind === "custom-passages") store.customPassages = store.customPassages.filter((r) => r.id !== id);
+  else throw new Error("DELETE " + path + " is not available in guest mode");
+  guestSave(store);
   return { ok: true };
 }
 
@@ -2189,6 +2365,7 @@ function oralStopRecording() {
   });
 }
 async function uploadOralAudio(blob, qnum) {
+  if (guestMode) return URL.createObjectURL(blob); // guest: audio stays in this browser only
   const uid = await sbUserId();
   const ext = (blob.type || "audio/webm").indexOf("mp4") >= 0 ? "mp4" : "webm";
   const path = uid + "/" + state.currentProfileId + "/" + Date.now() + "-q" + qnum + "." + ext;
@@ -2617,13 +2794,26 @@ async function addCustomTopic() {
   }
   $("customTopicStatus").textContent = "Uploading picture…";
   try {
-    const uid = await sbUserId();
-    const ext = ((file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg");
-    const path = uid + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + "." + ext;
-    const { error } = await supabase.storage.from("stimuli").upload(path, file, {
-      contentType: file.type || "image/jpeg", upsert: false });
-    if (error) throw new Error(error.message);
-    const imageUrl = supabase.storage.from("stimuli").getPublicUrl(path).data.publicUrl;
+    let imageUrl;
+    if (guestMode) {
+      // Guest: the picture stays in this browser only (a data URL in
+      // localStorage). Cap the size so the guest store stays small.
+      if (file.size > 1000000) throw new Error("That picture is too big for a guest trial (about 1 MB max). Sign in to use bigger pictures.");
+      imageUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("Could not read the picture."));
+        reader.readAsDataURL(file);
+      });
+    } else {
+      const uid = await sbUserId();
+      const ext = ((file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg");
+      const path = uid + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + "." + ext;
+      const { error } = await supabase.storage.from("stimuli").upload(path, file, {
+        contentType: file.type || "image/jpeg", upsert: false });
+      if (error) throw new Error(error.message);
+      imageUrl = supabase.storage.from("stimuli").getPublicUrl(path).data.publicUrl;
+    }
     const linked = $("customTopicLink").value;
     const linkedTopic = linked ? oralTopicById(linked) : null;
     const j = await apiPost("/api/custom-topics", {
@@ -3019,6 +3209,26 @@ function initParent() {
 
 /* ---------------- backup / restore ---------------- */
 async function exportAllData() {
+  if (guestMode) {
+    const store = guestStore() || guestNewStore("P6");
+    const masteryRows = [];
+    for (const pid of Object.keys(store.mastery || {})) {
+      for (const type of ["words", "passages", "oral"]) {
+        for (const key of Object.keys((store.mastery[pid] || {})[type] || {})) {
+          const rec = store.mastery[pid][type][key] || {};
+          masteryRows.push({ profile_id: pid, item_type: type, item_key: key, streak: rec.streak || 0, tested: rec.tested || 0, last_tested: rec.lastTested || null, next_due: rec.nextDue || null });
+        }
+      }
+    }
+    return { app: "TalkPupils", version: 1, exportedAt: new Date().toISOString(),
+      profiles: store.profiles.map((p) => Object.assign({}, p, { parent_id: "guest" })),
+      sessions: store.sessions,
+      mastery: masteryRows,
+      customVocab: store.customVocab.map((r) => Object.assign({}, r, { parent_id: "guest" })),
+      customPassages: store.customPassages.map((r) => Object.assign({}, r, { parent_id: "guest" })),
+      customTopics: store.customTopics.map((r) => Object.assign({}, r, { parent_id: "guest" })),
+      settings: [Object.assign({}, store.settings, { parent_id: "guest" })] };
+  }
   const uid = await sbUserId();
   const { data: profiles } = await supabase.from("profiles").select("*").eq("parent_id", uid);
   const pids = (profiles || []).map((p) => p.id);
@@ -3041,6 +3251,27 @@ async function exportAllData() {
   return out;
 }
 async function importAllData(data) {
+  if (guestMode) {
+    if (!data || data.app !== "TalkPupils") throw new Error("This does not look like a TalkPupils backup.");
+    const store = guestNewStore("P6");
+    store.profiles = (data.profiles || []).map((r) => ({ id: r.id, name: r.name, level: r.level, created_at: r.created_at }));
+    store.sessions = (data.sessions || []).map((r) => ({ id: r.id, profile_id: r.profile_id, kind: r.kind, created_at: r.created_at, details: r.details || {} }));
+    store.mastery = {};
+    for (const r of data.mastery || []) {
+      if (!store.mastery[r.profile_id]) store.mastery[r.profile_id] = { words: {}, passages: {}, oral: {} };
+      if (store.mastery[r.profile_id][r.item_type]) {
+        store.mastery[r.profile_id][r.item_type][r.item_key] = { streak: r.streak || 0, tested: r.tested || 0, lastTested: r.last_tested || null, nextDue: r.next_due || null };
+      }
+    }
+    store.customVocab = (data.customVocab || []).map((r) => ({ id: r.id, word: r.word, meaning: r.meaning, unit: r.unit, category: r.category, created_at: r.created_at }));
+    store.customPassages = (data.customPassages || []).map((r) => ({ id: r.id, title: r.title, text: r.text, created_at: r.created_at }));
+    store.customTopics = (data.customTopics || []).map((r) => ({ id: r.id, title: r.title, image: r.image || "", image_file: r.image_file || "", linked_topic_id: r.linked_topic_id || "", keywords: r.keywords || [], questions: r.questions || [], created_at: r.created_at }));
+    const st = (data.settings || [])[0];
+    if (st) store.settings = { marking_requirements: (st.marking_requirements != null ? st.marking_requirements : null), oral_prep_seconds: st.oral_prep_seconds || 120, oral_save_audio: st.oral_save_audio !== false };
+    if (!store.profiles.length) store.profiles = guestNewStore("P6").profiles;
+    guestSave(store);
+    return;
+  }
   const uid = await sbUserId();
   if (!data || data.app !== "TalkPupils") throw new Error("This does not look like a TalkPupils backup.");
   const { data: existing } = await supabase.from("profiles").select("id").eq("parent_id", uid);
@@ -3083,7 +3314,9 @@ function initBackup() {
       a.click();
       a.remove();
       setTimeout(() => URL.revokeObjectURL(a.href), 5000);
-      $("restoreStatus").textContent = "Backup downloaded. (Pictures and answer audio are stored in Supabase and are not in this file.)";
+      $("restoreStatus").textContent = guestMode
+        ? "Backup downloaded. (Answer audio is not in this file — it stays in this browser.)"
+        : "Backup downloaded. (Pictures and answer audio are stored in Supabase and are not in this file.)";
     } catch (err) {
       $("restoreStatus").textContent = "Backup failed: " + err.message;
     }
@@ -3269,10 +3502,44 @@ async function cleanupOldAudio() {
     }
   } catch (err) { /* clean-up is a bonus; it must never block the app */ }
 }
+/* ---------------- guest mode: enter / leave ---------------- */
+async function enterGuest(level) {
+  let store = guestStore();
+  if (!store || !store.profiles.length) {
+    store = guestNewStore(level);
+    guestSave(store);
+  }
+  guestMode = true;
+  const profile = store.profiles[0];
+  $("authCard").classList.add("hidden");
+  $("appShell").classList.remove("hidden");
+  $("guestBanner").classList.remove("hidden");
+  $("guestLevelLabel").textContent = profile.level;
+  $("authSignOutBtn").classList.add("hidden");
+  $("authEmailDisplay").textContent = "Guest — " + profile.level;
+  $("siteFooter").textContent = "Trying as a guest — results stay only in this browser. Sign in to save progress across devices.";
+  $("backupNote").textContent = "You are trying as a guest — your results live only in this browser. Download a backup file to keep a copy, or restore one.";
+  $("oralAudioNote").textContent = "Speak your answer, then tap “Done”. If the microphone is not available, type instead. Your voice stays only in this browser for this trial — it is not saved online.";
+  $("oralSettingsNote").textContent = "In this guest trial, answer audio stays only in this browser so your child can listen back during the trial. Written answers and scores are kept in this browser too.";
+  await init();
+}
+function exitGuest() {
+  guestClear(); // guest trial data is never kept or migrated into an account
+  location.reload();
+}
 async function initAuth() {
   $("authSignUpBtn").addEventListener("click", () => doAuth("signup"));
   $("authSignInBtn").addEventListener("click", () => doAuth("signin"));
   $("authSignOutBtn").addEventListener("click", async () => { await supabase.auth.signOut(); location.reload(); });
+  $("guestP6Btn").addEventListener("click", () => enterGuest("P6"));
+  $("guestP4Btn").addEventListener("click", () => enterGuest("P4"));
+  $("exitGuestBtn").addEventListener("click", exitGuest);
+  const store = guestStore();
+  if (store && store.profiles.length) {
+    // Resume the guest trial without touching Supabase at all.
+    await enterGuest(store.profiles[0].level || "P6");
+    return;
+  }
   const { data } = await supabase.auth.getSession();
   if (data && data.session) {
     state.parentId = data.session.user.id;

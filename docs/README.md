@@ -29,6 +29,19 @@ Live site (after the steps below): **https://ilikejava.github.io/TalkPupils/**
   after 1, 3, 7, 14, then 30 days; wrong ones come back soon. No AI.
 - **Parent** — marking requirements editor, add your own passages and
   picture topics, Oral Partner settings, backup download / restore.
+- **Try without signing in** — a guest trial: pick a demo P6 or P4
+  pupil and use the whole app. Guest results stay only in that
+  browser (localStorage); nothing is sent to Supabase and no account
+  is created. A banner at the top says so, with a button to sign in
+  and save progress properly. Leaving guest mode clears the trial data.
+
+## Try it without signing in (guest trial)
+
+No setup needed except turning on the website (step 2 below). Open
+the site, tap **Try as a P6 pupil** or **Try as a P4 pupil**, and use
+the whole app — reading, typing, words, Oral Partner, progress. The
+guest trial works even before the database tables (step 1) are created,
+because it does not touch Supabase at all.
 
 ## Test tonight — 3 steps
 

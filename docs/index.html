@@ -49,9 +49,22 @@
   </div>
   <p id="authStatus" class="muted"></p>
   <p class="muted small">If you just signed up, check your email for a confirmation link, then tap Sign in. If the link does not arrive, turn off “Confirm email” in Supabase → Authentication → Providers → Email.</p>
+  <div class="guest-box">
+    <h3>Just looking around?</h3>
+    <p class="muted">Try everything without signing in — pick a demo level. Results stay only in this browser and are not saved online.</p>
+    <div class="row">
+      <button id="guestP6Btn" class="btn">Try as a P6 pupil</button>
+      <button id="guestP4Btn" class="btn">Try as a P4 pupil</button>
+    </div>
+    <p class="muted small">No account needed. To save progress across devices, sign up above instead.</p>
+  </div>
 </div>
 
 <div id="appShell" class="hidden">
+<div id="guestBanner" class="guest-banner hidden">
+  <span>Trying as a guest (<span id="guestLevelLabel"></span>) — results stay only in this browser. Sign in to save progress.</span>
+  <button id="exitGuestBtn" class="btn small">Sign in / create parent account</button>
+</div>
 <nav class="tabs" id="tabs">
   <button data-tab="read" class="active">Read Aloud</button>
   <button data-tab="type">Typing Quest</button>
@@ -335,7 +348,7 @@
           <button id="oralRepeatBtn" class="btn">🔁 Repeat question</button>
           <button id="oralStopMicBtn" class="btn danger hidden">■ Stop speaking</button>
         </div>
-        <p class="muted small">Speak your answer, then tap “Done”. If the microphone is not available, type instead. Your voice is saved in your account so you can listen back — a parent can switch this off in the Parent tab.</p>
+        <p class="muted small" id="oralAudioNote">Speak your answer, then tap “Done”. If the microphone is not available, type instead. Your voice is saved in your account so you can listen back — a parent can switch this off in the Parent tab.</p>
       </div>
     </div>
 
@@ -355,7 +368,7 @@
     <div id="progressContent"></div>
     <div class="card">
       <h2>Backup</h2>
-      <p class="muted">All data is saved in your TalkPupils account (Supabase). You can also download a backup file, or restore one.</p>
+      <p class="muted" id="backupNote">All data is saved in your TalkPupils account (Supabase). You can also download a backup file, or restore one.</p>
       <p class="muted small">The backup file does not include your pictures or recorded answer audio — those live in Supabase storage.</p>
       <div class="row">
         <a class="btn" id="backupLink" href="#">⬇ Download backup</a>
@@ -379,7 +392,7 @@
         </select>
         <label class="check"><input id="oralSaveAudio" type="checkbox" checked> Save answer audio (listen back later)</label>
       </div>
-      <p class="muted">Answer recordings are saved in your account so your child can listen back. Recordings older than 7 days are deleted automatically when you sign in. Written answers and scores are kept.</p>
+      <p class="muted" id="oralSettingsNote">Answer recordings are saved in your account so your child can listen back. Recordings older than 7 days are deleted automatically when you sign in. Written answers and scores are kept.</p>
       <div class="row">
         <button id="saveOralSettingsBtn" class="btn primary">Save Oral Partner settings</button>
         <span id="oralSettingsStatus" class="muted"></span>
@@ -439,7 +452,7 @@
 </main>
 </div>
 
-<footer class="muted small">
+<footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
 

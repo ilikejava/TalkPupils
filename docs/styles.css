@@ -316,3 +316,20 @@ audio.answer-audio { width: 100%; margin: 6px 0; }
 .auth-card { max-width: 560px; margin: 16px auto; }
 .auth-card input { flex: 1; min-width: 200px; }
 #authEmailDisplay { margin-left: 6px; }
+
+/* ---- guest mode ---- */
+.guest-box { border-top: 1px solid #dfe5ee; margin-top: 16px; padding-top: 12px; }
+.guest-box h3 { margin: 0 0 4px; font-size: 17px; }
+.guest-banner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: #fdf6e0;
+  border: 1px solid #e8dfae;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 12px 12px 0;
+  font-size: 14px;
+}
