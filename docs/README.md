@@ -41,7 +41,9 @@ No setup needed except turning on the website (step 2 below). Open
 the site, tap **Try as a P6 pupil** or **Try as a P4 pupil**, and use
 the whole app — reading, typing, words, Oral Partner, progress. The
 guest trial works even before the database tables (step 1) are created,
-because it does not touch Supabase at all.
+because it does not touch Supabase at all. A direct link skips the
+sign-in page entirely: add `?guest=P6` (or `?guest=P4`) to the site
+URL.
 
 ## Test tonight — 3 steps
 

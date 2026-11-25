@@ -26,13 +26,13 @@ window.tpImgFallback = function (img) { img.onerror = null; img.src = TP_PLACEHO
    app must NOT die with it — guest mode ("Try without signing in") needs
    no Supabase at all, so the client is null and sign-in just reports
    itself unavailable until the page is reloaded. */
-const supabase = (typeof window !== "undefined" && window.supabase && window.supabase.createClient)
+const sbClient = (typeof window !== "undefined" && window.supabase && window.supabase.createClient)
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
   : null;
 
 async function sbUserId() {
-  if (!supabase) throw new Error("Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload.");
-  const { data } = await supabase.auth.getUser();
+  if (!sbClient) throw new Error("Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload.");
+  const { data } = await sbClient.auth.getUser();
   if (!data || !data.user) throw new Error("Not signed in. Please sign in again.");
   return data.user.id;
 }
@@ -89,19 +89,19 @@ async function apiGet(path) {
   const qs = new URLSearchParams(parts[1] || "");
   if (p === "/api/profiles") {
     const uid = await sbUserId();
-    const { data, error } = await supabase.from("profiles").select("*").eq("parent_id", uid).order("created_at", { ascending: true });
+    const { data, error } = await sbClient.from("profiles").select("*").eq("parent_id", uid).order("created_at", { ascending: true });
     if (error) throw new Error(error.message);
     return { ok: true, profiles: (data || []).map(mapProfile) };
   }
   if (p === "/api/sessions") {
     const pid = qs.get("profileId");
-    const { data, error } = await supabase.from("sessions").select("*").eq("profile_id", pid).order("created_at", { ascending: false });
+    const { data, error } = await sbClient.from("sessions").select("*").eq("profile_id", pid).order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
     return { ok: true, sessions: (data || []).map(mapSession) };
   }
   if (p === "/api/mastery") {
     const pid = qs.get("profileId");
-    const { data, error } = await supabase.from("mastery").select("*").eq("profile_id", pid);
+    const { data, error } = await sbClient.from("mastery").select("*").eq("profile_id", pid);
     if (error) throw new Error(error.message);
     const mastery = { words: {}, passages: {}, oral: {} };
     for (const r of data || []) {
@@ -112,31 +112,31 @@ async function apiGet(path) {
   }
   if (p === "/api/custom-vocab") {
     const uid = await sbUserId();
-    const { data, error } = await supabase.from("custom_vocab").select("*").eq("parent_id", uid).order("created_at", { ascending: false });
+    const { data, error } = await sbClient.from("custom_vocab").select("*").eq("parent_id", uid).order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
     return { ok: true, customVocab: (data || []).map(mapCustomVocab) };
   }
   if (p === "/api/custom-topics") {
     const uid = await sbUserId();
-    const { data, error } = await supabase.from("custom_topics").select("*").eq("parent_id", uid).order("created_at", { ascending: false });
+    const { data, error } = await sbClient.from("custom_topics").select("*").eq("parent_id", uid).order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
     return { ok: true, customTopics: (data || []).map(mapCustomTopic) };
   }
   if (p === "/api/custom-passages") {
     const uid = await sbUserId();
-    const { data, error } = await supabase.from("custom_passages").select("*").eq("parent_id", uid).order("created_at", { ascending: false });
+    const { data, error } = await sbClient.from("custom_passages").select("*").eq("parent_id", uid).order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
     return { ok: true, customPassages: (data || []).map(mapCustomPassage) };
   }
   if (p === "/api/settings") {
     const uid = await sbUserId();
-    const { data, error } = await supabase.from("settings").select("*").eq("parent_id", uid).maybeSingle();
+    const { data, error } = await sbClient.from("settings").select("*").eq("parent_id", uid).maybeSingle();
     if (error) throw new Error(error.message);
     return { ok: true, settings: mapSettings(data) };
   }
   if (p === "/api/settings/marking") {
     const uid = await sbUserId();
-    const { data, error } = await supabase.from("settings").select("marking_requirements").eq("parent_id", uid).maybeSingle();
+    const { data, error } = await sbClient.from("settings").select("marking_requirements").eq("parent_id", uid).maybeSingle();
     if (error) throw new Error(error.message);
     return { ok: true, markingRequirements: data ? data.marking_requirements : null };
   }
@@ -151,7 +151,7 @@ async function apiPost(path, body) {
     const uid = await sbUserId();
     const name = (body.name || "").trim();
     if (!name) throw new Error("name is required");
-    const { data, error } = await supabase.from("profiles").insert({ parent_id: uid, name: name.slice(0, 60), level: (body.level || "P5").slice(0, 10) }).select().single();
+    const { data, error } = await sbClient.from("profiles").insert({ parent_id: uid, name: name.slice(0, 60), level: (body.level || "P5").slice(0, 10) }).select().single();
     if (error) throw new Error(error.message);
     const all = await apiGet("/api/profiles");
     return { ok: true, profile: mapProfile(data), profiles: all.profiles };
@@ -162,7 +162,7 @@ async function apiPost(path, body) {
     if (!profileId || !kind) throw new Error("profileId and kind are required");
     const details = Object.assign({}, body);
     delete details.profileId;
-    const { data, error } = await supabase.from("sessions").insert({ profile_id: profileId, kind: kind, details: details }).select().single();
+    const { data, error } = await sbClient.from("sessions").insert({ profile_id: profileId, kind: kind, details: details }).select().single();
     if (error) throw new Error(error.message);
     return { ok: true, session: mapSession(data) };
   }
@@ -170,7 +170,7 @@ async function apiPost(path, body) {
     const pid = body.profileId;
     const mastery = body.mastery || {};
     if (!pid) throw new Error("profileId is required");
-    const del = await supabase.from("mastery").delete().eq("profile_id", pid);
+    const del = await sbClient.from("mastery").delete().eq("profile_id", pid);
     if (del.error) throw new Error(del.error.message);
     const rows = [];
     for (const type of ["words", "passages", "oral"]) {
@@ -180,7 +180,7 @@ async function apiPost(path, body) {
       }
     }
     if (rows.length) {
-      const ins = await supabase.from("mastery").insert(rows);
+      const ins = await sbClient.from("mastery").insert(rows);
       if (ins.error) throw new Error(ins.error.message);
     }
     return { ok: true, mastery: mastery };
@@ -190,7 +190,7 @@ async function apiPost(path, body) {
     const word = (body.word || "").trim();
     const meaning = (body.meaning || "").trim();
     if (!word || !meaning) throw new Error("word and meaning are required");
-    const { data, error } = await supabase.from("custom_vocab").insert({ parent_id: uid, word: word.slice(0, 80), meaning: meaning.slice(0, 160), unit: String(body.unit), category: body.category || "words & phrases" }).select().single();
+    const { data, error } = await sbClient.from("custom_vocab").insert({ parent_id: uid, word: word.slice(0, 80), meaning: meaning.slice(0, 160), unit: String(body.unit), category: body.category || "words & phrases" }).select().single();
     if (error) throw new Error(error.message);
     const all = await apiGet("/api/custom-vocab");
     return { ok: true, entry: mapCustomVocab(data), customVocab: all.customVocab };
@@ -200,7 +200,7 @@ async function apiPost(path, body) {
     const title = (body.title || "").trim();
     const text = (body.text || "").trim();
     if (!title || text.length < 20) throw new Error("title and passage text (20+ chars) are required");
-    const { data, error } = await supabase.from("custom_passages").insert({ parent_id: uid, title: title.slice(0, 80), text: text.slice(0, 3000) }).select().single();
+    const { data, error } = await sbClient.from("custom_passages").insert({ parent_id: uid, title: title.slice(0, 80), text: text.slice(0, 3000) }).select().single();
     if (error) throw new Error(error.message);
     const all = await apiGet("/api/custom-passages");
     return { ok: true, passage: mapCustomPassage(data), customPassages: all.customPassages };
@@ -211,7 +211,7 @@ async function apiPost(path, body) {
     const questions = (body.questions || []).slice(0, 5).map((q) => ({ q: String(q.q || "").slice(0, 500), type: ["picture", "experience", "opinion", "evaluative"].indexOf(q.type) >= 0 ? q.type : "opinion", model: String(q.model || "").slice(0, 2500) }));
     if (!title) throw new Error("a title is required");
     if (!questions.length) throw new Error("1 to 5 questions are required");
-    const { data, error } = await supabase.from("custom_topics").insert({ parent_id: uid, title: title.slice(0, 80), image: String(body.imageFile || "").slice(0, 500), image_file: String(body.imageFile || "").slice(0, 500), linked_topic_id: String(body.linkedTopicId || "").slice(0, 20), keywords: (body.keywords || []).slice(0, 12), questions: questions }).select().single();
+    const { data, error } = await sbClient.from("custom_topics").insert({ parent_id: uid, title: title.slice(0, 80), image: String(body.imageFile || "").slice(0, 500), image_file: String(body.imageFile || "").slice(0, 500), linked_topic_id: String(body.linkedTopicId || "").slice(0, 20), keywords: (body.keywords || []).slice(0, 12), questions: questions }).select().single();
     if (error) throw new Error(error.message);
     const all = await apiGet("/api/custom-topics");
     return { ok: true, topic: mapCustomTopic(data), customTopics: all.customTopics };
@@ -222,13 +222,13 @@ async function apiPost(path, body) {
     if (body.oralPrepSeconds != null) patch.oral_prep_seconds = Math.max(30, Math.min(600, parseInt(body.oralPrepSeconds, 10) || 120));
     if (typeof body.oralSaveAudio === "boolean") patch.oral_save_audio = body.oralSaveAudio;
     if (body.markingRequirements != null) patch.marking_requirements = String(body.markingRequirements).slice(0, 8000);
-    const { data, error } = await supabase.from("settings").upsert(Object.assign({ parent_id: uid }, patch), { onConflict: "parent_id" }).select().single();
+    const { data, error } = await sbClient.from("settings").upsert(Object.assign({ parent_id: uid }, patch), { onConflict: "parent_id" }).select().single();
     if (error) throw new Error(error.message);
     return { ok: true, settings: mapSettings(data) };
   }
   if (path === "/api/settings/marking") {
     const uid = await sbUserId();
-    const { data, error } = await supabase.from("settings").upsert({ parent_id: uid, marking_requirements: String(body.markingRequirements || "").slice(0, 8000) }, { onConflict: "parent_id" }).select().single();
+    const { data, error } = await sbClient.from("settings").upsert({ parent_id: uid, marking_requirements: String(body.markingRequirements || "").slice(0, 8000) }, { onConflict: "parent_id" }).select().single();
     if (error) throw new Error(error.message);
     return { ok: true, settings: mapSettings(data), markingRequirements: data.marking_requirements };
   }
@@ -248,7 +248,7 @@ async function apiDelete(path) {
   else if (kind === "custom-topics") table = "custom_topics";
   else if (kind === "custom-passages") table = "custom_passages";
   if (!table) throw new Error("DELETE " + path + " is not available on the website");
-  const { error } = await supabase.from(table).delete().eq("id", id);
+  const { error } = await sbClient.from(table).delete().eq("id", id);
   if (error) throw new Error(error.message);
   return { ok: true };
 }
@@ -2376,10 +2376,10 @@ async function uploadOralAudio(blob, qnum) {
   const uid = await sbUserId();
   const ext = (blob.type || "audio/webm").indexOf("mp4") >= 0 ? "mp4" : "webm";
   const path = uid + "/" + state.currentProfileId + "/" + Date.now() + "-q" + qnum + "." + ext;
-  const { error } = await supabase.storage.from("audio").upload(path, blob, {
+  const { error } = await sbClient.storage.from("audio").upload(path, blob, {
     contentType: blob.type || "audio/webm", upsert: false });
   if (error) throw new Error(error.message);
-  return supabase.storage.from("audio").getPublicUrl(path).data.publicUrl;
+  return sbClient.storage.from("audio").getPublicUrl(path).data.publicUrl;
 }
 
 function oralMicStart() {
@@ -2816,10 +2816,10 @@ async function addCustomTopic() {
       const uid = await sbUserId();
       const ext = ((file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg");
       const path = uid + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + "." + ext;
-      const { error } = await supabase.storage.from("stimuli").upload(path, file, {
+      const { error } = await sbClient.storage.from("stimuli").upload(path, file, {
         contentType: file.type || "image/jpeg", upsert: false });
       if (error) throw new Error(error.message);
-      imageUrl = supabase.storage.from("stimuli").getPublicUrl(path).data.publicUrl;
+      imageUrl = sbClient.storage.from("stimuli").getPublicUrl(path).data.publicUrl;
     }
     const linked = $("customTopicLink").value;
     const linkedTopic = linked ? oralTopicById(linked) : null;
@@ -3237,20 +3237,20 @@ async function exportAllData() {
       settings: [Object.assign({}, store.settings, { parent_id: "guest" })] };
   }
   const uid = await sbUserId();
-  const { data: profiles } = await supabase.from("profiles").select("*").eq("parent_id", uid);
+  const { data: profiles } = await sbClient.from("profiles").select("*").eq("parent_id", uid);
   const pids = (profiles || []).map((p) => p.id);
   const out = { app: "TalkPupils", version: 1, exportedAt: new Date().toISOString(),
     profiles: profiles || [], sessions: [], mastery: [] };
   if (pids.length) {
-    const s = await supabase.from("sessions").select("*").in("profile_id", pids);
-    const m = await supabase.from("mastery").select("*").in("profile_id", pids);
+    const s = await sbClient.from("sessions").select("*").in("profile_id", pids);
+    const m = await sbClient.from("mastery").select("*").in("profile_id", pids);
     out.sessions = s.data || [];
     out.mastery = m.data || [];
   }
-  const cv = await supabase.from("custom_vocab").select("*").eq("parent_id", uid);
-  const cp = await supabase.from("custom_passages").select("*").eq("parent_id", uid);
-  const ct = await supabase.from("custom_topics").select("*").eq("parent_id", uid);
-  const st = await supabase.from("settings").select("*").eq("parent_id", uid);
+  const cv = await sbClient.from("custom_vocab").select("*").eq("parent_id", uid);
+  const cp = await sbClient.from("custom_passages").select("*").eq("parent_id", uid);
+  const ct = await sbClient.from("custom_topics").select("*").eq("parent_id", uid);
+  const st = await sbClient.from("settings").select("*").eq("parent_id", uid);
   out.customVocab = cv.data || [];
   out.customPassages = cp.data || [];
   out.customTopics = ct.data || [];
@@ -3281,21 +3281,21 @@ async function importAllData(data) {
   }
   const uid = await sbUserId();
   if (!data || data.app !== "TalkPupils") throw new Error("This does not look like a TalkPupils backup.");
-  const { data: existing } = await supabase.from("profiles").select("id").eq("parent_id", uid);
+  const { data: existing } = await sbClient.from("profiles").select("id").eq("parent_id", uid);
   const pids = (existing || []).map((p) => p.id);
   if (pids.length) {
-    await supabase.from("sessions").delete().in("profile_id", pids);
-    await supabase.from("mastery").delete().in("profile_id", pids);
+    await sbClient.from("sessions").delete().in("profile_id", pids);
+    await sbClient.from("mastery").delete().in("profile_id", pids);
   }
-  await supabase.from("custom_vocab").delete().eq("parent_id", uid);
-  await supabase.from("custom_passages").delete().eq("parent_id", uid);
-  await supabase.from("custom_topics").delete().eq("parent_id", uid);
-  await supabase.from("settings").delete().eq("parent_id", uid);
-  await supabase.from("profiles").delete().eq("parent_id", uid);
+  await sbClient.from("custom_vocab").delete().eq("parent_id", uid);
+  await sbClient.from("custom_passages").delete().eq("parent_id", uid);
+  await sbClient.from("custom_topics").delete().eq("parent_id", uid);
+  await sbClient.from("settings").delete().eq("parent_id", uid);
+  await sbClient.from("profiles").delete().eq("parent_id", uid);
   const stamp = (rows) => (rows || []).map((r) => Object.assign({}, r, { parent_id: uid }));
   const put = async (table, rows) => {
     if (rows && rows.length) {
-      const { error } = await supabase.from(table).insert(rows);
+      const { error } = await sbClient.from(table).insert(rows);
       if (error) throw new Error(table + ": " + error.message);
     }
   };
@@ -3474,19 +3474,19 @@ async function doAuth(mode) {
   const email = $("authEmail").value.trim();
   const password = $("authPassword").value;
   if (!email || !password) { $("authStatus").textContent = "Type your email and password first."; return; }
-  if (!supabase) { $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload, or try as a guest below."; return; }
+  if (!sbClient) { $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload, or try as a guest below."; return; }
   $("authStatus").textContent = mode === "signup" ? "Creating your account…" : "Signing in…";
   try {
     let res;
     if (mode === "signup") {
-      res = await supabase.auth.signUp({ email: email, password: password });
+      res = await sbClient.auth.signUp({ email: email, password: password });
       if (res.error) throw res.error;
       if (!res.data.session) {
         $("authStatus").textContent = "Account created — check your email for a confirmation link, then tap Sign in.";
         return;
       }
     } else {
-      res = await supabase.auth.signInWithPassword({ email: email, password: password });
+      res = await sbClient.auth.signInWithPassword({ email: email, password: password });
       if (res.error) throw res.error;
     }
     state.parentId = res.data.session.user.id;
@@ -3501,12 +3501,12 @@ async function cleanupOldAudio() {
     const uid = state.parentId;
     if (!uid) return;
     const cutoff = Date.now() - 7 * 24 * 60 * 60 * 1000;
-    const { data: profiles } = await supabase.from("profiles").select("id").eq("parent_id", uid);
+    const { data: profiles } = await sbClient.from("profiles").select("id").eq("parent_id", uid);
     for (const p of profiles || []) {
-      const { data: files } = await supabase.storage.from("audio").list(uid + "/" + p.id, { limit: 100 });
+      const { data: files } = await sbClient.storage.from("audio").list(uid + "/" + p.id, { limit: 100 });
       const old = (files || []).filter((f) => f.created_at && new Date(f.created_at).getTime() < cutoff)
         .map((f) => uid + "/" + p.id + "/" + f.name);
-      if (old.length) await supabase.storage.from("audio").remove(old);
+      if (old.length) await sbClient.storage.from("audio").remove(old);
     }
   } catch (err) { /* clean-up is a bonus; it must never block the app */ }
 }
@@ -3538,17 +3538,23 @@ function exitGuest() {
 async function initAuth() {
   $("authSignUpBtn").addEventListener("click", () => doAuth("signup"));
   $("authSignInBtn").addEventListener("click", () => doAuth("signin"));
-  $("authSignOutBtn").addEventListener("click", async () => { if (supabase) await supabase.auth.signOut(); location.reload(); });
+  $("authSignOutBtn").addEventListener("click", async () => { if (sbClient) await sbClient.auth.signOut(); location.reload(); });
   $("guestP6Btn").addEventListener("click", () => enterGuest("P6"));
   $("guestP4Btn").addEventListener("click", () => enterGuest("P4"));
   $("exitGuestBtn").addEventListener("click", exitGuest);
+  const guestParam = (new URLSearchParams(location.search).get("guest") || "").toUpperCase();
+  if (guestParam === "P6" || guestParam === "P4") {
+    // Direct link (?guest=P6) skips the sign-in page entirely.
+    await enterGuest(guestParam);
+    return;
+  }
   const store = guestStore();
   if (store && store.profiles.length) {
     // Resume the guest trial without touching Supabase at all.
     await enterGuest(store.profiles[0].level || "P6");
     return;
   }
-  if (!supabase) {
+  if (!sbClient) {
     // The sign-in library did not load (e.g. its CDN was unreachable).
     // Guest mode still works — it needs no Supabase at all.
     $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload, or try as a guest below.";
@@ -3556,7 +3562,7 @@ async function initAuth() {
     $("appShell").classList.add("hidden");
     return;
   }
-  const { data } = await supabase.auth.getSession();
+  const { data } = await sbClient.auth.getSession();
   if (data && data.session) {
     state.parentId = data.session.user.id;
     $("authCard").classList.add("hidden");
