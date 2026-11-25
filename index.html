@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TalkPupils</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>TalkPupils</h1>
+    <p class="subtitle">PSLE Oral, typing &amp; vocabulary practice for Singapore pupils</p>
+  </div>
+  <div class="profile-box" id="profileBox">
+    <label for="profileSelect">Pupil:</label>
+    <select id="profileSelect"></select>
+    <button id="addProfileBtn" class="btn small">+ Add pupil</button>
+    <button id="deleteProfileBtn" class="btn small danger" title="Delete this pupil and all their sessions">Delete</button>
+    <div id="addProfileForm" class="hidden">
+      <input id="newProfileName" type="text" placeholder="Pupil's name" maxlength="60">
+      <select id="newProfileLevel">
+        <option value="P5">P5</option>
+        <option value="P6">P6</option>
+        <option value="P4">P4</option>
+        <option value="Sec 1">Sec 1</option>
+      </select>
+      <button id="saveProfileBtn" class="btn small">Save pupil</button>
+      <button id="cancelProfileBtn" class="btn small">Cancel</button>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="read" class="active">Read Aloud</button>
+  <button data-tab="type">Typing Quest</button>
+  <button data-tab="words">Words</button>
+  <button data-tab="oral">Oral Partner</button>
+  <button data-tab="progress">Progress</button>
+  <button data-tab="parent">Parent</button>
+</nav>
+
+<main>
+  <!-- ============ READ ============ -->
+  <section id="tab-read" class="tabpage active">
+    <div class="card">
+      <h2>Choose a passage</h2>
+      <div class="row">
+        <label for="passageSelect">Passage No.</label>
+        <select id="passageSelect"></select>
+        <button id="prevPassageBtn" class="btn small">← Prev</button>
+        <button id="nextPassageBtn" class="btn small">Next →</button>
+        <span id="passageMeta" class="muted"></span>
+      </div>
+      <div id="passageText" class="passage"></div>
+      <div id="readDueHint"></div>
+      <div class="row">
+        <button id="modelReadBtn" class="btn">▶ Listen to model reading</button>
+        <button id="stopSpeakBtn" class="btn small">Stop</button>
+        <button id="grammarBtn" class="btn">📖 Review grammar</button>
+        <span class="muted" id="modelStatus"></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Reading test</h2>
+      <p class="muted" id="micNote"></p>
+      <div class="row">
+        <button id="startMicBtn" class="btn primary">🎤 Start reading test (microphone)</button>
+        <button id="startTimedBtn" class="btn">⏱ Timed read (no microphone)</button>
+        <button id="stopTestBtn" class="btn danger hidden">■ Stop &amp; score</button>
+      </div>
+      <div id="testStatus" class="test-status"></div>
+      <div id="liveTranscript" class="transcript hidden"></div>
+      <p class="muted small">Timed read: read the passage aloud, tap “Finished reading”, then tap any words you stumbled on.</p>
+      <div id="readResult" class="hidden"></div>
+    </div>
+
+    <div class="card hidden" id="grammarCard">
+      <h2>Grammar review — <span id="grammarTitle"></span></h2>
+      <p class="muted">Tap a coloured word or phrase to see why the writer used it. The colours show the kind of grammar — tap a colour below to hide or show that kind.</p>
+      <div id="grammarLegend" class="row"></div>
+      <div id="grammarPassage" class="passage grammar-passage"></div>
+      <div id="grammarExplain" class="explain hidden"></div>
+      <div class="row">
+        <button id="grammarQuizBtn" class="btn primary">✏️ Start grammar quiz (4 questions)</button>
+        <button id="grammarCloseBtn" class="btn small">Close</button>
+      </div>
+      <div id="grammarQuizArea" class="hidden">
+        <div id="grammarQuizProgress" class="muted"></div>
+        <div id="grammarQuizQuestion" class="quiz-q"></div>
+        <div id="grammarQuizChoices" class="choices"></div>
+        <div id="grammarQuizFeedback" class="feedback"></div>
+        <button id="grammarQuizNextBtn" class="btn hidden">Next question →</button>
+      </div>
+      <div id="grammarQuizResult" class="hidden"></div>
+    </div>
+
+    <div class="card">
+      <h2>PSLE marking requirements</h2>
+      <details>
+        <summary>What the mark is based on (tap to read)</summary>
+        <pre id="markingDisplay" class="marking"></pre>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============ TYPE ============ -->
+  <section id="tab-type" class="tabpage">
+    <div class="card">
+      <h2>Typing Quest</h2>
+      <div class="row">
+        <button class="btn game-tab active" data-game="race">Sentence Race</button>
+        <button class="btn game-tab" data-game="rain">Word Rain</button>
+        <button class="btn game-tab" data-game="spell">Listen &amp; Spell</button>
+      </div>
+      <p class="muted">Typing uses the exact same passages as reading. Listen &amp; Spell uses the P5 Stellar vocabulary.</p>
+      <div id="typeDueHint"></div>
+    </div>
+
+    <div id="game-race" class="game">
+      <div class="card">
+        <h3>Sentence Race</h3>
+        <div class="row">
+          <label for="racePassageSelect">Passage</label>
+          <select id="racePassageSelect"></select>
+          <button id="raceStartBtn" class="btn primary">Start race</button>
+        </div>
+        <div id="raceArea" class="hidden">
+          <p class="muted">Type the sentence below, then press Enter.</p>
+          <div id="raceSentence" class="sentence-box"></div>
+          <input id="raceInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type the sentence here…">
+          <div id="raceFeedback" class="feedback"></div>
+          <div id="raceProgress" class="muted"></div>
+        </div>
+        <div id="raceResult" class="hidden"></div>
+      </div>
+    </div>
+
+    <div id="game-rain" class="game hidden">
+      <div class="card">
+        <h3>Word Rain</h3>
+        <div class="row">
+          <label for="rainPassageSelect">Passage</label>
+          <select id="rainPassageSelect"></select>
+          <button id="rainStartBtn" class="btn primary">Start Word Rain (60 seconds)</button>
+        </div>
+        <div id="rainArea" class="hidden">
+          <div id="rainBoard"></div>
+          <input id="rainInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type a falling word and press Enter…">
+          <div class="row"><span id="rainScore" class="muted">Score: 0</span><span id="rainTime" class="muted">60s left</span></div>
+        </div>
+        <div id="rainResult" class="hidden"></div>
+      </div>
+    </div>
+
+    <div id="game-spell" class="game hidden">
+      <div class="card">
+        <h3>Listen &amp; Spell</h3>
+        <p class="muted">Listen carefully — each word is read out <strong>3 times</strong>. Type the spelling you hear. The meaning is your clue.</p>
+        <div class="row">
+          <label for="spellUnitSelect">Unit</label>
+          <select id="spellUnitSelect"></select>
+          <label for="spellCountSelect">Round</label>
+          <select id="spellCountSelect">
+            <option value="10">10 words</option>
+            <option value="20">20 words</option>
+            <option value="all">All words</option>
+          </select>
+          <button id="spellStartBtn" class="btn primary">Start listening</button>
+        </div>
+        <div id="spellArea" class="hidden">
+          <div class="row">
+            <span id="spellProgress" class="muted"></span>
+            <button id="spellHearBtn" class="btn">🔊 Hear it again ×3</button>
+          </div>
+          <div id="spellClue" class="clue"></div>
+          <div id="spellBlanks" class="blanks"></div>
+          <input id="spellInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type the spelling here…">
+          <div class="row">
+            <button id="spellCheckBtn" class="btn primary">Check spelling</button>
+            <button id="spellNextBtn" class="btn hidden">Next word →</button>
+          </div>
+          <div id="spellFeedback" class="feedback"></div>
+        </div>
+        <div id="spellResult" class="hidden"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORDS ============ -->
+  <section id="tab-words" class="tabpage">
+    <div class="card">
+      <h2>Vocabulary — Primary 5 Stellar Units</h2>
+      <div class="row">
+        <label for="studyUnitSelect">Unit</label>
+        <select id="studyUnitSelect"></select>
+        <input id="studySearch" type="text" placeholder="Search words…" autocomplete="off">
+        <button id="hideMeaningsBtn" class="btn small">Hide meanings (self-test)</button>
+        <span id="studyCount" class="muted"></span>
+      </div>
+      <div id="wordList"></div>
+    </div>
+    <div class="card">
+      <h2>Add new vocabulary</h2>
+      <p class="muted">Add words or phrases of your own. They appear in the study list, the meaning quiz and Listen &amp; Spell.</p>
+      <div class="row">
+        <input id="newWordText" type="text" placeholder="Word or phrase (e.g. bellowed)" maxlength="80">
+        <input id="newWordMeaning" type="text" placeholder="Meaning (e.g. shouted loudly)" maxlength="160">
+      </div>
+      <div class="row">
+        <label for="newWordUnit">Unit</label>
+        <select id="newWordUnit"></select>
+        <label for="newWordCategory">Category</label>
+        <select id="newWordCategory">
+          <option value="phrasal verbs">Phrasal verb</option>
+          <option value="phrases with adverbs">Phrase containing an adverb</option>
+          <option value="collocations">Collocation</option>
+          <option value="words &amp; phrases">Single word</option>
+        </select>
+        <button id="addWordBtn" class="btn primary">Add word</button>
+        <span id="wordSaved" class="muted"></span>
+      </div>
+      <h3>Your words</h3>
+      <div id="customVocabList"></div>
+    </div>
+    <div class="card">
+      <h2>Word mastery — spaced repetition</h2>
+      <p class="muted">Words you get right several times in a row come back less and less often (1 day, then 3, 7, 14, 30 days). Words you miss come back soon. The Meaning Quiz and Listen &amp; Spell mostly use words that are due or still improving, with a few mastered words mixed in to check they are remembered.</p>
+      <div id="masteryLists"></div>
+    </div>
+    <div class="card">
+      <h2>Meaning quiz</h2>
+      <div class="row">
+        <label for="quizUnitSelect">Unit</label>
+        <select id="quizUnitSelect"></select>
+        <label for="quizCountSelect">Questions</label>
+        <select id="quizCountSelect">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="all">All</option>
+        </select>
+        <button id="quizStartBtn" class="btn primary">Start quiz</button>
+      </div>
+      <div id="quizArea" class="hidden">
+        <div id="quizProgress" class="muted"></div>
+        <div id="quizQuestion" class="quiz-q"></div>
+        <div id="quizChoices" class="choices"></div>
+        <div id="quizFeedback" class="feedback"></div>
+        <button id="quizNextBtn" class="btn hidden">Next question →</button>
+      </div>
+      <div id="quizResult" class="hidden"></div>
+    </div>
+  </section>
+
+  <!-- ============ ORAL PARTNER ============ -->
+  <section id="tab-oral" class="tabpage">
+    <div class="card">
+      <h2>Oral Partner — practise talking like the PSLE oral</h2>
+      <p class="muted">Your examiner asks questions about a picture, just like the real PSLE Stimulus-Based Conversation. Mock exam = 3 questions (picture → experience → opinion), marked out of 25.</p>
+      <div class="row">
+        <button class="btn mode-tab active" data-mode="mock">Mock exam (3 questions)</button>
+        <button class="btn mode-tab" data-mode="practice">One-topic practice (5 questions)</button>
+        <button class="btn mode-tab" data-mode="drill">One question type</button>
+      </div>
+      <div id="oralDrillPicker" class="row hidden">
+        <label for="oralDrillType">Question type</label>
+        <select id="oralDrillType">
+          <option value="experience">Tell us about a time… (experience)</option>
+          <option value="opinion">Do you prefer…? (opinion)</option>
+          <option value="evaluative">Do you think it is important…? (thinking)</option>
+          <option value="picture">About the picture (describe)</option>
+        </select>
+        <button id="oralDrillStartBtn" class="btn primary">Start drill (5 questions)</button>
+      </div>
+      <div class="row">
+        <button id="oralSurpriseBtn" class="btn">🎲 Surprise me</button>
+        <span id="oralDueHint" class="muted small"></span>
+      </div>
+      <div id="oralTopicGrid" class="topic-grid"></div>
+    </div>
+
+    <div id="oralPrepCard" class="card hidden">
+      <h2>Get ready — <span id="oralPrepTitle"></span></h2>
+      <img id="oralPrepImg" class="oral-photo" alt="Picture to talk about">
+      <p id="oralPrepKeywords" class="muted"></p>
+      <p><strong>Think about…</strong></p>
+      <ul id="oralPrepHints"></ul>
+      <div id="oralPhrases" class="phrases-box">
+        <h3>Helpful phrases (only now, while you prepare)</h3>
+        <div id="oralPhrasesList"></div>
+      </div>
+      <div class="row">
+        <span id="oralPrepTimer" class="prep-timer"></span>
+        <button id="oralStartBtn" class="btn primary">Start answering</button>
+        <button id="oralPrepCancelBtn" class="btn small">Choose another topic</button>
+      </div>
+      <p class="muted small">The helpful phrases disappear once you start answering — just like the real exam.</p>
+    </div>
+
+    <div id="oralChatCard" class="card hidden">
+      <h2><span id="oralChatTitle"></span> <span id="oralChatMode" class="muted small"></span></h2>
+      <div class="oral-layout">
+        <img id="oralChatImg" class="oral-photo small" alt="Picture to talk about">
+        <div id="oralThread" class="chat-thread"></div>
+      </div>
+      <div id="oralAnswerArea">
+        <div id="oralListenStatus" class="test-status"></div>
+        <div id="oralLiveTranscript" class="transcript hidden"></div>
+        <textarea id="oralTypedInput" rows="3" placeholder="Or type your answer here…"></textarea>
+        <div class="row">
+          <button id="oralMicBtn" class="btn primary">🎤 Answer by speaking</button>
+          <button id="oralDoneBtn" class="btn primary hidden">✓ Done — next question</button>
+          <button id="oralRepeatBtn" class="btn">🔁 Repeat question</button>
+          <button id="oralStopMicBtn" class="btn danger hidden">■ Stop speaking</button>
+        </div>
+        <p class="muted small">Speak your answer, then tap “Done”. If the microphone is not available, type instead. Your voice is saved on this laptop so you can listen back — a parent can switch this off in the Parent tab.</p>
+      </div>
+    </div>
+
+    <div id="oralReviewCard" class="card hidden">
+      <h2>Your review — <span id="oralReviewTitle"></span></h2>
+      <div id="oralReviewSummary"></div>
+      <div id="oralReviewList"></div>
+      <div class="row">
+        <button id="oralAgainBtn" class="btn primary">Practise another topic</button>
+        <button id="oralFinishBtn" class="btn">Done — see Progress</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROGRESS ============ -->
+  <section id="tab-progress" class="tabpage">
+    <div id="progressContent"></div>
+    <div class="card">
+      <h2>Backup</h2>
+      <p class="muted">All data lives in the <code>data</code> folder next to the server. You can also download a backup file, or restore one.</p>
+      <p class="muted small">The backup file does not include your pictures (<code>data/stimuli</code>), recorded answer audio (<code>data/audio</code>) or the AI key. Copy the whole app folder to back those up.</p>
+      <div class="row">
+        <a class="btn" id="backupLink" href="/api/backup" download>⬇ Download backup</a>
+        <label class="btn">⬆ Restore backup <input id="restoreInput" type="file" accept=".json,application/json" class="hidden"></label>
+        <span id="restoreStatus" class="muted"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARENT ============ -->
+  <section id="tab-parent" class="tabpage">
+    <div class="card">
+      <h2>Oral Partner settings</h2>
+      <p class="muted">How the Oral Partner mock exam works for your child.</p>
+      <div class="row">
+        <label for="oralPrepSeconds">Preparation time</label>
+        <select id="oralPrepSeconds">
+          <option value="60">1 minute</option>
+          <option value="120">2 minutes</option>
+          <option value="180">3 minutes</option>
+        </select>
+        <label class="check"><input id="oralSaveAudio" type="checkbox" checked> Save answer audio (listen back later)</label>
+      </div>
+      <p class="muted">Answer recordings are kept for 7 days, then deleted automatically to save space. Your child's written answers and scores are kept.</p>
+      <div class="row">
+        <button id="saveOralSettingsBtn" class="btn primary">Save Oral Partner settings</button>
+        <span id="oralSettingsStatus" class="muted"></span>
+      </div>
+      <p class="muted small">Helpful phrases are shown only during preparation, never while answering — just like the real exam. In a mock exam the examiner stays silent like a real examiner; in practice mode the examiner asks one gentle follow-up when an answer is very short. Your pictures and recorded answers live in the app folder (<code>data/stimuli</code> and <code>data/audio</code>). They are not included in backup downloads — copy the whole app folder to back them up.</p>
+    </div>
+    <div class="card">
+      <h2>Add your own picture topic</h2>
+      <p class="muted">Pick a photo from the laptop, give it a title, and write the examiner questions — or leave the questions blank and tick the generator to make the 3 PSLE questions (picture → experience → opinion) for you.</p>
+      <div class="row">
+        <label class="btn">📷 Choose picture <input id="customTopicFile" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" class="hidden"></label>
+        <span id="customTopicFileName" class="muted"></span>
+      </div>
+      <div class="row">
+        <input id="customTopicTitle" type="text" placeholder="Topic title (e.g. A family picnic at the park)" maxlength="80">
+      </div>
+      <div class="row">
+        <label for="customTopicLink">Link to a pack topic (for keywords)</label>
+        <select id="customTopicLink"></select>
+        <label class="check"><input id="customTopicGen" type="checkbox" checked> Use the 3-question generator</label>
+      </div>
+      <textarea id="customTopicQuestions" rows="5" placeholder="One question per line (up to 5). Leave blank to use the generator."></textarea>
+      <div class="row">
+        <button id="addCustomTopicBtn" class="btn primary">Add picture topic</button>
+        <span id="customTopicStatus" class="muted"></span>
+      </div>
+      <h3>Your picture topics</h3>
+      <div id="customTopicList"></div>
+    </div>
+      <p class="muted">This is what each reading is marked against (mark out of 10). Edit it and save — new readings use the new text.</p>
+      <textarea id="markingEditor" rows="16"></textarea>
+      <div class="row">
+        <button id="saveMarkingBtn" class="btn primary">Save marking requirements</button>
+        <button id="resetMarkingBtn" class="btn">Reset to Oral Pack text</button>
+        <span id="markingStatus" class="muted"></span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>AI marking (optional)</h2>
+      <p class="muted">If you switch this on, after each reading test the app also asks an AI (ChatGPT or Claude) to mark the reading and give feedback in simple words. It is optional — without it, the local mark is used. You need your own API key from the AI provider (pay-per-use, a few cents per reading). The same key is also used for Oral Partner feedback (a refined answer and an SBC mark) when this is switched on.</p>
+      <details>
+        <summary>How to get an API key (tap to read)</summary>
+        <p class="small"><strong>ChatGPT (OpenAI):</strong> 1. Go to platform.openai.com and sign in (or create a free account). 2. Click your profile icon (top right) → “API keys”. 3. Click “Create new secret key”, give it a name, and copy the key — it starts with <code>sk-</code>. Keep it secret; anyone with it can spend your credit. 4. You may need to add a little credit first (Billing → Add payment method). The first readings cost only a few cents each.</p>
+        <p class="small"><strong>Claude (Anthropic):</strong> 1. Go to console.anthropic.com and sign in (or create a free account). 2. On the left, click “API Keys”. 3. Click “Create Key”, give it a name, and copy the key — it starts with <code>sk-ant-</code>. 4. You may need to add a little credit first (Settings → Billing). The first readings cost only a few cents each.</p>
+        <p class="small">Then paste the key in the box below, choose the provider, tick “Use AI marking”, and click “Save AI settings”. Use “Test connection” to check the key works before your child practises.</p>
+      </details>
+      <div class="row">
+        <label for="aiProvider">AI provider</label>
+        <select id="aiProvider">
+          <option value="openai">ChatGPT (OpenAI)</option>
+          <option value="anthropic">Claude (Anthropic)</option>
+        </select>
+        <label for="aiModel">Model</label>
+        <input id="aiModel" type="text" placeholder="gpt-5.4-mini" maxlength="80">
+      </div>
+      <div class="row">
+        <label for="aiKey">API key</label>
+        <input id="aiKey" type="password" placeholder="Paste your API key here" maxlength="300" autocomplete="off">
+        <span id="aiKeyStatus" class="muted"></span>
+      </div>
+      <div class="row">
+        <label class="check"><input id="aiEnabled" type="checkbox"> Use AI marking after reading tests</label>
+      </div>
+      <div class="row">
+        <button id="saveAiBtn" class="btn primary">Save AI settings</button>
+        <button id="testAiBtn" class="btn">Test connection</button>
+        <button id="clearAiKeyBtn" class="btn danger">Remove key</button>
+        <span id="aiStatus" class="muted"></span>
+      </div>
+      <p class="muted small">Privacy: when AI marking is on, the passage text and what the microphone heard are sent to the AI provider you chose (OpenAI or Anthropic). For Oral Partner, the examiner's question and the child's spoken answer (as text) are sent. No audio is ever sent. The key is stored only on this laptop, in the data folder, and is never included in backup downloads.</p>
+    </div>
+    <div class="card">
+      <h2>Add your own passage</h2>
+      <div class="row">
+        <input id="customTitle" type="text" placeholder="Passage title" maxlength="80">
+      </div>
+      <textarea id="customText" rows="8" placeholder="Paste the passage text here (at least 20 characters)…"></textarea>
+      <div class="row">
+        <button id="addCustomBtn" class="btn primary">Add passage</button>
+      </div>
+      <h3>Your passages</h3>
+      <div id="customList"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="muted small">
+  All pupil data is saved on this laptop only (in the <code>data</code> folder next to the server). Nothing is saved in the browser. Works best in Google Chrome — microphone and speech need Chrome.
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
