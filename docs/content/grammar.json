@@ -1,0 +1,1711 @@
+{
+ "oracle-1": {
+  "highlights": [
+   {
+    "text": "\"Oh dear! It's eight o'clock! I'm so late for school!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Oh dear! It's eight o'clock! I'm so late for school!”."
+   },
+   {
+    "text": "\"Where are you going, Harry? Your breakfast is on the table!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Where are you going, Harry? Your breakfast is on the table!”."
+   },
+   {
+    "text": "\"Sorry, Mum, I'm late for school!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Sorry, Mum, I'm late for school!”."
+   },
+   {
+    "text": "as soon as",
+    "type": "connector",
+    "note": "“as soon as” is a connector — a word that joins ideas. It means 'right when' — one thing happened immediately after another. Here it is used in: “as soon as”."
+   },
+   {
+    "text": "After",
+    "type": "connector",
+    "note": "“After” is a connector — a word that joins ideas. It tells you one thing happened later than another. Here it is used in: “After”."
+   },
+   {
+    "text": "However",
+    "type": "connector",
+    "note": "“However” is a connector — a word that joins ideas. It shows the next idea is different from what came before — a surprise or a change of plan. Here it is used in: “However”."
+   },
+   {
+    "text": "were",
+    "type": "past",
+    "note": "“were” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "woke",
+    "type": "past",
+    "note": "“woke” is the past tense of “wake” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "stretched",
+    "type": "past",
+    "note": "“stretched” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "fumbled",
+    "type": "past",
+    "note": "“fumbled” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "cried",
+    "type": "past",
+    "note": "“cried” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "are",
+    "type": "present",
+    "note": "“are” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "is",
+    "type": "present",
+    "note": "“is” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "scrumptious",
+    "type": "adj",
+    "note": "“scrumptious” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "hasty",
+    "type": "adj",
+    "note": "“hasty” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "ready",
+    "type": "adj",
+    "note": "“ready” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "outside",
+    "type": "prep",
+    "note": "“outside” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "on",
+    "type": "prep",
+    "note": "“on” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Oh dear!",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Oh dear!”"
+   },
+   {
+    "text": "It's eight o'clock!",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “It's eight o'clock!”"
+   }
+  ]
+ },
+ "oracle-2": {
+  "highlights": [
+   {
+    "text": "\"Have you practised your lines?\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Have you practised your lines?”."
+   },
+   {
+    "text": "\"Yes, I've done so multiple times! However, I'm still feeling quite jittery about it,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Yes, I've done so multiple times! However, I'm still feeling…”."
+   },
+   {
+    "text": "\"Don't worry about it!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Don't worry about it!”."
+   },
+   {
+    "text": "\"You will do fine. Just don't forget your lines!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “You will do fine. Just don't forget your lines!”."
+   },
+   {
+    "text": "Besides",
+    "type": "connector",
+    "note": "“Besides” is a connector — a word that joins ideas. It means 'as well as that' — it adds another reason. Here it is used in: “Besides”."
+   },
+   {
+    "text": "However",
+    "type": "connector",
+    "note": "“However” is a connector — a word that joins ideas. It shows the next idea is different from what came before — a surprise or a change of plan. Here it is used in: “However”."
+   },
+   {
+    "text": "Before",
+    "type": "connector",
+    "note": "“Before” is a connector — a word that joins ideas. It tells you something happened earlier than something else. Here it is used in: “Before”."
+   },
+   {
+    "text": "had",
+    "type": "past",
+    "note": "“had” is the past tense of “have” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "selected",
+    "type": "past",
+    "note": "“selected” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "practised",
+    "type": "past",
+    "note": "“practised” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "asked",
+    "type": "past",
+    "note": "“asked” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "Have",
+    "type": "present",
+    "note": "“Have” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "do",
+    "type": "present",
+    "note": "“do” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "different",
+    "type": "adj",
+    "note": "“different” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "funny",
+    "type": "adj",
+    "note": "“funny” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "jittery",
+    "type": "adj",
+    "note": "“jittery” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "during",
+    "type": "prep",
+    "note": "“during” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "on",
+    "type": "prep",
+    "note": "“on” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Have you practised your lines?\"",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"Have you practised your lines?\"”"
+   },
+   {
+    "text": "\"Yes, I've done so multiple times!",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Yes, I've done so multiple times!”"
+   }
+  ]
+ },
+ "oracle-3": {
+  "highlights": [
+   {
+    "text": "\"Is this your first time using a digital camera?\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Is this your first time using a digital camera?”."
+   },
+   {
+    "text": "\"That's right. I've never tried taking photos of scenery before. This camera looks heavy.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “That's right. I've never tried taking photos of scenery befo…”."
+   },
+   {
+    "text": "\"Here, hold it. It is not heavy at all! In fact, you can hang it around your neck, just like I did!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Here, hold it. It is not heavy at all! In fact, you can hang…”."
+   },
+   {
+    "text": "While",
+    "type": "connector",
+    "note": "“While” is a connector — a word that joins ideas. It means 'at the same time as' something else. Here it is used in: “While”."
+   },
+   {
+    "text": "before",
+    "type": "connector",
+    "note": "“before” is a connector — a word that joins ideas. It tells you something happened earlier than something else. Here it is used in: “before”."
+   },
+   {
+    "text": "Indeed",
+    "type": "connector",
+    "note": "“Indeed” is a connector — a word that joins ideas. It means 'really' or 'truly' — it makes the idea stronger. Here it is used in: “Indeed”."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "had",
+    "type": "past",
+    "note": "“had” is the past tense of “have” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "intrigued",
+    "type": "past",
+    "note": "“intrigued” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "displayed",
+    "type": "past",
+    "note": "“displayed” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "asked",
+    "type": "past",
+    "note": "“asked” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "Is",
+    "type": "present",
+    "note": "“Is” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "first",
+    "type": "adj",
+    "note": "“first” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "huge",
+    "type": "adj",
+    "note": "“huge” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "black",
+    "type": "adj",
+    "note": "“black” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "at",
+    "type": "prep",
+    "note": "“at” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "during",
+    "type": "prep",
+    "note": "“during” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "around",
+    "type": "prep",
+    "note": "“around” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Is this your first time using a digital camera?\"",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"Is this your first time using a digital camera?\"”"
+   },
+   {
+    "text": "It is not heavy at all!",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “It is not heavy at all!”"
+   }
+  ]
+ },
+ "oracle-4": {
+  "highlights": [
+   {
+    "text": "\"Look at this mug! It says here 'Best Mum Ever'!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Look at this mug! It says here 'Best Mum Ever'!”."
+   },
+   {
+    "text": "\"This looks like something Mum might like!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “This looks like something Mum might like!”."
+   },
+   {
+    "text": "\"How much money have we got in total?\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “How much money have we got in total?”."
+   },
+   {
+    "text": "\"Ah! I have an idea!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Ah! I have an idea!”."
+   },
+   {
+    "text": "Unfortunately",
+    "type": "connector",
+    "note": "“Unfortunately” is a connector — a word that joins ideas. It shows something sad or unlucky happened. Here it is used in: “Unfortunately”."
+   },
+   {
+    "text": "walked",
+    "type": "past",
+    "note": "“walked” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "intended",
+    "type": "past",
+    "note": "“intended” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "stepped",
+    "type": "past",
+    "note": "“stepped” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "were",
+    "type": "past",
+    "note": "“were” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "says",
+    "type": "present",
+    "note": "“says” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "like",
+    "type": "present",
+    "note": "“like” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "wide",
+    "type": "adj",
+    "note": "“wide” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "Best",
+    "type": "adj",
+    "note": "“Best” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "purple",
+    "type": "adj",
+    "note": "“purple” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "into",
+    "type": "prep",
+    "note": "“into” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "around",
+    "type": "prep",
+    "note": "“around” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "at",
+    "type": "prep",
+    "note": "“at” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Look at this mug!",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Look at this mug!”"
+   },
+   {
+    "text": "It says here 'Best Mum Ever'!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “It says here 'Best Mum Ever'!\"”"
+   }
+  ]
+ },
+ "oracle-5": {
+  "highlights": [
+   {
+    "text": "\"Good morning, Leah!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Good morning, Leah!”."
+   },
+   {
+    "text": "\"Are you ready for your first lesson?\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Are you ready for your first lesson?”."
+   },
+   {
+    "text": "\"Yes! Let's begin!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Yes! Let's begin!”."
+   },
+   {
+    "text": "\"Well done for your first lesson, Leah! If we keep up with this pace, you will be able to master the breaststroke in no time,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Well done for your first lesson, Leah! If we keep up with th…”."
+   },
+   {
+    "text": "However",
+    "type": "connector",
+    "note": "“However” is a connector — a word that joins ideas. It shows the next idea is different from what came before — a surprise or a change of plan. Here it is used in: “However”."
+   },
+   {
+    "text": "As soon as",
+    "type": "connector",
+    "note": "“As soon as” is a connector — a word that joins ideas. It means 'right when' — one thing happened immediately after another. Here it is used in: “As soon as”."
+   },
+   {
+    "text": "Then",
+    "type": "connector",
+    "note": "“Then” is a connector — a word that joins ideas. It shows the next step in a list of events. Here it is used in: “Then”."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "had",
+    "type": "past",
+    "note": "“had” is the past tense of “have” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "promised",
+    "type": "past",
+    "note": "“promised” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "quit",
+    "type": "past",
+    "note": "“quit” is the past tense of “quit” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "took",
+    "type": "past",
+    "note": "“took” is the past tense of “take” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "Are",
+    "type": "present",
+    "note": "“Are” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "first",
+    "type": "adj",
+    "note": "“first” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "kind",
+    "type": "adj",
+    "note": "“kind” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "Good",
+    "type": "adj",
+    "note": "“Good” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "at",
+    "type": "prep",
+    "note": "“at” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "on",
+    "type": "prep",
+    "note": "“on” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Good morning, Leah!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Good morning, Leah!\"”"
+   },
+   {
+    "text": "\"Are you ready for your first lesson?\"",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"Are you ready for your first lesson?\"”"
+   }
+  ]
+ },
+ "oracle-6": {
+  "highlights": [
+   {
+    "text": "\"Look at what you've done, you mischievous boy!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Look at what you've done, you mischievous boy!”."
+   },
+   {
+    "text": "\"I'm sorry, Miss. Please forgive this young boy. I have some wet tissues for you,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “I'm sorry, Miss. Please forgive this young boy. I have some …”."
+   },
+   {
+    "text": "However",
+    "type": "connector",
+    "note": "“However” is a connector — a word that joins ideas. It shows the next idea is different from what came before — a surprise or a change of plan. Here it is used in: “However”."
+   },
+   {
+    "text": "while",
+    "type": "connector",
+    "note": "“while” is a connector — a word that joins ideas. It means 'at the same time as' something else. Here it is used in: “while”."
+   },
+   {
+    "text": "stepped",
+    "type": "past",
+    "note": "“stepped” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "Splattered",
+    "type": "past",
+    "note": "“Splattered” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "were",
+    "type": "past",
+    "note": "“were” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "sported",
+    "type": "past",
+    "note": "“sported” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "have",
+    "type": "present",
+    "note": "“have” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "middle-aged",
+    "type": "adj",
+    "note": "“middle-aged” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "neat",
+    "type": "adj",
+    "note": "“neat” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "young",
+    "type": "adj",
+    "note": "“young” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "into",
+    "type": "prep",
+    "note": "“into” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "at",
+    "type": "prep",
+    "note": "“at” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Look at what you've done, you mischievous boy!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Look at what you've done, you mischievous boy!\"”"
+   }
+  ]
+ },
+ "oracle-7": {
+  "highlights": [
+   {
+    "text": "\"Why do we have to eat here? It's so stuffy and crowded!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Why do we have to eat here? It's so stuffy and crowded!”."
+   },
+   {
+    "text": "\"This place sells the best duck rice,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “This place sells the best duck rice,”."
+   },
+   {
+    "text": "\"Besides, we can take this opportunity to experience the hawker culture in Singapore. Hawker centres are a part of our way of life.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Besides, we can take this opportunity to experience the hawk…”."
+   },
+   {
+    "text": "\"Wow! This tastes amazing!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Wow! This tastes amazing!”."
+   },
+   {
+    "text": "while",
+    "type": "connector",
+    "note": "“while” is a connector — a word that joins ideas. It means 'at the same time as' something else. Here it is used in: “while”."
+   },
+   {
+    "text": "Besides",
+    "type": "connector",
+    "note": "“Besides” is a connector — a word that joins ideas. It means 'as well as that' — it adds another reason. Here it is used in: “Besides”."
+   },
+   {
+    "text": "at first",
+    "type": "connector",
+    "note": "“at first” is a connector — a word that joins ideas. It shows the order of events — what happened at the start. Here it is used in: “at first”."
+   },
+   {
+    "text": "brought",
+    "type": "past",
+    "note": "“brought” is the past tense of “bring” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "were",
+    "type": "past",
+    "note": "“were” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "formed",
+    "type": "past",
+    "note": "“formed” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "crowded",
+    "type": "past",
+    "note": "“crowded” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "do",
+    "type": "present",
+    "note": "“do” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "have",
+    "type": "present",
+    "note": "“have” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "fiery",
+    "type": "adj",
+    "note": "“fiery” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "hot",
+    "type": "adj",
+    "note": "“hot” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "long",
+    "type": "adj",
+    "note": "“long” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "at",
+    "type": "prep",
+    "note": "“at” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "along",
+    "type": "prep",
+    "note": "“along” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Why do we have to eat here?",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"Why do we have to eat here?”"
+   },
+   {
+    "text": "It's so stuffy and crowded!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “It's so stuffy and crowded!\"”"
+   }
+  ]
+ },
+ "oracle-8": {
+  "highlights": [
+   {
+    "text": "\"Mary, could you please work on your part of the project? The deadline for our project proposal is this Friday,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Mary, could you please work on your part of the project? The…”."
+   },
+   {
+    "text": "\"Oh, don't worry too much about it. I can easily get the needed information by surfing the net. An hour is enough!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Oh, don't worry too much about it. I can easily get the need…”."
+   },
+   {
+    "text": "\"Sorry! I promise to complete my part of the project by tonight. I have to rush for my training now. See you again!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Sorry! I promise to complete my part of the project by tonig…”."
+   },
+   {
+    "text": "while",
+    "type": "connector",
+    "note": "“while” is a connector — a word that joins ideas. It means 'at the same time as' something else. Here it is used in: “while”."
+   },
+   {
+    "text": "Meanwhile",
+    "type": "connector",
+    "note": "“Meanwhile” is a connector — a word that joins ideas. It means 'at the same time' as something else. Here it is used in: “Meanwhile”."
+   },
+   {
+    "text": "However",
+    "type": "connector",
+    "note": "“However” is a connector — a word that joins ideas. It shows the next idea is different from what came before — a surprise or a change of plan. Here it is used in: “However”."
+   },
+   {
+    "text": "had",
+    "type": "past",
+    "note": "“had” is the past tense of “have” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "uninterested",
+    "type": "past",
+    "note": "“uninterested” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "turned",
+    "type": "past",
+    "note": "“turned” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "preoccupied",
+    "type": "past",
+    "note": "“preoccupied” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "is",
+    "type": "present",
+    "note": "“is” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "have",
+    "type": "present",
+    "note": "“have” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "bad",
+    "type": "adj",
+    "note": "“bad” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "busy",
+    "type": "adj",
+    "note": "“busy” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "nonchalant",
+    "type": "adj",
+    "note": "“nonchalant” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "on",
+    "type": "prep",
+    "note": "“on” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Mary, could you please work on your part of the project?",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"Mary, could you please work on your part of the project?”"
+   },
+   {
+    "text": "An hour is enough!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “An hour is enough!\"”"
+   }
+  ]
+ },
+ "oracle-9": {
+  "highlights": [
+   {
+    "text": "\"It's a delicacy in Japan,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “It's a delicacy in Japan,”."
+   },
+   {
+    "text": "\"Give it a try, Jenny. I'm sure you will like it,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Give it a try, Jenny. I'm sure you will like it,”."
+   },
+   {
+    "text": "\"Come on, Mum,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Come on, Mum,”."
+   },
+   {
+    "text": "\"It's just going to taste like the sea! It's nauseating!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “It's just going to taste like the sea! It's nauseating!”."
+   },
+   {
+    "text": "however",
+    "type": "connector",
+    "note": "“however” is a connector — a word that joins ideas. It shows the next idea is different from what came before — a surprise or a change of plan. Here it is used in: “however”."
+   },
+   {
+    "text": "before",
+    "type": "connector",
+    "note": "“before” is a connector — a word that joins ideas. It tells you something happened earlier than something else. Here it is used in: “before”."
+   },
+   {
+    "text": "did",
+    "type": "past",
+    "note": "“did” is the past tense of “do” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "had",
+    "type": "past",
+    "note": "“had” is the past tense of “have” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "changed",
+    "type": "past",
+    "note": "“changed” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "struck",
+    "type": "past",
+    "note": "“struck” is the past tense of “strike” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "smelled",
+    "type": "past",
+    "note": "“smelled” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "is",
+    "type": "present",
+    "note": "“is” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "like",
+    "type": "present",
+    "note": "“like” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "good",
+    "type": "adj",
+    "note": "“good” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "last",
+    "type": "adj",
+    "note": "“last” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "cold",
+    "type": "adj",
+    "note": "“cold” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "during",
+    "type": "prep",
+    "note": "“during” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "into",
+    "type": "prep",
+    "note": "“into” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"It's just going to taste like the sea!",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"It's just going to taste like the sea!”"
+   },
+   {
+    "text": "It's nauseating!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “It's nauseating!\"”"
+   }
+  ]
+ },
+ "oracle-10": {
+  "highlights": [
+   {
+    "text": "\"Remember, it is important that we stay safe throughout the activity. Do not go near the sea and stay within the parameters,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Remember, it is important that we stay safe throughout the a…”."
+   },
+   {
+    "text": "\"The weather is killing me! Shall we just head to the nearby eatery and grab some drinks?\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “The weather is killing me! Shall we just head to the nearby …”."
+   },
+   {
+    "text": "\"I think we should be responsible and complete our task. Even if we want to take a break, we should seek Mr Tan's permission,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “I think we should be responsible and complete our task. Even…”."
+   },
+   {
+    "text": "Soon",
+    "type": "connector",
+    "note": "“Soon” is a connector — a word that joins ideas. It means a short time later. Here it is used in: “Soon”."
+   },
+   {
+    "text": "after",
+    "type": "connector",
+    "note": "“after” is a connector — a word that joins ideas. It tells you one thing happened later than another. Here it is used in: “after”."
+   },
+   {
+    "text": "However",
+    "type": "connector",
+    "note": "“However” is a connector — a word that joins ideas. It shows the next idea is different from what came before — a surprise or a change of plan. Here it is used in: “However”."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "brought",
+    "type": "past",
+    "note": "“brought” is the past tense of “bring” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "were",
+    "type": "past",
+    "note": "“were” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "equipped",
+    "type": "past",
+    "note": "“equipped” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "scattered",
+    "type": "past",
+    "note": "“scattered” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "is",
+    "type": "present",
+    "note": "“is” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "Do",
+    "type": "present",
+    "note": "“Do” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "annual",
+    "type": "adj",
+    "note": "“annual” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "meaningful",
+    "type": "adj",
+    "note": "“meaningful” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "unsightly",
+    "type": "adj",
+    "note": "“unsightly” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "over",
+    "type": "prep",
+    "note": "“over” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "near",
+    "type": "prep",
+    "note": "“near” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"The weather is killing me!",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"The weather is killing me!”"
+   },
+   {
+    "text": "Shall we just head to the nearby eatery and grab some drinks?\"",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “Shall we just head to the nearby eatery and grab some drinks?\"”"
+   }
+  ]
+ },
+ "builtin-1": {
+  "highlights": [
+   {
+    "text": "\"Do you think anyone will play our ring toss game?\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Do you think anyone will play our ring toss game?”."
+   },
+   {
+    "text": "\"Of course!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Of course!”."
+   },
+   {
+    "text": "\"We have the best prizes — everyone loves the little plush toys.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “We have the best prizes — everyone loves the little plush to…”."
+   },
+   {
+    "text": "\"Your stall looks wonderful, girls. Remember to speak loudly and clearly when you welcome the visitors.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Your stall looks wonderful, girls. Remember to speak loudly …”."
+   },
+   {
+    "text": "then",
+    "type": "connector",
+    "note": "“then” is a connector — a word that joins ideas. It shows the next step in a list of events. Here it is used in: “then”."
+   },
+   {
+    "text": "Soon",
+    "type": "connector",
+    "note": "“Soon” is a connector — a word that joins ideas. It means a short time later. Here it is used in: “Soon”."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "hung",
+    "type": "past",
+    "note": "“hung” is the past tense of “hang” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "drifted",
+    "type": "past",
+    "note": "“drifted” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "had",
+    "type": "past",
+    "note": "“had” is the past tense of “have” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "asked",
+    "type": "past",
+    "note": "“asked” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "Do",
+    "type": "present",
+    "note": "“Do” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "think",
+    "type": "present",
+    "note": "“think” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "Colourful",
+    "type": "adj",
+    "note": "“Colourful” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "best",
+    "type": "adj",
+    "note": "“best” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "neat",
+    "type": "adj",
+    "note": "“neat” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "through",
+    "type": "prep",
+    "note": "“through” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "over",
+    "type": "prep",
+    "note": "“over” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Do you think anyone will play our ring toss game?\"",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"Do you think anyone will play our ring toss game?\"”"
+   },
+   {
+    "text": "\"Of course!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Of course!\"”"
+   }
+  ]
+ },
+ "builtin-2": {
+  "highlights": [
+   {
+    "text": "\"Good morning, Mrs Lim!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Good morning, Mrs Lim!”."
+   },
+   {
+    "text": "\"Let me help you carry those.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Let me help you carry those.”."
+   },
+   {
+    "text": "\"Oh, thank you, Daniel,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Oh, thank you, Daniel,”."
+   },
+   {
+    "text": "\"My knees are not as strong as they used to be.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “My knees are not as strong as they used to be.”."
+   },
+   {
+    "text": "while",
+    "type": "connector",
+    "note": "“while” is a connector — a word that joins ideas. It means 'at the same time as' something else. Here it is used in: “while”."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "saw",
+    "type": "past",
+    "note": "“saw” is the past tense of “see” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "called",
+    "type": "past",
+    "note": "“called” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "said",
+    "type": "past",
+    "note": "“said” is the past tense of “say” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "took",
+    "type": "past",
+    "note": "“took” is the past tense of “take” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "are",
+    "type": "present",
+    "note": "“are” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "want",
+    "type": "present",
+    "note": "“want” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "elderly",
+    "type": "adj",
+    "note": "“elderly” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "heavy",
+    "type": "adj",
+    "note": "“heavy” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "Good",
+    "type": "adj",
+    "note": "“Good” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "at",
+    "type": "prep",
+    "note": "“at” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "on",
+    "type": "prep",
+    "note": "“on” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Good morning, Mrs Lim!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Good morning, Mrs Lim!\"”"
+   },
+   {
+    "text": "\"Did you buy all this from the market?\"",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"Did you buy all this from the market?\"”"
+   }
+  ]
+ },
+ "builtin-3": {
+  "highlights": [
+   {
+    "text": "\"It's raining cats and dogs!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “It's raining cats and dogs!”."
+   },
+   {
+    "text": "\"What are we going to do all day?\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “What are we going to do all day?”."
+   },
+   {
+    "text": "\"Why don't you two help me bake some chocolate chip cookies? It is the perfect weather for baking.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Why don't you two help me bake some chocolate chip cookies? …”."
+   },
+   {
+    "text": "\"All right,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “All right,”."
+   },
+   {
+    "text": "Soon",
+    "type": "connector",
+    "note": "“Soon” is a connector — a word that joins ideas. It means a short time later. Here it is used in: “Soon”."
+   },
+   {
+    "text": "before",
+    "type": "connector",
+    "note": "“before” is a connector — a word that joins ideas. It tells you something happened earlier than something else. Here it is used in: “before”."
+   },
+   {
+    "text": "finally",
+    "type": "connector",
+    "note": "“finally” is a connector — a word that joins ideas. It shows this is the last thing in a list of events. Here it is used in: “finally”."
+   },
+   {
+    "text": "pattered",
+    "type": "past",
+    "note": "“pattered” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "stared",
+    "type": "past",
+    "note": "“stared” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "had",
+    "type": "past",
+    "note": "“had” is the past tense of “have” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "planned",
+    "type": "past",
+    "note": "“planned” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "are",
+    "type": "present",
+    "note": "“are” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "do",
+    "type": "present",
+    "note": "“do” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "ready",
+    "type": "adj",
+    "note": "“ready” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "warm",
+    "type": "adj",
+    "note": "“warm” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "cosy",
+    "type": "adj",
+    "note": "“cosy” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "at",
+    "type": "prep",
+    "note": "“at” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "on",
+    "type": "prep",
+    "note": "“on” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "into",
+    "type": "prep",
+    "note": "“into” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"It's raining cats and dogs!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"It's raining cats and dogs!\"”"
+   },
+   {
+    "text": "\"What are we going to do all day?\"",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"What are we going to do all day?\"”"
+   }
+  ]
+ },
+ "builtin-4": {
+  "highlights": [
+   {
+    "text": "\"Someone must be very worried,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Someone must be very worried,”."
+   },
+   {
+    "text": "\"Mum, I found a wallet!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Mum, I found a wallet!”."
+   },
+   {
+    "text": "\"This boy is from the school across the road. We should return it to him.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “This boy is from the school across the road. We should retur…”."
+   },
+   {
+    "text": "\"But how do we find him?\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “But how do we find him?”."
+   },
+   {
+    "text": "as soon as",
+    "type": "connector",
+    "note": "“as soon as” is a connector — a word that joins ideas. It means 'right when' — one thing happened immediately after another. Here it is used in: “as soon as”."
+   },
+   {
+    "text": "later",
+    "type": "connector",
+    "note": "“later” is a connector — a word that joins ideas. It means 'after that'. Here it is used in: “later”."
+   },
+   {
+    "text": "found",
+    "type": "past",
+    "note": "“found” is the past tense of “find” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "picked",
+    "type": "past",
+    "note": "“picked” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "looked",
+    "type": "past",
+    "note": "“looked” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "were",
+    "type": "past",
+    "note": "“were” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "thought",
+    "type": "past",
+    "note": "“thought” is the past tense of “think” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "is",
+    "type": "present",
+    "note": "“is” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "do",
+    "type": "present",
+    "note": "“do” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "worried",
+    "type": "adj",
+    "note": "“worried” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "whole",
+    "type": "adj",
+    "note": "“whole” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "next",
+    "type": "adj",
+    "note": "“next” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "On",
+    "type": "prep",
+    "note": "“On” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "near",
+    "type": "prep",
+    "note": "“near” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "inside",
+    "type": "prep",
+    "note": "“inside” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Mum, I found a wallet!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Mum, I found a wallet!\"”"
+   },
+   {
+    "text": "\"But how do we find him?\"",
+    "type": "punct",
+    "note": "A question mark (?) shows someone is asking something. Your voice should go up a little at the end of the question: “\"But how do we find him?\"”"
+   }
+  ]
+ },
+ "builtin-5": {
+  "highlights": [
+   {
+    "text": "\"I'm so nervous,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “I'm so nervous,”."
+   },
+   {
+    "text": "\"There are so many people!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “There are so many people!”."
+   },
+   {
+    "text": "\"Don't worry,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Don't worry,”."
+   },
+   {
+    "text": "\"We have practised so many times. We will do fine.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “We have practised so many times. We will do fine.”."
+   },
+   {
+    "text": "At first",
+    "type": "connector",
+    "note": "“At first” is a connector — a word that joins ideas. It shows the order of events — what happened at the start. Here it is used in: “At first”."
+   },
+   {
+    "text": "Then",
+    "type": "connector",
+    "note": "“Then” is a connector — a word that joins ideas. It shows the next step in a list of events. Here it is used in: “Then”."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "packed",
+    "type": "past",
+    "note": "“packed” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "waited",
+    "type": "past",
+    "note": "“waited” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "whispered",
+    "type": "past",
+    "note": "“whispered” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "said",
+    "type": "past",
+    "note": "“said” is the past tense of “say” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "are",
+    "type": "present",
+    "note": "“are” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "have",
+    "type": "present",
+    "note": "“have” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "annual",
+    "type": "adj",
+    "note": "“annual” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "colourful",
+    "type": "adj",
+    "note": "“colourful” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "short",
+    "type": "adj",
+    "note": "“short” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "Behind",
+    "type": "prep",
+    "note": "“Behind” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "through",
+    "type": "prep",
+    "note": "“through” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"There are so many people!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"There are so many people!\"”"
+   },
+   {
+    "text": "Most importantly, enjoy yourselves!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “Most importantly, enjoy yourselves!\"”"
+   }
+  ]
+ },
+ "builtin-6": {
+  "highlights": [
+   {
+    "text": "\"Grandpa, look! There is a squirrel!\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Grandpa, look! There is a squirrel!”."
+   },
+   {
+    "text": "\"Shh,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “Shh,”."
+   },
+   {
+    "text": "\"If you stay quiet, you may see more animals.\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “If you stay quiet, you may see more animals.”."
+   },
+   {
+    "text": "\"The ducklings are following their mother,\"",
+    "type": "speech",
+    "note": "These are the exact words someone said. The speech marks show a person is talking, so you can hear their voice in the story — for example, “The ducklings are following their mother,”."
+   },
+   {
+    "text": "soon",
+    "type": "connector",
+    "note": "“soon” is a connector — a word that joins ideas. It means a short time later. Here it is used in: “soon”."
+   },
+   {
+    "text": "took",
+    "type": "past",
+    "note": "“took” is the past tense of “take” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "was",
+    "type": "past",
+    "note": "“was” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "were",
+    "type": "past",
+    "note": "“were” is the past tense of “be” — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "sparkled",
+    "type": "past",
+    "note": "“sparkled” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "exclaimed",
+    "type": "past",
+    "note": "“exclaimed” is a past-tense verb (it ends in -ed) — it shows the action already happened. The writer uses the past tense because this story happened before."
+   },
+   {
+    "text": "is",
+    "type": "present",
+    "note": "“is” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "are",
+    "type": "present",
+    "note": "“are” is in the present tense — it shows something happening right now, or something that is true. The writer uses it inside speech because the person is talking right now."
+   },
+   {
+    "text": "fresh",
+    "type": "adj",
+    "note": "“fresh” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "bushy-tailed",
+    "type": "adj",
+    "note": "“bushy-tailed” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "fluffy",
+    "type": "adj",
+    "note": "“fluffy” is a describing word (adjective) — it tells you more about a person, place or thing, so you can picture it clearly. Look at the word just after it to see what it describes."
+   },
+   {
+    "text": "on",
+    "type": "prep",
+    "note": "“on” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "in",
+    "type": "prep",
+    "note": "“in” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "at",
+    "type": "prep",
+    "note": "“at” is a preposition — a small word that shows where or when something happened. Here it links the action to its place or time."
+   },
+   {
+    "text": "\"Grandpa, look!",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “\"Grandpa, look!”"
+   },
+   {
+    "text": "There is a squirrel!\"",
+    "type": "punct",
+    "note": "An exclamation mark (!) shows strong feeling — excitement, surprise or a shout. The writer uses it so you read these words with energy: “There is a squirrel!\"”"
+   }
+  ]
+ }
+}
