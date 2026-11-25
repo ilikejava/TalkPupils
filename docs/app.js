@@ -1634,18 +1634,18 @@ function startRain() {
   $("rainTime").textContent = "60s left";
   $("rainInput").focus();
   let spawnIdx = 0;
-  // One new word every 2 seconds, so words drop progressively instead of
-  // all at once. A word falls the 320px board in about 12 seconds
-  // (2.7px every 100ms) — a steady speed a child can read and type.
+  // One new word every 3 seconds, so words drop progressively instead of
+  // all at once. A word falls the 320px board in about 20 seconds
+  // (1.5px every 100ms) — a slow, steady speed a child can read and type.
   rain.spawnTimer = setInterval(() => {
     if (!rain.active) return;
     if (spawnIdx >= rain.words.length) return;
     if (document.querySelectorAll(".rain-word").length >= 6) return;
     if (spawnRainWord(rain.words[spawnIdx])) spawnIdx++;
-  }, 2000);
+  }, 3000);
   rain.dropTimer = setInterval(() => {
     document.querySelectorAll(".rain-word").forEach((el) => {
-      const top = parseFloat(el.dataset.top || 0) + 2.7;
+      const top = parseFloat(el.dataset.top || 0) + 1.5;
       el.dataset.top = top;
       el.style.top = top + "px";
       if (top > 300) { el.remove(); rain.missed++; }
