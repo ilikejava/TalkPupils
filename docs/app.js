@@ -22,9 +22,16 @@ const TP_PLACEHOLDER = "data:image/svg+xml;utf8," + encodeURIComponent(
   '<text x="320" y="180" font-family="sans-serif" font-size="24" fill="#667085" ' +
   'text-anchor="middle">Picture coming soon</text></svg>');
 window.tpImgFallback = function (img) { img.onerror = null; img.src = TP_PLACEHOLDER; };
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+/* The Supabase library comes from a CDN. If it fails to load, the whole
+   app must NOT die with it — guest mode ("Try without signing in") needs
+   no Supabase at all, so the client is null and sign-in just reports
+   itself unavailable until the page is reloaded. */
+const supabase = (typeof window !== "undefined" && window.supabase && window.supabase.createClient)
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+  : null;
 
 async function sbUserId() {
+  if (!supabase) throw new Error("Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload.");
   const { data } = await supabase.auth.getUser();
   if (!data || !data.user) throw new Error("Not signed in. Please sign in again.");
   return data.user.id;
@@ -3467,6 +3474,7 @@ async function doAuth(mode) {
   const email = $("authEmail").value.trim();
   const password = $("authPassword").value;
   if (!email || !password) { $("authStatus").textContent = "Type your email and password first."; return; }
+  if (!supabase) { $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload, or try as a guest below."; return; }
   $("authStatus").textContent = mode === "signup" ? "Creating your account…" : "Signing in…";
   try {
     let res;
@@ -3530,7 +3538,7 @@ function exitGuest() {
 async function initAuth() {
   $("authSignUpBtn").addEventListener("click", () => doAuth("signup"));
   $("authSignInBtn").addEventListener("click", () => doAuth("signin"));
-  $("authSignOutBtn").addEventListener("click", async () => { await supabase.auth.signOut(); location.reload(); });
+  $("authSignOutBtn").addEventListener("click", async () => { if (supabase) await supabase.auth.signOut(); location.reload(); });
   $("guestP6Btn").addEventListener("click", () => enterGuest("P6"));
   $("guestP4Btn").addEventListener("click", () => enterGuest("P4"));
   $("exitGuestBtn").addEventListener("click", exitGuest);
@@ -3538,6 +3546,14 @@ async function initAuth() {
   if (store && store.profiles.length) {
     // Resume the guest trial without touching Supabase at all.
     await enterGuest(store.profiles[0].level || "P6");
+    return;
+  }
+  if (!supabase) {
+    // The sign-in library did not load (e.g. its CDN was unreachable).
+    // Guest mode still works — it needs no Supabase at all.
+    $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload, or try as a guest below.";
+    $("authCard").classList.remove("hidden");
+    $("appShell").classList.add("hidden");
     return;
   }
   const { data } = await supabase.auth.getSession();
