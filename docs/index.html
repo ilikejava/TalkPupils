@@ -443,8 +443,27 @@
       </div>
     </div>
     <div class="card">
-      <h2>AI marking (coming later)</h2>
-      <p class="muted">AI marking (ChatGPT / Claude) is not in the website yet — it needs a secure server, so it comes in a later update. For now every reading is marked on the page, out of 10, using the marking requirements above.</p>
+      <h2>AI marking (optional)</h2>
+      <p class="muted">After a reading test, the AI gives a second mark out of 10 plus two strengths and two improvements, in simple words. For Oral Partner it refines the answer and gives a mark out of 25. The local mark always counts, even if the AI is off or fails.</p>
+      <div class="row">
+        <label for="aiProvider">Provider</label>
+        <select id="aiProvider">
+          <option value="openai">ChatGPT</option>
+          <option value="anthropic">Claude</option>
+        </select>
+        <label for="aiModel">Model (blank = default)</label>
+        <input id="aiModel" type="text" placeholder="gpt-5.4-mini" maxlength="80">
+      </div>
+      <div class="row">
+        <label class="check"><input id="aiEnabled" type="checkbox"> Use AI marking after reading tests</label>
+      </div>
+      <p class="muted small" id="aiKeyStatus">Checking the server key…</p>
+      <div class="row">
+        <button id="saveAiBtn" class="btn primary">Save AI settings</button>
+        <button id="testAiBtn" class="btn">Test connection</button>
+        <span id="aiStatus" class="muted"></span>
+      </div>
+      <p class="muted small">The API key is kept on the server (Supabase → Edge Functions → Secrets) and never appears on this page. Add OPENAI_API_KEY for ChatGPT or ANTHROPIC_API_KEY for Claude there. In guest mode AI marking is off — sign in to use it.</p>
     </div>
     <div class="card">
       <h2>Add your own passage</h2>
@@ -465,8 +484,8 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v9</p>
+<p class="muted small" id="appVersion">TalkPupils web · v10</p>
 
-<script src="app.js?v=9"></script>
+<script src="app.js?v=10"></script>
 </body>
 </html>

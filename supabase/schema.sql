@@ -67,6 +67,9 @@ create table if not exists public.settings (
   marking_requirements text,
   oral_prep_seconds integer not null default 120,
   oral_save_audio boolean not null default true,
+  ai_provider text not null default 'openai',
+  ai_model text not null default '',
+  ai_enabled boolean not null default false,
   updated_at timestamptz not null default now()
 );
 

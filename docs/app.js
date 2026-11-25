@@ -80,7 +80,7 @@ function mapSession(r) { return Object.assign({ id: r.id, profileId: r.profile_i
 function mapCustomVocab(r) { return { id: r.id, word: r.word, meaning: r.meaning, unit: (/^\d+$/.test(String(r.unit)) ? parseInt(r.unit, 10) : r.unit), category: r.category, createdAt: r.created_at }; }
 function mapCustomPassage(r) { return { id: r.id, title: r.title, text: r.text, createdAt: r.created_at }; }
 function mapCustomTopic(r) { return { id: r.id, title: r.title, image: r.image || "", linkedTopicId: r.linked_topic_id || "", keywords: r.keywords || [], questions: r.questions || [], createdAt: r.created_at }; }
-function mapSettings(r) { return { markingRequirements: r ? r.marking_requirements : null, oralPrepSeconds: r ? r.oral_prep_seconds : 120, oralSaveAudio: r ? r.oral_save_audio !== false : true }; }
+function mapSettings(r) { return { markingRequirements: r ? r.marking_requirements : null, oralPrepSeconds: r ? r.oral_prep_seconds : 120, oralSaveAudio: r ? r.oral_save_audio !== false : true, aiProvider: r && r.ai_provider ? r.ai_provider : "openai", aiModel: r && r.ai_model ? r.ai_model : "", aiEnabled: r ? !!r.ai_enabled : false }; }
 
 async function apiGet(path) {
   if (guestMode) return guestApiGet(path);
@@ -141,7 +141,19 @@ async function apiGet(path) {
     return { ok: true, markingRequirements: data ? data.marking_requirements : null };
   }
   if (p === "/api/ai-config") {
-    return { ok: true, config: { provider: "openai", model: "", enabled: false, keySaved: false, keyLast4: "" } };
+    // AI settings live in the settings row; whether a key exists lives
+    // on the server (the Supabase Edge Function "ai-mark"). If the
+    // function is not deployed yet, the call fails quietly and the
+    // parent sees "no key set" until it is.
+    const uid = await sbUserId();
+    const { data } = await sbClient.from("settings").select("ai_provider, ai_model, ai_enabled").eq("parent_id", uid).maybeSingle();
+    let keys = {};
+    try {
+      const r = await callAiFunction({ action: "status" });
+      if (r && r.ok) keys = r.keys || {};
+    } catch (err) { /* function not deployed yet — keys stay empty */ }
+    const provider = (data && data.ai_provider) || "openai";
+    return { ok: true, config: { provider, model: (data && data.ai_model) || "", enabled: !!(data && data.ai_enabled), keySaved: !!keys[provider], keyLast4: "", keys } };
   }
   throw new Error("GET " + path + " is not available on the website");
 }
@@ -232,8 +244,24 @@ async function apiPost(path, body) {
     if (error) throw new Error(error.message);
     return { ok: true, settings: mapSettings(data), markingRequirements: data.marking_requirements };
   }
-  if (path === "/api/ai-config" || path === "/api/ai-test") {
-    throw new Error("AI marking is not available on the website yet — it is coming in a later update.");
+  if (path === "/api/ai-config") {
+    // The API key itself is never sent here — it lives as a Supabase
+    // secret on the server. Only the parent's choice (provider, model,
+    // on/off) is saved, in the settings row.
+    const uid = await sbUserId();
+    const provider = ["openai", "anthropic"].indexOf(body.provider) >= 0 ? body.provider : "openai";
+    const patch = { parent_id: uid, ai_provider: provider, ai_model: String(body.model || "").slice(0, 80), ai_enabled: !!body.enabled };
+    const { error } = await sbClient.from("settings").upsert(patch, { onConflict: "parent_id" }).select().single();
+    if (error) throw new Error(error.message);
+    return apiGet("/api/ai-config");
+  }
+  if (path === "/api/ai-test") {
+    const cfg = await apiGet("/api/ai-config");
+    const provider = cfg.config.provider || "openai";
+    const model = (cfg.config.model || "").trim() || AI_DEFAULT_MODELS[provider];
+    const r = await callAiFunction({ action: "test", provider, model });
+    if (!r.ok) throw new Error(r.error || "AI test failed");
+    return { ok: true };
   }
   throw new Error("POST " + path + " is not available on the website");
 }
@@ -400,7 +428,7 @@ async function guestApiPost(path, body) {
     return { ok: true, settings: mapSettings(store.settings), markingRequirements: store.settings.marking_requirements };
   }
   if (path === "/api/ai-config" || path === "/api/ai-test") {
-    throw new Error("AI marking is not available on the website yet — it is coming in a later update.");
+    throw new Error("AI marking needs a parent account — sign in to use it. Guest trials use the local mark only.");
   }
   throw new Error("POST " + path + " is not available in guest mode");
 }
@@ -429,7 +457,7 @@ const state = {
   sessions: [],
   customPassages: [],
   settings: { markingRequirements: null },
-  ai: { provider: "openai", model: "", enabled: false, keySaved: false, keyLast4: "" },
+  ai: { provider: "openai", model: "", enabled: false, keySaved: false, keyLast4: "", keys: {} },
   markingDefault: "",
   oracle: {},       // "1" -> {title, text}
   builtin: {},      // "1" -> {title, text}
@@ -829,6 +857,17 @@ function finishTimedRead() {
   const stumbled = document.querySelectorAll("#passageText .w-stumble").length;
   const minutes = Math.max((Date.now() - state.readStart) / 60000, 0.05);
   const wpm = total / minutes;
+  if (wpm > 250) {
+    // Too fast to be a real read-aloud (a strong P6 pupil reads aloud
+    // around 180-200 words a minute). Nothing is scored or saved.
+    if (state.readTimer) { clearInterval(state.readTimer); state.readTimer = null; }
+    state.readMode = null;
+    $("passageText").onclick = null;
+    document.querySelectorAll("#passageText .w").forEach((el) => el.classList.remove("w-clickable", "w-stumble"));
+    setTestRunning(false);
+    $("testStatus").textContent = "That was " + Math.round(wpm) + " words per minute — too fast to be a full read-aloud. Nothing was saved. Read the whole passage aloud, then tap “Finished reading”.";
+    return;
+  }
   const clarity = Math.max(0, (total - stumbled) / total * 100);
   const smoothness = stumbled === 0 ? 100 : Math.max(50, 100 - stumbled * 5);
   const matched = tokenize(p.text).map((_, i) => {
@@ -2607,21 +2646,11 @@ function offlineRefined(q, transcript) {
 }
 
 async function fetchAiOral(payload) {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 35000);
-  try {
-    const r = await fetch("/api/ai-oral", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      signal: ctrl.signal,
-    });
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.error || "AI oral feedback failed");
-    return j;
-  } finally {
-    clearTimeout(timer);
-  }
+  const provider = state.ai.provider || "openai";
+  const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
+  const j = await callAiFunction({ action: "oral", provider, model, payload });
+  if (!j.ok) throw new Error(j.error || "AI oral feedback failed");
+  return j;
 }
 
 /* ---- finishing one answer ---- */
@@ -3164,54 +3193,43 @@ async function saveMarking() {
 }
 
 /* ---------------- AI marking (optional, parent's own key) ---------------- */
-/* The key is stored only on the laptop (data/ai_config.json) and is never
-   returned to the browser in full — the server only says whether a key is
-   saved and its last 4 characters. No pupil data is kept in browser storage. */
+/* The API key lives on the server as a Supabase secret (Edge Function
+   "ai-mark") and is never sent to, or shown on, this page. The page only
+   saves the parent's choice (provider, model, on/off) and asks the
+   function for a mark. No pupil data is kept in browser storage. */
 const AI_DEFAULT_MODELS = { openai: "gpt-5.4-mini", anthropic: "claude-3-5-haiku-20241022" };
 const AI_PROVIDER_NAMES = { openai: "ChatGPT", anthropic: "Claude" };
 
 function renderAiConfig() {
-  if (!$("aiProvider")) return; // AI marking is not in website v1
+  if (!$("aiProvider")) return;
   const a = state.ai;
   $("aiProvider").value = a.provider || "openai";
   $("aiModel").placeholder = AI_DEFAULT_MODELS[a.provider] || "gpt-5.4-mini";
   if (!$("aiModel").value) $("aiModel").value = a.model || "";
   $("aiEnabled").checked = !!a.enabled;
-  $("aiKeyStatus").textContent = a.keySaved
-    ? "Key saved (••••" + a.keyLast4 + "). Leave the box empty to keep it."
-    : "No key saved yet.";
+  if (guestMode) {
+    $("aiKeyStatus").textContent = "AI marking needs a parent account — sign in to use it. Guest trials use the local mark only.";
+    return;
+  }
+  const hasKey = a.keys ? !!a.keys[a.provider] : !!a.keySaved;
+  $("aiKeyStatus").textContent = hasKey
+    ? "Key is set on the server for " + (AI_PROVIDER_NAMES[a.provider] || "AI") + ". The key never appears on this page."
+    : "No key set on the server for " + (AI_PROVIDER_NAMES[a.provider] || "AI") + " yet — add it in Supabase → Edge Functions → Secrets.";
 }
 
 async function saveAiConfig() {
   const provider = $("aiProvider").value;
   const model = $("aiModel").value.trim();
   const enabled = $("aiEnabled").checked;
-  const key = $("aiKey").value.trim();
   $("aiStatus").textContent = "Saving…";
   try {
-    const body = { provider, model, enabled };
-    if (key) body.apiKey = key; // empty box = keep the saved key
-    const j = await apiPost("/api/ai-config", body);
+    const j = await apiPost("/api/ai-config", { provider, model, enabled });
     state.ai = j.config;
-    $("aiKey").value = "";
     renderAiConfig();
     $("aiStatus").textContent = "Saved." + (enabled && !j.config.keySaved
-      ? " AI is on but no key is saved yet — paste a key to use it." : "");
+      ? " AI is on but no key is set on the server yet — add it in Supabase → Edge Functions → Secrets." : "");
   } catch (err) {
     $("aiStatus").textContent = "Could not save: " + err.message;
-  }
-}
-
-async function clearAiKey() {
-  if (!confirm("Remove the saved API key from this laptop? AI marking will be off until a new key is saved.")) return;
-  try {
-    const j = await apiPost("/api/ai-config", { clearKey: true });
-    state.ai = j.config;
-    $("aiKey").value = "";
-    renderAiConfig();
-    $("aiStatus").textContent = "Key removed.";
-  } catch (err) {
-    $("aiStatus").textContent = "Could not remove the key: " + err.message;
   }
 }
 
@@ -3225,22 +3243,20 @@ async function testAiConfig() {
   }
 }
 
+async function callAiFunction(body) {
+  // One call to the Supabase Edge Function "ai-mark". The function holds
+  // the API keys as server secrets; the browser never sees them.
+  const { data, error } = await sbClient.functions.invoke("ai-mark", { body });
+  if (error) throw new Error(error.message || "AI service failed");
+  return data;
+}
+
 async function fetchAiMark(payload) {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 35000);
-  try {
-    const r = await fetch("/api/ai-mark", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      signal: ctrl.signal,
-    });
-    const j = await r.json();
-    if (!j.ok) throw new Error(j.error || "AI marking failed");
-    return j; // {ai: {mark, strengths, improvements}, provider}
-  } finally {
-    clearTimeout(timer);
-  }
+  const provider = state.ai.provider || "openai";
+  const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
+  const j = await callAiFunction({ action: "mark", provider, model, payload });
+  if (!j.ok) throw new Error(j.error || "AI marking failed");
+  return j; // {ai: {mark, strengths, improvements}, provider}
 }
 async function addCustomPassage() {
   const title = $("customTitle").value.trim();
@@ -3267,10 +3283,9 @@ function initParent() {
     $("markingEditor").value = state.markingDefault;
   });
   $("addCustomBtn").addEventListener("click", addCustomPassage);
-  if ($("saveAiBtn")) { // AI marking is not in website v1; the card is a note
+  if ($("saveAiBtn")) {
     $("saveAiBtn").addEventListener("click", saveAiConfig);
     $("testAiBtn").addEventListener("click", testAiConfig);
-    $("clearAiKeyBtn").addEventListener("click", clearAiKey);
     $("aiProvider").addEventListener("change", () => {
       $("aiModel").placeholder = AI_DEFAULT_MODELS[$("aiProvider").value] || "";
     });

@@ -1,4 +1,4 @@
-# TalkPupils — website v1
+# TalkPupils — website v10
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -76,6 +76,29 @@ URL.
    session, mark and streak should be there. Switch pupils at the top
    right to see each child's own progress.
 
+### 4. Turn on AI marking (optional, about 5 minutes)
+
+The website is a static page, so the API key can never live in it —
+anyone could copy it from the page source. A small Supabase Edge
+Function holds the key instead.
+
+1. Open your Supabase project → left menu → **Edge Functions** →
+   **Create a new function**. Name it exactly `ai-mark`.
+2. Open `supabase/functions/ai-mark/index.ts` in this repo, copy the
+   whole file, paste it into the function editor, and click **Deploy**.
+   Leave **Verify JWT** on (only a signed-in parent can call it).
+3. Still in Edge Functions → **Secrets** (or **Manage secrets**) → add
+   a secret: name `OPENAI_API_KEY`, value your ChatGPT key. For Claude,
+   add `ANTHROPIC_API_KEY` instead (or as well).
+4. On the website, sign in, go to the **Parent** tab → **AI marking**,
+   pick the provider, tick **Use AI marking**, **Save AI settings**,
+   then **Test connection**. The Parent tab shows whether the server
+   has a key for the chosen provider.
+
+Cost: about $0.0025 per reading on ChatGPT (gpt-5.4-mini) and about
+$0.0003 on Claude Haiku. The key is never shown on the page and never
+sent to the browser — only the mark and feedback come back.
+
 ## Notes for tonight
 
 - **Photos:** the 18 Oral Partner pictures load from this repo
@@ -86,10 +109,14 @@ URL.
 - **Answer recordings** are saved in Supabase storage. Recordings older
   than 7 days are deleted automatically when the parent signs in.
   Written answers and scores are kept.
-- **AI marking is NOT in v1.** Readings are marked on the page, out of
-  10, from the measured speed / clarity / smoothness, using the marking
-  requirements in the Parent tab. AI marking (ChatGPT / Claude) needs a
-  secure server and comes in a later update.
+- **AI marking (v10)** — optional. After a reading test, the AI gives a
+  second mark out of 10 plus two strengths and two improvements; for
+  Oral Partner it refines the answer and gives a mark out of 25. It
+  runs through a Supabase Edge Function (`supabase/functions/ai-mark/`)
+  that holds the API key as a server secret, so the key never appears
+  on the page. See “AI marking setup” below. The local mark always
+  counts, even if the AI is off or fails. Guest trials use the local
+  mark only.
 - **Privacy:** each parent only sees their own pupils (row level
   security). No `service_role` key is used anywhere in this website —
   only the publishable key, which is safe to embed in frontend code.
@@ -99,3 +126,5 @@ URL.
 - `index.html`, `app.js`, `styles.css` — the website (served from `docs/`)
 - `content/` — passages, vocabulary, grammar highlights, SBC topics
 - `supabase/schema.sql` — database tables, security rules, storage buckets
+- `supabase/functions/ai-mark/index.ts` — AI marking Edge Function
+  (deploy it from the Supabase dashboard; see “AI marking setup” above)
