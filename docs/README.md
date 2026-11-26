@@ -1,4 +1,4 @@
-# TalkPupils — website v20
+# TalkPupils — website v21
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v21: default model switched to gemini-3.8-flash — Google retired gemini-2.5-flash for new users, and its own error message names 3.8-flash as the replacement. Same free tier.
 v20: Gemini is now the only AI provider (gemini-2.5-flash, free tier from Google AI Studio, no card) and the default. ChatGPT and Claude are removed; the provider dropdown is gone. The Model box now also refuses a pasted Gemini key (AIza...).
 v19: the AI service now always answers with a plain message instead of a generic error (unknown actions and bad model names return HTTP 200 with the reason, and the client explains when the Edge Function needs redeploying).
 v18: Add passages & words from a file — upload a PDF (read in the browser with pdf.js) or a photo (read by Claude vision), or paste text; the AI splits it into 150-300-word passages with titles and levels and picks out new words with plain meanings; parent checks the list, then saves the ticked items into My Passages / My words. Needs the Claude key, like AI marking.

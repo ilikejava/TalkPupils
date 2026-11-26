@@ -13,7 +13,7 @@
 // name it "ai-mark", paste this file, Deploy. Then add the secrets:
 // Edge Functions -> Secrets -> GEMINI_API_KEY (free from Google AI Studio).
 // Keep "Verify JWT" ON: only a signed-in pupil can call it.
-// The only provider is Gemini (gemini-2.5-flash). Every action that gives
+// The only provider is Gemini (gemini-3.8-flash). Every action that gives
 // feedback (mark/oral/plan) is sent the pupil's progress summary, so the
 // AI judges this pupil, not a stranger — that history is in the prompt.
 //
@@ -33,7 +33,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 // One provider only: Gemini (free tier from Google AI Studio, no card).
 // The model is fixed here; the Model box on the site is only an
 // override — blank means this default.
-const DEFAULT_MODEL = "gemini-2.5-flash";
+const DEFAULT_MODEL = "gemini-3.8-flash";
 const PROVIDER_NAME = "Gemini";
 const SECRET_NAME = "GEMINI_API_KEY";
 

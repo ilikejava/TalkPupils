@@ -3219,7 +3219,7 @@ async function saveMarking() {
    "ai-mark") and is never sent to, or shown on, this page. The page only
    saves the pupil's choice (provider, model, on/off) and asks the
    function for a mark. No pupil data is kept in browser storage. */
-const AI_DEFAULT_MODELS = { gemini: "gemini-2.5-flash" };
+const AI_DEFAULT_MODELS = { gemini: "gemini-3.8-flash" };
 const AI_PROVIDER_NAMES = { gemini: "Gemini" };
 
 function renderAiConfig() {
