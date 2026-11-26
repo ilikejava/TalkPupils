@@ -13,6 +13,11 @@
 // name it "ai-mark", paste this file, Deploy. Then add the secrets:
 // Edge Functions -> Secrets -> OPENAI_API_KEY and/or ANTHROPIC_API_KEY.
 // Keep "Verify JWT" ON: only a signed-in pupil can call it.
+// Default provider is Claude (Haiku 5.5, claude-haiku-5-5) — cheapest
+// and fastest for these short calls; ChatGPT stays available as an
+// option. Every action that gives feedback (mark/oral/plan) is sent
+// the pupil's progress summary, so the AI judges this pupil, not a
+// stranger — that history is in the prompt for both providers.
 //
 // Actions (POST JSON body {action, provider, model, ...}):
 //   status -> {ok, keys: {openai: bool, anthropic: bool}}
@@ -26,7 +31,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const DEFAULT_MODELS: Record<string, string> = {
   openai: "gpt-5.4-mini",
-  anthropic: "claude-3-5-haiku-20241022",
+  anthropic: "claude-haiku-5-5",
 };
 const PROVIDER_NAMES: Record<string, string> = {
   openai: "ChatGPT",
@@ -358,12 +363,15 @@ serve(async (req) => {
     return err("Send a JSON body: {action, provider, model, ...}.", 400);
   }
   const action = String(body.action || "");
-  const provider = String(body.provider || "openai");
+  const provider = String(body.provider || "anthropic");
   if (provider !== "openai" && provider !== "anthropic") {
     return err("Unknown provider: " + provider + ".", 400);
   }
   const model =
     String(body.model || "").trim() || DEFAULT_MODELS[provider];
+  if (/^sk-(ant-|proj-)?/i.test(model)) {
+    return err("That model name looks like an API key — leave the model blank to use the default. The key only goes in Supabase → Edge Functions → Secrets.", 400);
+  }
 
   try {
     if (action === "status") {
