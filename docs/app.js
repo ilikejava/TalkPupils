@@ -1,17 +1,18 @@
 /* TalkPupils — website v1 (GitHub Pages + Supabase).
-   Pupil data lives in Supabase (Auth + Postgres + Storage), one parent
-   account holding one or more pupil profiles. Speech recognition /
+   Pupil data lives in Supabase (Auth + Postgres + Storage). Each
+   pupil has their own account — name + password, no email — and
+   their own profile row, sessions and progress. Speech recognition /
    synthesis are browser APIs (best in Google Chrome). No AI marking
    in v1.
    Guest mode ("Try without signing in") is the exception: a demo pupil
    (P6 or P4) whose data lives only in this browser's localStorage.
    In guest mode the app makes no Supabase calls at all — no sign-in,
    no tables, no storage uploads; answer audio stays as a blob URL in
-   the browser. When the parent signs in on the same browser, the
-   pupil profiles created in the trial (and their sessions, progress
-   and added words/passages/topics) move into the parent account, and
-   the trial copy is then cleared. The built-in "Guest pupil" demo
-   profile itself does not move across. */
+   the browser. When a pupil signs in on the same browser, the trial
+   profile with their name (and its sessions, progress and added
+   words/passages/topics) moves into their account, and that trial
+   copy is then cleared. The built-in "Guest pupil" demo profile
+   itself does not move across. */
 "use strict";
 
 /* ---------------- Supabase (website) ---------------- */
@@ -148,7 +149,7 @@ async function apiGet(path) {
     // AI settings live in the settings row; whether a key exists lives
     // on the server (the Supabase Edge Function "ai-mark"). If the
     // function is not deployed yet, the call fails quietly and the
-    // parent sees "no key set" until it is.
+    // the pupil sees "no key set" until it is.
     const uid = await sbUserId();
     const { data } = await sbClient.from("settings").select("ai_provider, ai_model, ai_enabled").eq("parent_id", uid).maybeSingle();
     let keys = {};
@@ -250,7 +251,7 @@ async function apiPost(path, body) {
   }
   if (path === "/api/ai-config") {
     // The API key itself is never sent here — it lives as a Supabase
-    // secret on the server. Only the parent's choice (provider, model,
+    // secret on the server. Only the pupil's choice (provider, model,
     // on/off) is saved, in the settings row.
     const uid = await sbUserId();
     const provider = ["openai", "anthropic"].indexOf(body.provider) >= 0 ? body.provider : "openai";
@@ -291,9 +292,9 @@ async function apiDelete(path) {
    answer the same apiGet/apiPost/apiDelete shapes the signed-in layer
    answers, so the rest of the app works unchanged. Guest rows are kept
    in database-row shape so the mapProfile/mapSession/etc. mappers are
-   reused as-is. When the parent signs in on the same browser, the
-   pupils added in the trial move into the account (see
-   migrateGuestToAccount); until then the trial lives only here. */
+   reused as-is. When the pupil signs in on the same browser, the
+   trial profile with their name moves into their account (see
+   migrateGuestToKid); until then the trial lives only here. */
 const GUEST_KEY = "talktupils_guest_v1";
 let guestMode = false;
 
@@ -433,7 +434,7 @@ async function guestApiPost(path, body) {
     return { ok: true, settings: mapSettings(store.settings), markingRequirements: store.settings.marking_requirements };
   }
   if (path === "/api/ai-config" || path === "/api/ai-test") {
-    throw new Error("AI marking needs a parent account — sign in to use it. Guest trials use the local mark only.");
+    throw new Error("AI marking needs your own account — sign up to use it. Guest trials use the local mark only.");
   }
   throw new Error("POST " + path + " is not available in guest mode");
 }
@@ -472,7 +473,7 @@ const state = {
   mastery: { words: {}, passages: {}, oral: {} },  // per-word / per-passage / per-topic spaced-repetition records
   passages: [],     // unified list {id, num, group, title, text}
   sbc: null,        // built-in Oral Partner bank {topics: [...], starters: {...}}
-  customTopics: [], // parent-added oral topics [{id, title, image, keywords, questions}]
+  customTopics: [], // pupil-added oral topics [{id, title, image, keywords, questions}]
   oralSettings: { prepSeconds: 120, saveAudio: true },
   currentPassage: null,
   readMode: null,   // "mic" | "timed" | null
@@ -574,7 +575,7 @@ function initTabs() {
     document.querySelectorAll("#tabs button").forEach((x) => x.classList.toggle("active", x === b));
     document.querySelectorAll(".tabpage").forEach((x) => x.classList.toggle("active", x.id === "tab-" + b.dataset.tab));
     if (b.dataset.tab === "progress") renderProgress();
-    if (b.dataset.tab === "parent") renderParent();
+    if (b.dataset.tab === "settings") renderSettings();
     if (b.dataset.tab === "oral") renderOralTopics();
   });
 }
@@ -752,14 +753,18 @@ function showReadResult(res) {
       "<p><strong>What went well:</strong></p><ul>" +
       a.strengths.map((s) => "<li>" + esc(s) + "</li>").join("") + "</ul>" +
       "<p><strong>To improve:</strong></p><ul>" +
-      a.improvements.map((s) => "<li>" + esc(s) + "</li>").join("") + "</ul></div>";
+      a.improvements.map((s) => "<li>" + esc(s) + "</li>").join("") + "</ul>" +
+      (a.nextSteps && a.nextSteps.length
+        ? "<p><strong>What to work on next:</strong></p><ul>" +
+          a.nextSteps.map((s) => "<li>" + esc(s) + "</li>").join("") + "</ul>" : "") +
+      "</div>";
   } else if (res.aiError) {
     html += '<p class="muted small">AI feedback was not available (' + esc(res.aiError) +
       "). The local mark above still counts.</p>";
   }
   html +=
     '<p class="muted small">Volume is not measured by the app — ask a parent to check you are clear and steady, not too loud and not too soft. ' +
-    "The mark follows the PSLE marking requirements saved in the Parent tab.</p>" +
+    "The mark follows the PSLE marking requirements saved in the Settings tab.</p>" +
     '<p class="muted small">Result saved to your progress.</p>' +
     '<p><button id="readGrammarBtn" class="btn primary" type="button">📖 Review grammar in this passage</button></p>';
   el.innerHTML = html;
@@ -793,6 +798,7 @@ async function finishReading(res) {
         smoothness: Math.round(res.smoothness),
         localMark: res.mark,
         markingRequirements: markingText(),
+        history: kidHistorySummary(),
       });
       aiFeedback = j.ai;
       aiProvider = j.provider;
@@ -1049,7 +1055,7 @@ const GRAMMAR_ED_EXCLUDE = new Set(["bed", "red", "need", "indeed", "speed", "fe
 const GRAMMAR_PRESENT = new Set(["is", "are", "am", "has", "have", "do", "does", "want", "wants", "need", "needs", "like", "likes", "love", "loves", "think", "thinks", "know", "knows", "says"]);
 const GRAMMAR_PREPS = new Set(["out of", "through", "between", "behind", "beside", "under", "over", "across", "along", "around", "towards", "inside", "outside", "beneath", "during", "before", "after", "near", "above", "below", "into", "in", "on", "at"]);
 
-/* Basic annotations for parent-added passages (same rules as the
+/* Basic annotations for custom passages (same rules as the
    pre-computed ones, without the describing-word list). */
 function autoGrammar(text) {
   const highlights = [];
@@ -1997,7 +2003,7 @@ function renderStudy() {
   });
 }
 
-/* --- Custom vocabulary (added by the parent) --- */
+/* --- Custom vocabulary (added by the pupil) --- */
 function mergeCustomVocab() {
   state.vocab = state.vocab.filter((w) => !w.custom);
   for (const c of state.customVocab) {
@@ -2711,6 +2717,7 @@ async function finishOralAnswer() {
       const j = await fetchAiOral({
         question: q.q, qtype: q.type, topicTitle: q.topicTitle,
         transcript: fullText, modelAnswer: q.model || "",
+        history: kidHistorySummary(),
       });
       record.aiFeedback = j.ai;
       record.aiProvider = j.provider;
@@ -2807,6 +2814,9 @@ function renderOralReview(round) {
           ai.strengths.map((s) => "<li>" + esc(s) + "</li>").join("") + "</ul>" +
           "<p><strong>Try this next time:</strong></p><ul>" +
           ai.gaps.map((g) => "<li>" + esc(g) + "</li>").join("") + "</ul>" +
+          (ai.nextSteps && ai.nextSteps.length
+            ? "<p><strong>What to work on next:</strong></p><ul>" +
+              ai.nextSteps.map((s) => "<li>" + esc(s) + "</li>").join("") + "</ul>" : "") +
           "<p class=\"small\">Relevance " + ai.relevance + "/5 · Elaboration " + ai.elaboration +
           "/5 · Vocabulary " + ai.vocabulary + "/5 · Grammar " + ai.grammar + "/5</p>" +
           "<p class=\"small\">AI refined version: “" + esc(ai.refined) + "”</p></div>"
@@ -2823,7 +2833,7 @@ function renderOralReview(round) {
   $("oralReviewCard").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-/* ---- Parent tab: Oral Partner settings + picture topics ---- */
+/* ---- Settings tab: Oral Partner settings + picture topics ---- */
 function renderOralSettings() {
   const s = state.oralSettings || { prepSeconds: 120, saveAudio: true };
   $("oralPrepSeconds").value = String(s.prepSeconds || 120);
@@ -3112,6 +3122,10 @@ function renderProgress() {
     '<div class="score-box"><div class="num">' + (bestSpell ? bestSpell + "%" : "—") + '</div><div class="lbl">best spelling score</div></div>' +
     '<div class="score-box"><div class="num">' + (bestSbc ? bestSbc + "/25" : "—") + '</div><div class="lbl">best SBC mark</div></div>' +
     "</div></div>" +
+    '<div class="card"><h3>🤖 AI ideas to improve</h3>' +
+    '<p class="muted">The AI reads all your results so far — reading, typing, words and Oral Partner — and suggests what to practise next.</p>' +
+    '<div class="row"><button id="aiIdeasBtn" class="btn primary">Get AI ideas</button><span id="aiIdeasStatus" class="muted"></span></div>' +
+    '<div id="aiIdeasResult"></div></div>' +
     '<div class="card"><h3>Awards</h3>' +
     awards.map((a) => '<span class="badge' + (a.earned ? "" : " locked") + '">' +
       (a.earned ? "★ " : "☆ ") + esc(a.name) + " — " + esc(a.desc) + "</span>").join("") + "</div>" +
@@ -3131,6 +3145,8 @@ function renderProgress() {
         esc(sessionLabel(x)) + "</td><td>" + esc(sessionResult(x)) + "</td></tr>").join("") + "</table>"
       : '<p class="muted">No sessions yet. Practise on the Read, Type or Words tabs and the results will appear here.</p>') +
     "</div>";
+  const ideasBtn = $("aiIdeasBtn");
+  if (ideasBtn) ideasBtn.addEventListener("click", getAiIdeas);
 }
 function sessionLabel(x) {
   if (x.kind === "reading") return "Reading — " + (x.passageTitle || "");
@@ -3153,11 +3169,11 @@ function sessionResult(x) {
   return "";
 }
 
-/* ---------------- Parent ---------------- */
+/* ---------------- Settings ---------------- */
 function markingText() {
   return state.settings.markingRequirements || state.markingDefault;
 }
-function renderParent() {
+function renderSettings() {
   $("markingEditor").value = markingText();
   $("markingDisplay").textContent = markingText();
   renderCustomList();
@@ -3198,10 +3214,10 @@ async function saveMarking() {
   $("markingStatus").textContent = "Saved.";
 }
 
-/* ---------------- AI marking (optional, parent's own key) ---------------- */
+/* ---------------- AI marking (optional, the app's own key) ---------------- */
 /* The API key lives on the server as a Supabase secret (Edge Function
    "ai-mark") and is never sent to, or shown on, this page. The page only
-   saves the parent's choice (provider, model, on/off) and asks the
+   saves the pupil's choice (provider, model, on/off) and asks the
    function for a mark. No pupil data is kept in browser storage. */
 const AI_DEFAULT_MODELS = { openai: "gpt-5.4-mini", anthropic: "claude-3-5-haiku-20241022" };
 const AI_PROVIDER_NAMES = { openai: "ChatGPT", anthropic: "Claude" };
@@ -3214,7 +3230,7 @@ function renderAiConfig() {
   if (!$("aiModel").value) $("aiModel").value = a.model || "";
   $("aiEnabled").checked = !!a.enabled;
   if (guestMode) {
-    $("aiKeyStatus").textContent = "AI marking needs a parent account — sign in to use it. Guest trials use the local mark only.";
+    $("aiKeyStatus").textContent = "AI marking needs your own account — sign up to use it. Guest trials use the local mark only.";
     return;
   }
   const hasKey = a.keys ? !!a.keys[a.provider] : !!a.keySaved;
@@ -3257,12 +3273,90 @@ async function callAiFunction(body) {
   return data;
 }
 
+/* A short text summary of this pupil's progress so far, sent with AI
+   calls so the feedback builds on what the pupil has already done —
+   not just this one test. Compact on purpose: the AI prompt stays
+   small and cheap. Works for signed-in pupils and guest trials alike
+   (both keep their sessions in state). */
+function kidHistorySummary() {
+  const s = state.sessions || [];
+  const p = currentProfile();
+  const lines = [];
+  if (p) lines.push("Pupil: " + p.name + " (" + p.level + ").");
+  const reading = s.filter((x) => x.kind === "reading");
+  if (reading.length) {
+    const recent = reading.slice(0, 8);
+    const avg = (arr) => Math.round(arr.reduce((a, b) => a + b, 0) / Math.max(1, arr.length));
+    lines.push("Reading (latest " + recent.length + " of " + reading.length + "): " +
+      recent.map((x) => (x.passageTitle || "passage") + " " + (x.mark != null ? x.mark : "—") + "/10, " + (x.wpm || "—") + " wpm, clarity " + (x.clarity != null ? x.clarity : "—") + "%, smoothness " + (x.smoothness != null ? x.smoothness : "—") + "%").join(" | "));
+    lines.push("Reading averages: mark " + avg(recent.map((x) => x.mark || 0)) + "/10, " +
+      avg(recent.map((x) => x.wpm || 0)) + " wpm, clarity " + avg(recent.map((x) => x.clarity || 0)) +
+      "%, smoothness " + avg(recent.map((x) => x.smoothness || 0)) + "%.");
+  } else {
+    lines.push("No reading sessions yet.");
+  }
+  const oral = s.filter((x) => x.kind === "oral");
+  if (oral.length) {
+    lines.push("Oral Partner (latest " + Math.min(3, oral.length) + "): " +
+      oral.slice(0, 3).map((x) => (x.topicTitle || "topic") + " " + (x.sbcMark != null ? x.sbcMark : "—") + "/25").join(" | "));
+  } else {
+    lines.push("No Oral Partner sessions yet.");
+  }
+  const typing = s.filter((x) => x.kind === "typing");
+  if (typing.length) {
+    const t = typing[0];
+    lines.push("Typing: latest " + (t.game || "game") + " " + (t.wpm != null ? t.wpm + " wpm" : "") +
+      (t.accuracy != null ? ", " + t.accuracy + "% accuracy" : "") +
+      "; best typing " + Math.max.apply(null, typing.map((x) => x.wpm || 0)) + " wpm.");
+  }
+  const wordEntries = Object.keys(state.mastery.words || {});
+  const masteredW = wordEntries.filter((k) => isMasteredWord(state.mastery.words[k])).length;
+  const improvingW = wordEntries.filter((k) => !isMasteredWord(state.mastery.words[k])).slice(0, 5);
+  lines.push("Vocabulary: " + masteredW + " words mastered, " + (wordEntries.length - masteredW) +
+    " still improving" + (improvingW.length ? " (e.g. " + improvingW.join(", ") + ")" : "") + ".");
+  return lines.join("\n");
+}
+
 async function fetchAiMark(payload) {
   const provider = state.ai.provider || "openai";
   const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
   const j = await callAiFunction({ action: "mark", provider, model, payload });
   if (!j.ok) throw new Error(j.error || "AI marking failed");
-  return j; // {ai: {mark, strengths, improvements}, provider}
+  return j; // {ai: {mark, strengths, improvements, nextSteps}, provider}
+}
+
+/* Ask the AI for a practice plan from the pupil's whole history. */
+async function fetchAiPlan() {
+  const provider = state.ai.provider || "openai";
+  const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
+  const j = await callAiFunction({ action: "plan", provider, model, payload: { history: kidHistorySummary() } });
+  if (!j.ok) throw new Error(j.error || "AI ideas failed");
+  return j; // {ai: {title, focus: [{area, activity}], encourage}, provider}
+}
+async function getAiIdeas() {
+  const btn = $("aiIdeasBtn"), status = $("aiIdeasStatus"), out = $("aiIdeasResult");
+  if (!btn || !status || !out) return;
+  if (guestMode) {
+    status.textContent = "AI ideas need your own account — sign up to use them. Guest trials use the local mark only.";
+    return;
+  }
+  if (!state.ai.enabled || !state.ai.keySaved) {
+    status.textContent = "Turn on AI marking in the Settings tab first (tick “Use AI marking”, Save, and make sure a key is set on the server).";
+    return;
+  }
+  btn.disabled = true;
+  status.textContent = "Reading your progress…";
+  try {
+    const j = await fetchAiPlan();
+    const a = j.ai || {};
+    out.innerHTML = "<p><strong>" + esc(a.title || "Your practice plan") + "</strong></p>" +
+      (a.focus || []).map((f) => "<p><strong>" + esc(f.area) + ":</strong> " + esc(f.activity) + "</p>").join("") +
+      (a.encourage ? '<p class="muted">' + esc(a.encourage) + "</p>" : "");
+    status.textContent = "";
+  } catch (err) {
+    status.textContent = "AI ideas were not available (" + (err.message || "AI failed") + ").";
+  }
+  btn.disabled = false;
 }
 async function addCustomPassage() {
   const title = $("customTitle").value.trim();
@@ -3282,7 +3376,7 @@ async function addCustomPassage() {
   renderCustomList();
   selectPassage("custom-" + j.passage.id);
 }
-function initParent() {
+function initSettings() {
   $("saveMarkingBtn").addEventListener("click", saveMarking);
   $("resetMarkingBtn").addEventListener("click", () => {
     if (!confirm("Reset the marking requirements to the PSLE Oral Pack text?")) return;
@@ -3428,44 +3522,10 @@ function initBackup() {
 }
 
 /* ---------------- profiles (top bar) ---------------- */
-function quickAddProfile(level) {
-  $("newProfileName").value = level;
-  $("newProfileLevel").value = level;
-  $("addProfileForm").classList.remove("hidden");
-  const input = $("newProfileName");
-  input.focus();
-  input.select();
-}
+/* A signed-in pupil has exactly one profile — their own — so the
+   top bar only shows it. Pupils are not added from here; each pupil
+   signs up with their own name and password. */
 function initProfiles() {
-  const q6 = $("quickP6Btn");
-  if (q6) q6.addEventListener("click", () => quickAddProfile("P6"));
-  const q4 = $("quickP4Btn");
-  if (q4) q4.addEventListener("click", () => quickAddProfile("P4"));
-  $("addProfileBtn").addEventListener("click", () => {
-    $("addProfileForm").classList.remove("hidden");
-    $("newProfileName").focus();
-  });
-  $("cancelProfileBtn").addEventListener("click", () => {
-    $("addProfileForm").classList.add("hidden");
-    $("newProfileName").value = "";
-  });
-  $("saveProfileBtn").addEventListener("click", async () => {
-    const name = $("newProfileName").value.trim();
-    const level = $("newProfileLevel").value.trim() || "P5";
-    if (!name) { alert("Type the pupil's name."); return; }
-    const j = await apiPost("/api/profiles", { name, level });
-    state.profiles = j.profiles;
-    state.currentProfileId = j.profile.id;
-    $("newProfileName").value = "";
-    $("addProfileForm").classList.add("hidden");
-    renderProfiles();
-    await loadSessions();
-    await loadMastery();
-    renderMasteryLists();
-    renderDueHints();
-    renderOralTopics();
-    renderProgress();
-  });
   $("profileSelect").addEventListener("change", async (e) => {
     state.currentProfileId = e.target.value;
     await loadSessions();
@@ -3474,22 +3534,6 @@ function initProfiles() {
     renderDueHints();
     renderOralTopics();
     if ($("tab-progress").classList.contains("active")) renderProgress();
-  });
-  const delBtn = $("deleteProfileBtn");
-  if (delBtn) delBtn.addEventListener("click", async () => {
-    const p = currentProfile();
-    if (!p) return;
-    if (!confirm('Delete the profile "' + p.name + '" and all of its sessions?')) return;
-    await apiDelete("/api/profiles/" + encodeURIComponent(p.id));
-    state.profiles = state.profiles.filter((x) => x.id !== p.id);
-    state.currentProfileId = null;
-    renderProfiles();
-    await loadSessions();
-    await loadMastery();
-    renderMasteryLists();
-    renderDueHints();
-    renderOralTopics();
-    renderProgress();
   });
 }
 
@@ -3501,7 +3545,7 @@ async function init() {
   initType();
   initWords();
   initOral();
-  initParent();
+  initSettings();
   initBackup();
   try {
     const [oracle, builtin, vocab, marking, grammarData, customVocab] = await Promise.all([
@@ -3540,7 +3584,7 @@ async function init() {
     fillPassageSelect($("racePassageSelect"), state.passages);
     fillPassageSelect($("rainPassageSelect"), state.passages);
     selectPassage(state.passages[0] ? state.passages[0].id : null);
-    renderParent();
+    renderSettings();
     await loadOralData();
     await loadProfiles();
     await loadSessions();
@@ -3554,24 +3598,29 @@ async function init() {
       esc(err.message) + ". Check your internet connection and that you are signed in.</div>");
   }
 }
-/* Move a guest trial into the parent account, once, on sign-in.
-   Only pupil profiles the parent added in the trial move across
-   (Zeen, Zexi, …) — the built-in "Guest pupil" demo profile does
-   not. Their sessions, spaced-repetition progress, added words,
-   passages and picture topics move with them, and the trial's
-   marking requirements and Oral Partner settings carry over too
-   (only if the parent has no settings saved yet). The trial copy
-   is cleared only after the move succeeds, so a failed move can
-   be tried again on the next sign-in. If a profile with the same
-   name and level already exists in the account, it is reused
-   instead of adding a second one. Returns the moved profile names,
-   or null when there was nothing to move. */
-async function migrateGuestToAccount() {
+/* Move a guest trial into the pupil's own account, once, on sign-in.
+   Only the trial profile with this pupil's name and level moves
+   across — a trial made by another pupil stays in this browser
+   until that pupil signs in. The built-in "Guest pupil" demo
+   profile never moves. The profile's sessions, spaced-repetition
+   progress, added words, passages and picture topics move with it,
+   and the trial's marking requirements and Oral Partner settings
+   carry over too (only if the pupil has no settings saved yet).
+   The trial copy is cleared only after the move succeeds, so a
+   failed move can be tried again on the next sign-in. If a profile
+   with the same name and level already exists in the account, it
+   is reused instead of adding a second one. Returns the moved
+   profile names, or null when there was nothing to move. */
+async function migrateGuestToKid(kidName, kidLevel) {
   const store = guestStore();
   if (!store || !store.profiles || !store.profiles.length) return null;
   const uid = await sbUserId();
-  const moving = store.profiles.filter((p) => p.name !== "Guest pupil" && String(p.id).indexOf("guest-") !== 0);
-  if (!moving.length) { guestClear(); return null; }
+  const named = store.profiles.filter((p) => p.name !== "Guest pupil" && String(p.id).indexOf("guest-") !== 0);
+  if (!named.length) { guestClear(); return null; }
+  const moving = named.filter((p) =>
+    String(p.name).toLowerCase() === String(kidName || "").toLowerCase() &&
+    String(p.level) === String(kidLevel || ""));
+  if (!moving.length) return null; // another pupil's trial — leave it here
   const { data: existing } = await sbClient.from("profiles").select("id, name, level").eq("parent_id", uid);
   const idMap = {};
   const movedNames = [];
@@ -3635,45 +3684,64 @@ async function migrateGuestToAccount() {
       if (error) throw new Error(error.message);
     }
   }
-  guestClear();
+  // Take only this pupil's moved trial data out of the guest store.
+  // Anything left (another pupil's trial, and the shared added
+  // words/passages/topics) stays here for their sign-in.
+  const movedIds = Object.keys(idMap);
+  store.profiles = (store.profiles || []).filter((p) => movedIds.indexOf(p.id) < 0);
+  store.sessions = (store.sessions || []).filter((s) => movedIds.indexOf(s.profile_id) < 0);
+  for (const id of movedIds) delete (store.mastery || {})[id];
+  const namedLeft = (store.profiles || []).some((p) => p.name !== "Guest pupil" && String(p.id).indexOf("guest-") !== 0);
+  if (!namedLeft) guestClear();
+  else guestSave(store);
   return movedNames;
 }
 
-/* ---------------- auth (parent sign-in) ---------------- */
-let pendingConfirmEmail = "";
-function showResend(show) {
-  const r = $("authResendRow");
-  if (r) r.classList.toggle("hidden", !show);
+/* ---------------- auth (pupil sign-in) ---------------- */
+/* Pupils sign in with a name + password — no email. The name maps to
+   a made-up Supabase email (kid-<name>@talktupils.local) that only
+   the app ever uses; nothing is ever sent to it. That is why sign-up
+   only works with "Confirm email" turned off in Supabase: with it
+   on, the confirmation would go to an address nobody reads. */
+const KID_EMAIL_DOMAIN = "talktupils.local";
+function kidNameToEmail(name) {
+  const clean = String(name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  return clean ? "kid-" + clean + "@" + KID_EMAIL_DOMAIN : "";
+}
+function kidNameFromEmail(email) {
+  const m = String(email || "").match(/^kid-([a-z0-9]+)@/);
+  return m ? m[1] : "";
 }
 function plainAuthError(err, mode) {
   const m = String((err && err.message) || err || "");
-  if (/already registered|already exists/i.test(m)) return "This email already has an account — tap Sign in instead.";
+  if (/already registered|already exists/i.test(m)) return "That name is already taken — try adding a number, e.g. Zeen2.";
   if (/at least 6 characters|password.*short/i.test(m)) return "Use a password with at least 6 characters.";
-  if (/email not confirmed/i.test(m)) return "Your email is not confirmed yet — click the link in the confirmation email, or tap “Resend confirmation email” below.";
-  if (/invalid login credentials/i.test(m)) return "That email and password don't match — check them, or tap Sign up if you don't have an account yet.";
-  if (/rate limit|too many/i.test(m)) return "Too many sign-up emails were sent just now — Supabase only allows a couple per hour. Wait a little while and try again.";
-  if (/not authorized/i.test(m)) return "Supabase can't send confirmation emails to this address. Turn off “Confirm email” in Supabase (Authentication → Providers → Email), then sign up again.";
-  if (/email.*invalid|invalid.*email/i.test(m)) return "That email address doesn't look right — check it and try again.";
+  if (/email not confirmed/i.test(m)) return "Your account is not switched on yet. Ask a parent to turn off “Confirm email” in Supabase (Authentication → Providers → Email), then sign up again.";
+  if (/invalid login credentials/i.test(m)) return "That name and password don't match — check them, or tap Sign up if you don't have an account yet.";
+  if (/rate limit|too many/i.test(m)) return "Too many sign-ups just now — wait a little while and try again.";
+  if (/not authorized/i.test(m)) return "Supabase can't send emails to this account. Ask a parent to turn off “Confirm email” in Supabase (Authentication → Providers → Email), then sign up again.";
   return "Could not sign in: " + m;
 }
 async function doAuth(mode) {
-  const email = $("authEmail").value.trim();
+  const name = $("authName").value.trim();
+  const level = $("authLevel").value || "P6";
   const password = $("authPassword").value;
-  if (!email || !password) { $("authStatus").textContent = "Type your email and password first."; return; }
+  if (!name || !password) { $("authStatus").textContent = "Type your name and password first."; return; }
+  const email = kidNameToEmail(name);
+  if (!email) { $("authStatus").textContent = "Use a name with letters or numbers."; return; }
   if (!sbClient) { $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load. Check your connection and reload, or try as a guest below."; return; }
   $("authStatus").textContent = mode === "signup" ? "Creating your account…" : "Signing in…";
-  showResend(false);
   try {
     let res;
     if (mode === "signup") {
-      res = await sbClient.auth.signUp({ email: email, password: password });
+      res = await sbClient.auth.signUp({ email: email, password: password,
+        options: { data: { kid_name: name.slice(0, 60), level: level } } });
       if (res.error) throw res.error;
       if (!res.data.session) {
-        // Email confirmation is on: the account exists but the parent
-        // must click the link in the email before signing in.
-        pendingConfirmEmail = email;
-        $("authStatus").textContent = "Account created — check your email for a confirmation link, then tap Sign in.";
-        showResend(true);
+        // Email confirmation is still on: the confirmation would go
+        // to the made-up address, so it can never arrive. The parent
+        // must turn "Confirm email" off in Supabase first.
+        $("authStatus").textContent = "That didn't sign you in. Ask a parent to turn off “Confirm email” in Supabase (Authentication → Providers → Email), then sign up again.";
         return;
       }
     } else {
@@ -3683,28 +3751,10 @@ async function doAuth(mode) {
     state.parentId = res.data.session.user.id;
     location.reload();
   } catch (err) {
-    const msg = plainAuthError(err, mode);
-    $("authStatus").textContent = msg;
-    if (/not confirmed/i.test(String((err && err.message) || ""))) {
-      pendingConfirmEmail = email;
-      showResend(true);
-    }
+    $("authStatus").textContent = plainAuthError(err, mode);
   }
 }
-async function resendConfirmation() {
-  const email = pendingConfirmEmail || $("authEmail").value.trim();
-  if (!email) { $("authStatus").textContent = "Type your email first, then tap Resend."; return; }
-  if (!sbClient) { $("authStatus").textContent = "Sign-in is unavailable right now — the sign-in library did not load."; return; }
-  $("authStatus").textContent = "Sending the confirmation email…";
-  try {
-    const { error } = await sbClient.auth.resend({ type: "signup", email: email });
-    if (error) throw error;
-    $("authStatus").textContent = "Confirmation email sent to " + email + " — click the link in it, then tap Sign in.";
-  } catch (err) {
-    $("authStatus").textContent = plainAuthError(err, "signup");
-  }
-}
-/* Delete answer recordings older than 7 days (runs when the parent signs in). */
+/* Delete answer recordings older than 7 days (runs when the pupil signs in). */
 async function cleanupOldAudio() {
   try {
     const uid = state.parentId;
@@ -3733,26 +3783,37 @@ async function enterGuest(level) {
   $("guestBanner").classList.remove("hidden");
   $("guestLevelLabel").textContent = profile.level;
   $("authSignOutBtn").classList.add("hidden");
-  $("authEmailDisplay").textContent = "Guest — " + profile.level;
-  $("siteFooter").textContent = "Trying as a guest — results stay only in this browser. Sign in to save progress across devices; pupils you add here move into your account when you sign in.";
+  $("authNameDisplay").textContent = "Guest — " + profile.level;
+  $("siteFooter").textContent = "Trying as a guest — results stay only in this browser. Sign up with your name to save your progress; a trial under your name moves into your account when you sign in.";
   $("backupNote").textContent = "You are trying as a guest — your results live only in this browser. Download a backup file to keep a copy, or restore one.";
   $("oralAudioNote").textContent = "Speak your answer, then tap “Done”. If the microphone is not available, type instead. Your voice stays only in this browser for this trial — it is not saved online.";
-  $("oralSettingsNote").textContent = "In this guest trial, answer audio stays only in this browser so your child can listen back during the trial. Written answers and scores are kept in this browser too.";
+  $("oralSettingsNote").textContent = "In this guest trial, answer audio stays only in this browser so you can listen back during the trial. Written answers and scores are kept in this browser too.";
   await init();
 }
 function exitGuest() {
-  // Go to the sign-in page WITHOUT deleting the trial: when the parent
-  // signs in, the trial pupils move into the account (see
-  // migrateGuestToAccount). A flag stops the guest trial resuming
-  // itself on the reload that follows.
+  // Go to the sign-in page WITHOUT deleting the trial: when the pupil
+  // signs in, the trial profile with their name moves into their
+  // account (see migrateGuestToKid). A flag stops the guest trial
+  // resuming itself on the reload that follows.
   try { sessionStorage.setItem("talktupils_exit_guest", "1"); } catch (err) { /* ignore */ }
   location.reload();
+}
+/* First sign-in for this pupil: make sure they have exactly one
+   profile — their own — created from the name and level saved at
+   sign-up (or from the account name as a fallback). */
+async function ensureKidProfile() {
+  const j = await apiGet("/api/profiles");
+  if (j.profiles && j.profiles.length) return j.profiles;
+  const { data } = await sbClient.auth.getUser();
+  const meta = (data && data.user && data.user.user_metadata) || {};
+  const name = String(meta.kid_name || kidNameFromEmail(data && data.user ? data.user.email : "") || "Pupil").slice(0, 60);
+  const level = String(meta.level || "P6").slice(0, 10);
+  const created = await apiPost("/api/profiles", { name, level });
+  return created.profiles;
 }
 async function initAuth() {
   $("authSignUpBtn").addEventListener("click", () => doAuth("signup"));
   $("authSignInBtn").addEventListener("click", () => doAuth("signin"));
-  const resendBtn = $("authResendBtn");
-  if (resendBtn) resendBtn.addEventListener("click", resendConfirmation);
   $("authSignOutBtn").addEventListener("click", async () => { if (sbClient) await sbClient.auth.signOut(); location.reload(); });
   $("guestP6Btn").addEventListener("click", () => enterGuest("P6"));
   $("guestP4Btn").addEventListener("click", () => enterGuest("P4"));
@@ -3774,32 +3835,40 @@ async function initAuth() {
   const { data } = await sbClient.auth.getSession();
   if (data && data.session) {
     state.parentId = data.session.user.id;
-    // A guest trial in this browser moves into the account now.
-    // A failed move never blocks sign-in — the trial is kept and
-    // the move is tried again on the next sign-in.
+    const meta = data.session.user.user_metadata || {};
+    const kidName = String(meta.kid_name || kidNameFromEmail(data.session.user.email) || "");
+    const kidLevel = String(meta.level || "P6");
+    // A guest trial with this pupil's name moves into their account
+    // now. A failed move never blocks sign-in — the trial is kept
+    // and the move is tried again on the next sign-in.
     let moved = null;
     let moveError = "";
-    try { moved = await migrateGuestToAccount(); }
+    try { moved = await migrateGuestToKid(kidName, kidLevel); }
     catch (err) { moveError = (err && err.message) || "move failed"; }
+    // Make sure the pupil has their own profile before the app loads.
+    let profiles = [];
+    try { profiles = await ensureKidProfile(); }
+    catch (err) { moveError = moveError || ((err && err.message) || "profile failed"); }
     $("authCard").classList.add("hidden");
     $("appShell").classList.remove("hidden");
     $("authSignOutBtn").classList.remove("hidden");
-    $("authEmailDisplay").textContent = data.session.user.email || "";
+    const me = (profiles && profiles[0]) || null;
+    $("authNameDisplay").textContent = me ? me.name + " (" + me.level + ")" : kidName;
     await init();
     cleanupOldAudio();
     if (moved && moved.length) {
       document.querySelector("main").insertAdjacentHTML("afterbegin",
-        '<div class="card" style="border-color:#9dc89d;background:#eef7ee">Moved into your account from your guest trial: ' +
-        esc(moved.join(", ")) + ". They now show in the pupil list at the top right.</div>");
+        '<div class="card" style="border-color:#9dc89d;background:#eef7ee">Your guest trial moved into your account: ' +
+        esc(moved.join(", ")) + ". Those results are now saved online.</div>");
     } else if (moveError) {
       document.querySelector("main").insertAdjacentHTML("afterbegin",
-        '<div class="card" style="border-color:#e5a09a;background:#fdecea">Your guest trial pupils could not be moved into your account this time (' +
-        esc(moveError) + '). They are still in this browser — sign out and sign in again to try the move once more.</div>');
+        '<div class="card" style="border-color:#e5a09a;background:#fdecea">Your guest trial could not be moved into your account this time (' +
+        esc(moveError) + '). It is still in this browser — sign out and sign in again to try the move once more.</div>');
     }
     return;
   }
   // No session: show the sign-in page — unless the guest trial is
-  // resuming (skipped when exitGuest sent the parent here to sign in).
+  // resuming (skipped when exitGuest sent the pupil here to sign in).
   let exitGuestFlag = null;
   try {
     exitGuestFlag = sessionStorage.getItem("talktupils_exit_guest");

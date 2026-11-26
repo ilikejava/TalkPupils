@@ -59,15 +59,15 @@ body {
 .tabs button[data-tab="oral"].active { background: #a855f7; border-color: #a855f7; color: #fff; }
 .tabs button[data-tab="progress"] { background: #fce7f3; border-color: #f9a8d4; color: #9d174d; }
 .tabs button[data-tab="progress"].active { background: #ec4899; border-color: #ec4899; color: #fff; }
-.tabs button[data-tab="parent"] { background: #e8edf4; border-color: #cbd5e1; color: #475569; }
-.tabs button[data-tab="parent"].active { background: #64748b; border-color: #64748b; color: #fff; }
+.tabs button[data-tab="settings"] { background: #e8edf4; border-color: #cbd5e1; color: #475569; }
+.tabs button[data-tab="settings"].active { background: #64748b; border-color: #64748b; color: #fff; }
 /* Each tab's page carries a matching coloured top edge on its cards. */
 #tab-read .card { border-top: 4px solid #0ea5e9; }
 #tab-type .card { border-top: 4px solid #f97316; }
 #tab-words .card { border-top: 4px solid #22c55e; }
 #tab-oral .card { border-top: 4px solid #a855f7; }
 #tab-progress .card { border-top: 4px solid #ec4899; }
-#tab-parent .card { border-top: 4px solid #64748b; }
+#tab-settings .card { border-top: 4px solid #64748b; }
 main { padding: 12px; max-width: 980px; margin: 0 auto; }
 .tabpage { display: none; }
 .tabpage.active { display: block; }
@@ -341,7 +341,7 @@ audio.answer-audio { width: 100%; margin: 6px 0; }
 /* ---- website v1 additions ---- */
 .auth-card { max-width: 560px; margin: 16px auto; }
 .auth-card input { flex: 1; min-width: 200px; }
-#authEmailDisplay { margin-left: 6px; }
+#authNameDisplay { margin-left: 6px; }
 
 /* ---- guest mode ---- */
 .guest-box { border-top: 1px solid #dfe5ee; margin-top: 16px; padding-top: 12px; }

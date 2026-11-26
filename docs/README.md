@@ -1,4 +1,4 @@
-# TalkPupils — website v14
+# TalkPupils — website v15
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -19,6 +19,18 @@ v14: sign-in page fixes from the login test — the “Resend
 confirmation email” hint only appears together with its button
 (it used to promise a button that was hidden), and Supabase's
 email rate-limit / not-authorized errors now show plain messages.
+
+v15: no more parent account — each pupil signs in with their own
+name + password (no email; the name maps to a made-up
+kid-&lt;name&gt;@talktupils.local address the app uses behind the
+scenes, so sign-up only works with “Confirm email” turned off in
+Supabase). A guest trial under the pupil's name moves into their
+account on first sign-in. The Parent tab is now “Settings”. The AI
+now reads the pupil's whole progress history: each reading/oral
+mark comes with “What to work on next”, and the Progress tab has a
+“Get AI ideas” button that proposes a practice plan. The Edge
+Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
+in the Supabase dashboard for the history-aware AI to work.
 
 ## What it does
 

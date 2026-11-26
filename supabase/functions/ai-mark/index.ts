@@ -1,24 +1,26 @@
 // TalkPupils AI marking — Supabase Edge Function.
 //
-// The website is a static page (GitHub Pages), so the parent's API key
+// The website is a static page (GitHub Pages), so the app's API key
 // can never live in the page: anyone could copy it from the source and
-// spend the parent's credit. This function holds the keys as Supabase
+// spend the credit. This function holds the keys as Supabase
 // secrets (OPENAI_API_KEY / ANTHROPIC_API_KEY) and calls the provider
 // on the website's behalf. The browser only ever sends pupil work
-// (passage text, recognised words, answers) and gets back a mark and
-// feedback. No audio is ever sent.
+// (passage text, recognised words, answers, and a short summary of
+// the pupil's progress so far) and gets back a mark and feedback.
+// No audio is ever sent.
 //
 // Deploy: Supabase Dashboard -> Edge Functions -> Create function,
 // name it "ai-mark", paste this file, Deploy. Then add the secrets:
 // Edge Functions -> Secrets -> OPENAI_API_KEY and/or ANTHROPIC_API_KEY.
-// Keep "Verify JWT" ON: only a signed-in parent can call it.
+// Keep "Verify JWT" ON: only a signed-in pupil can call it.
 //
 // Actions (POST JSON body {action, provider, model, ...}):
 //   status -> {ok, keys: {openai: bool, anthropic: bool}}
 //   test   -> {ok} when the provider answers (tiny call)
-//   mark   -> {ok, ai: {mark, strengths, improvements}, provider}
+//   mark   -> {ok, ai: {mark, strengths, improvements, nextSteps}, provider}
 //   oral   -> {ok, ai: {refined, strengths, gaps, relevance, elaboration,
-//             vocabulary, grammar, mark25}, provider}
+//             vocabulary, grammar, mark25, nextSteps}, provider}
+//   plan   -> {ok, ai: {title, focus: [{area, activity}], encourage}, provider}
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
@@ -199,14 +201,22 @@ function markPrompt(d: Record<string, unknown>): string {
     "Speed: " + d.wpm + " words per minute. Clarity: " + d.clarity +
       "%. Smoothness: " + d.smoothness + "%. Local mark: " + d.localMark + "/10.",
   );
+  if (d.history) {
+    parts.push(
+      "This pupil's progress so far (use it to make the feedback specific to them — name the pattern you see across their readings, not just this one):",
+    );
+    parts.push(String(d.history).slice(0, 2500));
+  }
   if (d.markingRequirements) {
     parts.push("Marking requirements:");
     parts.push(String(d.markingRequirements).slice(0, 4000));
   }
   parts.push(
     'Reply with JSON only, exactly this shape: {"mark": <number 1-10>, ' +
-      '"strengths": ["...", "..."], "improvements": ["...", "..."]}. ' +
-      "Give exactly 2 strengths and 2 improvements, in simple words a primary school pupil can understand.",
+      '"strengths": ["...", "..."], "improvements": ["...", "..."], ' +
+      '"nextSteps": ["...", "..."]}. ' +
+      "Give exactly 2 strengths, 2 improvements and 2 next steps, in simple words a primary school pupil can understand. " +
+      "The next steps must follow from the pupil's progress so far (e.g. if smoothness has been low in several readings, say to slow down and pause at commas) and name one concrete thing to do in the next practice.",
   );
   return parts.join("\n\n");
 }
@@ -229,6 +239,9 @@ function parseAiMark(text: string): Record<string, unknown> {
     mark: Math.max(1, Math.min(10, Math.round(mark))),
     strengths: (strengths as unknown[]).slice(0, 2).map((s) => String(s).slice(0, 300)),
     improvements: (improvements as unknown[]).slice(0, 2).map((s) => String(s).slice(0, 300)),
+    nextSteps: Array.isArray(data.nextSteps)
+      ? (data.nextSteps as unknown[]).slice(0, 2).map((s) => String(s).slice(0, 300))
+      : [],
   };
 }
 
@@ -247,14 +260,21 @@ function oralPrompt(d: Record<string, unknown>): string {
     );
     parts.push(String(d.modelAnswer).slice(0, 2500));
   }
+  if (d.history) {
+    parts.push(
+      "This pupil's progress so far (use it to make the feedback specific to them — name the pattern you see across their answers, not just this one):",
+    );
+    parts.push(String(d.history).slice(0, 2500));
+  }
   parts.push(
     'Reply with JSON only, exactly this shape: {"refined": "<a stronger version of the SAME answer, in the pupil\'s own voice, keeping the pupil\'s own ideas and experience but complete: direct answer, reasons with because/so, a personal example if the question asks for one, and a closing line. 3-5 sentences, simple words>", ' +
       '"strengths": ["...", "..."], "gaps": ["...", "..."], ' +
       '"relevance": <1-5>, "elaboration": <1-5>, "vocabulary": <1-5>, ' +
-      '"grammar": <1-5>, "mark25": <0-25>}. ' +
+      '"grammar": <1-5>, "mark25": <0-25>, "nextSteps": ["...", "..."]}. ' +
       "Give exactly 2 strengths and 1-3 gaps, in simple words a primary school pupil can understand. " +
       "Gaps must name what is missing (too short, no reason, no example, no personal experience, vague word with a better word, off-topic). " +
-      "mark25 is the overall SBC mark out of 25 for this one answer scaled to a full 3-question mock (a good single answer is about 17-21).",
+      "mark25 is the overall SBC mark out of 25 for this one answer scaled to a full 3-question mock (a good single answer is about 17-21). " +
+      "nextSteps are 2 concrete things to practise next, following from the pupil's progress so far.",
   );
   return parts.join("\n\n");
 }
@@ -287,6 +307,43 @@ function parseAiOral(text: string): Record<string, unknown> {
     vocabulary: score(data.vocabulary),
     grammar: score(data.grammar),
     mark25: Number.isFinite(m25) ? Math.max(0, Math.min(25, m25)) : null,
+    nextSteps: Array.isArray(data.nextSteps)
+      ? (data.nextSteps as unknown[]).slice(0, 2).map((s) => String(s).slice(0, 300))
+      : [],
+  };
+}
+
+function planPrompt(d: Record<string, unknown>): string {
+  const parts: string[] = [
+    "You are a kind primary school English teacher and coach for a Singapore pupil (PSLE oral, reading aloud, typing and vocabulary).",
+    "Here is the pupil's practice history so far:",
+    String(d.history || "No sessions yet.").slice(0, 3000),
+    "Propose a short, encouraging practice plan for this pupil for the next week.",
+    'Reply with JSON only, exactly this shape: {"title": "<short plan title>", "focus": [{"area": "<e.g. Reading smoothness>", "activity": "<one concrete thing to do, with how often>"}, ...], "encourage": "<one warm sentence>"}. ' +
+      "Give 2-3 focus areas, ordered by what matters most. Each activity must be something the pupil can actually do in this app (read a passage aloud, play a typing game, practise spelling, do an Oral Partner mock). Use simple words a primary school pupil can understand. If there is almost no history yet, say so in the title and suggest a first week of mixed practice.",
+  ];
+  return parts.join("\n\n");
+}
+
+function parseAiPlan(text: string): Record<string, unknown> {
+  const data = parseJsonObject(text);
+  const focus = data.focus;
+  if (!Array.isArray(focus) || !focus.length) {
+    throw new Error("the AI reply was missing the plan");
+  }
+  return {
+    title: String(data.title || "Your practice plan").slice(0, 200),
+    focus: (focus as unknown[])
+      .slice(0, 3)
+      .map((f) => {
+        const o = (f || {}) as Record<string, unknown>;
+        return {
+          area: String(o.area || "").slice(0, 120),
+          activity: String(o.activity || "").slice(0, 400),
+        };
+      })
+      .filter((f) => f.area && f.activity),
+    encourage: String(data.encourage || "").slice(0, 300),
   };
 }
 
@@ -355,6 +412,19 @@ serve(async (req) => {
         false,
       );
       return json({ ok: true, ai: parseAiOral(text), provider });
+    }
+    if (action === "plan") {
+      const key = providerKey(provider);
+      const payload = (body.payload || body) as Record<string, unknown>;
+      const text = await callProvider(
+        provider,
+        key,
+        model,
+        planPrompt(payload),
+        "You are a kind primary school English teacher.",
+        false,
+      );
+      return json({ ok: true, ai: parseAiPlan(text), provider });
     }
     return err("Unknown action: " + action + ".", 400);
   } catch (e) {
