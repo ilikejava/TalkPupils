@@ -2,12 +2,13 @@
 body {
   margin: 0;
   font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background: #f4f6fb;
+  background: linear-gradient(180deg, #e0f2fe 0%, #fefce8 65%, #fff7ed 100%);
+  background-attachment: fixed;
   color: #222;
   line-height: 1.5;
 }
 .topbar {
-  background: #1f3a5f;
+  background: linear-gradient(90deg, #2563eb 0%, #7c3aed 100%);
   color: #fff;
   padding: 14px 20px;
   display: flex;
@@ -42,8 +43,31 @@ body {
   border-radius: 8px 8px 0 0;
   cursor: pointer;
   font-size: 15px;
+  font-weight: 600;
+  color: #334155;
 }
-.tabs button.active { background: #fff; font-weight: 700; }
+.tabs button.active { font-weight: 700; }
+/* One bright colour per tab, so kids can spot their tab at a glance.
+   Inactive tabs are a pale tint of their colour; the open tab is filled. */
+.tabs button[data-tab="read"] { background: #e0f2fe; border-color: #7dd3fc; color: #075985; }
+.tabs button[data-tab="read"].active { background: #0ea5e9; border-color: #0ea5e9; color: #fff; }
+.tabs button[data-tab="type"] { background: #ffedd5; border-color: #fdba74; color: #9a3412; }
+.tabs button[data-tab="type"].active { background: #f97316; border-color: #f97316; color: #fff; }
+.tabs button[data-tab="words"] { background: #dcfce7; border-color: #86efac; color: #166534; }
+.tabs button[data-tab="words"].active { background: #22c55e; border-color: #22c55e; color: #fff; }
+.tabs button[data-tab="oral"] { background: #f3e8ff; border-color: #d8b4fe; color: #6b21a8; }
+.tabs button[data-tab="oral"].active { background: #a855f7; border-color: #a855f7; color: #fff; }
+.tabs button[data-tab="progress"] { background: #fce7f3; border-color: #f9a8d4; color: #9d174d; }
+.tabs button[data-tab="progress"].active { background: #ec4899; border-color: #ec4899; color: #fff; }
+.tabs button[data-tab="parent"] { background: #e8edf4; border-color: #cbd5e1; color: #475569; }
+.tabs button[data-tab="parent"].active { background: #64748b; border-color: #64748b; color: #fff; }
+/* Each tab's page carries a matching coloured top edge on its cards. */
+#tab-read .card { border-top: 4px solid #0ea5e9; }
+#tab-type .card { border-top: 4px solid #f97316; }
+#tab-words .card { border-top: 4px solid #22c55e; }
+#tab-oral .card { border-top: 4px solid #a855f7; }
+#tab-progress .card { border-top: 4px solid #ec4899; }
+#tab-parent .card { border-top: 4px solid #64748b; }
 main { padding: 12px; max-width: 980px; margin: 0 auto; }
 .tabpage { display: none; }
 .tabpage.active { display: block; }
@@ -77,7 +101,7 @@ main { padding: 12px; max-width: 980px; margin: 0 auto; }
 .btn.danger { background: #fdecea; border-color: #e5a09a; color: #8f1d16; }
 .btn.small { padding: 5px 10px; font-size: 13px; }
 .btn:disabled { opacity: .5; cursor: default; }
-.game-tab.active { background: #2f6fed; border-color: #2f6fed; color: #fff; }
+.game-tab.active { background: #f97316; border-color: #f97316; color: #fff; }
 select, input[type=text], input[type=password], textarea {
   font: inherit;
   padding: 8px 10px;
@@ -144,7 +168,7 @@ input[type=password] { min-width: 280px; }
   border: 1px solid #dfe5ee;
   border-radius: 8px;
   overflow: hidden;
-  background: linear-gradient(#eaf3ff, #fff);
+  background: linear-gradient(#fff7ed, #fff);
   margin: 10px 0;
 }
 .rain-word {
@@ -298,7 +322,7 @@ code { background: #eef2f8; padding: 1px 5px; border-radius: 4px; }
 .phrases-box ul { margin: 2px 0 6px; padding-left: 20px; font-size: 14px; }
 .prep-timer { font-size: 22px; font-weight: 700; color: #1f3a5f; min-width: 90px; }
 .prep-timer.low { color: #c01f16; }
-.mode-tab.active { background: #2f6fed; border-color: #2f6fed; color: #fff; }
+.mode-tab.active { background: #a855f7; border-color: #a855f7; color: #fff; }
 .review-item { border: 1px solid #dfe5ee; border-radius: 10px; padding: 12px 14px; margin: 10px 0; }
 .review-item h3 { margin: 0 0 6px; font-size: 16px; }
 .review-item h4 { margin: 8px 0 4px; font-size: 14px; }
