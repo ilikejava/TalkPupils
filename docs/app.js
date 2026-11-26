@@ -3381,6 +3381,159 @@ async function addCustomPassage() {
   renderCustomList();
   selectPassage("custom-" + j.passage.id);
 }
+
+/* ---------------- Add from file (PDF / photo / pasted text) ---------------- */
+// A parent uploads a PDF or a photo of a page (or pastes text), the AI
+// reads it and organises it into reading passages + new words, the parent
+// checks the list, then saves the ticked items. PDFs are read in the
+// browser with pdf.js (free, no AI needed); photos are read by Claude
+// vision through the Edge Function; organising always uses the AI, so
+// this needs a signed-in pupil and the server key, like AI marking.
+let importPreviewData = null;
+
+function importSetStatus(msg) { if ($("importStatus")) $("importStatus").textContent = msg; }
+
+async function extractPdfText(file) {
+  if (!window.pdfjsLib) throw new Error("The PDF reader did not load — check the internet connection and try again.");
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  const buf = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+  const pages = Math.min(pdf.numPages, 20);
+  const chunks = [];
+  for (let n = 1; n <= pages; n++) {
+    const page = await pdf.getPage(n);
+    const tc = await page.getTextContent();
+    chunks.push(tc.items.map((it) => it.str).join(" "));
+  }
+  return chunks.join("\n\n").replace(/[ \t]+/g, " ").trim();
+}
+
+function downscaleImage(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const maxSide = 1600;
+        const scale = Math.min(1, maxSide / Math.max(img.width, img.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", 0.85));
+      };
+      img.onerror = () => reject(new Error("Could not read that photo."));
+      img.src = reader.result;
+    };
+    reader.onerror = () => reject(new Error("Could not read that file."));
+    reader.readAsDataURL(file);
+  });
+}
+
+async function importOrganise() {
+  if (guestMode) { importSetStatus("This needs your own account — sign up to use it. Guest trials use the local mark only."); return; }
+  const file = $("importFile").files[0];
+  const pasted = $("importText").value.trim();
+  if (!file && !pasted) { importSetStatus("Choose a PDF or photo, or paste some text first."); return; }
+  const btn = $("importOrganiseBtn");
+  btn.disabled = true;
+  $("importSaveBtn").disabled = true;
+  $("importSaveStatus").textContent = "";
+  try {
+    const provider = state.ai.provider || "anthropic";
+    const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
+    let text = "";
+    const isPdf = file && (file.type === "application/pdf" || /\.pdf$/i.test(file.name || ""));
+    if (isPdf) {
+      importSetStatus("Reading the PDF in your browser…");
+      text = await extractPdfText(file);
+    } else if (file) {
+      importSetStatus("Reading the photo with the AI…");
+      const dataUrl = await downscaleImage(file);
+      const r = await callAiFunction({ action: "extract", provider, model, image: dataUrl });
+      if (!r.ok) throw new Error(r.error || "Could not read the photo.");
+      text = (r.text || "").trim();
+    } else {
+      text = pasted;
+    }
+    if (!text || text.length < 20) { importSetStatus("I could not find enough text in that. Try a clearer photo or paste the text."); return; }
+    importSetStatus("Organising it into passages and words… (" + text.length + " characters read)");
+    const r = await callAiFunction({ action: "organise", provider, model, payload: { text } });
+    if (!r.ok) throw new Error(r.error || "Organising failed.");
+    importPreviewData = r.organised;
+    renderImportPreview();
+    const np = (r.organised.passages || []).length, nv = (r.organised.vocabulary || []).length;
+    importSetStatus("Found " + np + " passage" + (np === 1 ? "" : "s") + " and " + nv + " word" + (nv === 1 ? "" : "s") + ". Tick what to keep, edit anything, then save.");
+  } catch (err) {
+    importSetStatus("Could not do that: " + (err.message || "AI failed") + ".");
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderImportPreview() {
+  const box = $("importPreview");
+  const d = importPreviewData;
+  if (!d) { box.innerHTML = ""; return; }
+  let html = "";
+  (d.passages || []).forEach((pg, i) => {
+    html += '<div class="import-item"><label class="check"><input type="checkbox" class="import-p-check" data-i="' + i + '" checked> Keep this passage</label>'
+      + '<div class="row"><input class="import-p-title" data-i="' + i + '" type="text" maxlength="80" value="' + esc(pg.title || "") + '">'
+      + '<select class="import-p-level" data-i="' + i + '">' + ["P4", "P5", "P6"].map((l) => "<option" + (pg.level === l ? " selected" : "") + ">" + l + "</option>").join("") + "</select></div>"
+      + '<textarea class="import-p-text" data-i="' + i + '" rows="5">' + esc(pg.text || "") + "</textarea></div>";
+  });
+  (d.vocabulary || []).forEach((v, i) => {
+    html += '<div class="import-item import-vocab"><label class="check"><input type="checkbox" class="import-v-check" data-i="' + i + '" checked> Keep</label>'
+      + '<input class="import-v-word" data-i="' + i + '" type="text" maxlength="80" value="' + esc(v.word || "") + '">'
+      + '<input class="import-v-meaning" data-i="' + i + '" type="text" maxlength="150" value="' + esc(v.meaning || "") + '"></div>';
+  });
+  box.innerHTML = html || '<p class="muted">Nothing to save from that file.</p>';
+  $("importSaveBtn").disabled = !((d.passages && d.passages.length) || (d.vocabulary && d.vocabulary.length));
+}
+
+async function importSave() {
+  const d = importPreviewData;
+  if (!d) return;
+  const btn = $("importSaveBtn");
+  btn.disabled = true;
+  let savedP = 0, savedV = 0;
+  try {
+    for (const el of document.querySelectorAll(".import-p-check:checked")) {
+      const i = el.dataset.i;
+      const title = (document.querySelector('.import-p-title[data-i="' + i + '"]').value || "").trim();
+      const text = (document.querySelector('.import-p-text[data-i="' + i + '"]').value || "").trim();
+      if (!title || !text) continue;
+      const j = await apiPost("/api/custom-passages", { title, text });
+      state.customPassages = j.customPassages;
+      savedP++;
+    }
+    for (const el of document.querySelectorAll(".import-v-check:checked")) {
+      const i = el.dataset.i;
+      const word = (document.querySelector('.import-v-word[data-i="' + i + '"]').value || "").trim();
+      const meaning = (document.querySelector('.import-v-meaning[data-i="' + i + '"]').value || "").trim();
+      if (!word || !meaning) continue;
+      const j = await apiPost("/api/custom-vocab", { word, meaning, unit: "My words", category: "words & phrases" });
+      state.customVocab = j.customVocab;
+      savedV++;
+    }
+    mergeCustomVocab(); fillUnitSelects(); renderStudy(); renderCustomVocabList();
+    buildPassageList();
+    fillPassageSelect($("passageSelect"), state.passages);
+    fillPassageSelect($("racePassageSelect"), state.passages);
+    fillPassageSelect($("rainPassageSelect"), state.passages);
+    $("importSaveStatus").textContent = "Saved " + savedP + " passage" + (savedP === 1 ? "" : "s") + " and " + savedV + " word" + (savedV === 1 ? "" : "s") + ". They are in Read, Typing and Words now.";
+    importPreviewData = null;
+    $("importPreview").innerHTML = "";
+    $("importFile").value = "";
+    $("importFileName").textContent = "";
+    $("importText").value = "";
+  } catch (err) {
+    $("importSaveStatus").textContent = "Save failed: " + (err.message || "error") + ".";
+  } finally {
+    btn.disabled = false;
+  }
+}
+
 function initSettings() {
   $("saveMarkingBtn").addEventListener("click", saveMarking);
   $("resetMarkingBtn").addEventListener("click", () => {
@@ -3388,6 +3541,14 @@ function initSettings() {
     $("markingEditor").value = state.markingDefault;
   });
   $("addCustomBtn").addEventListener("click", addCustomPassage);
+  if ($("importOrganiseBtn")) {
+    $("importOrganiseBtn").addEventListener("click", importOrganise);
+    $("importSaveBtn").addEventListener("click", importSave);
+    $("importFile").addEventListener("change", () => {
+      const f = $("importFile").files[0];
+      $("importFileName").textContent = f ? f.name : "";
+    });
+  }
   if ($("saveAiBtn")) {
     $("saveAiBtn").addEventListener("click", saveAiConfig);
     $("testAiBtn").addEventListener("click", testAiConfig);

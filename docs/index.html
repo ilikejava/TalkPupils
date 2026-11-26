@@ -443,7 +443,7 @@
           <option value="openai">ChatGPT</option>
         </select>
         <label for="aiModel">Model (blank = default)</label>
-        <input id="aiModel" type="text" placeholder="gpt-5.4-mini" maxlength="80">
+        <input id="aiModel" type="text" placeholder="claude-haiku-5-5" maxlength="80">
       </div>
       <div class="row">
         <label class="check"><input id="aiEnabled" type="checkbox"> Use AI marking after reading tests</label>
@@ -455,6 +455,25 @@
         <span id="aiStatus" class="muted"></span>
       </div>
       <p class="muted small">The API key is kept on the server (Supabase → Edge Functions → Secrets) and never appears on this page. Add OPENAI_API_KEY for ChatGPT or ANTHROPIC_API_KEY for Claude there. In guest mode AI marking is off — sign up to use it.</p>
+    </div>
+    <div class="card">
+      <h2>Add passages &amp; words from a file</h2>
+      <p class="muted">Upload a PDF or a photo of a page — or paste text below — and the AI will read it, split it into reading passages and pick out new words with plain meanings. Check the list before you save: the AI can misread a word.</p>
+      <div class="row">
+        <label class="btn">📄 Choose file <input id="importFile" type="file" accept=".pdf,image/*" class="hidden"></label>
+        <span id="importFileName" class="muted"></span>
+      </div>
+      <textarea id="importText" rows="6" placeholder="Or paste text here instead of a file…"></textarea>
+      <div class="row">
+        <button id="importOrganiseBtn" class="btn primary">Read &amp; organise with AI</button>
+        <span id="importStatus" class="muted"></span>
+      </div>
+      <div id="importPreview"></div>
+      <div class="row">
+        <button id="importSaveBtn" class="btn primary" disabled>Save ticked items</button>
+        <span id="importSaveStatus" class="muted"></span>
+      </div>
+      <p class="muted small">PDFs are read in your browser (free). Photos are read by the AI, and organising needs the AI key — the same Claude key as AI marking. In guest mode this needs your own account — sign up to use it.</p>
     </div>
     <div class="card">
       <h2>Add your own passage</h2>
@@ -475,8 +494,9 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v17</p>
+<p class="muted small" id="appVersion">TalkPupils web · v18</p>
 
-<script src="app.js?v=17"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="app.js?v=18"></script>
 </body>
 </html>

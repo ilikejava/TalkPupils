@@ -26,6 +26,9 @@
 //   oral   -> {ok, ai: {refined, strengths, gaps, relevance, elaboration,
 //             vocabulary, grammar, mark25, nextSteps}, provider}
 //   plan   -> {ok, ai: {title, focus: [{area, activity}], encourage}, provider}
+//   extract -> {ok, text, provider}  (photo of a page -> transcribed text, Claude vision)
+//   organise -> {ok, organised: {passages: [{title, text, level}], vocabulary:
+//             [{word, meaning}]}, provider}  (raw text -> passages + new words)
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
@@ -78,6 +81,8 @@ async function callProvider(
   userText: string,
   systemText: string | null,
   test: boolean,
+  imageDataUrl: string | null = null,
+  maxTokens = 0,
 ): Promise<string> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 30000);
@@ -86,6 +91,9 @@ async function callProvider(
     let payload: Record<string, unknown> = {};
     let headers: Record<string, string> = {};
     if (provider === "openai") {
+      if (imageDataUrl) {
+        throw new Error("Reading a photo needs Claude — switch the provider to Claude in Settings.");
+      }
       url = "https://api.openai.com/v1/chat/completions";
       payload = {
         model,
@@ -106,14 +114,33 @@ async function callProvider(
       };
     } else {
       // anthropic
-      url = "https://api.anthropic.com/v1/messages";
-      payload = {
-        model,
-        max_tokens: test ? 5 : 800,
-        temperature: 0.3,
-        messages: [{ role: "user", content: userText }],
-      };
-      if (systemText) payload.system = systemText;
+      if (imageDataUrl) {
+        const m = imageDataUrl.match(/^data:(image\/[a-z]+);base64,(.+)$/);
+        if (!m) throw new Error("That photo could not be read — try a JPG or PNG.");
+        url = "https://api.anthropic.com/v1/messages";
+        payload = {
+          model,
+          max_tokens: maxTokens || 2000,
+          temperature: 0.3,
+          messages: [{
+            role: "user",
+            content: [
+              { type: "image", source: { type: "base64", media_type: m[1], data: m[2] } },
+              { type: "text", text: userText },
+            ],
+          }],
+        };
+        if (systemText) payload.system = systemText;
+      } else {
+        url = "https://api.anthropic.com/v1/messages";
+        payload = {
+          model,
+          max_tokens: test ? 5 : (maxTokens || 800),
+          temperature: 0.3,
+          messages: [{ role: "user", content: userText }],
+        };
+        if (systemText) payload.system = systemText;
+      }
       headers = {
         "x-api-key": key,
         "anthropic-version": "2023-06-01",
@@ -352,6 +379,49 @@ function parseAiPlan(text: string): Record<string, unknown> {
   };
 }
 
+function organisePrompt(d: Record<string, unknown>): string {
+  const text = String(d.text || "").slice(0, 12000);
+  return [
+    "You are organising reading material for Singapore primary school pupils (PSLE oral, Primary 4-6).",
+    "Split the text below into reading passages and pick out new words. Keep the pupils' own words — do NOT rewrite the passages, only split them and give each one a short title.",
+    "Passages: each 150-300 words. If the text is one short piece, return one passage. If it is long, split at natural breaks (paragraphs, stories, sections). At most 6 passages. Give each a short title (under 10 words) and a level: P4, P5 or P6, by how hard the words and sentences are.",
+    "Vocabulary: up to 20 words a Primary 4-6 pupil may not know, each with a plain one-line meaning in simple words (under 100 characters). Skip names of people and places, and skip easy words (cat, run, happy).",
+    "Reply with JSON only, exactly this shape: {\"passages\": [{\"title\": \"...\", \"text\": \"...\", \"level\": \"P6\"}], \"vocabulary\": [{\"word\": \"...\", \"meaning\": \"...\"}]}.",
+    "Text to organise:",
+    text,
+  ].join("\n\n");
+}
+
+function parseAiOrganise(text: string): Record<string, unknown> {
+  const data = parseJsonObject(text);
+  const level = (v: unknown): string => {
+    const l = String(v || "").toUpperCase().trim();
+    return l === "P4" || l === "P5" || l === "P6" ? l : "P6";
+  };
+  const passages = (Array.isArray(data.passages) ? data.passages : [])
+    .slice(0, 6)
+    .map((p) => {
+      const o = (p || {}) as Record<string, unknown>;
+      return {
+        title: String(o.title || "").slice(0, 80),
+        text: String(o.text || "").slice(0, 3000),
+        level: level(o.level),
+      };
+    })
+    .filter((p) => p.title && p.text);
+  const vocabulary = (Array.isArray(data.vocabulary) ? data.vocabulary : [])
+    .slice(0, 30)
+    .map((v) => {
+      const o = (v || {}) as Record<string, unknown>;
+      return {
+        word: String(o.word || "").slice(0, 80),
+        meaning: String(o.meaning || "").slice(0, 150),
+      };
+    })
+    .filter((v) => v.word && v.meaning);
+  return { passages, vocabulary };
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -420,6 +490,40 @@ serve(async (req) => {
         false,
       );
       return json({ ok: true, ai: parseAiOral(text), provider });
+    }
+    if (action === "extract") {
+      if (provider === "openai") {
+        return err("Reading a photo needs Claude — switch the provider to Claude in Settings.");
+      }
+      const key = providerKey(provider);
+      const image = String(body.image || "");
+      if (!image.startsWith("data:image/")) {
+        return err("Send a photo (JPG or PNG).");
+      }
+      const text = await callProvider(
+        provider,
+        key,
+        model,
+        "Transcribe all the text in this photo exactly as printed, line by line. Do not add, change or summarise any words. If a word is unclear, write [?].",
+        "You transcribe text from photos.",
+        false,
+        image,
+        2000,
+      );
+      return json({ ok: true, text, provider });
+    }
+    if (action === "organise") {
+      const key = providerKey(provider);
+      const payload = (body.payload || body) as Record<string, unknown>;
+      const text = await callProvider(
+        provider,
+        key,
+        model,
+        organisePrompt(payload),
+        "You are a kind primary school English teacher.",
+        false,
+      );
+      return json({ ok: true, organised: parseAiOrganise(text), provider });
     }
     if (action === "plan") {
       const key = providerKey(provider);

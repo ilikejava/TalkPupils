@@ -1,4 +1,4 @@
-# TalkPupils — website v17
+# TalkPupils — website v18
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v18: Add passages & words from a file — upload a PDF (read in the browser with pdf.js) or a photo (read by Claude vision), or paste text; the AI splits it into 150-300-word passages with titles and levels and picks out new words with plain meanings; parent checks the list, then saves the ticked items into My Passages / My words. Needs the Claude key, like AI marking.
 v17: AI default switched to Claude Haiku 5.5 (claude-haiku-5-5) — cheapest and fastest for marking, follow-ups and plans; ChatGPT stays as an option. The model box now refuses anything that looks like an API key (sk-...), and the Edge Function rejects it too — the key only ever goes in Supabase Secrets.
 v16: database permission fix — the schema never granted the signed-in
 role any privileges on the tables, so every signed-in query failed with
