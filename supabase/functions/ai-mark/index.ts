@@ -3,7 +3,7 @@
 // The website is a static page (GitHub Pages), so the app's API key
 // can never live in the page: anyone could copy it from the source and
 // spend the credit. This function holds the keys as Supabase
-// secrets (OPENAI_API_KEY / ANTHROPIC_API_KEY) and calls the provider
+// secret (GEMINI_API_KEY) and calls Gemini on the website's behalf.
 // on the website's behalf. The browser only ever sends pupil work
 // (passage text, recognised words, answers, and a short summary of
 // the pupil's progress so far) and gets back a mark and feedback.
@@ -11,39 +11,31 @@
 //
 // Deploy: Supabase Dashboard -> Edge Functions -> Create function,
 // name it "ai-mark", paste this file, Deploy. Then add the secrets:
-// Edge Functions -> Secrets -> OPENAI_API_KEY and/or ANTHROPIC_API_KEY.
+// Edge Functions -> Secrets -> GEMINI_API_KEY (free from Google AI Studio).
 // Keep "Verify JWT" ON: only a signed-in pupil can call it.
-// Default provider is Claude (Haiku 5.5, claude-haiku-5-5) — cheapest
-// and fastest for these short calls; ChatGPT stays available as an
-// option. Every action that gives feedback (mark/oral/plan) is sent
-// the pupil's progress summary, so the AI judges this pupil, not a
-// stranger — that history is in the prompt for both providers.
+// The only provider is Gemini (gemini-2.5-flash). Every action that gives
+// feedback (mark/oral/plan) is sent the pupil's progress summary, so the
+// AI judges this pupil, not a stranger — that history is in the prompt.
 //
 // Actions (POST JSON body {action, provider, model, ...}):
-//   status -> {ok, keys: {openai: bool, anthropic: bool}}
+//   status -> {ok, keys: {gemini: bool}}
 //   test   -> {ok} when the provider answers (tiny call)
 //   mark   -> {ok, ai: {mark, strengths, improvements, nextSteps}, provider}
 //   oral   -> {ok, ai: {refined, strengths, gaps, relevance, elaboration,
 //             vocabulary, grammar, mark25, nextSteps}, provider}
 //   plan   -> {ok, ai: {title, focus: [{area, activity}], encourage}, provider}
-//   extract -> {ok, text, provider}  (photo of a page -> transcribed text, Claude vision)
+//   extract -> {ok, text, provider}  (photo of a page -> transcribed text, Gemini vision)
 //   organise -> {ok, organised: {passages: [{title, text, level}], vocabulary:
 //             [{word, meaning}]}, provider}  (raw text -> passages + new words)
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
-const DEFAULT_MODELS: Record<string, string> = {
-  openai: "gpt-5.4-mini",
-  anthropic: "claude-haiku-5-5",
-};
-const PROVIDER_NAMES: Record<string, string> = {
-  openai: "ChatGPT",
-  anthropic: "Claude",
-};
-const SECRET_NAMES: Record<string, string> = {
-  openai: "OPENAI_API_KEY",
-  anthropic: "ANTHROPIC_API_KEY",
-};
+// One provider only: Gemini (free tier from Google AI Studio, no card).
+// The model is fixed here; the Model box on the site is only an
+// override — blank means this default.
+const DEFAULT_MODEL = "gemini-2.5-flash";
+const PROVIDER_NAME = "Gemini";
+const SECRET_NAME = "GEMINI_API_KEY";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -62,12 +54,12 @@ function err(message: string, status = 200): Response {
   return json({ ok: false, error: message }, status);
 }
 
-function providerKey(provider: string): string {
-  const key = Deno.env.get(SECRET_NAMES[provider]) || "";
+function providerKey(): string {
+  const key = Deno.env.get(SECRET_NAME) || "";
   if (!key) {
     throw new Error(
-      "No " + (PROVIDER_NAMES[provider] || provider) +
-        " key is set on the server — add " + SECRET_NAMES[provider] +
+      "No " + PROVIDER_NAME +
+        " key is set on the server — add " + SECRET_NAME +
         " in Supabase → Edge Functions → Secrets.",
     );
   }
@@ -75,7 +67,6 @@ function providerKey(provider: string): string {
 }
 
 async function callProvider(
-  provider: string,
   key: string,
   model: string,
   userText: string,
@@ -87,78 +78,39 @@ async function callProvider(
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 30000);
   try {
-    let url = "";
-    let payload: Record<string, unknown> = {};
-    let headers: Record<string, string> = {};
-    if (provider === "openai") {
-      if (imageDataUrl) {
-        throw new Error("Reading a photo needs Claude — switch the provider to Claude in Settings.");
-      }
-      url = "https://api.openai.com/v1/chat/completions";
-      payload = {
-        model,
-        temperature: 0.3,
-        messages: [
-          {
-            role: "system",
-            content: systemText || "You are a kind primary school English teacher.",
-          },
-          { role: "user", content: userText },
-        ],
-      };
-      if (!test) payload.response_format = { type: "json_object" };
-      if (test) payload.max_tokens = 5;
-      headers = {
-        Authorization: "Bearer " + key,
-        "Content-Type": "application/json",
-      };
-    } else {
-      // anthropic
-      if (imageDataUrl) {
-        const m = imageDataUrl.match(/^data:(image\/[a-z]+);base64,(.+)$/);
-        if (!m) throw new Error("That photo could not be read — try a JPG or PNG.");
-        url = "https://api.anthropic.com/v1/messages";
-        payload = {
-          model,
-          max_tokens: maxTokens || 2000,
-          temperature: 0.3,
-          messages: [{
-            role: "user",
-            content: [
-              { type: "image", source: { type: "base64", media_type: m[1], data: m[2] } },
-              { type: "text", text: userText },
-            ],
-          }],
-        };
-        if (systemText) payload.system = systemText;
-      } else {
-        url = "https://api.anthropic.com/v1/messages";
-        payload = {
-          model,
-          max_tokens: test ? 5 : (maxTokens || 800),
-          temperature: 0.3,
-          messages: [{ role: "user", content: userText }],
-        };
-        if (systemText) payload.system = systemText;
-      }
-      headers = {
-        "x-api-key": key,
-        "anthropic-version": "2023-06-01",
-        "Content-Type": "application/json",
-      };
+    const parts: Record<string, unknown>[] = [];
+    if (imageDataUrl) {
+      const m = imageDataUrl.match(/^data:(image\/[a-z]+);base64,(.+)$/);
+      if (!m) throw new Error("That photo could not be read — try a JPG or PNG.");
+      parts.push({ inlineData: { mimeType: m[1], data: m[2] } });
     }
+    parts.push({ text: userText });
+    const payload: Record<string, unknown> = {
+      contents: [{ parts }],
+      generationConfig: {
+        temperature: 0.3,
+        maxOutputTokens: test ? 5 : (maxTokens || 800),
+      },
+    };
+    // Ask for JSON on the calls that expect it (mark/oral/plan/organise);
+    // extract (photo -> text) and test expect plain text.
+    if (!test && !imageDataUrl) {
+      (payload.generationConfig as Record<string, unknown>).responseMimeType = "application/json";
+    }
+    if (systemText) payload.systemInstruction = { parts: [{ text: systemText }] };
     let resp: Response;
     try {
-      resp = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(payload),
-        signal: ctrl.signal,
-      });
-    } catch (_e) {
-      throw new Error(
-        "could not reach the AI provider — check the internet connection",
+      resp = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
+        {
+          method: "POST",
+          headers: { "x-goog-api-key": key, "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          signal: ctrl.signal,
+        },
       );
+    } catch (_e) {
+      throw new Error("could not reach the AI provider — check the internet connection");
     }
     const raw = await resp.json().catch(() => ({}));
     if (!resp.ok) {
@@ -167,31 +119,27 @@ async function callProvider(
         | undefined;
       let msg =
         (e && (e.message as string)) ||
-        (e && (e.type as string)) ||
         ("provider returned HTTP " + resp.status);
       if (resp.status === 401 || resp.status === 403) {
         msg = "the API key was rejected — check the key and try again";
       }
+      if (resp.status === 429) {
+        msg = "the free daily limit was reached — try again tomorrow";
+      }
       throw new Error(msg);
     }
-    if (provider === "openai") {
-      const text = (raw as Record<string, unknown>).choices as
-        | Array<Record<string, unknown>>
-        | undefined;
-      const content = text?.[0]?.message as
-        | Record<string, unknown>
-        | undefined;
-      if (typeof content?.content !== "string") {
-        throw new Error("unexpected reply from the AI provider");
-      }
-      return content.content as string;
-    }
-    const blocks = (raw as Record<string, unknown>).content as
+    const cands = (raw as Record<string, unknown>).candidates as
       | Array<Record<string, unknown>>
       | undefined;
-    const text = (blocks || [])
-      .filter((b) => b.type === "text")
-      .map((b) => b.text as string)
+    const content = cands?.[0]?.content as
+      | Record<string, unknown>
+      | undefined;
+    const cparts = (content?.parts as
+      | Array<Record<string, unknown>>
+      | undefined) || [];
+    const text = cparts
+      .filter((q) => typeof q.text === "string")
+      .map((q) => q.text as string)
       .join("");
     if (!text) throw new Error("unexpected reply from the AI provider");
     return text;
@@ -433,13 +381,10 @@ serve(async (req) => {
     return err("Send a JSON body: {action, provider, model, ...}.");
   }
   const action = String(body.action || "");
-  const provider = String(body.provider || "anthropic");
-  if (provider !== "openai" && provider !== "anthropic") {
-    return err("Unknown provider: " + provider + ".");
-  }
+  const provider = "gemini"; // the only provider
   const model =
-    String(body.model || "").trim() || DEFAULT_MODELS[provider];
-  if (/^sk-(ant-|proj-)?/i.test(model)) {
+    String(body.model || "").trim() || DEFAULT_MODEL;
+  if (/^(sk-(ant-|proj-)?|AIza)/i.test(model)) {
     return err("That model name looks like an API key — leave the model blank to use the default. The key only goes in Supabase → Edge Functions → Secrets.");
   }
 
@@ -448,15 +393,13 @@ serve(async (req) => {
       return json({
         ok: true,
         keys: {
-          openai: !!Deno.env.get("OPENAI_API_KEY"),
-          anthropic: !!Deno.env.get("ANTHROPIC_API_KEY"),
+          gemini: !!Deno.env.get("GEMINI_API_KEY"),
         },
       });
     }
     if (action === "test") {
-      const key = providerKey(provider);
+      const key = providerKey();
       await callProvider(
-        provider,
         key,
         model,
         "Reply with the single word OK.",
@@ -466,10 +409,9 @@ serve(async (req) => {
       return json({ ok: true, provider });
     }
     if (action === "mark") {
-      const key = providerKey(provider);
+      const key = providerKey();
       const payload = (body.payload || body) as Record<string, unknown>;
       const text = await callProvider(
-        provider,
         key,
         model,
         markPrompt(payload),
@@ -479,10 +421,9 @@ serve(async (req) => {
       return json({ ok: true, ai: parseAiMark(text), provider });
     }
     if (action === "oral") {
-      const key = providerKey(provider);
+      const key = providerKey();
       const payload = (body.payload || body) as Record<string, unknown>;
       const text = await callProvider(
-        provider,
         key,
         model,
         oralPrompt(payload),
@@ -492,16 +433,12 @@ serve(async (req) => {
       return json({ ok: true, ai: parseAiOral(text), provider });
     }
     if (action === "extract") {
-      if (provider === "openai") {
-        return err("Reading a photo needs Claude — switch the provider to Claude in Settings.");
-      }
-      const key = providerKey(provider);
+      const key = providerKey();
       const image = String(body.image || "");
       if (!image.startsWith("data:image/")) {
         return err("Send a photo (JPG or PNG).");
       }
       const text = await callProvider(
-        provider,
         key,
         model,
         "Transcribe all the text in this photo exactly as printed, line by line. Do not add, change or summarise any words. If a word is unclear, write [?].",
@@ -513,10 +450,9 @@ serve(async (req) => {
       return json({ ok: true, text, provider });
     }
     if (action === "organise") {
-      const key = providerKey(provider);
+      const key = providerKey();
       const payload = (body.payload || body) as Record<string, unknown>;
       const text = await callProvider(
-        provider,
         key,
         model,
         organisePrompt(payload),
@@ -526,10 +462,9 @@ serve(async (req) => {
       return json({ ok: true, organised: parseAiOrganise(text), provider });
     }
     if (action === "plan") {
-      const key = providerKey(provider);
+      const key = providerKey();
       const payload = (body.payload || body) as Record<string, unknown>;
       const text = await callProvider(
-        provider,
         key,
         model,
         planPrompt(payload),

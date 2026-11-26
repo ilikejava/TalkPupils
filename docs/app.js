@@ -85,7 +85,7 @@ function mapSession(r) { return Object.assign({ id: r.id, profileId: r.profile_i
 function mapCustomVocab(r) { return { id: r.id, word: r.word, meaning: r.meaning, unit: (/^\d+$/.test(String(r.unit)) ? parseInt(r.unit, 10) : r.unit), category: r.category, createdAt: r.created_at }; }
 function mapCustomPassage(r) { return { id: r.id, title: r.title, text: r.text, createdAt: r.created_at }; }
 function mapCustomTopic(r) { return { id: r.id, title: r.title, image: r.image || "", linkedTopicId: r.linked_topic_id || "", keywords: r.keywords || [], questions: r.questions || [], createdAt: r.created_at }; }
-function mapSettings(r) { return { markingRequirements: r ? r.marking_requirements : null, oralPrepSeconds: r ? r.oral_prep_seconds : 120, oralSaveAudio: r ? r.oral_save_audio !== false : true, aiProvider: r && r.ai_provider ? r.ai_provider : "anthropic", aiModel: r && r.ai_model ? r.ai_model : "", aiEnabled: r ? !!r.ai_enabled : false }; }
+function mapSettings(r) { return { markingRequirements: r ? r.marking_requirements : null, oralPrepSeconds: r ? r.oral_prep_seconds : 120, oralSaveAudio: r ? r.oral_save_audio !== false : true, aiProvider: "gemini", aiModel: r && r.ai_model ? r.ai_model : "", aiEnabled: r ? !!r.ai_enabled : false }; }
 
 async function apiGet(path) {
   if (guestMode) return guestApiGet(path);
@@ -157,7 +157,7 @@ async function apiGet(path) {
       const r = await callAiFunction({ action: "status" });
       if (r && r.ok) keys = r.keys || {};
     } catch (err) { /* function not deployed yet — keys stay empty */ }
-    const provider = (data && data.ai_provider) || "anthropic";
+    const provider = "gemini";
     return { ok: true, config: { provider, model: (data && data.ai_model) || "", enabled: !!(data && data.ai_enabled), keySaved: !!keys[provider], keyLast4: "", keys } };
   }
   throw new Error("GET " + path + " is not available on the website");
@@ -254,7 +254,7 @@ async function apiPost(path, body) {
     // secret on the server. Only the pupil's choice (provider, model,
     // on/off) is saved, in the settings row.
     const uid = await sbUserId();
-    const provider = ["openai", "anthropic"].indexOf(body.provider) >= 0 ? body.provider : "anthropic";
+    const provider = "gemini";
     const patch = { parent_id: uid, ai_provider: provider, ai_model: String(body.model || "").slice(0, 80), ai_enabled: !!body.enabled };
     const { error } = await sbClient.from("settings").upsert(patch, { onConflict: "parent_id" }).select().single();
     if (error) throw new Error(error.message);
@@ -262,7 +262,7 @@ async function apiPost(path, body) {
   }
   if (path === "/api/ai-test") {
     const cfg = await apiGet("/api/ai-config");
-    const provider = cfg.config.provider || "anthropic";
+    const provider = "gemini";
     const model = (cfg.config.model || "").trim() || AI_DEFAULT_MODELS[provider];
     const r = await callAiFunction({ action: "test", provider, model });
     if (!r.ok) throw new Error(r.error || "AI test failed");
@@ -358,7 +358,7 @@ async function guestApiGet(path) {
   if (p === "/api/custom-passages") return { ok: true, customPassages: store.customPassages.map(mapCustomPassage) };
   if (p === "/api/settings") return { ok: true, settings: mapSettings(store.settings) };
   if (p === "/api/settings/marking") return { ok: true, markingRequirements: store.settings ? store.settings.marking_requirements : null };
-  if (p === "/api/ai-config") return { ok: true, config: { provider: "anthropic", model: "", enabled: false, keySaved: false, keyLast4: "" } };
+  if (p === "/api/ai-config") return { ok: true, config: { provider: "gemini", model: "", enabled: false, keySaved: false, keyLast4: "" } };
   throw new Error("GET " + path + " is not available in guest mode");
 }
 async function guestApiPost(path, body) {
@@ -463,7 +463,7 @@ const state = {
   sessions: [],
   customPassages: [],
   settings: { markingRequirements: null },
-  ai: { provider: "anthropic", model: "", enabled: false, keySaved: false, keyLast4: "", keys: {} },
+  ai: { provider: "gemini", model: "", enabled: false, keySaved: false, keyLast4: "", keys: {} },
   markingDefault: "",
   oracle: {},       // "1" -> {title, text}
   builtin: {},      // "1" -> {title, text}
@@ -2658,7 +2658,7 @@ function offlineRefined(q, transcript) {
 }
 
 async function fetchAiOral(payload) {
-  const provider = state.ai.provider || "anthropic";
+  const provider = "gemini";
   const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
   const j = await callAiFunction({ action: "oral", provider, model, payload });
   if (!j.ok) throw new Error(j.error || "AI oral feedback failed");
@@ -3219,14 +3219,12 @@ async function saveMarking() {
    "ai-mark") and is never sent to, or shown on, this page. The page only
    saves the pupil's choice (provider, model, on/off) and asks the
    function for a mark. No pupil data is kept in browser storage. */
-const AI_DEFAULT_MODELS = { openai: "gpt-5.4-mini", anthropic: "claude-haiku-5-5" };
-const AI_PROVIDER_NAMES = { openai: "ChatGPT", anthropic: "Claude" };
+const AI_DEFAULT_MODELS = { gemini: "gemini-2.5-flash" };
+const AI_PROVIDER_NAMES = { gemini: "Gemini" };
 
 function renderAiConfig() {
-  if (!$("aiProvider")) return;
   const a = state.ai;
-  $("aiProvider").value = a.provider || "anthropic";
-  $("aiModel").placeholder = AI_DEFAULT_MODELS[a.provider] || "claude-haiku-5-5";
+  $("aiModel").placeholder = AI_DEFAULT_MODELS.gemini;
   if (!$("aiModel").value) $("aiModel").value = a.model || "";
   $("aiEnabled").checked = !!a.enabled;
   if (guestMode) {
@@ -3240,9 +3238,9 @@ function renderAiConfig() {
 }
 
 async function saveAiConfig() {
-  const provider = $("aiProvider").value;
+  const provider = "gemini";
   const model = $("aiModel").value.trim();
-  if (/^sk-(ant-|proj-)?/i.test(model)) {
+  if (/^(sk-(ant-|proj-)?|AIza)/i.test(model)) {
     $("aiStatus").textContent = "That looks like an API key, not a model name — the key goes only in Supabase → Edge Functions → Secrets, never here. Leave the model box empty to use the default.";
     return;
   }
@@ -3329,7 +3327,7 @@ function kidHistorySummary() {
 }
 
 async function fetchAiMark(payload) {
-  const provider = state.ai.provider || "anthropic";
+  const provider = "gemini";
   const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
   const j = await callAiFunction({ action: "mark", provider, model, payload });
   if (!j.ok) throw new Error(j.error || "AI marking failed");
@@ -3338,7 +3336,7 @@ async function fetchAiMark(payload) {
 
 /* Ask the AI for a practice plan from the pupil's whole history. */
 async function fetchAiPlan() {
-  const provider = state.ai.provider || "anthropic";
+  const provider = "gemini";
   const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
   const j = await callAiFunction({ action: "plan", provider, model, payload: { history: kidHistorySummary() } });
   if (!j.ok) throw new Error(j.error || "AI ideas failed");
@@ -3392,7 +3390,7 @@ async function addCustomPassage() {
 // A parent uploads a PDF or a photo of a page (or pastes text), the AI
 // reads it and organises it into reading passages + new words, the parent
 // checks the list, then saves the ticked items. PDFs are read in the
-// browser with pdf.js (free, no AI needed); photos are read by Claude
+// browser with pdf.js (free, no AI needed); photos are read by Gemini
 // vision through the Edge Function; organising always uses the AI, so
 // this needs a signed-in pupil and the server key, like AI marking.
 let importPreviewData = null;
@@ -3446,7 +3444,7 @@ async function importOrganise() {
   $("importSaveBtn").disabled = true;
   $("importSaveStatus").textContent = "";
   try {
-    const provider = state.ai.provider || "anthropic";
+    const provider = "gemini";
     const model = (state.ai.model || "").trim() || AI_DEFAULT_MODELS[provider];
     let text = "";
     const isPdf = file && (file.type === "application/pdf" || /\.pdf$/i.test(file.name || ""));
@@ -3558,9 +3556,6 @@ function initSettings() {
   if ($("saveAiBtn")) {
     $("saveAiBtn").addEventListener("click", saveAiConfig);
     $("testAiBtn").addEventListener("click", testAiConfig);
-    $("aiProvider").addEventListener("change", () => {
-      $("aiModel").placeholder = AI_DEFAULT_MODELS[$("aiProvider").value] || "";
-    });
   }
 }
 
