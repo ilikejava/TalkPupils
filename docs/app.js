@@ -1812,9 +1812,31 @@ function scheduleRainMusic() {
     rainMusic.idx = (rainMusic.idx + 1) % song.notes.length;
   }
 }
-function startRainMusic() {
-  stopRainMusic();
-  const song = RAIN_MUSIC[rainMusicChoice()];
+/* MP3 files that replace a synthesized tune with the real recording:
+   put the file in docs/content/music/ in the repo, named exactly as
+   below. If the file is not there, the synthesized tune plays instead,
+   so songs can be swapped one at a time. */
+const RAIN_MUSIC_FILES = {
+  tmth: "tmth.mp3", moon: "moon.mp3", twinkle: "twinkle.mp3",
+  ode: "ode.mp3", row: "row.mp3", london: "london.mp3",
+};
+const RAIN_MUSIC_DIR = "content/music/";
+const rainAudio = { el: null, gen: 0 };
+function startRainFile(file) {
+  try {
+    const audio = new Audio();
+    audio.loop = true;
+    audio.volume = RAIN_MUSIC_VOLUME;
+    audio.preload = "auto";
+    audio.addEventListener("error", () => { if (rainAudio.el === audio) startRainSynth(rainMusicChoice()); }, { once: true });
+    audio.src = RAIN_MUSIC_DIR + file;
+    rainAudio.el = audio;
+    const p = audio.play();
+    if (p && p.catch) p.catch(() => { if (rainAudio.el === audio) startRainSynth(rainMusicChoice()); });
+  } catch (e) { startRainSynth(rainMusicChoice()); }
+}
+function startRainSynth(choice) {
+  const song = RAIN_MUSIC[choice];
   if (!song) return; // "none" selected — no music
   try {
     const AC = window.AudioContext || window.webkitAudioContext;
@@ -1836,7 +1858,25 @@ function startRainMusic() {
     rainMusic.timer = setInterval(scheduleRainMusic, 200);
   } catch (e) { /* no sound on this browser — the game still works */ }
 }
+async function startRainMusic() {
+  stopRainMusic();
+  const gen = rainAudio.gen;
+  const choice = rainMusicChoice();
+  if (choice === "none") return;
+  const file = RAIN_MUSIC_FILES[choice];
+  if (file) {
+    try {
+      const res = await fetch(RAIN_MUSIC_DIR + file, { method: "HEAD" });
+      if (gen !== rainAudio.gen) return; // a newer start/stop took over
+      if (res && res.ok) { startRainFile(file); return; }
+    } catch (e) { /* no file / offline — fall through to the synth version */ }
+    if (gen !== rainAudio.gen) return;
+  }
+  startRainSynth(choice);
+}
 function stopRainMusic() {
+  rainAudio.gen++;
+  if (rainAudio.el) { try { rainAudio.el.pause(); rainAudio.el.removeAttribute("src"); } catch (e) {} rainAudio.el = null; }
   rainMusic.playing = false;
   if (rainMusic.timer) { clearInterval(rainMusic.timer); rainMusic.timer = null; }
 }
