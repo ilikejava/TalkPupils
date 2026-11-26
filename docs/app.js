@@ -644,6 +644,31 @@ function renderPassageText() {
 }
 
 /* ---------------- model reading ---------------- */
+// How a sentence should sound. The browser voice is flat by default, so
+// each sentence gets a feeling from its punctuation and feeling words:
+// excited or panicked lines go faster and higher, questions rise,
+// worried or quiet lines go slower and lower, spoken words are a
+// little livelier than plain narration. Returns {rate, pitch} for
+// SpeechSynthesisUtterance (rate 0.1-10, pitch 0-2; we stay near 1).
+function sentenceFeeling(s) {
+  const low = (s || "").toLowerCase();
+  if (/!/.test(s) || /\b(cried|yelled|shouted|exclaimed|gasped|hurry|hurried|late|oh dear|oh no)\b/.test(low)) {
+    return { rate: 1.05, pitch: 1.25 }; // excited / panicked
+  }
+  if (/\b(laughed|cheered|happily|excited|proudly)\b/.test(low)) {
+    return { rate: 1.0, pitch: 1.15 }; // happy
+  }
+  if (/\?/.test(s) || /\b(asked|wondered)\b/.test(low)) {
+    return { rate: 0.9, pitch: 1.12 }; // question / wondering
+  }
+  if (/\b(whispered|quietly|softly|gently|anxio\w*|worr\w*|nervous|afraid|bewilder\w*|confus\w*|grogg\w*|tired|sighed|sad|sorry)\b/.test(low)) {
+    return { rate: 0.8, pitch: 0.9 }; // worried / quiet / slow
+  }
+  if (/["“”]/.test(s)) {
+    return { rate: 0.95, pitch: 1.1 }; // spoken words
+  }
+  return { rate: 0.9, pitch: 1 }; // calm narration
+}
 async function playModelReading() {
   const p = state.currentPassage;
   if (!p) return;
@@ -661,7 +686,8 @@ async function playModelReading() {
     if (token !== state.speakToken) return;
     spans.forEach((s) => s.classList.remove("sent-current"));
     if (spans[i]) spans[i].classList.add("sent-current");
-    await speakText(sentences[i], { rate: 0.9 });
+    const feel = sentenceFeeling(sentences[i]);
+    await speakText(sentences[i], { rate: feel.rate, pitch: feel.pitch });
   }
   spans.forEach((s) => s.classList.remove("sent-current"));
   state.speaking = false;
