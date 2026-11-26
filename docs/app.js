@@ -780,12 +780,12 @@ async function finishReading(res) {
   if (state.readTimer) { clearInterval(state.readTimer); state.readTimer = null; }
   $("testStatus").textContent = "";
   const p = state.currentPassage;
-  // Optional AI marking: ask the AI first, then save one session with both
+  // AI marking is on by default: ask the AI first, then save one session with both
   // marks. Any failure falls back to the local mark only.
   let aiFeedback = null;
   let aiProvider = null;
   let aiError = null;
-  if (state.ai.enabled && state.ai.keySaved) {
+  if (state.ai.keySaved) {
     $("testStatus").textContent = "Getting AI feedback…";
     try {
       const j = await fetchAiMark({
@@ -1962,18 +1962,6 @@ function fillUnitSelects() {
     }
     if (keep && [...sel.options].some((o) => o.value === keep)) sel.value = keep;
   }
-  const nu = $("newWordUnit");
-  if (nu) {
-    const keep = nu.value || "my";
-    nu.innerHTML = "";
-    for (const o of unitOptions) {
-      const el = document.createElement("option");
-      el.value = o.value;
-      el.textContent = o.text;
-      nu.appendChild(el);
-    }
-    nu.value = [...nu.options].some((o) => o.value === keep) ? keep : "my";
-  }
 }
 function renderStudy() {
   const unit = selectedUnit($("studyUnitSelect"));
@@ -2010,22 +1998,6 @@ function mergeCustomVocab() {
     state.vocab.push({ word: c.word, meaning: c.meaning, unit: c.unit,
       category: c.category, unitName: unitName(c.unit), custom: true, id: c.id });
   }
-}
-async function addCustomVocab() {
-  const word = $("newWordText").value.trim();
-  const meaning = $("newWordMeaning").value.trim();
-  const unit = selectedUnit($("newWordUnit"));
-  const category = $("newWordCategory").value;
-  if (!word || !meaning) { alert("Type the word and its meaning."); return; }
-  const j = await apiPost("/api/custom-vocab", { word, meaning, unit, category });
-  state.customVocab = j.customVocab;
-  mergeCustomVocab();
-  fillUnitSelects();
-  renderStudy();
-  renderCustomVocabList();
-  $("newWordText").value = "";
-  $("newWordMeaning").value = "";
-  $("wordSaved").textContent = "Saved — “" + word + "” is now in " + unitLabel(unit) + ".";
 }
 async function deleteCustomVocab(id) {
   const entry = state.customVocab.find((c) => c.id === id);
@@ -2142,7 +2114,6 @@ function initWords() {
   });
   $("quizStartBtn").addEventListener("click", startQuiz);
   $("quizNextBtn").addEventListener("click", nextQuiz);
-  $("addWordBtn").addEventListener("click", addCustomVocab);
   renderStudy();
   renderCustomVocabList();
   renderMasteryLists();
@@ -2711,8 +2682,8 @@ async function finishOralAnswer() {
     praise: praiseForAnswer(q, fullText, topic, scored),
     audioFile: audioFile, attempts: oral.pendingTranscript ? 2 : 1,
   };
-  // Optional AI feedback (same key as AI marking; text only, never audio).
-  if (state.ai.enabled && state.ai.keySaved) {
+  // AI feedback is on by default (same key as AI marking; text only, never audio).
+  if (state.ai.keySaved) {
     try {
       const j = await fetchAiOral({
         question: q.q, qtype: q.type, topicTitle: q.topicTitle,
@@ -2854,101 +2825,6 @@ async function saveOralSettings() {
     $("oralSettingsStatus").textContent = "Could not save: " + err.message;
   }
 }
-function generateOralQuestions(title) {
-  const t = (title || "this picture").trim();
-  return [
-    { q: "Look at the picture. What do you think is happening in the picture? Why do you think so?", type: "picture", model: "" },
-    { q: "Tell us about a time when you did something like this yourself.", type: "experience", model: "" },
-    { q: "Would you like to take part in something like this? Why or why not?", type: "opinion", model: "" },
-  ];
-}
-function renderCustomTopicList() {
-  const el = $("customTopicList");
-  if (!el) return;
-  el.innerHTML = state.customTopics.length
-    ? state.customTopics.map((t) =>
-        '<div class="word-row">' +
-        (t.image ? '<img class="topic-thumb" src="' + esc(t.image) + '" alt="" onerror="tpImgFallback(this)">' : "") +
-        '<span class="w">' + esc(t.title) + "</span>" +
-        '<span class="m">' + t.questions.length + " question" + (t.questions.length === 1 ? "" : "s") + "</span>" +
-        '<button class="btn small danger" data-deltopic="' + esc(t.id) + '">Delete</button></div>').join("")
-    : '<p class="muted">No picture topics added yet.</p>';
-  el.querySelectorAll("[data-deltopic]").forEach((b) => {
-    b.addEventListener("click", async () => {
-      const t = state.customTopics.find((x) => x.id === b.dataset.deltopic);
-      if (t && !confirm('Delete the picture topic "' + t.title + '"?')) return;
-      await apiDelete("/api/custom-topics/" + encodeURIComponent(b.dataset.deltopic));
-      state.customTopics = state.customTopics.filter((x) => x.id !== b.dataset.deltopic);
-      renderCustomTopicList();
-      renderOralTopics();
-    });
-  });
-}
-function fillCustomTopicLink() {
-  const sel = $("customTopicLink");
-  if (!sel) return;
-  sel.innerHTML = '<option value="">— No link —</option>' +
-    allOralTopics().filter((t) => !t.custom).map((t) =>
-      '<option value="' + esc(t.id) + '">' + esc(t.title) + "</option>").join("");
-}
-async function addCustomTopic() {
-  const file = $("customTopicFile").files[0];
-  const title = $("customTopicTitle").value.trim();
-  if (!file) { alert("Choose a picture first (JPG or PNG)."); return; }
-  if (!title) { alert("Give the topic a title."); return; }
-  const lines = $("customTopicQuestions").value.split("\n").map((s) => s.trim()).filter(Boolean);
-  let questions;
-  if (lines.length) {
-    const types = ["picture", "experience", "opinion", "evaluative", "evaluative"];
-    questions = lines.slice(0, 5).map((q, i) => ({ q, type: types[i] || "evaluative", model: "" }));
-  } else if ($("customTopicGen").checked) {
-    questions = generateOralQuestions(title);
-  } else {
-    alert("Type the questions (one per line) or tick the 3-question generator.");
-    return;
-  }
-  $("customTopicStatus").textContent = "Uploading picture…";
-  try {
-    let imageUrl;
-    if (guestMode) {
-      // Guest: the picture stays in this browser only (a data URL in
-      // localStorage). Cap the size so the guest store stays small.
-      if (file.size > 1000000) throw new Error("That picture is too big for a guest trial (about 1 MB max). Sign in to use bigger pictures.");
-      imageUrl = await new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = () => reject(new Error("Could not read the picture."));
-        reader.readAsDataURL(file);
-      });
-    } else {
-      const uid = await sbUserId();
-      const ext = ((file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg");
-      const path = uid + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + "." + ext;
-      const { error } = await sbClient.storage.from("stimuli").upload(path, file, {
-        contentType: file.type || "image/jpeg", upsert: false });
-      if (error) throw new Error(error.message);
-      imageUrl = sbClient.storage.from("stimuli").getPublicUrl(path).data.publicUrl;
-    }
-    const linked = $("customTopicLink").value;
-    const linkedTopic = linked ? oralTopicById(linked) : null;
-    const j = await apiPost("/api/custom-topics", {
-      title, imageFile: imageUrl, linkedTopicId: linked || "",
-      keywords: linkedTopic ? linkedTopic.keywords : [],
-      questions,
-    });
-    state.customTopics = j.customTopics;
-    $("customTopicFile").value = "";
-    $("customTopicFileName").textContent = "";
-    $("customTopicTitle").value = "";
-    $("customTopicQuestions").value = "";
-    renderCustomTopicList();
-    fillCustomTopicLink();
-    renderOralTopics();
-    $("customTopicStatus").textContent = "Saved — “" + title + "” is now in the Oral Partner menu.";
-  } catch (err) {
-    $("customTopicStatus").textContent = "Could not save: " + err.message;
-  }
-}
 async function loadOralData() {
   try {
     const [sbc, customs, settings] = await Promise.all([
@@ -2969,8 +2845,6 @@ async function loadOralData() {
     state.sbc = null;
   }
   renderOralTopics();
-  fillCustomTopicLink();
-  renderCustomTopicList();
   renderOralSettings();
 }
 function initOral() {
@@ -3018,16 +2892,6 @@ function initOral() {
     document.querySelector('#tabs button[data-tab="progress"]').click();
   });
   $("saveOralSettingsBtn").addEventListener("click", saveOralSettings);
-  $("customTopicFile").addEventListener("change", (e) => {
-    const f = e.target.files[0];
-    $("customTopicFileName").textContent = f ? f.name + " (" + Math.round(f.size / 1024) + " KB)" : "";
-  });
-  $("customTopicGen").addEventListener("change", () => {
-    if ($("customTopicGen").checked && !$("customTopicQuestions").value.trim()) {
-      $("customTopicQuestions").value = generateOralQuestions($("customTopicTitle").value).map((q) => q.q).join("\n");
-    }
-  });
-  $("addCustomTopicBtn").addEventListener("click", addCustomTopic);
 }
 
 /* ---------------- Progress ---------------- */
@@ -3176,35 +3040,7 @@ function markingText() {
 function renderSettings() {
   $("markingEditor").value = markingText();
   $("markingDisplay").textContent = markingText();
-  renderCustomList();
-  renderAiConfig();
   renderOralSettings();
-  renderCustomTopicList();
-  fillCustomTopicLink();
-}
-function renderCustomList() {
-  const el = $("customList");
-  el.innerHTML = state.customPassages.length
-    ? state.customPassages.map((p) =>
-        '<div class="word-row"><span class="w">' + esc(p.title) + "</span>" +
-        '<span class="m">' + wordCount(p.text) + ' words</span>' +
-        '<button class="btn small danger" data-del="' + esc(p.id) + '">Delete</button></div>').join("")
-    : '<p class="muted">No custom passages yet.</p>';
-  el.querySelectorAll("[data-del]").forEach((b) => {
-    b.addEventListener("click", async () => {
-      if (!confirm('Delete the passage "' + b.closest(".word-row").querySelector(".w").textContent + '"?')) return;
-      await apiDelete("/api/custom-passages/" + encodeURIComponent(b.dataset.del));
-      state.customPassages = state.customPassages.filter((p) => p.id !== b.dataset.del);
-      buildPassageList();
-      fillPassageSelect($("passageSelect"), state.passages);
-      fillPassageSelect($("racePassageSelect"), state.passages);
-      fillPassageSelect($("rainPassageSelect"), state.passages);
-      if (state.currentPassage && state.currentPassage.id === "custom-" + b.dataset.del) {
-        selectPassage(state.passages[0].id);
-      }
-      renderCustomList();
-    });
-  });
 }
 async function saveMarking() {
   const text = $("markingEditor").value;
@@ -3214,59 +3050,13 @@ async function saveMarking() {
   $("markingStatus").textContent = "Saved.";
 }
 
-/* ---------------- AI marking (optional, the app's own key) ---------------- */
+/* ---------------- AI marking (on by default) ---------------- */
 /* The API key lives on the server as a Supabase secret (Edge Function
-   "ai-mark") and is never sent to, or shown on, this page. The page only
-   saves the pupil's choice (provider, model, on/off) and asks the
-   function for a mark. No pupil data is kept in browser storage. */
+   "ai-mark") and is never sent to, or shown on, this page. AI marking
+   runs after reading and oral tests whenever the server key is set.
+   No pupil data is kept in browser storage. */
 const AI_DEFAULT_MODELS = { gemini: "gemini-3.8-flash" };
 const AI_PROVIDER_NAMES = { gemini: "Gemini" };
-
-function renderAiConfig() {
-  const a = state.ai;
-  $("aiModel").placeholder = AI_DEFAULT_MODELS.gemini;
-  if (!$("aiModel").value) $("aiModel").value = a.model || "";
-  $("aiEnabled").checked = !!a.enabled;
-  if (guestMode) {
-    $("aiKeyStatus").textContent = "AI marking needs your own account — sign up to use it. Guest trials use the local mark only.";
-    return;
-  }
-  const hasKey = a.keys ? !!a.keys[a.provider] : !!a.keySaved;
-  $("aiKeyStatus").textContent = hasKey
-    ? "Key is set on the server for " + (AI_PROVIDER_NAMES[a.provider] || "AI") + ". The key never appears on this page."
-    : "No key set on the server for " + (AI_PROVIDER_NAMES[a.provider] || "AI") + " yet — add it in Supabase → Edge Functions → Secrets.";
-}
-
-async function saveAiConfig() {
-  const provider = "gemini";
-  const model = $("aiModel").value.trim();
-  if (/^(sk-(ant-|proj-)?|AIza)/i.test(model)) {
-    $("aiStatus").textContent = "That looks like an API key, not a model name — the key goes only in Supabase → Edge Functions → Secrets, never here. Leave the model box empty to use the default.";
-    return;
-  }
-
-  const enabled = $("aiEnabled").checked;
-  $("aiStatus").textContent = "Saving…";
-  try {
-    const j = await apiPost("/api/ai-config", { provider, model, enabled });
-    state.ai = j.config;
-    renderAiConfig();
-    $("aiStatus").textContent = "Saved." + (enabled && !j.config.keySaved
-      ? " AI is on but no key is set on the server yet — add it in Supabase → Edge Functions → Secrets." : "");
-  } catch (err) {
-    $("aiStatus").textContent = "Could not save: " + err.message;
-  }
-}
-
-async function testAiConfig() {
-  $("aiStatus").textContent = "Testing…";
-  try {
-    await apiPost("/api/ai-test", {});
-    $("aiStatus").textContent = "AI connection works. (" + (AI_PROVIDER_NAMES[state.ai.provider] || "AI") + ")";
-  } catch (err) {
-    $("aiStatus").textContent = "AI test failed: " + err.message;
-  }
-}
 
 async function callAiFunction(body) {
   // One call to the Supabase Edge Function "ai-mark". The function holds
@@ -3349,8 +3139,8 @@ async function getAiIdeas() {
     status.textContent = "AI ideas need your own account — sign up to use them. Guest trials use the local mark only.";
     return;
   }
-  if (!state.ai.enabled || !state.ai.keySaved) {
-    status.textContent = "Turn on AI marking in the Settings tab first (tick “Use AI marking”, Save, and make sure a key is set on the server).";
+  if (!state.ai.keySaved) {
+    status.textContent = "AI ideas need the server key — add GEMINI_API_KEY in Supabase → Edge Functions → Secrets.";
     return;
   }
   btn.disabled = true;
@@ -3367,25 +3157,6 @@ async function getAiIdeas() {
   }
   btn.disabled = false;
 }
-async function addCustomPassage() {
-  const title = $("customTitle").value.trim();
-  const text = $("customText").value.trim();
-  if (!title || !text) { alert("Give the passage a title and paste the text."); return; }
-  if (wordCount(text) < 30) {
-    if (!confirm("This passage is short (" + wordCount(text) + " words). Add it anyway?")) return;
-  }
-  const j = await apiPost("/api/custom-passages", { title, text });
-  state.customPassages = j.customPassages;
-  $("customTitle").value = "";
-  $("customText").value = "";
-  buildPassageList();
-  fillPassageSelect($("passageSelect"), state.passages);
-  fillPassageSelect($("racePassageSelect"), state.passages);
-  fillPassageSelect($("rainPassageSelect"), state.passages);
-  renderCustomList();
-  selectPassage("custom-" + j.passage.id);
-}
-
 /* ---------------- Add from file (PDF / photo / pasted text) ---------------- */
 // A parent uploads a PDF or a photo of a page (or pastes text), the AI
 // reads it and organises it into reading passages + new words, the parent
@@ -3544,7 +3315,6 @@ function initSettings() {
     if (!confirm("Reset the marking requirements to the PSLE Oral Pack text?")) return;
     $("markingEditor").value = state.markingDefault;
   });
-  $("addCustomBtn").addEventListener("click", addCustomPassage);
   if ($("importOrganiseBtn")) {
     $("importOrganiseBtn").addEventListener("click", importOrganise);
     $("importSaveBtn").addEventListener("click", importSave);
@@ -3552,10 +3322,6 @@ function initSettings() {
       const f = $("importFile").files[0];
       $("importFileName").textContent = f ? f.name : "";
     });
-  }
-  if ($("saveAiBtn")) {
-    $("saveAiBtn").addEventListener("click", saveAiConfig);
-    $("testAiBtn").addEventListener("click", testAiConfig);
   }
 }
 

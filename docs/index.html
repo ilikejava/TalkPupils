@@ -237,29 +237,6 @@
       <div id="wordList"></div>
     </div>
     <div class="card">
-      <h2>Add new vocabulary</h2>
-      <p class="muted">Add words or phrases of your own. They appear in the study list, the meaning quiz and Listen &amp; Spell.</p>
-      <div class="row">
-        <input id="newWordText" type="text" placeholder="Word or phrase (e.g. bellowed)" maxlength="80">
-        <input id="newWordMeaning" type="text" placeholder="Meaning (e.g. shouted loudly)" maxlength="160">
-      </div>
-      <div class="row">
-        <label for="newWordUnit">Unit</label>
-        <select id="newWordUnit"></select>
-        <label for="newWordCategory">Category</label>
-        <select id="newWordCategory">
-          <option value="phrasal verbs">Phrasal verb</option>
-          <option value="phrases with adverbs">Phrase containing an adverb</option>
-          <option value="collocations">Collocation</option>
-          <option value="words &amp; phrases">Single word</option>
-        </select>
-        <button id="addWordBtn" class="btn primary">Add word</button>
-        <span id="wordSaved" class="muted"></span>
-      </div>
-      <h3>Your words</h3>
-      <div id="customVocabList"></div>
-    </div>
-    <div class="card">
       <h2>Word mastery — spaced repetition</h2>
       <p class="muted">Words you get right several times in a row come back less and less often (1 day, then 3, 7, 14, 30 days). Words you miss come back soon. The Meaning Quiz and Listen &amp; Spell mostly use words that are due or still improving, with a few mastered words mixed in to check they are remembered.</p>
       <div id="masteryLists"></div>
@@ -401,29 +378,6 @@
       <p class="muted small">Helpful phrases are shown only during preparation, never while answering — just like the real exam. In a mock exam the examiner stays silent like a real examiner; in practice mode the examiner asks one gentle follow-up when an answer is very short.</p>
     </div>
     <div class="card">
-      <h2>Add your own picture topic</h2>
-      <p class="muted">Pick a photo from your device, give it a title, and write the examiner questions — or leave the questions blank and tick the generator to make the 3 PSLE questions (picture → experience → opinion) for you.</p>
-      <div class="row">
-        <label class="btn">📷 Choose picture <input id="customTopicFile" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" class="hidden"></label>
-        <span id="customTopicFileName" class="muted"></span>
-      </div>
-      <div class="row">
-        <input id="customTopicTitle" type="text" placeholder="Topic title (e.g. A family picnic at the park)" maxlength="80">
-      </div>
-      <div class="row">
-        <label for="customTopicLink">Link to a pack topic (for keywords)</label>
-        <select id="customTopicLink"></select>
-        <label class="check"><input id="customTopicGen" type="checkbox" checked> Use the 3-question generator</label>
-      </div>
-      <textarea id="customTopicQuestions" rows="5" placeholder="One question per line (up to 5). Leave blank to use the generator."></textarea>
-      <div class="row">
-        <button id="addCustomTopicBtn" class="btn primary">Add picture topic</button>
-        <span id="customTopicStatus" class="muted"></span>
-      </div>
-      <h3>Your picture topics</h3>
-      <div id="customTopicList"></div>
-    </div>
-    <div class="card">
       <h2>Marking requirements</h2>
       <p class="muted">This is what each reading is marked against (mark out of 10). Edit it and save — new readings use the new text.</p>
       <textarea id="markingEditor" rows="16"></textarea>
@@ -432,25 +386,6 @@
         <button id="resetMarkingBtn" class="btn">Reset to Oral Pack text</button>
         <span id="markingStatus" class="muted"></span>
       </div>
-    </div>
-    <div class="card">
-      <h2>AI marking (optional)</h2>
-      <p class="muted">After a reading test, the AI gives a second mark out of 10 plus two strengths and two improvements, in simple words. For Oral Partner it refines the answer and gives a mark out of 25. The local mark always counts, even if the AI is off or fails.</p>
-      <div class="row">
-        <span class="muted">Provider: <strong>Gemini</strong> (free — Google AI Studio, no card needed)</span>
-        <label for="aiModel">Model (blank = default)</label>
-        <input id="aiModel" type="text" placeholder="gemini-3.8-flash" maxlength="80">
-      </div>
-      <div class="row">
-        <label class="check"><input id="aiEnabled" type="checkbox"> Use AI marking after reading tests</label>
-      </div>
-      <p class="muted small" id="aiKeyStatus">Checking the server key…</p>
-      <div class="row">
-        <button id="saveAiBtn" class="btn primary">Save AI settings</button>
-        <button id="testAiBtn" class="btn">Test connection</button>
-        <span id="aiStatus" class="muted"></span>
-      </div>
-      <p class="muted small">The API key is kept on the server (Supabase → Edge Functions → Secrets) and never appears on this page. Add GEMINI_API_KEY there — free from Google AI Studio, no card needed. In guest mode AI marking is off — sign up to use it.</p>
     </div>
     <div class="card">
       <h2>Add passages &amp; words from a file</h2>
@@ -471,18 +406,6 @@
       </div>
       <p class="muted small">PDFs are read in your browser (free). Photos are read by the AI, and organising needs the AI key — the same free Gemini key as AI marking. In guest mode this needs your own account — sign up to use it.</p>
     </div>
-    <div class="card">
-      <h2>Add your own passage</h2>
-      <div class="row">
-        <input id="customTitle" type="text" placeholder="Passage title" maxlength="80">
-      </div>
-      <textarea id="customText" rows="8" placeholder="Paste the passage text here (at least 20 characters)…"></textarea>
-      <div class="row">
-        <button id="addCustomBtn" class="btn primary">Add passage</button>
-      </div>
-      <h3>Your passages</h3>
-      <div id="customList"></div>
-    </div>
   </section>
 </main>
 </div>
@@ -490,9 +413,9 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v22</p>
+<p class="muted small" id="appVersion">TalkPupils web · v23</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="app.js?v=22"></script>
+<script src="app.js?v=23"></script>
 </body>
 </html>
