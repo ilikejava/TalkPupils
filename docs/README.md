@@ -1,4 +1,4 @@
-# TalkPupils — website v31
+# TalkPupils — website v32
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v32: Word Rain now answers back. Typing a word that is not falling gave no feedback at all — a child could not tell whether the game heard them. It now says "Caught …! +10" on a catch and "No match — type a word you can see falling." when the word is not on the screen. (Checked during the v31 layout test: a 0-point round was the words reaching the bottom before the test typed them, not a scoring bug.)
 v31: Layout — less scrolling. (1) On wide screens the 6 tabs are now a vertical menu down the left side (sticky, so it stays visible while you scroll); phones keep the horizontal tab row. (2) The Progress tab's cards now sit side by side in two columns — glance and history span both — so the page is about half as long. (3) History shows the latest 10 sessions with a "Show all N sessions" button instead of all 50 at once.
 v30: Leaderboard — compete with others. A new "🏆 Leaderboard" card in Progress shows the top 10 pupils by total points, with each pupil's registered name and level; your own row is highlighted, and your rank shows below the table if you are outside the top 10. One shared `leaderboard` row per pupil (name + points), updated automatically after every practice and on sign-in. WILLIAM must re-run supabase/schema.sql in the Supabase SQL Editor once for the new table — until then the card says the board is being set up. Guests see a sign-up note instead of the board.
 v29: Oral Partner answer hardening. (1) Double-tapping Done could record the same answer twice and skip a question — the Done button is now disabled the moment an answer is submitted. (2) Marking now matches multi-word topic words ("time management", "study timetable") instead of only single words, and "timetable" was added to the Time management topic. (3) A genuine short answer (10+ words) now earns half a length point instead of a flat 0 — the same 19-word answer that scored 0/5 now scores 1.5/5.

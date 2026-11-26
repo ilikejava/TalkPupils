@@ -1711,6 +1711,7 @@ function startRain() {
   $("rainBoard").innerHTML = "";
   $("rainInput").value = "";
   $("rainScore").textContent = "Score: 0";
+  $("rainStatus").textContent = "";
   $("rainTime").textContent = "60s left";
   $("rainInput").focus();
   const lvl = RAIN_LEVELS[rainLevel() - 1];
@@ -1781,6 +1782,9 @@ function rainSubmit() {
     rain.caught++;
     rain.score += 10;
     $("rainScore").textContent = "Score: " + rain.score;
+    $("rainStatus").textContent = "Caught “" + val + "”! +10";
+  } else {
+    $("rainStatus").textContent = "No match — type a word you can see falling.";
   }
 }
 async function endRain() {
