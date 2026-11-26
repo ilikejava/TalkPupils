@@ -632,6 +632,18 @@ function selectPassage(id) {
   $("readResult").innerHTML = "";
   $("grammarCard").classList.add("hidden");
 }
+// First passage for this pupil: P3 starts on the shortest Primary
+// (built-in) passage — everyday words, not the PSLE Oracle set.
+// Everyone else starts on Passage 01, as before.
+function defaultPassageId() {
+  const p = currentProfile();
+  if (p && p.level === "P3") {
+    const builtins = state.passages.filter((x) => x.id.indexOf("builtin-") === 0)
+      .sort((a, b) => wordCount(a.text) - wordCount(b.text));
+    if (builtins[0]) return builtins[0].id;
+  }
+  return state.passages[0] ? state.passages[0].id : null;
+}
 function renderPassageText() {
   const p = state.currentPassage;
   if (!p) { $("passageText").textContent = ""; return; }
@@ -1699,12 +1711,14 @@ async function submitRace() {
 
 /* --- Word Rain --- */
 /* Word Rain speed levels 1–6, slowest to fastest. fall = px dropped every
-   100ms (a word falls the 320px board in ~30s at Level 1, ~10s at Level 6);
-   spawn = ms between new words; max = most words on screen at once. */
+   100ms (a word falls the 320px board in ~40s at Level 1, ~10s at Level 6);
+   spawn = ms between new words; max = most words on screen at once.
+   Levels 1–3 are gentle on purpose — a child new to the keyboard
+   needs time to find the keys and type the word before it lands. */
 const RAIN_LEVELS = [
+  { fall: 0.8, spawn: 6000, max: 4 },
   { fall: 1.0, spawn: 5000, max: 4 },
   { fall: 1.2, spawn: 4000, max: 5 },
-  { fall: 1.5, spawn: 3000, max: 6 },
   { fall: 2.0, spawn: 2500, max: 6 },
   { fall: 2.5, spawn: 2000, max: 6 },
   { fall: 3.0, spawn: 1500, max: 7 },
@@ -1714,7 +1728,10 @@ function rainLevel() {
   try { saved = parseInt(localStorage.getItem("talktupils_rain_level") || "0", 10) || 0; } catch (e) {}
   if (saved >= 1 && saved <= 6) return saved;
   const p = currentProfile();
-  return p && p.level === "P4" ? 2 : 3;
+  // New keyboard typists start slow: P3 starts at Level 1, P4 at 2,
+  // P5/P6/Sec 1 at 3, Sec 2 at 4. A saved pick always wins.
+  const byLevel = { P3: 1, P4: 2, P5: 3, P6: 3, "Sec 1": 3, "Sec 2": 4 };
+  return (p && byLevel[p.level]) || 3;
 }
 const rain = { words: [], pool: [], timer: null, dropTimer: null, spawnTimer: null, timeLeft: 60, score: 0, caught: 0, missed: 0, active: false, fallStep: 1.5, spawnMs: 3000, maxOnScreen: 6 };
 function startRain() {
@@ -3604,7 +3621,7 @@ function renderImportPreview() {
   (d.passages || []).forEach((pg, i) => {
     html += '<div class="import-item"><label class="check"><input type="checkbox" class="import-p-check" data-i="' + i + '" checked> Keep this passage</label>'
       + '<div class="row"><input class="import-p-title" data-i="' + i + '" type="text" maxlength="80" value="' + esc(pg.title || "") + '">'
-      + '<select class="import-p-level" data-i="' + i + '">' + ["P4", "P5", "P6"].map((l) => "<option" + (pg.level === l ? " selected" : "") + ">" + l + "</option>").join("") + "</select></div>"
+      + '<select class="import-p-level" data-i="' + i + '">' + ["P3", "P4", "P5", "P6", "Sec 1", "Sec 2"].map((l) => "<option" + (pg.level === l ? " selected" : "") + ">" + l + "</option>").join("") + "</select></div>"
       + '<textarea class="import-p-text" data-i="' + i + '" rows="5">' + esc(pg.text || "") + "</textarea></div>";
   });
   (d.vocabulary || []).forEach((v, i) => {
@@ -3874,6 +3891,11 @@ async function init() {
     renderSettings();
     await loadOralData();
     await loadProfiles();
+    // Profiles are known only now, so the first passage can match
+    // the pupil's level (P3 starts on a Primary passage, not the
+    // PSLE Oracle set). The earlier selectPassage above just made
+    // sure something was showing while the data loaded.
+    selectPassage(defaultPassageId());
     await loadSessions();
     await loadMastery();
     renderMasteryLists();
@@ -4189,11 +4211,14 @@ async function initAuth() {
   $("authSignOutBtn").addEventListener("click", async () => { if (sbClient) await sbClient.auth.signOut(); location.reload(); });
   $("guestP6Btn").addEventListener("click", () => enterGuest("P6"));
   $("guestP4Btn").addEventListener("click", () => enterGuest("P4"));
+  $("guestP3Btn").addEventListener("click", () => enterGuest("P3"));
+  $("guestSec2Btn").addEventListener("click", () => enterGuest("Sec 2"));
   $("exitGuestBtn").addEventListener("click", exitGuest);
   const guestParam = (new URLSearchParams(location.search).get("guest") || "").toUpperCase();
-  if (guestParam === "P6" || guestParam === "P4") {
+  const guestLevels = { P3: "P3", P4: "P4", P6: "P6", "SEC 1": "Sec 1", "SEC 2": "Sec 2" };
+  if (guestLevels[guestParam]) {
     // Direct link (?guest=P6) skips the sign-in page entirely.
-    await enterGuest(guestParam);
+    await enterGuest(guestLevels[guestParam]);
     return;
   }
   if (!sbClient) {

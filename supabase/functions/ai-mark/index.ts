@@ -352,10 +352,10 @@ function parseAiPlan(text: string): Record<string, unknown> {
 function organisePrompt(d: Record<string, unknown>): string {
   const text = String(d.text || "").slice(0, 12000);
   return [
-    "You are organising reading material for Singapore primary school pupils (PSLE oral, Primary 4-6).",
+    "You are organising reading material for Singapore pupils (Primary 3-6 and Secondary 1-2).",
     "Split the text below into reading passages and pick out new words. Keep the pupils' own words — do NOT rewrite the passages, only split them and give each one a short title.",
-    "Passages: each 150-300 words. If the text is one short piece, return one passage. If it is long, split at natural breaks (paragraphs, stories, sections). At most 6 passages. Give each a short title (under 10 words) and a level: P4, P5 or P6, by how hard the words and sentences are.",
-    "Vocabulary: up to 20 words a Primary 4-6 pupil may not know, each with a plain one-line meaning in simple words (under 100 characters). Skip names of people and places, and skip easy words (cat, run, happy).",
+    "Passages: each 150-300 words. If the text is one short piece, return one passage. If it is long, split at natural breaks (paragraphs, stories, sections). At most 6 passages. Give each a short title (under 10 words) and a level: P3, P4, P5, P6, Sec 1 or Sec 2, by how hard the words and sentences are.",
+    "Vocabulary: up to 20 words a Primary 3 to Secondary 2 pupil may not know, each with a plain one-line meaning in simple words (under 100 characters). Skip names of people and places, and skip easy words (cat, run, happy).",
     "Reply with JSON only, exactly this shape: {\"passages\": [{\"title\": \"...\", \"text\": \"...\", \"level\": \"P6\"}], \"vocabulary\": [{\"word\": \"...\", \"meaning\": \"...\"}]}.",
     "Text to organise:",
     text,
@@ -366,7 +366,9 @@ function parseAiOrganise(text: string): Record<string, unknown> {
   const data = parseJsonObject(text);
   const level = (v: unknown): string => {
     const l = String(v || "").toUpperCase().trim();
-    return l === "P4" || l === "P5" || l === "P6" ? l : "P6";
+    if (l === "SEC 1") return "Sec 1";
+    if (l === "SEC 2") return "Sec 2";
+    return l === "P3" || l === "P4" || l === "P5" || l === "P6" ? l : "P6";
   };
   const passages = (Array.isArray(data.passages) ? data.passages : [])
     .slice(0, 6)

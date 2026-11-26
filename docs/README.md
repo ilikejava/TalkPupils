@@ -1,4 +1,4 @@
-# TalkPupils — website v35
+# TalkPupils — website v36
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v36: Word Rain Levels 1–3 are slower for children new to the keyboard (Level 1 now ~40 seconds for a word to fall, a new word every 6 seconds; Levels 2–3 slowed one step too; Levels 4–6 unchanged). Primary 3 and Secondary 2 are now levels a pupil can pick at sign-up (and in the guest trial, the password reset and the file-import level list). Content follows the level on sign-in: a P3 pupil starts Word Rain at Level 1 and opens on the shortest Primary passage instead of the PSLE Oracle set; Sec 2 starts Word Rain at Level 4; P4/P5/P6/Sec 1 are unchanged (Levels 2/3/3/3, Passage 01). The speed dropdown and the passage dropdown still let any pupil change it by hand. The AI file-import can now tag passages P3 to Sec 2 — this needs the ai-mark function redeployed in Supabase (same redeploy as v34).
 v35: The model reading now reads with feeling. Each sentence gets a voice to match what it says: excited or panicked lines ("Oh dear! I'm so late!") go faster and higher, happy lines lift a little, questions rise, worried or quiet lines ("clearly bewildered", "rubbing his eyes groggily") go slower and lower, spoken words are livelier than plain narration. The sentence-by-sentence highlighting stays exactly as before.
 v34: AI copes better when Google's free Gemini is busy. On a "high demand" (503) answer the function now tries once more a few seconds later instead of failing straight away; if it is still busy, the message is plain — "Gemini is busy right now — try again in a few minutes" — instead of Google's long sentence. WILLIAM must redeploy supabase/functions/ai-mark/index.ts in the Supabase dashboard for this to take effect — the same redeploy also brings the v22 improvements (55-second timeout, low thinking) that were in the repo but not yet live.
 v33: All 28 Oral Partner topics now have pictures. The 10 cheat-sheet topics (Health + Resident's corner) are linked to their new AI illustrations, and the 18 Oracle topics now show AI-generated pictures instead of the scanned pack photos (the original pack photos are backed up). No code change was needed for the 18 — they already pointed at practice-NN.jpg.
@@ -80,9 +81,8 @@ run the whole file again in the SQL Editor — it only adds the grants.
   after 1, 3, 7, 14, then 30 days; wrong ones come back soon. No AI.
 - **Parent** — marking requirements editor, add your own passages and
   picture topics, Oral Partner settings, backup download / restore.
-- **Try without signing in** — a guest trial: pick a demo P6 or P4
-  pupil and use the whole app. Guest results stay only in that
-  browser (localStorage); nothing is sent to Supabase and no account
+- **Try without signing in** — a guest trial: pick a demo pupil (P3, P4, P6 or Sec 2)
+  and use the whole app. Guest results stay only in that browser (localStorage); nothing is sent to Supabase and no account
   is created. A banner at the top says so, with a button to sign in
   and save progress properly. When the parent signs in on the same
   browser, the pupils added in the trial (and their sessions and
@@ -92,11 +92,11 @@ run the whole file again in the SQL Editor — it only adds the grants.
 ## Try it without signing in (guest trial)
 
 No setup needed except turning on the website (step 2 below). Open
-the site, tap **Try as a P6 pupil** or **Try as a P4 pupil**, and use
+the site, tap **Try as a P6 pupil**, **Try as a P4 pupil**, **Try as a P3 pupil** or **Try as a Sec 2 pupil**, and use
 the whole app — reading, typing, words, Oral Partner, progress. The
 guest trial works even before the database tables (step 1) are created,
 because it does not touch Supabase at all. A direct link skips the
-sign-in page entirely: add `?guest=P6` (or `?guest=P4`) to the site
+sign-in page entirely: add `?guest=P6` (or `?guest=P3`, `?guest=P4`, `?guest=Sec%201`, `?guest=Sec%202`) to the site
 URL.
 
 ## Test tonight — 3 steps

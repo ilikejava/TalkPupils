@@ -29,10 +29,12 @@
   <div class="row">
     <input id="authName" type="text" placeholder="Your name (e.g. Zeen)" maxlength="60" autocomplete="username">
     <select id="authLevel">
-      <option value="P6">Primary 6</option>
+      <option value="P3">Primary 3</option>
       <option value="P4">Primary 4</option>
       <option value="P5">Primary 5</option>
+      <option value="P6" selected>Primary 6</option>
       <option value="Sec 1">Sec 1</option>
+      <option value="Sec 2">Sec 2</option>
     </select>
     <input id="authPassword" type="password" placeholder="Password (at least 6 characters)" autocomplete="current-password">
   </div>
@@ -64,6 +66,8 @@
     <div class="row">
       <button id="guestP6Btn" class="btn">Try as a P6 pupil</button>
       <button id="guestP4Btn" class="btn">Try as a P4 pupil</button>
+      <button id="guestP3Btn" class="btn">Try as a P3 pupil</button>
+      <button id="guestSec2Btn" class="btn">Try as a Sec 2 pupil</button>
     </div>
     <p class="muted small">No account needed. To save progress across devices, sign up above instead — a trial under your name moves into your account when you sign in.</p>
   </div>
@@ -471,9 +475,9 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v35</p>
+<p class="muted small" id="appVersion">TalkPupils web · v36</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="app.js?v=35"></script>
+<script src="app.js?v=36"></script>
 </body>
 </html>
