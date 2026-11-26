@@ -1,7 +1,12 @@
--- TalkPupils website v1 — Supabase schema
+-- TalkPupils website v16 — Supabase schema
 -- HOW TO RUN: Supabase Dashboard -> SQL Editor -> paste this whole file -> Run.
 -- Run it once. It is safe to run again (IF NOT EXISTS / DROP POLICY IF EXISTS).
 -- No service_role key is needed anywhere in the website.
+-- v16 fix: the v1 file created the tables and the RLS policies but never
+-- granted the signed-in role any privileges on the tables, so every
+-- signed-in query failed with "permission denied for table ...".
+-- The GRANT block below fixes that. If you already ran v1, just run
+-- this whole file again — it only adds the missing grants.
 
 -- ============ tables ============
 
@@ -74,8 +79,8 @@ create table if not exists public.settings (
 );
 
 -- ============ row level security ============
--- Every row belongs to the signed-in parent. A parent can only see and
--- change their own pupils, sessions and content.
+-- Every row belongs to the signed-in pupil. A pupil can only see and
+-- change their own profile, sessions and content.
 
 alter table public.profiles enable row level security;
 alter table public.sessions enable row level security;
@@ -88,6 +93,20 @@ alter table public.settings enable row level security;
 drop policy if exists "Parents manage their own profiles" on public.profiles;
 create policy "Parents manage their own profiles" on public.profiles
   for all using (parent_id = auth.uid()) with check (parent_id = auth.uid());
+
+-- ============ grants (v16 fix) ============
+-- Postgres checks table privileges BEFORE row level security. Without
+-- these grants, a signed-in pupil gets "permission denied for table ..."
+-- on every query, even though the RLS policy above would allow the row.
+-- Only the signed-in role gets access; the anon role gets nothing
+-- (guest trials never touch Supabase at all).
+grant select, insert, update, delete on public.profiles to authenticated;
+grant select, insert, update, delete on public.sessions to authenticated;
+grant select, insert, update, delete on public.mastery to authenticated;
+grant select, insert, update, delete on public.custom_vocab to authenticated;
+grant select, insert, update, delete on public.custom_passages to authenticated;
+grant select, insert, update, delete on public.custom_topics to authenticated;
+grant select, insert, update, delete on public.settings to authenticated;
 
 drop policy if exists "Parents manage sessions of their profiles" on public.sessions;
 create policy "Parents manage sessions of their profiles" on public.sessions
@@ -125,9 +144,9 @@ create policy "Parents manage their own settings" on public.settings
 
 -- ============ storage buckets ============
 -- 'audio' holds Oral Partner answer recordings, 'stimuli' holds
--- parent-uploaded picture topics. Both are public for reading (the URLs
--- are long and unguessable); only the signed-in parent can upload or
--- delete inside their own folder (<parent-uuid>/...).
+-- pupil-uploaded picture topics. Both are public for reading (the URLs
+-- are long and unguessable); only the signed-in pupil can upload or
+-- delete inside their own folder (<pupil-uuid>/...).
 
 insert into storage.buckets (id, name, public)
 values ('audio', 'audio', true), ('stimuli', 'stimuli', true)
@@ -166,5 +185,5 @@ create policy "Parents delete their own stimuli" on storage.objects
     and (storage.foldername(name))[1] = auth.uid()::text);
 
 -- NOTE: answer recordings older than 7 days are deleted by the website
--- itself when the parent signs in (see cleanupOldAudio in docs/app.js).
+-- itself when the pupil signs in (see cleanupOldAudio in docs/app.js).
 -- No pg_cron job is set up in v1.

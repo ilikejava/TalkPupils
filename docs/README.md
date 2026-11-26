@@ -1,4 +1,4 @@
-# TalkPupils — website v15
+# TalkPupils — website v16
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -31,6 +31,13 @@ mark comes with “What to work on next”, and the Progress tab has a
 “Get AI ideas” button that proposes a practice plan. The Edge
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
+
+v16: database permission fix — the schema never granted the signed-in
+role any privileges on the tables, so every signed-in query failed with
+“permission denied for table …” even though the RLS policies were
+right. `supabase/schema.sql` now grants select/insert/update/delete on
+all 7 tables to `authenticated`. If you already ran the schema once,
+run the whole file again in the SQL Editor — it only adds the grants.
 
 ## What it does
 
