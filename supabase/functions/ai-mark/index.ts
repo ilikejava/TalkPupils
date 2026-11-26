@@ -430,17 +430,17 @@ serve(async (req) => {
   try {
     body = await req.json();
   } catch (_e) {
-    return err("Send a JSON body: {action, provider, model, ...}.", 400);
+    return err("Send a JSON body: {action, provider, model, ...}.");
   }
   const action = String(body.action || "");
   const provider = String(body.provider || "anthropic");
   if (provider !== "openai" && provider !== "anthropic") {
-    return err("Unknown provider: " + provider + ".", 400);
+    return err("Unknown provider: " + provider + ".");
   }
   const model =
     String(body.model || "").trim() || DEFAULT_MODELS[provider];
   if (/^sk-(ant-|proj-)?/i.test(model)) {
-    return err("That model name looks like an API key — leave the model blank to use the default. The key only goes in Supabase → Edge Functions → Secrets.", 400);
+    return err("That model name looks like an API key — leave the model blank to use the default. The key only goes in Supabase → Edge Functions → Secrets.");
   }
 
   try {
@@ -538,7 +538,7 @@ serve(async (req) => {
       );
       return json({ ok: true, ai: parseAiPlan(text), provider });
     }
-    return err("Unknown action: " + action + ".", 400);
+    return err("Unknown action: " + action + ". — the Edge Function needs redeploying in Supabase (Edge Functions → ai-mark → Deploy).");
   } catch (e) {
     return err(e instanceof Error ? e.message : "AI marking failed");
   }

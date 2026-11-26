@@ -3274,7 +3274,13 @@ async function callAiFunction(body) {
   // One call to the Supabase Edge Function "ai-mark". The function holds
   // the API keys as server secrets; the browser never sees them.
   const { data, error } = await sbClient.functions.invoke("ai-mark", { body });
-  if (error) throw new Error(error.message || "AI service failed");
+  if (error) {
+    const m = error.message || "AI service failed";
+    if (/non-2xx/i.test(m)) {
+      throw new Error("The AI service did not answer — the Edge Function may need redeploying in Supabase (Edge Functions → ai-mark → Deploy).");
+    }
+    throw new Error(m);
+  }
   return data;
 }
 
