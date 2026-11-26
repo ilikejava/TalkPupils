@@ -76,7 +76,7 @@ async function callProvider(
   maxTokens = 0,
 ): Promise<string> {
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 30000);
+  const timer = setTimeout(() => ctrl.abort(), 55000);
   try {
     const parts: Record<string, unknown>[] = [];
     if (imageDataUrl) {
@@ -90,6 +90,10 @@ async function callProvider(
       generationConfig: {
         temperature: 0.3,
         maxOutputTokens: test ? 5 : (maxTokens || 800),
+        // 3.8-flash "works harder" (more reasoning) by default; our calls
+        // are simple marking and short JSON, so low thinking keeps them
+        // fast and well under the free-tier load.
+        thinkingConfig: { thinkingLevel: "low" },
       },
     };
     // Ask for JSON on the calls that expect it (mark/oral/plan/organise);
@@ -110,6 +114,9 @@ async function callProvider(
         },
       );
     } catch (_e) {
+      if ((_e as Error)?.name === "AbortError") {
+        throw new Error("Gemini took too long to answer — try again in a moment");
+      }
       throw new Error("could not reach the AI provider — check the internet connection");
     }
     const raw = await resp.json().catch(() => ({}));
