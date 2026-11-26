@@ -2712,9 +2712,15 @@ function oralMicStop(showDone) {
 
 /* ---- scoring, gaps and the stronger version (offline) ---- */
 function oralKeywordsHit(transcript, topic) {
-  const words = new Set(tokenize(transcript.toLowerCase()).map(normWord));
+  const low = transcript.toLowerCase();
+  const words = new Set(tokenize(low).map(normWord));
   const keys = (topic && topic.keywords) || (oral.topic && oral.topic.keywords) || [];
-  return keys.filter((k) => words.has(normWord(k))).length;
+  return keys.filter((k) => {
+    const nk = normWord(k);
+    if (!nk) return false;
+    if (nk.indexOf(" ") >= 0) return low.indexOf(nk) >= 0; // multi-word phrase, e.g. "time management"
+    return words.has(nk);
+  }).length;
 }
 function scoreOralAnswer(q, transcript, topic) {
   const words = wordCount(transcript);
@@ -2724,7 +2730,7 @@ function scoreOralAnswer(q, transcript, topic) {
   const hasClosing = ORAL_CLOSING_RE.test(transcript) || ORAL_DETAIL_RE.test(transcript);
   let score = 0;
   if (words >= 40) score += 1;
-  else if (words >= 20) score += 0.5;
+  else if (words >= 10) score += 0.5;
   if (kw >= 1) score += 1;
   if (hasReason) score += 1;
   if (hasExample) score += 1;
@@ -2818,10 +2824,13 @@ async function fetchAiOral(payload) {
 /* ---- finishing one answer ---- */
 async function finishOralAnswer() {
   if (oral.answering) oralMicStop(false);
+  const doneBtn = $("oralDoneBtn");
+  if (doneBtn.disabled) return; // already answering — ignore double-taps
   const typed = $("oralTypedInput").value.trim();
   let text = (oral.transcript || "").trim();
   if (typed) text = text ? text + " " + typed : typed;
   if (!text) { alert("Say or type your answer first."); return; }
+  doneBtn.disabled = true; // disable before the await below, so a second tap cannot record the same answer twice
   const fullText = oral.pendingTranscript ? oral.pendingTranscript + " " + text : text;
   const q = oral.currentQ;
   const topic = oralTopicById(q.topicId) || oral.topic;
@@ -2844,13 +2853,13 @@ async function finishOralAnswer() {
       $("oralTypedInput").value = "";
       $("oralLiveTranscript").textContent = "";
       const fu = ORAL_FOLLOWUPS[Math.floor(Math.random() * ORAL_FOLLOWUPS.length)];
+      doneBtn.disabled = false;
       await askOralFollowup(fu);
       return;
     }
   }
   oralChatMsg("You", fullText, "child");
   $("oralListenStatus").textContent = "Checking your answer…";
-  $("oralDoneBtn").disabled = true;
   const scored = scoreOralAnswer(q, fullText, topic);
   const off = offlineRefined(q, fullText);
   const record = {
