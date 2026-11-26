@@ -1,4 +1,4 @@
-# TalkPupils — website v30
+# TalkPupils — website v31
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v31: Layout — less scrolling. (1) On wide screens the 6 tabs are now a vertical menu down the left side (sticky, so it stays visible while you scroll); phones keep the horizontal tab row. (2) The Progress tab's cards now sit side by side in two columns — glance and history span both — so the page is about half as long. (3) History shows the latest 10 sessions with a "Show all N sessions" button instead of all 50 at once.
 v30: Leaderboard — compete with others. A new "🏆 Leaderboard" card in Progress shows the top 10 pupils by total points, with each pupil's registered name and level; your own row is highlighted, and your rank shows below the table if you are outside the top 10. One shared `leaderboard` row per pupil (name + points), updated automatically after every practice and on sign-in. WILLIAM must re-run supabase/schema.sql in the Supabase SQL Editor once for the new table — until then the card says the board is being set up. Guests see a sign-up note instead of the board.
 v29: Oral Partner answer hardening. (1) Double-tapping Done could record the same answer twice and skip a question — the Done button is now disabled the moment an answer is submitted. (2) Marking now matches multi-word topic words ("time management", "study timetable") instead of only single words, and "timetable" was added to the Time management topic. (3) A genuine short answer (10+ words) now earns half a length point instead of a flat 0 — the same 19-word answer that scored 0/5 now scores 1.5/5.
 v28: Points, awards and the Oral Partner mock fix. (1) Top-right points label — every session earns up to 100 points (reading mark x10, oral SBC x4, typing game points capped at 100, quiz/spell/quest/grammar as a percentage), shown as "⭐ N pts" beside the pupil name, with the day streak when it is more than 1 day. (2) Awards grow from 8 to 17: First Steps, Quest Starter, Perfect Quest (15/15), Quest Streak 3, Word Collector (10 words mastered), and points milestones Rising Star 500 / Superstar 1,000 / Champion 2,500 / Legend 5,000 — plus a "🏆 New award" pop-up the moment one is earned. Total points also shows in Progress. (3) BUG FIX: finishing an Oral Partner mock crashed (a mistyped variable name, aiSbcMark) so no review screen appeared and the round was never saved — fixed and verified with a 20-check harness.

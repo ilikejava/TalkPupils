@@ -477,6 +477,7 @@ const state = {
   oralSettings: { prepSeconds: 120, saveAudio: true },
   currentPassage: null,
   leaderboard: null, // null = not loaded / unavailable; [] = loaded, no scores yet
+  progressShowAll: false, // Progress history: show first 10 rows until "Show all" is tapped
   readMode: null,   // "mic" | "timed" | null
   readStart: 0,
   readTimer: null,
@@ -3287,7 +3288,8 @@ function renderProgress() {
   const monthName = now.toLocaleDateString(undefined, { month: "long", year: "numeric" });
 
   $("progressContent").innerHTML =
-    '<div class="card"><h3>' + esc(p.name) + " (" + esc(p.level) + ") — at a glance</h3>" +
+    '<div class="progress-grid">' +
+    '<div class="card span2"><h3>' + esc(p.name) + " (" + esc(p.level) + ") — at a glance</h3>" +
     '<div class="score-grid">' +
     '<div class="score-box"><div class="num">⭐ ' + res.pts + '</div><div class="lbl">total points</div></div>' +
     '<div class="score-box"><div class="num">' + s.length + '</div><div class="lbl">practice sessions</div></div>' +
@@ -3316,14 +3318,18 @@ function renderProgress() {
       '<div class="bar" style="width:' + Math.round(r.n / monthMax * 180) + 'px"></div>' +
       '<span class="bar-num">' + r.n + " session" + (r.n === 1 ? "" : "s") + "</span></div>").join("") + "</div>" +
     masteryCardHtml() +
-    '<div class="card"><h3>History</h3>' +
+    '<div class="card span2"><h3>History</h3>' +
     (s.length ? '<table class="history"><tr><th>Date</th><th>What</th><th>Result</th></tr>' +
-      s.slice(0, 50).map((x) => "<tr><td>" + fmtDate(x.createdAt) + "</td><td>" +
-        esc(sessionLabel(x)) + "</td><td>" + esc(sessionResult(x)) + "</td></tr>").join("") + "</table>"
+      (state.progressShowAll ? s : s.slice(0, 10)).map((x) => "<tr><td>" + fmtDate(x.createdAt) + "</td><td>" +
+        esc(sessionLabel(x)) + "</td><td>" + esc(sessionResult(x)) + "</td></tr>").join("") + "</table>" +
+      ((!state.progressShowAll && s.length > 10) ? '<p><button id="showAllHistBtn" class="btn">Show all ' + s.length + ' sessions</button></p>' : "")
       : '<p class="muted">No sessions yet. Practise on the Read, Type or Words tabs and the results will appear here.</p>') +
+    "</div>" +
     "</div>";
   const ideasBtn = $("aiIdeasBtn");
   if (ideasBtn) ideasBtn.addEventListener("click", getAiIdeas);
+  const histBtn = $("showAllHistBtn");
+  if (histBtn) histBtn.addEventListener("click", () => { state.progressShowAll = true; renderProgress(); });
 }
 function sessionLabel(x) {
   if (x.kind === "reading") return "Reading — " + (x.passageTitle || "");
