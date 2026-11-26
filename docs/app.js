@@ -564,6 +564,8 @@ async function saveSession(fields) {
   }
   const j = await apiPost("/api/sessions", Object.assign({ profileId: state.currentProfileId }, fields));
   state.sessions.unshift(j.session);
+  renderPointsLabel();
+  checkNewAwards();
   return j.session;
 }
 
@@ -2895,7 +2897,7 @@ async function finishOral() {
   $("oralChatCard").classList.add("hidden");
   stopSpeaking();
   const sbcMark = oralSbcMark();
-  const aiMark = oral.aiSbcMarks.length
+  const aiSbcMark = oral.aiSbcMarks.length
     ? Math.round(oral.aiSbcMarks.reduce((a, b) => a + b, 0) / oral.aiSbcMarks.length) : null;
   const mode = oral.mode;
   const topicId = oral.topic ? oral.topic.id : null;
@@ -3080,6 +3082,104 @@ function computeStreak(sessions) {
   while (days.has(todayKey(d))) { streak++; d.setDate(d.getDate() - 1); }
   return streak;
 }
+
+/* ---------------- points & awards ---------------- */
+/* One points currency across the whole app, so marks accumulate and
+   pupils can compare totals. Every session is worth up to 100 points:
+   reading mark/10 x10, oral SBC/25 x4, typing game points (capped at
+   100), everything else score/total as a percentage. */
+function sessionPoints(s) {
+  if (!s) return 0;
+  if (s.kind === "reading") return (s.mark || 0) * 10;
+  if (s.kind === "oral") return (s.sbcMark || 0) * 4;
+  if (s.kind === "typing") return Math.min(100, s.points || s.score || 0);
+  if (s.total) return Math.round((s.score || 0) / s.total * 100);
+  return s.score || 0;
+}
+function totalPoints() {
+  return state.sessions.reduce((t, s) => t + sessionPoints(s), 0);
+}
+function masteredWordCount() {
+  return Object.values(state.mastery.words || {}).filter(isMasteredWord).length;
+}
+function computeAwards() {
+  const s = state.sessions;
+  const reading = s.filter((x) => x.kind === "reading");
+  const typing = s.filter((x) => x.kind === "typing");
+  const vocab = s.filter((x) => x.kind === "vocab");
+  const spellS = s.filter((x) => x.kind === "spell");
+  const grammarS = s.filter((x) => x.kind === "grammar");
+  const oralS = s.filter((x) => x.kind === "oral");
+  const quests = s.filter((x) => x.game === "Daily Spelling Quest");
+  const bestMark = reading.length ? Math.max(...reading.map((x) => x.mark || 0)) : 0;
+  const bestWpm = typing.length ? Math.max(...typing.map((x) => x.wpm || 0)) : 0;
+  const bestQuiz = vocab.length ? Math.max(...vocab.map((x) => x.accuracy || 0)) : 0;
+  const bestSpell = spellS.length ? Math.max(...spellS.map((x) => x.accuracy || 0)) : 0;
+  const bestGrammar = grammarS.length ? Math.max(...grammarS.map((x) => x.accuracy || 0)) : 0;
+  const bestSbc = oralS.length ? Math.max(...oralS.map((x) => x.sbcMark || 0)) : 0;
+  const bestQuest = quests.length ? Math.max(...quests.map((x) => x.score || 0)) : 0;
+  const questStreak = computeStreak(quests);
+  const streak = computeStreak(s);
+  const pts = totalPoints();
+  const wordsMastered = masteredWordCount();
+  return {
+    bestMark, bestWpm, bestQuiz, bestSpell, bestGrammar, bestSbc, streak, pts,
+    awards: [
+      { name: "First Steps", desc: "Finish your first practice", earned: s.length >= 1 },
+      { name: "3-Star Reader", desc: "PSLE mark 8 or more", earned: bestMark >= 8 },
+      { name: "Bookworm", desc: "10 reading sessions", earned: reading.length >= 10 },
+      { name: "7-Day Streak", desc: "Practised 7 days in a row", earned: streak >= 7 },
+      { name: "Typing Ace", desc: "40 words per minute in a typing game", earned: bestWpm >= 40 },
+      { name: "Perfect Quiz", desc: "100% in a meaning quiz", earned: bestQuiz >= 100 },
+      { name: "Spelling Star", desc: "90% or more in Listen & Spell", earned: bestSpell >= 90 },
+      { name: "Grammar Star", desc: "100% in a grammar quiz", earned: bestGrammar >= 100 },
+      { name: "Oral Star", desc: "SBC mark 20 or more in Oral Partner", earned: bestSbc >= 20 },
+      { name: "Quest Starter", desc: "Finish your first Daily Spelling Quest", earned: quests.length >= 1 },
+      { name: "Perfect Quest", desc: "15/15 in a Daily Spelling Quest", earned: bestQuest >= 15 },
+      { name: "Quest Streak 3", desc: "Daily Quest 3 days in a row", earned: questStreak >= 3 },
+      { name: "Word Collector", desc: "10 words mastered", earned: wordsMastered >= 10 },
+      { name: "Rising Star", desc: "500 points in total", earned: pts >= 500 },
+      { name: "Superstar", desc: "1,000 points in total", earned: pts >= 1000 },
+      { name: "Champion", desc: "2,500 points in total", earned: pts >= 2500 },
+      { name: "Legend", desc: "5,000 points in total", earned: pts >= 5000 },
+    ],
+  };
+}
+function renderPointsLabel() {
+  const el = $("pointsLabel");
+  if (!el) return;
+  const pts = totalPoints();
+  const streak = computeStreak(state.sessions);
+  el.textContent = "⭐ " + pts + " pts" + (streak > 1 ? " · 🔥 " + streak + " days" : "");
+}
+function awardToast(award) {
+  const t = document.createElement("div");
+  t.className = "award-toast";
+  t.innerHTML = "🏆 New award: <strong>" + esc(award.name) + "</strong> — " + esc(award.desc);
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 7000);
+  t.addEventListener("click", () => t.remove());
+}
+function checkNewAwards() {
+  if (!state.currentProfileId) return;
+  const key = "talktupils_awards_" + state.currentProfileId;
+  let seen = null;
+  try { seen = JSON.parse(localStorage.getItem(key) || "null"); } catch (e) { seen = null; }
+  const earned = computeAwards().awards.filter((a) => a.earned).map((a) => a.name);
+  if (seen === null) {
+    // First run for this pupil: remember what is already earned, quietly.
+    try { localStorage.setItem(key, JSON.stringify(earned)); } catch (e) {}
+    return;
+  }
+  const fresh = earned.filter((n) => !seen.includes(n));
+  if (fresh.length || seen.length !== earned.length) {
+    try { localStorage.setItem(key, JSON.stringify(earned)); } catch (e) {}
+  }
+  fresh.forEach((n, i) => setTimeout(() => {
+    const a = computeAwards().awards.find((x) => x.name === n);
+    if (a) awardToast(a);
+  }, 900 + i * 1500));
+}
 function weekStart(d) {
   const x = new Date(d);
   const day = (x.getDay() + 6) % 7; // Monday = 0
@@ -3100,23 +3200,10 @@ function renderProgress() {
   const spellS = s.filter((x) => x.kind === "spell");
   const grammarS = s.filter((x) => x.kind === "grammar");
   const oralS = s.filter((x) => x.kind === "oral");
-  const bestMark = reading.length ? Math.max(...reading.map((x) => x.mark || 0)) : 0;
-  const bestWpm = typing.length ? Math.max(...typing.map((x) => x.wpm || 0)) : 0;
-  const bestQuiz = vocab.length ? Math.max(...vocab.map((x) => x.accuracy || 0)) : 0;
-  const bestSpell = spellS.length ? Math.max(...spellS.map((x) => x.accuracy || 0)) : 0;
-  const bestGrammar = grammarS.length ? Math.max(...grammarS.map((x) => x.accuracy || 0)) : 0;
-  const bestSbc = oralS.length ? Math.max(...oralS.map((x) => x.sbcMark || 0)) : 0;
-  const streak = computeStreak(s);
-  const awards = [
-    { name: "3-Star Reader", desc: "PSLE mark 8 or more", earned: bestMark >= 8 },
-    { name: "Bookworm", desc: "10 reading sessions", earned: reading.length >= 10 },
-    { name: "7-Day Streak", desc: "Practised 7 days in a row", earned: streak >= 7 },
-    { name: "Typing Ace", desc: "40 words per minute in a typing game", earned: bestWpm >= 40 },
-    { name: "Perfect Quiz", desc: "100% in a meaning quiz", earned: bestQuiz >= 100 },
-    { name: "Spelling Star", desc: "90% or more in Listen & Spell", earned: bestSpell >= 90 },
-    { name: "Grammar Star", desc: "100% in a grammar quiz", earned: bestGrammar >= 100 },
-    { name: "Oral Star", desc: "SBC mark 20 or more in Oral Partner", earned: bestSbc >= 20 },
-  ];
+  const res = computeAwards();
+  const bestMark = res.bestMark, bestWpm = res.bestWpm, bestQuiz = res.bestQuiz,
+    bestSpell = res.bestSpell, bestSbc = res.bestSbc, streak = res.streak;
+  const awards = res.awards;
   // weekly report (Mon–Sun of this week)
   const ws = weekStart(new Date());
   const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -3155,6 +3242,7 @@ function renderProgress() {
   $("progressContent").innerHTML =
     '<div class="card"><h3>' + esc(p.name) + " (" + esc(p.level) + ") — at a glance</h3>" +
     '<div class="score-grid">' +
+    '<div class="score-box"><div class="num">⭐ ' + res.pts + '</div><div class="lbl">total points</div></div>' +
     '<div class="score-box"><div class="num">' + s.length + '</div><div class="lbl">practice sessions</div></div>' +
     '<div class="score-box"><div class="num">' + streak + '</div><div class="lbl">day streak</div></div>' +
     '<div class="score-box"><div class="num">' + (bestMark || "—") + (bestMark ? "/10" : "") + '</div><div class="lbl">best PSLE mark</div></div>' +
@@ -3646,6 +3734,7 @@ function initProfiles() {
     renderMasteryLists();
     renderDueHints();
     renderOralTopics();
+    renderPointsLabel();
     if ($("tab-progress").classList.contains("active")) renderProgress();
   });
 }
@@ -3706,6 +3795,8 @@ async function init() {
     renderMasteryLists();
     renderDueHints();
     renderOralTopics();
+    renderPointsLabel();
+    checkNewAwards();
   } catch (err) {
     document.querySelector("main").insertAdjacentHTML("afterbegin",
       '<div class="card" style="border-color:#e5a09a;background:#fdecea">Could not load the app data: ' +
