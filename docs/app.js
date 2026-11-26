@@ -577,6 +577,7 @@ function initTabs() {
   $("tabs").addEventListener("click", (e) => {
     const b = e.target.closest("button[data-tab]");
     if (!b) return;
+    if (b.dataset.tab !== "type") stopRainMusic();
     document.querySelectorAll("#tabs button").forEach((x) => x.classList.toggle("active", x === b));
     document.querySelectorAll(".tabpage").forEach((x) => x.classList.toggle("active", x.id === "tab-" + b.dataset.tab));
     if (b.dataset.tab === "progress") { renderProgress(); loadLeaderboard().then(() => { if ($("tab-progress").classList.contains("active")) renderProgress(); }); }
@@ -1636,6 +1637,7 @@ function masteryCardHtml() {
 function initTypeTabs() {
   document.querySelectorAll(".game-tab").forEach((b) => {
     b.addEventListener("click", () => {
+      if (b.dataset.game !== "rain") stopRainMusic();
       document.querySelectorAll(".game-tab").forEach((x) => x.classList.toggle("active", x === b));
       document.querySelectorAll(".game").forEach((g) => g.classList.add("hidden"));
       $("game-" + b.dataset.game).classList.remove("hidden");
@@ -1709,6 +1711,136 @@ async function submitRace() {
   }
 }
 
+/* --- Word Rain music --- */
+/* A few classic tunes, played softly (20% volume) while a Word Rain
+   round runs. No audio file is needed: the browser plays the notes
+   itself with the Web Audio API, so the tunes work offline and cost
+   nothing to host. Each tune is the familiar chorus or first part,
+   as a list of [note, beats]. These are soft synthesized versions
+   of the tunes, not the original recordings. */
+const RAIN_MUSIC_VOLUME = 0.2;
+const RAIN_MUSIC = {
+  tmth: { name: "Take Me to Your Heart", bpm: 84, notes: [
+    ["D4", 1], ["E4", 1], ["G4", 1], ["A4", 1], ["B4", 2],
+    ["B4", 1], ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 2],
+    ["E4", 1], ["G4", 1], ["A4", 1], ["B4", 1], ["A4", 1], ["G4", 1], ["E4", 2],
+    ["D4", 1], ["E4", 1], ["G4", 1], ["A4", 1], ["B4", 2],
+    ["B4", 1], ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 2],
+    ["E4", 1], ["G4", 1], ["A4", 1], ["B4", 1], ["A4", 2],
+    ["B4", 1], ["A4", 1], ["G4", 1], ["A4", 1], ["B4", 2],
+    ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 2],
+    ["B4", 1], ["A4", 1], ["G4", 1], ["A4", 2],
+    ["B4", 2], ["A4", 1], ["G4", 1],
+    ["D4", 1], ["E4", 1], ["G4", 1], ["A4", 1], ["B4", 2],
+    ["B4", 1], ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 2],
+    ["E4", 1], ["G4", 1], ["A4", 1], ["B4", 1], ["A4", 2],
+    ["D4", 1], ["E4", 1], ["G4", 1], ["A4", 1], ["B4", 2],
+    ["B4", 1], ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 2],
+    ["A4", 1], ["B4", 1], ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 1], ["G4", 2],
+  ] },
+  moon: { name: "The Moon Represents My Heart", bpm: 80, notes: [
+    ["E4", 1], ["G4", 1], ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 1], ["C4", 1], ["D4", 1],
+    ["E4", 1], ["G4", 1], ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 2],
+    ["E4", 1], ["G4", 1], ["A4", 1], ["C5", 1], ["B4", 1], ["A4", 1], ["G4", 2],
+    ["A4", 1], ["G4", 1], ["E4", 1], ["D4", 1], ["C4", 2],
+  ] },
+  twinkle: { name: "Twinkle Twinkle Little Star", bpm: 100, notes: [
+    ["C4", 1], ["C4", 1], ["G4", 1], ["G4", 1], ["A4", 1], ["A4", 1], ["G4", 2],
+    ["F4", 1], ["F4", 1], ["E4", 1], ["E4", 1], ["D4", 1], ["D4", 1], ["C4", 2],
+    ["G4", 1], ["G4", 1], ["F4", 1], ["F4", 1], ["E4", 1], ["E4", 1], ["D4", 2],
+    ["G4", 1], ["G4", 1], ["F4", 1], ["F4", 1], ["E4", 1], ["E4", 1], ["D4", 2],
+    ["C4", 1], ["C4", 1], ["G4", 1], ["G4", 1], ["A4", 1], ["A4", 1], ["G4", 2],
+    ["F4", 1], ["F4", 1], ["E4", 1], ["E4", 1], ["D4", 1], ["D4", 1], ["C4", 2],
+  ] },
+  ode: { name: "Ode to Joy", bpm: 100, notes: [
+    ["E4", 1], ["E4", 1], ["F4", 1], ["G4", 1], ["G4", 1], ["F4", 1], ["E4", 1], ["D4", 1], ["C4", 1], ["C4", 1], ["D4", 1], ["E4", 1], ["E4", 1.5], ["D4", 0.5], ["D4", 2],
+    ["E4", 1], ["E4", 1], ["F4", 1], ["G4", 1], ["G4", 1], ["F4", 1], ["E4", 1], ["D4", 1], ["C4", 1], ["C4", 1], ["D4", 1], ["E4", 1], ["D4", 1.5], ["C4", 0.5], ["C4", 2],
+    ["D4", 1], ["D4", 1], ["E4", 1], ["C4", 1], ["D4", 1], ["E4", 0.5], ["F4", 0.5], ["E4", 1], ["C4", 1], ["D4", 1], ["E4", 0.5], ["F4", 0.5], ["E4", 1], ["D4", 1], ["C4", 1], ["D4", 1], ["G3", 2],
+    ["E4", 1], ["E4", 1], ["F4", 1], ["G4", 1], ["G4", 1], ["F4", 1], ["E4", 1], ["D4", 1], ["C4", 1], ["C4", 1], ["D4", 1], ["E4", 1], ["D4", 1.5], ["C4", 0.5], ["C4", 2],
+  ] },
+  row: { name: "Row, Row, Row Your Boat", bpm: 100, notes: [
+    ["C4", 1], ["C4", 1], ["C4", 1], ["D4", 1], ["E4", 1],
+    ["E4", 1], ["D4", 1], ["E4", 1], ["F4", 1], ["G4", 1],
+    ["C5", 1], ["C5", 1], ["C5", 1], ["G4", 1], ["G4", 1], ["G4", 1], ["E4", 1], ["E4", 1], ["E4", 1], ["C4", 1], ["C4", 1], ["C4", 1],
+    ["G4", 1], ["F4", 1], ["E4", 1], ["D4", 1], ["C4", 2],
+  ] },
+  london: { name: "London Bridge Is Falling Down", bpm: 100, notes: [
+    ["G4", 1], ["A4", 1], ["G4", 1], ["F4", 1], ["E4", 1], ["F4", 1], ["G4", 2],
+    ["D4", 1], ["E4", 1], ["F4", 2],
+    ["E4", 1], ["F4", 1], ["G4", 2],
+    ["G4", 1], ["A4", 1], ["G4", 1], ["F4", 1], ["E4", 1], ["F4", 1], ["G4", 2],
+    ["D4", 1], ["G4", 1], ["E4", 2],
+    ["C4", 2],
+  ] },
+};
+const RAIN_MUSIC_KEY = "talktupils_rain_music";
+function rainMusicChoice() {
+  const sel = $("rainMusicSelect");
+  if (sel && sel.value) return sel.value;
+  try { return localStorage.getItem(RAIN_MUSIC_KEY) || "tmth"; } catch (e) { return "tmth"; }
+}
+function noteFreq(name) {
+  const m = /^([A-G])(#?)(\d)$/.exec(name || "");
+  if (!m) return 440;
+  const semis = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+  const midi = 12 * (parseInt(m[3], 10) + 1) + semis[m[1]] + (m[2] ? 1 : 0);
+  return 440 * Math.pow(2, (midi - 69) / 12);
+}
+const rainMusic = { ctx: null, master: null, timer: null, idx: 0, nextTime: 0, playing: false, song: null };
+function playRainNote(name, when, dur) {
+  const ctx = rainMusic.ctx;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = "triangle";
+  osc.frequency.value = noteFreq(name);
+  g.gain.setValueAtTime(0.0001, when);
+  g.gain.linearRampToValueAtTime(0.6, when + 0.03);
+  g.gain.exponentialRampToValueAtTime(0.001, when + Math.max(dur * 0.9, 0.2));
+  osc.connect(g);
+  g.connect(rainMusic.master);
+  osc.start(when);
+  osc.stop(when + dur + 0.05);
+}
+function scheduleRainMusic() {
+  if (!rainMusic.playing || !rainMusic.ctx) return;
+  const ctx = rainMusic.ctx, song = rainMusic.song;
+  const beat = 60 / song.bpm;
+  while (rainMusic.nextTime < ctx.currentTime + 0.5) {
+    const n = song.notes[rainMusic.idx];
+    playRainNote(n[0], rainMusic.nextTime, n[1] * beat);
+    rainMusic.nextTime += n[1] * beat;
+    rainMusic.idx = (rainMusic.idx + 1) % song.notes.length;
+  }
+}
+function startRainMusic() {
+  stopRainMusic();
+  const song = RAIN_MUSIC[rainMusicChoice()];
+  if (!song) return; // "none" selected — no music
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    if (!rainMusic.ctx) rainMusic.ctx = new AC();
+    const ctx = rainMusic.ctx;
+    if (ctx.state === "suspended") ctx.resume();
+    if (!rainMusic.master) {
+      rainMusic.master = ctx.createGain();
+      rainMusic.master.gain.value = RAIN_MUSIC_VOLUME;
+      rainMusic.master.connect(ctx.destination);
+    } else {
+      rainMusic.master.gain.value = RAIN_MUSIC_VOLUME;
+    }
+    rainMusic.song = song;
+    rainMusic.idx = 0;
+    rainMusic.playing = true;
+    rainMusic.nextTime = ctx.currentTime + 0.05;
+    rainMusic.timer = setInterval(scheduleRainMusic, 200);
+  } catch (e) { /* no sound on this browser — the game still works */ }
+}
+function stopRainMusic() {
+  rainMusic.playing = false;
+  if (rainMusic.timer) { clearInterval(rainMusic.timer); rainMusic.timer = null; }
+}
+
 /* --- Word Rain --- */
 /* Word Rain speed levels 1–6, slowest to fastest. fall = px dropped every
    100ms (a word falls the 320px board in ~40s at Level 1, ~10s at Level 6);
@@ -1757,6 +1889,7 @@ function startRain() {
   $("rainStatus").textContent = "";
   $("rainTime").textContent = "60s left";
   $("rainInput").focus();
+  startRainMusic();
   const lvl = RAIN_LEVELS[rainLevel() - 1];
   rain.fallStep = lvl.fall; rain.spawnMs = lvl.spawn; rain.maxOnScreen = lvl.max;
   $("rainLevelSelect").value = String(rainLevel());
@@ -1833,6 +1966,7 @@ function rainSubmit() {
 async function endRain() {
   if (!rain.active) return;
   rain.active = false;
+  stopRainMusic();
   clearInterval(rain.timer);
   clearInterval(rain.dropTimer);
   clearInterval(rain.spawnTimer);
@@ -1979,6 +2113,14 @@ function initType() {
   $("rainLevelSelect").value = String(rainLevel());
   $("rainLevelSelect").addEventListener("change", () => {
     try { localStorage.setItem("talktupils_rain_level", $("rainLevelSelect").value); } catch (e) {}
+  });
+  try {
+    const savedMusic = localStorage.getItem(RAIN_MUSIC_KEY);
+    if (savedMusic && (RAIN_MUSIC[savedMusic] || savedMusic === "none")) $("rainMusicSelect").value = savedMusic;
+  } catch (e) {}
+  $("rainMusicSelect").addEventListener("change", () => {
+    try { localStorage.setItem(RAIN_MUSIC_KEY, $("rainMusicSelect").value); } catch (e) {}
+    if (rain.active) startRainMusic(); // switch tune mid-round
   });
   $("spellStartBtn").addEventListener("click", startSpell);
   $("spellHearBtn").addEventListener("click", () => {
