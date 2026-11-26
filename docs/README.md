@@ -1,4 +1,4 @@
-# TalkPupils — website v25
+# TalkPupils — website v26
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v26: Oral Partner gains the 10 Health/Neighbours topics from The Write Tribe's PSLE Oral Conversation Cheat Sheet SAMPLE (Sets 1-9 with PEEL model answers, Set 10 prompts only — the sample ends there; no pictures in this version, cards show "No picture"). PEEL (Point-Elaborate-Example-Link back) now shows in the prep screen's helpful-phrases box. Topics 19-28 in the Oral Partner menu.
 v25: forgot-password via a secret word (pupils have no email, so no reset link is possible). Sign-up now asks for a secret word, stored in the account; the sign-in card has "Forgot password?" which checks name + level + secret word through a new Edge Function "auth-reset" (Verify JWT OFF — the pupil is not signed in; the secret word is the check; 5 wrong tries per name in 10 minutes). Settings has a "Password & secret word" card to change the password or set the word later — existing pupils (signed up before secret words) must set one there. The reset function uses the auto-provided SUPABASE_SERVICE_ROLE_KEY; no new secret to add.
 v24: Words heading is now "Vocabulary — Stellar Units" (no "Primary 5") — later levels/units will be added, so no level is specified. Same change in the Typing tab note.
 v23: removed the "Add new vocabulary" card (Words) and the Settings cards "Add your own picture topic", "AI marking (optional)" and "Add your own passage". AI marking is now on by default (runs whenever the server key is set, no toggle). "Add passages & words from a file" is now the only upload window for passages and vocabulary (PDF, photo or pasted text).

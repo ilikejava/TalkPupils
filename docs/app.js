@@ -2172,7 +2172,7 @@ function allOralTopics() {
   if (state.sbc && state.sbc.topics) {
     for (const t of state.sbc.topics) {
       list.push({ id: t.id, title: t.title, keywords: t.keywords || [],
-        relatedTopics: t.relatedTopics || [], image: SBC_PHOTO_BASE + t.image,
+        relatedTopics: t.relatedTopics || [], image: t.image ? SBC_PHOTO_BASE + t.image : "",
         questions: t.questions, custom: false });
     }
   }
@@ -2342,6 +2342,7 @@ function showOralPrep() {
 function renderOralPhrases() {
   const s = (state.sbc && state.sbc.starters) || {};
   const groups = [
+    ["Answer in PEEL", s.peel || []],
     ["Describe the picture", s.describe || []],
     ["Start your answer", s.answer || []],
     ["Give your ideas", s.ideas || []],

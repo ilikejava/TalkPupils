@@ -1,6 +1,6 @@
 {
- "source": "PSLE Oral Oracle Pack YEG (2025) — SBC practices, OCR'd and cleaned. Model answers are the pack's model responses, lightly cleaned of OCR errors; do not memorise them word for word.",
- "practiceCount": 18,
+ "source": "PSLE Oral Oracle Pack YEG (2025) — SBC practices, OCR'd and cleaned. Model answers are the pack's model responses, lightly cleaned of OCR errors; do not memorise them word for word. Topics 19-28: The Ultimate PSLE Oral Conversation Cheat Sheet (The Write Tribe, 2025 SAMPLE) — Health theme, Sets 1-9, plus Set 10 (Resident's corner, prompts only). Model answers follow the book's PEEL format (Point-Elaborate-Example-Link back); one missing Point (Set 6 Q3) was filled from the answer's own wording.",
+ "practiceCount": 28,
  "topics": [
   {
    "id": "sbc-01",
@@ -886,6 +886,391 @@
      "model": "First, I make sure my study area is neat and free of clutter. I keep only my necessary materials, such as my textbooks, stationery, and worksheets, on the table. Having a clean space helps me concentrate better because I'm not distracted by unnecessary items around me. For example, I once tried to study with toys nearby, and I ended up playing instead of doing my homework. Since then, I always tidy up before starting, Not-only that, I will also put my phone in another room. This is very important because = notifications and games can be very tempting. I even let my parents hold on to my devices when I'm studying for big exams like the PSLE, so I'm not tempted to check them. If Ineed to use my device to search for information, I set a timer to limit my usage and avoid getting distracted by unrelated things. Last but not least, I follow a study schedule with short breaks in between. This helps me stay productive without feeling too tired or restless. During these breaks, I like to do light stretches or grab a snack. I avoid watching television or scrolling on my phone, as it's harder to return to studying afterward. A well-structured routine keeps me focused and ensures I have enough time for all my subjects. All in all, reducing distractions while studying takes effort, but the benefits are worth it. With fewer interruptions, I can focus better, finish my work faster, and revise my work more effectively."
     }
    ]
+  },
+  {
+   "id": "cheat-01",
+   "number": 19,
+   "title": "Time management (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "time management",
+    "plan",
+    "schedule",
+    "prioritise",
+    "deadline",
+    "routine",
+    "organised",
+    "procrastinate",
+    "balance",
+    "study timetable"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "Look at the picture. Are you like the student in the picture? Why / Why not?",
+     "type": "picture",
+     "model": "Yes, I am like the student in the picture. I have a planner and believe that being well-organized is important for a student, as we have many assignments and school activities. I also write down the goals I need to achieve each week. I once read an interesting book that mentioned when you write down your reminders and goals, there is a higher chance you won’t forget them, and you’re more likely to accomplish what you set out to do. For example, whenever I need to complete a task, I quickly jot it down in my planner so I don’t forget easily. I wasn’t always like this, though. Once, I had an important audition I was looking forward to. Back then, I wasn’t very organised, and sadly, I mixed up the dates and missed a golden opportunity. Ever since then, I’ve become like the student in the picture."
+    },
+    {
+     "q": "Do you think time management is important for students?",
+     "type": "opinion",
+     "model": "Yes, time management is important for students. It helps us prioritise tasks. By creating a timetable, I can concentrate on tasks that need immediate attention, for example, completing important projects. Also, some projects may require more time than others. By managing my time efficiently, I can ensure I give adequate amount of time to complete tasks that require more attention. I can be more efficient and achieve balance so I have more time to do leisure activities. Few months back, I had an important presentation. We had holidays for a week so I thought I had all the time in the world. I was more interested in playing games. In the end, I had only one day to complete my presentation. I realised it was a big mistake because I did not have adequate time for research. As a result, I handed in a shoddy presentation and received a bad score. Once bitten, twice shy! When the next presentation came along, I used my planner. I managed to break down the tasks of the project into bite-sizes. I spread this over days. In this way, I managed to finish my presentation without losing quality but at the same time, I was able to carve some time out daily for leisure. Overall, my mood was also better because I had balance between work and play. I also scored very well for my presentation. Therefore, I believe time management is very important for students."
+    },
+    {
+     "q": "How do you manage your time?",
+     "type": "experience",
+     "model": "I create a plan at the start of a week First, I prioritise tasks that are important for the week. This could mean important tests or presentations. Then, I set goals and deadlines for each day. After that, I break down these tasks. Finally, I reward myself. In my opinion, it is important to have a plan. If you do not have a plan, you have no idea whether you are doing enough. I tell myself study time should not exceed two hours on a daily basis. I would then give myself one hour daily to finish school homework. Lastly, I would give one hour to myself for leisure activities. I would set goals and deadlines daily. If I have a big project, I would break it down and spread it over a few days. In this way, I would not feel overworked but I am also hitting my goals. This is how I am able to manage my time efficiently. P POINT State your answer E ELABORATE Elaborate in detail E EXAMPLE Give a personal example L LINK BACK Link back to the question"
+    }
+   ]
+  },
+  {
+   "id": "cheat-02",
+   "number": 20,
+   "title": "Stress & relaxation (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "stress",
+    "relaxation",
+    "pressure",
+    "calm",
+    "overwhelmed",
+    "cope",
+    "breathe",
+    "rest",
+    "examinations",
+    "well-being"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "What do you think the girl is feeling?",
+     "type": "picture",
+     "model": "I think the girl appears to be stressed. She has a worried expression on her face. Her eyes are focused on her book. I believe she may be stressed with schoolwork. She is holding her hands up. It may mean she is clueless about something, possibly the answer to a question in her assignment or she has no idea how she would be able to complete her task. This could mean she may have a mountain of work before her, judging from the piles of book stacked in front of her. In my opinion, it may be her exam week and she is feeling overwhelmed as she has a lot to do. She is probably wondering how she is going to get all the tasks done in time. Or it could mean, she has managed her time poorly and is now facing piles of unfinished work. If I was in her situation, I would feel very overwhelmed too. Overall, I believe the girl in the picture is stressed."
+    },
+    {
+     "q": "Do you think stress management is important for students?",
+     "type": "opinion",
+     "model": "Yes, stress management is important for students. It improves academic performance, mental health and teaches life skills. If students are too stressed, they cannot enjoy learning. If you dislike something, you would do poorly at it. Students who are less stressed are less likely to develop anxiety and depression. Also, stress management teaches important life skills like learning to stay calm during difficult periods and learning how to navigate out of it. For example, if students do not learn how to manage stress well, they may lose confidence in themselves and in some serious cases, they may harm themselves too. Therefore, it is important for students to learn about stress management."
+    },
+    {
+     "q": "Can you recall a time when you were stressed? What did you do?",
+     "type": "experience",
+     "model": "It was during my final year examination and I turned to my mother for help. My mother is my best friend. She always lends me a listening ear. Whenever, I feel anxious or worried, I would talk to her. She is very knowledgeable and gives me tips and tricks on how to manage my stress. I was just like this girl in the picture. I wanted to pass my exams with flying colours. I poured my feelings to her. She gave me advice that learning is a journey and not a competition. She made jokes and made me laugh. She also brought me out for ice cream or snacks after a session of positive talk. This boost of confidence she gave me everyday melted away my stresses. I learnt not to be too hard on myself. Ever since that incident, I always turn to her when I am stressed. She is my stress buster!"
+    }
+   ]
+  },
+  {
+   "id": "cheat-03",
+   "number": 21,
+   "title": "Eating healthy (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "healthy eating",
+    "balanced diet",
+    "food pyramid",
+    "convenience food",
+    "instant noodles",
+    "nutritious",
+    "vegetables",
+    "fruits",
+    "junk food",
+    "health"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "Look at the picture. Are you like the boy in the picture?",
+     "type": "picture",
+     "model": "No, I am not like the boy in the picture. I do not eat instant noodles every day. The boy appears to be enjoying his cup noodles. It could be that he has no time for a proper meal and decided to eat instant noodles. In that case, it is okay. However, if he eats instant noodles on a daily basis, it may be hazardous to his health. I understand instant noodles can be a great form of convenience food. Some of my friends enjoy them as snacks. However, instant noodles are unhealthy, and they are bad for health. For example, they are notorious to be high in fat, sodium and are loaded with preservatives. They provide very low nutritional value, and they are not that filling. Personally, I have experienced bloating from eating cup noodles. This is why I would steer away from eating them on a daily basis. I would only eat them once in a blue moon."
+    },
+    {
+     "q": "In your opinion, do you feel it is healthy to consume convenience foods?",
+     "type": "opinion",
+     "model": "Definitely, not! I think it is very unhealthy to consume convenience foods regularly. MSG stands for monosodium glutamate. It is used in the food industry as a flavour enhancer. It heightens the umami flavour in food products. It adds a savoury flavour to food. For example, MSG is not only added to many dishes in restaurants, but they can also be found in canned food, soups and even snacks. MSG is generally safe but it is bad in convenience foods as they already contain a lot of sodium. It can be detrimental and eventually cause high blood pressure and other diseases in people. Since processed foods are bad for health, I believe it is unhealthy to consume convenience foods."
+    },
+    {
+     "q": "How do you keep a balanced diet?",
+     "type": "experience",
+     "model": "I use the food pyramid to ensure I have a balanced diet. The food pyramid is a great tool that advises the optimal number of servings of food a person should eat daily from each basic food group. I learned that our diet should consist mostly of healthy grains. We should eat generous servings of vegetables and fruits. However, we should eat meat moderately and ensure we eat less fat, salt, and sugar. I follow this closely to keep a balanced diet. Additionally, I ensure I eat brown rice as it is healthier than white rice. Also, I make it a point to have a variety of vegetables and fruits daily. I prefer white meat to red meat. I prefer chicken and fish as it is healthier. I do not consume soft drinks as it contains too much sugar. I prefer to drink green tea with less sugar. Furthermore, I like eating nuts as snacks as it is a healthier option. However, once in a blue moon, I allow myself to have a chocolate bar. By eating a variety of healthy foods in reasonable portions, I manage to keep a balanced diet."
+    }
+   ]
+  },
+  {
+   "id": "cheat-04",
+   "number": 22,
+   "title": "Fight Dengue (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "dengue",
+    "mosquito",
+    "breeding",
+    "stagnant water",
+    "prevent",
+    "campaign",
+    "awareness",
+    "community",
+    "health"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "Would you participate in this activity?",
+     "type": "picture",
+     "model": "Yes, I would. The people in the picture are educating the public by distributing posters on how to fight dengue. They appear friendly with smiling faces. They are also made up of different races which shows the community spirit. I also believe they are made of different races so they can speak in different languages other than English. I believe raising awareness about dengue will help immensely. We should work together as a community to prevent illnesses like dengue from spreading. We should educate public on how to prevent dengue and what to do when we contract dengue. Also, as a citizen, we should practise social responsibility. We should follow the steps of the mozzie wipeout and do other preventive measures. Therefore, I would participate in this activity as I believe it is important to educate the public about dengue."
+    },
+    {
+     "q": "What do you do at home to prevent dengue?",
+     "type": "experience",
+     "model": "There are a few other methods we can do to prevent dengue. We prevent water accumulation on the trays of the dish drying racks. We use insecticide sprays in dark corners like under the bed or burn repellent oils inside our home. Also, we made ourselves aware of the dengue colour-coded alert system so we can protect our family. The system uses colour coded banners – yellow, red or green) Red means there are more than 10 cases, yellow means there are less than 10 cases and green means we should remain vigilant. For example, when our neighbourhood colour code turned to yellow, my parents installed mosquito screens on our windows and doors. Also, I had to sleep under a mosquito net. On top of that, I helped by clearing the water from the vases. I did this every 2 to 3 days. Luckily, the code eventually turned to green, but we continued staying vigilant. These are some ways we prevent dengue at home."
+    },
+    {
+     "q": "Do you think it is important for schools to educate students about how to prevent dengue?",
+     "type": "opinion",
+     "model": "It’s important to start early in educating the public. I believe we should start with schools. Educating students help build awareness, ensuring students grow up with habits that protect public health. For example, we had a school talk on “Mozzie Wipeout”, a public health initiative aimed at preventing the spread of dengue. The host shared to us practical steps on how we can prevent dengue at home. It involved steps like, emptying and cleaning containers that collect water, covering water storage to prevent mosquito access and using mosquito repellents and nets to avoid bites. These steps were easy fore me to share with family and friends. Therefore, it is important to instil these habits early."
+    }
+   ]
+  },
+  {
+   "id": "cheat-05",
+   "number": 23,
+   "title": "Mozzie wipeout (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "mosquito",
+    "dengue",
+    "poster",
+    "campaign",
+    "wipeout",
+    "breeding grounds",
+    "awareness",
+    "responsible",
+    "community"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "What are the people in the photograph doing? Do you think it is effective?",
+     "type": "picture",
+     "model": "The people in the photograph appear to be part of a campaign that raises awareness about dengue. The people in the posters are wearing backpack billboards. I believe many of them are volunteers as some of them are wearing shirts which read, ‘Volunteer Corps’. The billboard shows steps on how to stop dengue. They also seem to be engaging with people at a hawker centre to raise awareness. I believe human billboards are effective compared to stagnant advertising mainly because they move around. The human element is important because they can directly answer any questions or queries. Also their uniqueness catches attention from the public. Therefore, I think their campaign to raise awareness about dengue is effective."
+    },
+    {
+     "q": "Do you think that the poster is effective in preventing dengue?",
+     "type": "opinion",
+     "model": "Yes, it is effective. The poster uses acronyms like B.L.O.C.K and S.A.W to simplify the message. It also show clear steps using pictures to educate citizens on what steps to take. The poster is not too colourful and only uses the colours red and grey. The picture of the big mosquito at the top clearly tells citizens what the campaign is about. Acronyms are effective because it is easy for citizens to remember the message. The acronyms in this poster capture attention quickly and spread awareness by encouraging clear actions on how to block mosquitoes from spreading or how to prevent bites. The uses of red against grey makes citizens focus on the important steps to take. The big picture of the mosquito is useful to convey that this is a campaign about dengue. Hence, I believe it is an effective poster in preventing dengue."
+    },
+    {
+     "q": "What are some suggestions you have to educate people to become responsible citizens?",
+     "type": "evaluative",
+     "model": "I have two suggestions which my family practices as well. My family sprays insecticide on dark corners of our home. For example, under the bed and behind the sofa. We also have installed mosquito screens on our windows and doors. We also alert neighbours if we find dengue breeding spots. For example, we spray insecticide weekly. On top of that, my mother encourages our neighbours to do the same. She even bought a few bottles for our neighbours. By taking care of our own households and encouraging our neighbours, we can become responsible citizens and protect against dengue. Describe details from the picture to explain how effective it is!"
+    }
+   ]
+  },
+  {
+   "id": "cheat-06",
+   "number": 24,
+   "title": "Hygiene (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "hygiene",
+    "Covid-19",
+    "hand washing",
+    "mask",
+    "social distancing",
+    "health",
+    "clean",
+    "virus",
+    "school",
+    "safety"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "What are the people in the picture doing?",
+     "type": "picture",
+     "model": "The teacher is delivering a talk about coronavirus to her students The teacher is educating the students about the new virus. This must be when Covid-19 just started. The students appear to be interested in the talk as they are leaning forward. I believe this photograph must have been taken in the early stages of the pandemic as no one in the classroom are wearing masks or practising social distancing yet. Also, it is indicated as a ‘new virus.’ The cases may have been increasing and therefore the teacher must have been instructed to give the talk to raise awareness."
+    },
+    {
+     "q": "How has Covid-19 affected your life?",
+     "type": "experience",
+     "model": "It has affected me negatively and positively. Being someone who loves going outdoors, the circuit-breaker was a challenge. I had to stay indoors, and I really missed the outdoors. Also, I had to celebrate my birthday during the lockdown. My friends and relatives attended my party via Zoom and Skype. However, it has also helped us as a family to bond closer together. For example, my parents work long hours, and they hardly have time to spend with me. During the lockdown, we bonded over board games, shows and found creative ways to entertain each other. My father edited my birthday party video with Disney princesses. So, it looks like the princesses attended my party. I was touched by his gesture. Therefore, Covid-19 has both been a boon and a bane in my life."
+    },
+    {
+     "q": "Do you think your school was successful in stopping the spread of Covid-19?",
+     "type": "evaluative",
+     "model": "Yes, my school was successful in stopping the spread of Covid-19. During the pandemic, my school switched to Home-Based Learning until the virus was under control. Covid-19 spreads quickly in groups especially when they are in proximity. Thanks to technology, we can have lessons from home. I think my school took this to their advantage and kept students safely at home. Some other measures they did was to practise social distancing. Our desks were placed far apart from each other. Also, they ensured we took our temperatures often. This helped monitor who had the virus and who did not. My school also made wearing masks mandatory. Finally, they educated us on how to wash our hands. They also distributed hand sanitisers and encouraged the usage of it. I believe all these steps helped in stopping the spread of Covid-19."
+    }
+   ]
+  },
+  {
+   "id": "cheat-07",
+   "number": 25,
+   "title": "Healthy snacks (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "healthy snacks",
+    "processed food",
+    "fruits",
+    "nuts",
+    "lifestyle",
+    "balanced diet",
+    "sugar",
+    "junk food",
+    "health"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "Are you like the boy in this picture? Do you prefer processed foods as snacks?",
+     "type": "picture",
+     "model": "Yes and no. The boy seem to be enjoying junk food. I believe he is eating potato fries. He appears to be enjoying his snack. Mostly, I prefer healthy snacks like fruits and nuts. But sometimes, I allow myself to enjoy like the boy in the picture. My favourite processed snacks are potato chips. However, I am aware that it is high in sugar, salt and fat which is not good for the long term. Therefore, I mostly steer clear from it. However, once in a while, I do indulge a little which I believe is okay. I also hope the boy in the picture is not doing this everyday. Processed foods can be dangerous if taken excessively. Currently, Singapore ranks third globally for kidney disease and this disease usually occurs due to the intake of processed foods. Therefore, I only indulge sometimes and not all the time as I am aware of the dangers of processed foods."
+    },
+    {
+     "q": "How do you maintain a healthy lifestyle?",
+     "type": "experience",
+     "model": "My mother helps me maintain a healthy lifestyle. She teaches me about healthy food habits. Therefore, I ensure I eat a balanced diet with a variety of vegetables and fruits. I also exercise regularly. For example, my mother ensures I get different types of vegetables every day. She feels if I eat a variety, I can get sufficient vitamins and minerals. When I am at school, I choose brown rice over white rice. I also ensure I have vegetables. Additionally, I avoid fried foods and choose steamed foods instead. Every day, I play badminton with my friends. This gives me adequate exercise. I also choose my snacks wisely. I stay away from anything that has too much salt or sugar. Lastly, I make it a point to stay hydrated. My mother bought me a cute water bottle that has markers with encouraging messages on it. This motivates me to drink up. Most importantly, my mother chooses to stock our pantry with healthy snacks! By eating healthily, exercising regularly, making healthier choices and drinking adequate amounts of water, I maintain a healthy lifestyle."
+    },
+    {
+     "q": "Do you have suggestions on what type of snacks children your age should eat?",
+     "type": "evaluative",
+     "model": "I suggest fruit juices and nuts. I enjoy eating nuts a lot. Pistachios are my favourite type of nuts. They are an excellent source of fats, fibre, and zinc. I particularly like them because I heard they are good for the brain. Apart from pistachios, I enjoy chestnuts. They contain many vitamins and minerals too. As for fruit, I like oranges. They are rich in vitamin C and is refreshing on a hot day. For example, whenever I am low on energy, I eat pistachios. I find them convenient. I do not have to cook them. It is also a great source of energy. I love eating chestnuts with a little bit of salt. My aunt prepares them that way during teatime. It is a great source of energy! As for oranges, my favourite way of preparing them is to make fresh orange juice. Compared to popcorn and sandwiches, I feel more satiated when I eat fruit and nuts. These are the suggestions I have for healthy snacks."
+    }
+   ]
+  },
+  {
+   "id": "cheat-08",
+   "number": 26,
+   "title": "Cooking & baking (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "cooking",
+    "baking",
+    "healthy food",
+    "recipe",
+    "family",
+    "learn",
+    "skills",
+    "nutritious",
+    "home"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "How do you think the little girl in the picture is feeling?",
+     "type": "picture",
+     "model": "She appears to be both shy and proud. Judging from the name tag sticker on her shirt, I believe she is taking part in a cooking class. She also appears to be wearing an apron and a paper chef hat. I think she must have just completed making a dish. It looks like a healthy unicorn bento box. I believe the girl must be very creative. She had used a carrot for a horn and seaweed for eyelashes. She also used a variety of fruit and vegetables. I think it must be her first time as she looks a little shy. Maybe the adult behind her is her mother. Overall, I think she is proud as a peacock for learning how to cook healthy."
+    },
+    {
+     "q": "Do you think it is important for children to learn how to cook healthy?",
+     "type": "opinion",
+     "model": "It is important for children to learn how to cook healthy food as it promotes long-term health and well-being. When children learn how to prepare nutritious meals, they develop an understanding of what foods contribute to a balanced diet and how to make healthier food choices. This can help prevent chronic health issues like obesity, heart disease, and diabetes later in life. Children who are involved in cooking and meal preparation are more likely to make healthier food choices, both in childhood and into adulthood. My mother involves me in cooking. I accompany her to buy groceries for special occasions. She also teaches me to cook basic recipes like soups, sandwiches and pasta. She also tells me what each ingredient does for the body. Eventually, I would need to cook when I am an adult so it is important to learn how to cook or we can end up eating processed foods which can be harmful for the body. In my opinion, I think it is important parents teach children how to cook healthy meals."
+    },
+    {
+     "q": "Are you influenced by what your family and friends eat?",
+     "type": "experience",
+     "model": "Yes, I am influenced by what my family and friends eat. I once read that you are the average of the five people you surround yourself with. The people who you are closest to will influence the way you eat. I am fortunate that my family eats very healthy. However, my friends not so much. For example, my parents are very particular that I eat a variety of vegetables. They also stock the pantry with healthy snacks like dried fruits and nuts. Whenever, I am at home, I eat healthily. However, when I am out with my friends, we frequent fast food joints. Since we are students, fast food is the cheapest option for us. To accommodate my friends, I do indulge in fast food whenever I am out with them. So yes, I am definitely influenced by what my friends and family eat. Describe details from the picture to explain how effective it is!"
+    }
+   ]
+  },
+  {
+   "id": "cheat-09",
+   "number": 27,
+   "title": "Social responsibility (Health)",
+   "relatedTopics": [
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "social responsibility",
+    "community",
+    "masks",
+    "health",
+    "responsible",
+    "help others",
+    "Covid-19",
+    "caring",
+    "society"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "What are the people doing in the picture?",
+     "type": "picture",
+     "model": "Face masks are being distributed to residents. Prime minister Lee Hsien Loong is distributing face masks to residents. He has a cheery, bright smile on his face. The resident receiving them seems to be happy. I believe he is going door to door to distribute masks and educate the public about the social responsibility of wearing masks especially when we are sick and out in public. In my opinion, if a prime minister goes door to door explaining about social responsibility, it will have a big impact on public. It will also show the importance of the message. When we are sick, it is important to wear a mask so we do not spread our infection to others. I think it is a powerful message that the prime minister is sending out to residents."
+    },
+    {
+     "q": "Do you think being socially responsible is important?",
+     "type": "opinion",
+     "model": "I believe social responsibility is the key to preventing the spread of infectious diseases. If everyone follows the mandatory guidelines given by the Ministry of Health, together as a community, we can prevent the spread of such diseases. For example, some people were resistant to wearing masks in public despite knowing that Covid 19 spreads through droplets transmitted from an infected person. Also, there were cases, where quarantined persons left the home before the quarantine period was over, endangering the public. This type of social irresponsibility can make it hard to stop the spread. If more and more people do not cooperate, it becomes harder to stop the spread of such infectious diseases. We have a responsibility towards our society. We should not endanger the lives of others. Therefore, I believe social responsibility is the key to stopping the spread of infectious diseases and other issues in society."
+    },
+    {
+     "q": "In what ways have you been socially responsible?",
+     "type": "experience",
+     "model": "During covid, I was socially responsible by following health guidelines. I had worn masks in public, got myself vaccinated and I carried a hand sanitiser with me at all times. I also did not flout any rules set by the government like going out when I am not allowed to. Apart from covid, there are other examples of social responsibility that I have done. For example, I return trays at hawker centres. I also did the Mozzie Wipeout, which was a campaign to prevent the spread of dengue. I have also taken part in recycling campaigns. These are some ways I have been socially responsible."
+    }
+   ]
+  },
+  {
+   "id": "cheat-10",
+   "number": 28,
+   "title": "Resident’s corner (Neighbours & Community)",
+   "relatedTopics": [
+    "neighbours & community",
+    "health",
+    "daily life"
+   ],
+   "keywords": [
+    "senior citizens",
+    "neighbours",
+    "community",
+    "elderly",
+    "facilities",
+    "care",
+    "respect",
+    "grandparents",
+    "neighbourhood"
+   ],
+   "image": "",
+   "questions": [
+    {
+     "q": "Look at the picture. What are they feeling?",
+     "type": "picture",
+     "model": ""
+    },
+    {
+     "q": "Why do you think it is important to have a senior citizens’ corner in your neighbourhood?",
+     "type": "evaluative",
+     "model": ""
+    },
+    {
+     "q": "Do your grandparents use such facilities?",
+     "type": "experience",
+     "model": ""
+    }
+   ]
   }
  ],
  "starters": {
@@ -938,6 +1323,12 @@
    "Hence / Therefore / As such,",
    "Based on what I have shared, [...].",
    "I hope that [...]."
+  ],
+  "peel": [
+   "P — Point: say your answer in one sentence.",
+   "E — Elaborate: add details and reasons.",
+   "E — Example: give a personal example.",
+   "L — Link back: repeat your point to finish."
   ]
  }
 }
