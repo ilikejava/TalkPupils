@@ -48,10 +48,11 @@
     <button id="authSignInBtn" class="btn primary">Sign in</button>
   </div>
   <p id="authStatus" class="muted"></p>
-  <div class="row">
-    <button id="authResendBtn" class="btn small hidden">Resend confirmation email</button>
+  <div class="row hidden" id="authResendRow">
+    <button id="authResendBtn" class="btn small">Resend confirmation email</button>
+    <span class="muted small">If the link does not arrive, tap Resend.</span>
   </div>
-  <p class="muted small">If you just signed up, check your email for a confirmation link, then tap Sign in. If the link does not arrive, tap “Resend confirmation email” above.</p>
+  <p class="muted small">If you just signed up, check your email for a confirmation link, then tap Sign in.</p>
   <div class="guest-box">
     <h3>Just looking around?</h3>
     <p class="muted">Try everything without signing in — pick a demo level. Results stay only in this browser and are not saved online.</p>
@@ -486,8 +487,8 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v13</p>
+<p class="muted small" id="appVersion">TalkPupils web · v14</p>
 
-<script src="app.js?v=13"></script>
+<script src="app.js?v=14"></script>
 </body>
 </html>

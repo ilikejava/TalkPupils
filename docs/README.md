@@ -1,4 +1,4 @@
-# TalkPupils — website v13
+# TalkPupils — website v14
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -14,6 +14,11 @@ v13: a brighter, kid-friendly look — each tab has its own colour
 (Read Aloud blue, Typing Quest orange, Words green, Oral Partner
 purple, Progress pink, Parent grey), the page background is a soft
 sky-to-cream gradient, and the header is a blue-to-purple gradient.
+
+v14: sign-in page fixes from the login test — the “Resend
+confirmation email” hint only appears together with its button
+(it used to promise a button that was hidden), and Supabase's
+email rate-limit / not-authorized errors now show plain messages.
 
 ## What it does
 

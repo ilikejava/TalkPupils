@@ -3642,8 +3642,8 @@ async function migrateGuestToAccount() {
 /* ---------------- auth (parent sign-in) ---------------- */
 let pendingConfirmEmail = "";
 function showResend(show) {
-  const b = $("authResendBtn");
-  if (b) b.classList.toggle("hidden", !show);
+  const r = $("authResendRow");
+  if (r) r.classList.toggle("hidden", !show);
 }
 function plainAuthError(err, mode) {
   const m = String((err && err.message) || err || "");
@@ -3651,6 +3651,8 @@ function plainAuthError(err, mode) {
   if (/at least 6 characters|password.*short/i.test(m)) return "Use a password with at least 6 characters.";
   if (/email not confirmed/i.test(m)) return "Your email is not confirmed yet — click the link in the confirmation email, or tap “Resend confirmation email” below.";
   if (/invalid login credentials/i.test(m)) return "That email and password don't match — check them, or tap Sign up if you don't have an account yet.";
+  if (/rate limit|too many/i.test(m)) return "Too many sign-up emails were sent just now — Supabase only allows a couple per hour. Wait a little while and try again.";
+  if (/not authorized/i.test(m)) return "Supabase can't send confirmation emails to this address. Turn off “Confirm email” in Supabase (Authentication → Providers → Email), then sign up again.";
   if (/email.*invalid|invalid.*email/i.test(m)) return "That email address doesn't look right — check it and try again.";
   return "Could not sign in: " + m;
 }
