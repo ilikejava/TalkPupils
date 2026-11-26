@@ -156,7 +156,7 @@
         <button class="btn game-tab" data-game="rain">Word Rain</button>
         <button class="btn game-tab" data-game="spell">Listen &amp; Spell</button>
       </div>
-      <p class="muted">Typing uses the exact same passages as reading. Listen &amp; Spell uses the Stellar vocabulary.</p>
+      <p class="muted">Typing uses the exact same passages as reading. Listen &amp; Spell uses the Stellar and spelling vocabulary.</p>
       <div id="typeDueHint"></div>
     </div>
 
@@ -241,8 +241,31 @@
 
   <!-- ============ WORDS ============ -->
   <section id="tab-words" class="tabpage">
+    <div class="card quest-card">
+      <h2>⭐ Daily Spelling Quest</h2>
+      <p class="muted">One spelling week a day, 3 quick rounds, about 5 minutes. Finish it every day to keep your streak burning!</p>
+      <p id="questStreak" class="muted"></p>
+      <div id="questToday"></div>
+      <div class="row"><button id="questStartBtn" class="btn primary">Start today's quest</button></div>
+      <div id="questArea" class="hidden">
+        <div id="questDots" class="quest-dots"></div>
+        <div id="questProgress" class="muted"></div>
+        <div id="questRoundTitle" class="quiz-q"></div>
+        <div id="questClue" class="clue"></div>
+        <div id="questBlanks" class="blanks"></div>
+        <div id="questChoices" class="choices"></div>
+        <input id="questInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type here…">
+        <div class="row">
+          <button id="questHearBtn" class="btn">🔊 Hear it again ×3</button>
+          <button id="questCheckBtn" class="btn primary">Check</button>
+          <button id="questNextBtn" class="btn hidden">Next →</button>
+        </div>
+        <div id="questFeedback" class="feedback"></div>
+      </div>
+      <div id="questResult" class="hidden"></div>
+    </div>
     <div class="card">
-      <h2>Vocabulary — Stellar Units</h2>
+      <h2>Vocabulary</h2>
       <div class="row">
         <label for="studyUnitSelect">Unit</label>
         <select id="studyUnitSelect"></select>
@@ -445,9 +468,9 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v26</p>
+<p class="muted small" id="appVersion">TalkPupils web · v27</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="app.js?v=26"></script>
+<script src="app.js?v=27"></script>
 </body>
 </html>

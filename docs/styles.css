@@ -359,3 +359,10 @@ audio.answer-audio { width: 100%; margin: 6px 0; }
   margin: 12px 12px 0;
   font-size: 14px;
 }
+
+/* Daily Spelling Quest (Words tab) */
+.quest-card { border-top: 4px solid #22c55e; background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 70%); }
+.quest-dots { display: flex; gap: 8px; margin: 10px 0; }
+.quest-dot { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; background: #e5e7eb; color: #6b7280; }
+.quest-dot.now { background: #22c55e; color: #fff; }
+.quest-dot.done { background: #bbf7d0; color: #166534; }

@@ -2254,5 +2254,740 @@
   "category": "words & phrases",
   "meaning": "cannot be guessed",
   "fromFile": true
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "determined not to change your mind",
+  "unit": 101,
+  "unitName": "Spelling Week 1",
+  "word": "adamant"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "having enough skill or knowledge to do something well",
+  "unit": 101,
+  "unitName": "Spelling Week 1",
+  "word": "competent"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "so satisfied with yourself that you do not feel any change is necessary",
+  "unit": 101,
+  "unitName": "Spelling Week 1",
+  "word": "complacent"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "skilled and experienced",
+  "unit": 101,
+  "unitName": "Spelling Week 1",
+  "word": "proficient"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "admirably purposeful, determined, and unwavering",
+  "unit": 101,
+  "unitName": "Spelling Week 1",
+  "word": "resolute"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "an event that causes great damage to people's lives and property",
+  "unit": 102,
+  "unitName": "Spelling Week 2",
+  "word": "calamity"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a sudden event that causes great trouble or destruction",
+  "unit": 102,
+  "unitName": "Spelling Week 2",
+  "word": "catastrophe"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "severe punishment for something seriously wrong that somebody has done",
+  "unit": 102,
+  "unitName": "Spelling Week 2",
+  "word": "retribution"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a very sad event or situation, especially one involving death or suffering",
+  "unit": 102,
+  "unitName": "Spelling Week 2",
+  "word": "tragedy"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "punishing of someone for harming you or your friends or family, or the wish for such punishment to happen",
+  "unit": 102,
+  "unitName": "Spelling Week 2",
+  "word": "vengeance"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to make someone or something so famous that that person or thing is remembered for a very long time",
+  "unit": 103,
+  "unitName": "Spelling Week 3",
+  "word": "immortalise"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "that cannot be moved or changed",
+  "unit": 103,
+  "unitName": "Spelling Week 3",
+  "word": "immovable"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "not supporting any of the sides involved in an argument",
+  "unit": 103,
+  "unitName": "Spelling Week 3",
+  "word": "impartial"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "impossible to go through",
+  "unit": 103,
+  "unitName": "Spelling Week 3",
+  "word": "impassable"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a situation in which progress is impossible, especially because the people involved cannot agree",
+  "unit": 103,
+  "unitName": "Spelling Week 3",
+  "word": "impasse"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a person who is very good at sports or physical exercise",
+  "unit": 104,
+  "unitName": "Spelling Week 4",
+  "word": "athlete"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a person who comments on a certain event or subject",
+  "unit": 104,
+  "unitName": "Spelling Week 4",
+  "word": "commentator"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a person whose job is to collect and write news",
+  "unit": 104,
+  "unitName": "Spelling Week 4",
+  "word": "journalist"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a person that you are playing or fighting against",
+  "unit": 104,
+  "unitName": "Spelling Week 4",
+  "word": "opponent"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a person who watches, usually a sports event",
+  "unit": 104,
+  "unitName": "Spelling Week 4",
+  "word": "spectator"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "in a way that continues without interruption",
+  "unit": 105,
+  "unitName": "Spelling Week 5",
+  "word": "continually"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "often",
+  "unit": 105,
+  "unitName": "Spelling Week 5",
+  "word": "frequently"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "in a way that stops and starts often over a period of time; not regularly",
+  "unit": 105,
+  "unitName": "Spelling Week 5",
+  "word": "intermittently"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "sometimes but not often",
+  "unit": 105,
+  "unitName": "Spelling Week 5",
+  "word": "occasionally"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "happening fairly often and regularly",
+  "unit": 105,
+  "unitName": "Spelling Week 5",
+  "word": "periodic"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "so interesting that you give it all your attention and time",
+  "unit": 106,
+  "unitName": "Spelling Week 6",
+  "word": "engross"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to keep someone completely interested",
+  "unit": 106,
+  "unitName": "Spelling Week 6",
+  "word": "enthral"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "fascinate",
+  "unit": 106,
+  "unitName": "Spelling Week 6",
+  "word": "mesmerise"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "be constantly talking or worrying about something",
+  "unit": 106,
+  "unitName": "Spelling Week 6",
+  "word": "obsess"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to be the main thought in someone's mind, causing other things to be forgotten",
+  "unit": 106,
+  "unitName": "Spelling Week 6",
+  "word": "preoccupy"
+ },
+ {
+  "word": "clank",
+  "unit": 107,
+  "unitName": "Spelling Week 7",
+  "category": "spelling lists",
+  "meaning": "a loud sound made by pieces of metal hitting each other"
+ },
+ {
+  "word": "clatter",
+  "unit": 107,
+  "unitName": "Spelling Week 7",
+  "category": "spelling lists",
+  "meaning": "the sound of hard objects knocking together"
+ },
+ {
+  "word": "clink",
+  "unit": 107,
+  "unitName": "Spelling Week 7",
+  "category": "spelling lists",
+  "meaning": "a sharp ringing sound, like glasses being hit against each other"
+ },
+ {
+  "word": "cluster",
+  "unit": 107,
+  "unitName": "Spelling Week 7",
+  "category": "spelling lists",
+  "meaning": "a group of things of the same type that grow or appear close together"
+ },
+ {
+  "word": "clutter",
+  "unit": 107,
+  "unitName": "Spelling Week 7",
+  "category": "spelling lists",
+  "meaning": "to fill a place with too many things"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "hide",
+  "unit": 108,
+  "unitName": "Spelling Week 8",
+  "word": "conceal"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to hide your real feelings or intentions, often by pretending to have different ones",
+  "unit": 108,
+  "unitName": "Spelling Week 8",
+  "word": "dissemble"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "take somebody's attention away from what they are trying to do",
+  "unit": 108,
+  "unitName": "Spelling Week 8",
+  "word": "distract"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to take someone's attention away from something; to cause something or someone to change direction",
+  "unit": 108,
+  "unitName": "Spelling Week 8",
+  "word": "divert"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to avoid or escape from someone or something",
+  "unit": 108,
+  "unitName": "Spelling Week 8",
+  "word": "evade"
+ },
+ {
+  "word": "coincidence",
+  "unit": 109,
+  "unitName": "Spelling Week 9",
+  "category": "spelling lists",
+  "meaning": "the fact of two things happening at the same time by chance"
+ },
+ {
+  "word": "consecutive",
+  "unit": 109,
+  "unitName": "Spelling Week 9",
+  "category": "spelling lists",
+  "meaning": "following one after another"
+ },
+ {
+  "word": "correlation",
+  "unit": 109,
+  "unitName": "Spelling Week 9",
+  "category": "spelling lists",
+  "meaning": "a connection between two or more things"
+ },
+ {
+  "word": "simultaneous",
+  "unit": 109,
+  "unitName": "Spelling Week 9",
+  "category": "spelling lists",
+  "meaning": "happening or done at the same time"
+ },
+ {
+  "word": "synchronise",
+  "unit": 109,
+  "unitName": "Spelling Week 9",
+  "category": "spelling lists",
+  "meaning": "to cause to happen at the same time"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "able to express thoughts and feelings easily and clearly; to express in words, pronounce",
+  "unit": 110,
+  "unitName": "Spelling Week 10",
+  "word": "articulate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "(of an argument or plan) describing that each part connects logically; (of a person) able to be understood",
+  "unit": 110,
+  "unitName": "Spelling Week 10",
+  "word": "coherent"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "able to use language and express your opinions well",
+  "unit": 110,
+  "unitName": "Spelling Week 10",
+  "word": "eloquent"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "relating to your ability to think and understand things, especially complicated ideas",
+  "unit": 110,
+  "unitName": "Spelling Week 10",
+  "word": "intellectual"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "able to do many different things",
+  "unit": 110,
+  "unitName": "Spelling Week 10",
+  "word": "versatile"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "difficult, needing a lot of effort and energy",
+  "unit": 111,
+  "unitName": "Spelling Week 11",
+  "word": "arduous"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "very hungry",
+  "unit": 111,
+  "unitName": "Spelling Week 11",
+  "word": "famished"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a feeling of being extremely tired",
+  "unit": 111,
+  "unitName": "Spelling Week 11",
+  "word": "fatigue"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "the feeling of having little energy or of being unable or unwilling to do anything",
+  "unit": 111,
+  "unitName": "Spelling Week 11",
+  "word": "lethargy"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "very dry or thirsty",
+  "unit": 111,
+  "unitName": "Spelling Week 11",
+  "word": "parched"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "make something, especially a feeling, less strong",
+  "unit": 112,
+  "unitName": "Spelling Week 12",
+  "word": "allay"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "make somebody calmer or less angry",
+  "unit": 112,
+  "unitName": "Spelling Week 12",
+  "word": "appease"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "not affected by or do not have to do something",
+  "unit": 112,
+  "unitName": "Spelling Week 12",
+  "word": "exempt"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to cause someone who is angry or upset to be calm and satisfied",
+  "unit": 112,
+  "unitName": "Spelling Week 12",
+  "word": "pacify"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to stop someone from feeling angry",
+  "unit": 112,
+  "unitName": "Spelling Week 12",
+  "word": "placate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "give somebody the desire, confidence or enthusiasm to do something well; to give someone an idea",
+  "unit": 113,
+  "unitName": "Spelling Week 13",
+  "word": "inspire"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to make someone feel fresher, healthier, and more energetic",
+  "unit": 113,
+  "unitName": "Spelling Week 13",
+  "word": "invigorate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to make somebody want to do something, especially something that involves hard work and effort",
+  "unit": 113,
+  "unitName": "Spelling Week 13",
+  "word": "motivate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to make an organisation more effective by introducing new ideas or people; to make someone look or feel young and energetic again",
+  "unit": 113,
+  "unitName": "Spelling Week 13",
+  "word": "rejuvenate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to make something develop or become more active",
+  "unit": 113,
+  "unitName": "Spelling Week 13",
+  "word": "stimulate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a small booklet or pamphlet, especially one that contains pictures and is used for advertising purposes",
+  "unit": 114,
+  "unitName": "Spelling Week 14",
+  "word": "brochure"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "an organised list of things (book titles, goods for sale)",
+  "unit": 114,
+  "unitName": "Spelling Week 14",
+  "word": "catalogue"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a list of names and addresses of people or businesses",
+  "unit": 114,
+  "unitName": "Spelling Week 14",
+  "word": "directory"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a book of instructions; having to do with use of the hands",
+  "unit": 114,
+  "unitName": "Spelling Week 14",
+  "word": "manual"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "a list of ingredients and instructions for making a food dish",
+  "unit": 114,
+  "unitName": "Spelling Week 14",
+  "word": "recipe"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "behaving confidently and able to say in a direct way what you want or believe",
+  "unit": 115,
+  "unitName": "Spelling Week 15",
+  "word": "assertive"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "very important for the final result of a particular situation; able to make decisions quickly and confidently",
+  "unit": 115,
+  "unitName": "Spelling Week 15",
+  "word": "decisive"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "strong and determined in speech or action, so that what is said or done gets attention",
+  "unit": 115,
+  "unitName": "Spelling Week 15",
+  "word": "emphatic"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "true, and impossible to doubt",
+  "unit": 115,
+  "unitName": "Spelling Week 15",
+  "word": "indisputable"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "total, or expressed in a clear and certain way",
+  "unit": 115,
+  "unitName": "Spelling Week 15",
+  "word": "unequivocal"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "delicious",
+  "unit": 116,
+  "unitName": "Spelling Week 16",
+  "word": "scrumptious"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "always doing what is right",
+  "unit": 116,
+  "unitName": "Spelling Week 16",
+  "word": "scrupulous"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "large or splendid",
+  "unit": 116,
+  "unitName": "Spelling Week 16",
+  "word": "sumptuous"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "consuming large amounts of food with greed",
+  "unit": 116,
+  "unitName": "Spelling Week 16",
+  "word": "voracious"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "enthusiastic and eager",
+  "unit": 116,
+  "unitName": "Spelling Week 16",
+  "word": "zealous"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to use something in a way that helps you; to use someone or something unfairly for your own advantage",
+  "unit": 117,
+  "unitName": "Spelling Week 17",
+  "word": "exploit"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to continue to have; to keep in existence, or not allow to become less",
+  "unit": 117,
+  "unitName": "Spelling Week 17",
+  "word": "maintain"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to control something or someone to your advantage, often unfairly or dishonestly",
+  "unit": 117,
+  "unitName": "Spelling Week 17",
+  "word": "manipulate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to cause or allow something to continue; food",
+  "unit": 117,
+  "unitName": "Spelling Week 17",
+  "word": "sustain"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to use something in an effective way",
+  "unit": 117,
+  "unitName": "Spelling Week 17",
+  "word": "utilise"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "pleasant smell",
+  "unit": 118,
+  "unitName": "Spelling Week 18",
+  "word": "aroma"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "smoke, gas",
+  "unit": 118,
+  "unitName": "Spelling Week 18",
+  "word": "fumes"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "smell (especially one that is unpleasant)",
+  "unit": 118,
+  "unitName": "Spelling Week 18",
+  "word": "odour"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "having a strong taste or smell",
+  "unit": 118,
+  "unitName": "Spelling Week 18",
+  "word": "pungent"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "unpleasant smell",
+  "unit": 118,
+  "unitName": "Spelling Week 18",
+  "word": "stench"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to cause someone to be completely unable to understand or explain something",
+  "unit": 119,
+  "unitName": "Spelling Week 19",
+  "word": "baffled"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "confused",
+  "unit": 119,
+  "unitName": "Spelling Week 19",
+  "word": "befuddled"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "slightly confused",
+  "unit": 119,
+  "unitName": "Spelling Week 19",
+  "word": "bemused"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "confused and uncertain",
+  "unit": 119,
+  "unitName": "Spelling Week 19",
+  "word": "bewildered"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "confused and not knowing where to go or what to do",
+  "unit": 119,
+  "unitName": "Spelling Week 19",
+  "word": "disoriented"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to wave something in the air in a threatening or excited way",
+  "unit": 120,
+  "unitName": "Spelling Week 20",
+  "word": "brandish"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "show something you are proud of",
+  "unit": 120,
+  "unitName": "Spelling Week 20",
+  "word": "flaunt"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "not well known or difficult to understand",
+  "unit": 120,
+  "unitName": "Spelling Week 20",
+  "word": "obscure"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to cover or hide something",
+  "unit": 120,
+  "unitName": "Spelling Week 20",
+  "word": "shroud"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to put an end to or prevent something from being known",
+  "unit": 120,
+  "unitName": "Spelling Week 20",
+  "word": "suppress"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "make something smaller in size or number",
+  "unit": 121,
+  "unitName": "Spelling Week 21",
+  "word": "decrease"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to make somebody feel less confident; to let air or gas out of a tyre, balloon etc",
+  "unit": 121,
+  "unitName": "Spelling Week 21",
+  "word": "deflate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "go down from a higher level to lower level",
+  "unit": 121,
+  "unitName": "Spelling Week 21",
+  "word": "descend"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "become worse",
+  "unit": 121,
+  "unitName": "Spelling Week 21",
+  "word": "deteriorate"
+ },
+ {
+  "category": "spelling lists",
+  "meaning": "to reduce in value",
+  "unit": 121,
+  "unitName": "Spelling Week 21",
+  "word": "devalue"
  }
 ]

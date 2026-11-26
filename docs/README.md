@@ -1,4 +1,4 @@
-# TalkPupils — website v26
+# TalkPupils — website v27
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v27: Words tab gains Zexi's AGrader P5 spelling lists — ALL 21 weeks, 105 words (Weeks 7 and 9 arrived 26 Nov), each with the sheet's printed meaning. They appear as "Spelling Week N" in the study/quiz/Listen & Spell unit dropdowns, alongside the 9 Stellar units; the heading is now just "Vocabulary". New: Daily Spelling Quest at the top of the Words tab — one spelling week a day (rotates by date), 3 quick rounds (hear it + spell it, pick the meaning, recall the word from its meaning), stars + points + a day streak, about 5 minutes. Three words (athlete, competent, occasionally) already existed in Stellar with shorter meanings — both versions are kept, so every weekly set stays complete at 5 words.
 v26: Oral Partner gains the 10 Health/Neighbours topics from The Write Tribe's PSLE Oral Conversation Cheat Sheet SAMPLE (Sets 1-9 with PEEL model answers, Set 10 prompts only — the sample ends there; no pictures in this version, cards show "No picture"). PEEL (Point-Elaborate-Example-Link back) now shows in the prep screen's helpful-phrases box. Topics 19-28 in the Oral Partner menu.
 v25: forgot-password via a secret word (pupils have no email, so no reset link is possible). Sign-up now asks for a secret word, stored in the account; the sign-in card has "Forgot password?" which checks name + level + secret word through a new Edge Function "auth-reset" (Verify JWT OFF — the pupil is not signed in; the secret word is the check; 5 wrong tries per name in 10 minutes). Settings has a "Password & secret word" card to change the password or set the word later — existing pupils (signed up before secret words) must set one there. The reset function uses the auto-provided SUPABASE_SERVICE_ROLE_KEY; no new secret to add.
 v24: Words heading is now "Vocabulary — Stellar Units" (no "Primary 5") — later levels/units will be added, so no level is specified. Same change in the Typing tab note.

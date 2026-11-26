@@ -577,6 +577,7 @@ function initTabs() {
     if (b.dataset.tab === "progress") renderProgress();
     if (b.dataset.tab === "settings") renderSettings();
     if (b.dataset.tab === "oral") renderOralTopics();
+    if (b.dataset.tab === "words") renderQuestCard();
   });
 }
 
@@ -1817,6 +1818,7 @@ function selectedUnit(sel) {
 function unitLabel(u) {
   if (u === 0) return "All units";
   if (u === "my") return "My words";
+  if (typeof u === "number" && u >= 101) return unitName(u);
   return "Unit " + u + " — " + unitName(u);
 }
 async function speakWordThrice(word) {
@@ -1942,6 +1944,7 @@ function initType() {
 const study = { hideMeanings: false };
 function unitName(u) {
   if (u === "my") return "My words";
+  if (typeof u === "number" && u >= 101) return "Spelling Week " + (u - 100);
   const names = { 1: "Coolie Boy", 2: "Amazing Friends", 3: "Ten", 4: "The Promise",
     5: "A Game of Emails", 6: "Martial Arts", 7: "Dogs with Jobs",
     8: "Making Every Drop Count", 9: "Urban Wildlife" };
@@ -1949,7 +1952,7 @@ function unitName(u) {
 }
 function fillUnitSelects() {
   const units = [...new Set(state.vocab.map((w) => w.unit).filter((u) => typeof u === "number"))].sort((a, b) => a - b);
-  const unitOptions = units.map((u) => ({ value: String(u), text: "Unit " + u + " — " + unitName(u) }));
+  const unitOptions = units.map((u) => ({ value: String(u), text: unitLabel(u) }));
   unitOptions.push({ value: "my", text: "My words" });
   for (const sel of [$("studyUnitSelect"), $("quizUnitSelect"), $("spellUnitSelect")]) {
     const keep = sel.value;
@@ -2103,6 +2106,171 @@ async function nextQuiz() {
     showQuizQuestion();
   }
 }
+/* --- Daily Spelling Quest --- */
+/* One spelling week a day (rotates by date), 3 rounds x 5 words:
+   Round 1 hear it + spell it, Round 2 pick the meaning, Round 3 recall
+   the word from its meaning. Stars + points + a day streak. */
+const quest = { words: [], qs: [], idx: 0, correct: 0, wrong: [], unit: 0, answered: false };
+function questSpellingWeeks() {
+  return [...new Set(state.vocab.map((w) => w.unit).filter((u) => typeof u === "number" && u >= 101))].sort((a, b) => a - b);
+}
+function questTodayUnit() {
+  const weeks = questSpellingWeeks();
+  if (!weeks.length) return 0;
+  return weeks[Math.floor(Date.now() / 86400000) % weeks.length];
+}
+function questSessions() {
+  return state.sessions.filter((s) => s.game === "Daily Spelling Quest");
+}
+function questDoneToday() {
+  const t = todayKey();
+  return questSessions().some((s) => todayKey(new Date(s.createdAt)) === t);
+}
+function renderQuestCard() {
+  const unit = questTodayUnit();
+  if (!unit) { $("questToday").innerHTML = '<p class="muted">Spelling weeks are still loading…</p>'; return; }
+  const words = unitWords(unit);
+  const qs = questSessions();
+  const streak = computeStreak(qs);
+  $("questStreak").textContent = (streak > 0 ? "🔥 " + streak + "-day quest streak! " : "") +
+    "Quests finished: " + qs.length + (questDoneToday() ? " · Done for today — well done!" : "");
+  $("questToday").innerHTML =
+    '<p><strong>Today: ' + esc(unitLabel(unit)) + '</strong> — learn the 5 words first, then take the quest.</p>' +
+    words.map((w) =>
+      '<div class="word-row"><span class="w">' + esc(w.word) + '</span><span class="m">' + esc(w.meaning) + '</span></div>').join("");
+}
+function questRoundName(idx) {
+  return idx < 5 ? "Round 1 — Hear it, spell it" : idx < 10 ? "Round 2 — What does it mean?" : "Round 3 — Which word is it?";
+}
+function startQuest() {
+  if (!currentProfile()) { alert("Add a pupil profile first (top right)."); return; }
+  const unit = questTodayUnit();
+  const words = shuffle(unitWords(unit).slice());
+  if (!words.length) { alert("No spelling words yet."); return; }
+  quest.words = words;
+  quest.qs = [];
+  for (const w of words) quest.qs.push({ type: "spell", word: w });
+  for (const w of shuffle(words.slice())) quest.qs.push({ type: "meaning", word: w });
+  for (const w of shuffle(words.slice())) quest.qs.push({ type: "recall", word: w });
+  quest.idx = 0; quest.correct = 0; quest.wrong = []; quest.unit = unit;
+  $("questArea").classList.remove("hidden");
+  $("questResult").classList.add("hidden");
+  showQuestQuestion();
+}
+function showQuestQuestion() {
+  const q = quest.qs[quest.idx];
+  quest.answered = false;
+  const round = Math.floor(quest.idx / 5) + 1;
+  $("questDots").innerHTML = [1, 2, 3].map((r) =>
+    '<span class="quest-dot' + (r < round ? " done" : r === round ? " now" : "") + '">' + (r < round ? "✓" : r) + '</span>').join("");
+  $("questProgress").textContent = "Question " + (quest.idx + 1) + " of " + quest.qs.length;
+  $("questRoundTitle").textContent = questRoundName(quest.idx);
+  $("questFeedback").textContent = "";
+  $("questNextBtn").classList.add("hidden");
+  if (q.type === "meaning") {
+    $("questClue").textContent = "What does “" + q.word.word + "” mean?";
+    $("questBlanks").innerHTML = "";
+    $("questInput").classList.add("hidden");
+    $("questHearBtn").classList.add("hidden");
+    $("questCheckBtn").classList.add("hidden");
+    const others = [];
+    for (const x of shuffle(state.vocab.filter((x) => x.word !== q.word.word))) {
+      if (others.length >= 3) break;
+      if (others.some((o) => o.meaning === x.meaning)) continue; // never show the same meaning twice
+      others.push(x);
+    }
+    const choices = shuffle([q.word].concat(others));
+    const box = $("questChoices");
+    box.innerHTML = "";
+    choices.forEach((c) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = c.meaning;
+      b.addEventListener("click", () => answerQuestChoice(b, c.meaning === q.word.meaning));
+      box.appendChild(b);
+    });
+  } else {
+    $("questChoices").innerHTML = "";
+    $("questInput").classList.remove("hidden");
+    $("questInput").value = "";
+    $("questCheckBtn").classList.remove("hidden");
+    if (q.type === "spell") {
+      $("questClue").textContent = "Listen — the word is read out 3 times. Type the spelling.";
+      $("questBlanks").innerHTML = spellBlanks(q.word.word);
+      $("questHearBtn").classList.remove("hidden");
+      speakWordThrice(q.word.word);
+    } else {
+      $("questClue").textContent = "Which word means: " + q.word.meaning + "?";
+      $("questBlanks").innerHTML = spellBlanks(q.word.word);
+      $("questHearBtn").classList.add("hidden");
+    }
+    $("questInput").focus();
+  }
+}
+function answerQuestChoice(btn, ok) {
+  if (quest.answered) return;
+  quest.answered = true;
+  const q = quest.qs[quest.idx];
+  document.querySelectorAll("#questChoices button").forEach((b) => {
+    b.disabled = true;
+    if (b.textContent === q.word.meaning) b.classList.add("correct");
+    else if (b === btn) b.classList.add("wrong");
+  });
+  finishQuestAnswer(q, ok);
+}
+function checkQuestTyped() {
+  if (quest.answered) return;
+  const q = quest.qs[quest.idx];
+  const typed = spellNorm($("questInput").value);
+  if (!typed) { $("questFeedback").textContent = "Type something first!"; return; }
+  quest.answered = true;
+  finishQuestAnswer(q, typed === spellNorm(q.word.word));
+}
+function finishQuestAnswer(q, ok) {
+  updateWordMastery(q.word.word, ok);
+  saveMastery();
+  if (ok) {
+    quest.correct++;
+    $("questFeedback").textContent = "Correct! ★";
+    $("questFeedback").style.color = "#1c7a2e";
+  } else {
+    quest.wrong.push(q.word.word);
+    $("questFeedback").textContent = "Not quite — the answer was “" + q.word.word + "”" +
+      (q.type === "meaning" ? " — it means: " + q.word.meaning : "") + ".";
+    $("questFeedback").style.color = "#c01f16";
+    if (q.type !== "meaning") $("questBlanks").innerHTML = esc(q.word.word);
+  }
+  $("questCheckBtn").classList.add("hidden");
+  $("questNextBtn").classList.remove("hidden");
+  $("questNextBtn").focus();
+}
+async function nextQuest() {
+  quest.idx++;
+  if (quest.idx >= quest.qs.length) {
+    stopSpeaking();
+    $("questArea").classList.add("hidden");
+    const total = quest.qs.length;
+    const acc = total ? Math.round(quest.correct / total * 100) : 0;
+    const stars = quest.correct >= 13 ? 3 : quest.correct >= 9 ? 2 : quest.correct >= 5 ? 1 : 0;
+    const label = unitLabel(quest.unit);
+    const el = $("questResult");
+    el.innerHTML = "<h3>Quest complete — " + esc(label) + "</h3>" +
+      '<div class="stars">' + starText(stars) + "</div>" +
+      '<div class="score-grid">' +
+      '<div class="score-box"><div class="num">' + quest.correct + "/" + total + '</div><div class="lbl">correct</div></div>' +
+      '<div class="score-box"><div class="num">' + (quest.correct * 10) + '</div><div class="lbl">points</div></div></div>' +
+      (quest.wrong.length
+        ? "<p><strong>Words to practise again:</strong> " + [...new Set(quest.wrong)].map(esc).join(", ") + "</p>"
+        : "<p><strong>Perfect — every answer right!</strong></p>") +
+      '<p class="muted small">Result saved to your progress. Come back tomorrow for a new week!</p>';
+    el.classList.remove("hidden");
+    await saveSession({ kind: "vocab", game: "Daily Spelling Quest", unit: label,
+      score: quest.correct, total: total, accuracy: acc, wrongWords: [...new Set(quest.wrong)] });
+    renderQuestCard();
+  } else {
+    showQuestQuestion();
+  }
+}
 function initWords() {
   fillUnitSelects();
   $("studyUnitSelect").addEventListener("change", renderStudy);
@@ -2114,6 +2282,14 @@ function initWords() {
   });
   $("quizStartBtn").addEventListener("click", startQuiz);
   $("quizNextBtn").addEventListener("click", nextQuiz);
+  $("questStartBtn").addEventListener("click", startQuest);
+  $("questCheckBtn").addEventListener("click", checkQuestTyped);
+  $("questNextBtn").addEventListener("click", nextQuest);
+  $("questHearBtn").addEventListener("click", () => {
+    const q = quest.qs[quest.idx];
+    if (q && q.type === "spell") speakWordThrice(q.word.word);
+  });
+  $("questInput").addEventListener("keydown", (e) => { if (e.key === "Enter") checkQuestTyped(); });
   renderStudy();
   renderCustomVocabList();
   renderMasteryLists();
@@ -3506,6 +3682,7 @@ async function init() {
     renderStudy();
     renderCustomVocabList();
     renderMasteryLists();
+    renderQuestCard();
     const [settings, customs, aiCfg] = await Promise.all([
       apiGet("/api/settings/marking"),
       apiGet("/api/custom-passages"),
