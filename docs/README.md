@@ -1,4 +1,4 @@
-# TalkPupils — website v33
+# TalkPupils — website v34
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v34: AI copes better when Google's free Gemini is busy. On a "high demand" (503) answer the function now tries once more a few seconds later instead of failing straight away; if it is still busy, the message is plain — "Gemini is busy right now — try again in a few minutes" — instead of Google's long sentence. WILLIAM must redeploy supabase/functions/ai-mark/index.ts in the Supabase dashboard for this to take effect — the same redeploy also brings the v22 improvements (55-second timeout, low thinking) that were in the repo but not yet live.
 v33: All 28 Oral Partner topics now have pictures. The 10 cheat-sheet topics (Health + Resident's corner) are linked to their new AI illustrations, and the 18 Oracle topics now show AI-generated pictures instead of the scanned pack photos (the original pack photos are backed up). No code change was needed for the 18 — they already pointed at practice-NN.jpg.
 v32: Word Rain now answers back. Typing a word that is not falling gave no feedback at all — a child could not tell whether the game heard them. It now says "Caught …! +10" on a catch and "No match — type a word you can see falling." when the word is not on the screen. (Checked during the v31 layout test: a 0-point round was the words reaching the bottom before the test typed them, not a scoring bug.)
 v31: Layout — less scrolling. (1) On wide screens the 6 tabs are now a vertical menu down the left side (sticky, so it stays visible while you scroll); phones keep the horizontal tab row. (2) The Progress tab's cards now sit side by side in two columns — glance and history span both — so the page is about half as long. (3) History shows the latest 10 sessions with a "Show all N sessions" button instead of all 50 at once.

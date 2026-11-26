@@ -102,21 +102,33 @@ async function callProvider(
       (payload.generationConfig as Record<string, unknown>).responseMimeType = "application/json";
     }
     if (systemText) payload.systemInstruction = { parts: [{ text: systemText }] };
-    let resp: Response;
-    try {
-      resp = await fetch(
-        "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
-        {
-          method: "POST",
-          headers: { "x-goog-api-key": key, "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          signal: ctrl.signal,
-        },
-      );
-    } catch (_e) {
-      if ((_e as Error)?.name === "AbortError") {
-        throw new Error("Gemini took too long to answer — try again in a moment");
+    // Google's free tier sometimes answers 503 when the model is busy;
+    // the spike is usually over in a few seconds, so try once more
+    // before giving up. Any other status, or a second 503, is final.
+    let resp: Response | null = null;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (attempt > 0) {
+        await new Promise((r) => setTimeout(r, 6000));
       }
+      try {
+        resp = await fetch(
+          "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
+          {
+            method: "POST",
+            headers: { "x-goog-api-key": key, "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+            signal: ctrl.signal,
+          },
+        );
+      } catch (_e) {
+        if ((_e as Error)?.name === "AbortError") {
+          throw new Error("Gemini took too long to answer — try again in a moment");
+        }
+        throw new Error("could not reach the AI provider — check the internet connection");
+      }
+      if (resp.ok || resp.status !== 503) break;
+    }
+    if (!resp) {
       throw new Error("could not reach the AI provider — check the internet connection");
     }
     const raw = await resp.json().catch(() => ({}));
@@ -132,6 +144,9 @@ async function callProvider(
       }
       if (resp.status === 429) {
         msg = "the free daily limit was reached — try again tomorrow";
+      }
+      if (resp.status === 503) {
+        msg = "Gemini is busy right now — try again in a few minutes";
       }
       throw new Error(msg);
     }
