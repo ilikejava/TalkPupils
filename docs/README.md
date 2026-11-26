@@ -1,4 +1,4 @@
-# TalkPupils — website v23
+# TalkPupils — website v24
 
 Free PSLE Oral, typing and vocabulary practice for Singapore pupils.
 This is the website version: a static frontend on **GitHub Pages** with
@@ -32,6 +32,7 @@ mark comes with “What to work on next”, and the Progress tab has a
 Function gains a `plan` action — redeploy `supabase/functions/ai-mark/index.ts`
 in the Supabase dashboard for the history-aware AI to work.
 
+v24: Words heading is now "Vocabulary — Stellar Units" (no "Primary 5") — later levels/units will be added, so no level is specified. Same change in the Typing tab note.
 v23: removed the "Add new vocabulary" card (Words) and the Settings cards "Add your own picture topic", "AI marking (optional)" and "Add your own passage". AI marking is now on by default (runs whenever the server key is set, no toggle). "Add passages & words from a file" is now the only upload window for passages and vocabulary (PDF, photo or pasted text).
 v22: Gemini calls now use low thinking (3.8-flash reasons longer by default; our marking calls are simple) and wait up to 55s — the first 3.8-flash test hung 30s and then Google answered "high demand, try again later". A timeout now says so plainly instead of "check the internet connection".
 v21: default model switched to gemini-3.8-flash — Google retired gemini-2.5-flash for new users, and its own error message names 3.8-flash as the replacement. Same free tier.
@@ -60,7 +61,7 @@ run the whole file again in the SQL Editor — it only adds the grants.
   SBC mark out of 25.
 - **Typing Quest** — Sentence Race, Word Rain and Listen & Spell, using
   the same passages and vocabulary as reading.
-- **Words** — P5 Stellar vocabulary (Units 1–9, about 282 words), study,
+- **Words** — Stellar vocabulary (Units 1–9, about 282 words), study,
   meaning quiz, and a form to add your own words.
 - **Progress** — per-pupil history, weekly and monthly reports, practice
   streak, best marks, awards, and Mastered / Improving lists.
