@@ -1,4 +1,4 @@
--- TalkPupils website v16 — Supabase schema
+-- TalkPupils website v30 — Supabase schema
 -- HOW TO RUN: Supabase Dashboard -> SQL Editor -> paste this whole file -> Run.
 -- Run it once. It is safe to run again (IF NOT EXISTS / DROP POLICY IF EXISTS).
 -- No service_role key is needed anywhere in the website.
@@ -7,6 +7,9 @@
 -- signed-in query failed with "permission denied for table ...".
 -- The GRANT block below fixes that. If you already ran v1, just run
 -- this whole file again — it only adds the missing grants.
+-- v30: new `leaderboard` table — one row per pupil (registered name +
+-- total points). Every signed-in pupil can READ all rows (that is the
+-- point of the board); each pupil can only WRITE their own row.
 
 -- ============ tables ============
 
@@ -78,6 +81,18 @@ create table if not exists public.settings (
   updated_at timestamptz not null default now()
 );
 
+-- Leaderboard (v30): one row per pupil, keyed by the pupil's account.
+-- name is the registered pupil name; points is the same total the
+-- top-right label shows. Read by every signed-in pupil; written
+-- only by the pupil the row belongs to.
+create table if not exists public.leaderboard (
+  parent_id uuid primary key references auth.users (id) on delete cascade,
+  name text not null,
+  level text not null default 'P6',
+  points integer not null default 0,
+  updated_at timestamptz not null default now()
+);
+
 -- ============ row level security ============
 -- Every row belongs to the signed-in pupil. A pupil can only see and
 -- change their own profile, sessions and content.
@@ -89,6 +104,7 @@ alter table public.custom_vocab enable row level security;
 alter table public.custom_passages enable row level security;
 alter table public.custom_topics enable row level security;
 alter table public.settings enable row level security;
+alter table public.leaderboard enable row level security;
 
 drop policy if exists "Parents manage their own profiles" on public.profiles;
 create policy "Parents manage their own profiles" on public.profiles
@@ -107,6 +123,7 @@ grant select, insert, update, delete on public.custom_vocab to authenticated;
 grant select, insert, update, delete on public.custom_passages to authenticated;
 grant select, insert, update, delete on public.custom_topics to authenticated;
 grant select, insert, update, delete on public.settings to authenticated;
+grant select, insert, update, delete on public.leaderboard to authenticated;
 
 drop policy if exists "Parents manage sessions of their profiles" on public.sessions;
 create policy "Parents manage sessions of their profiles" on public.sessions
@@ -141,6 +158,16 @@ create policy "Parents manage their own custom topics" on public.custom_topics
 drop policy if exists "Parents manage their own settings" on public.settings;
 create policy "Parents manage their own settings" on public.settings
   for all using (parent_id = auth.uid()) with check (parent_id = auth.uid());
+
+-- Leaderboard (v30): every signed-in pupil reads the whole board;
+-- each pupil writes only the row with their own account id.
+drop policy if exists "Anyone signed in reads the leaderboard" on public.leaderboard;
+create policy "Anyone signed in reads the leaderboard" on public.leaderboard
+  for select to authenticated using (true);
+
+drop policy if exists "Pupils write their own leaderboard row" on public.leaderboard;
+create policy "Pupils write their own leaderboard row" on public.leaderboard
+  for all to authenticated using (parent_id = auth.uid()) with check (parent_id = auth.uid());
 
 -- ============ storage buckets ============
 -- 'audio' holds Oral Partner answer recordings, 'stimuli' holds

@@ -476,6 +476,7 @@ const state = {
   customTopics: [], // pupil-added oral topics [{id, title, image, keywords, questions}]
   oralSettings: { prepSeconds: 120, saveAudio: true },
   currentPassage: null,
+  leaderboard: null, // null = not loaded / unavailable; [] = loaded, no scores yet
   readMode: null,   // "mic" | "timed" | null
   readStart: 0,
   readTimer: null,
@@ -566,6 +567,7 @@ async function saveSession(fields) {
   state.sessions.unshift(j.session);
   renderPointsLabel();
   checkNewAwards();
+  updateLeaderboardRow();
   return j.session;
 }
 
@@ -576,7 +578,7 @@ function initTabs() {
     if (!b) return;
     document.querySelectorAll("#tabs button").forEach((x) => x.classList.toggle("active", x === b));
     document.querySelectorAll(".tabpage").forEach((x) => x.classList.toggle("active", x.id === "tab-" + b.dataset.tab));
-    if (b.dataset.tab === "progress") renderProgress();
+    if (b.dataset.tab === "progress") { renderProgress(); loadLeaderboard().then(() => { if ($("tab-progress").classList.contains("active")) renderProgress(); }); }
     if (b.dataset.tab === "settings") renderSettings();
     if (b.dataset.tab === "oral") renderOralTopics();
     if (b.dataset.tab === "words") renderQuestCard();
@@ -3108,6 +3110,42 @@ function sessionPoints(s) {
 function totalPoints() {
   return state.sessions.reduce((t, s) => t + sessionPoints(s), 0);
 }
+/* Leaderboard: one shared row per pupil (registered name + total points).
+   Every signed-in pupil reads all rows; each pupil writes only their own.
+   Guest mode has no account, so it never touches the board. */
+async function loadLeaderboard() {
+  if (guestMode || !sbClient) { state.leaderboard = null; return; }
+  try {
+    const { data, error } = await sbClient.from("leaderboard")
+      .select("parent_id, name, level, points").order("points", { ascending: false });
+    if (error) throw error;
+    state.leaderboard = data || [];
+  } catch (err) { state.leaderboard = null; }
+}
+async function updateLeaderboardRow() {
+  if (guestMode || !sbClient || !state.parentId) return;
+  const p = currentProfile();
+  if (!p) return;
+  try {
+    const { error } = await sbClient.from("leaderboard").upsert({
+      parent_id: state.parentId, name: p.name, level: p.level,
+      points: totalPoints(), updated_at: new Date().toISOString(),
+    }, { onConflict: "parent_id" });
+    if (error) throw error;
+    await loadLeaderboard();
+  } catch (err) { /* table not set up yet — the board just stays hidden */ }
+}
+function leaderboardHtml() {
+  if (guestMode) return '<div class="card"><h3>🏆 Leaderboard</h3><p class="muted">Sign up with your name to join the leaderboard and see other pupils’ points.</p></div>';
+  if (state.leaderboard === null) return '<div class="card"><h3>🏆 Leaderboard</h3><p class="muted">The leaderboard is being set up — check back soon.</p></div>';
+  if (!state.leaderboard.length) return '<div class="card"><h3>🏆 Leaderboard</h3><p class="muted">No scores yet — finish a practice to be the first on the board!</p></div>';
+  const rows = state.leaderboard.slice(0, 10);
+  const myRank = state.leaderboard.findIndex((r) => r.parent_id === state.parentId) + 1;
+  let h = '<div class="card"><h3>🏆 Leaderboard</h3><table class="history"><tr><th>#</th><th>Pupil</th><th>Points</th></tr>' +
+    rows.map((r, i) => '<tr' + (r.parent_id === state.parentId ? ' class="me"' : '') + '><td>' + (i + 1) + '</td><td>' + esc(r.name) + (r.level ? ' (' + esc(r.level) + ')' : '') + '</td><td>⭐ ' + r.points + '</td></tr>').join("") + '</table>';
+  if (myRank > 10) h += '<p class="muted">You are #' + myRank + ' with ⭐ ' + totalPoints() + ' pts.</p>';
+  return h + '</div>';
+}
 function masteredWordCount() {
   return Object.values(state.mastery.words || {}).filter(isMasteredWord).length;
 }
@@ -3267,6 +3305,7 @@ function renderProgress() {
     '<div class="card"><h3>Awards</h3>' +
     awards.map((a) => '<span class="badge' + (a.earned ? "" : " locked") + '">' +
       (a.earned ? "★ " : "☆ ") + esc(a.name) + " — " + esc(a.desc) + "</span>").join("") + "</div>" +
+    leaderboardHtml() +
     '<div class="card"><h3>This week (per day)</h3>' +
     weekRows.map((r) => '<div class="bar-row"><span class="bar-label">' + r.name + '</span>' +
       '<div class="bar" style="width:' + Math.round(r.n / weekMax * 180) + 'px"></div>' +
@@ -3806,6 +3845,7 @@ async function init() {
     renderOralTopics();
     renderPointsLabel();
     checkNewAwards();
+    await updateLeaderboardRow();
   } catch (err) {
     document.querySelector("main").insertAdjacentHTML("afterbegin",
       '<div class="card" style="border-color:#e5a09a;background:#fdecea">Could not load the app data: ' +
