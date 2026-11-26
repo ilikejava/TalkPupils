@@ -3041,6 +3041,7 @@ function renderSettings() {
   $("markingEditor").value = markingText();
   $("markingDisplay").textContent = markingText();
   renderOralSettings();
+  renderPasswordCard();
 }
 async function saveMarking() {
   const text = $("markingEditor").value;
@@ -3323,6 +3324,8 @@ function initSettings() {
       $("importFileName").textContent = f ? f.name : "";
     });
   }
+  $("savePasswordBtn").addEventListener("click", savePassword);
+  $("saveSecretWordBtn").addEventListener("click", saveSecretWord);
 }
 
 /* ---------------- backup / restore ---------------- */
@@ -3667,8 +3670,13 @@ async function doAuth(mode) {
   try {
     let res;
     if (mode === "signup") {
+      // The secret word is how a pupil resets a forgotten password
+      // (there is no email to send a link to). Only the pupil and
+      // their parent should know it.
+      const recoveryWord = $("authRecoveryWord").value.trim().toLowerCase();
+      if (!recoveryWord) { $("authStatus").textContent = "Pick a secret word too — it lets you reset your password if you forget it. Only you and your parent should know it."; return; }
       res = await sbClient.auth.signUp({ email: email, password: password,
-        options: { data: { kid_name: name.slice(0, 60), level: level } } });
+        options: { data: { kid_name: name.slice(0, 60), level: level, recovery_word: recoveryWord.slice(0, 40) } } });
       if (res.error) throw res.error;
       if (!res.data.session) {
         // Email confirmation is still on: the confirmation would go
@@ -3686,6 +3694,81 @@ async function doAuth(mode) {
   } catch (err) {
     $("authStatus").textContent = plainAuthError(err, mode);
   }
+}
+/* Forgot password: the pupil is not signed in, so the reset goes
+   through the "auth-reset" Edge Function, which checks the name +
+   level + secret word and sets the new password. No email is ever
+   sent — pupil accounts have no real email address. */
+async function doResetPassword() {
+  const name = $("authName").value.trim();
+  const level = $("authLevel").value || "P6";
+  const word = $("resetWord").value.trim();
+  const next = $("resetPassword").value;
+  const next2 = $("resetPassword2").value;
+  if (!name) { $("resetStatus").textContent = "Type your name above first."; return; }
+  if (!word) { $("resetStatus").textContent = "Type your secret word."; return; }
+  if (next.length < 6) { $("resetStatus").textContent = "Use a new password with at least 6 characters."; return; }
+  if (next !== next2) { $("resetStatus").textContent = "The two new passwords don't match."; return; }
+  if (!sbClient) { $("resetStatus").textContent = "Reset is unavailable right now — check your connection and reload."; return; }
+  $("resetStatus").textContent = "Resetting…";
+  try {
+    const { data, error } = await sbClient.functions.invoke("auth-reset", {
+      body: { name, level, recoveryWord: word, newPassword: next },
+    });
+    if (error) throw new Error(error.message || "Reset failed");
+    if (!data || !data.ok) throw new Error((data && data.error) || "Reset failed");
+    $("resetStatus").textContent = "Password changed — sign in above with your new password.";
+    $("resetWord").value = "";
+    $("resetPassword").value = "";
+    $("resetPassword2").value = "";
+    $("authPassword").value = "";
+  } catch (err) {
+    $("resetStatus").textContent = "Could not reset: " + (err.message || "try again in a moment");
+  }
+}
+/* Change password / set the secret word, for a signed-in pupil. */
+async function savePassword() {
+  const next = $("newPassword").value;
+  const next2 = $("newPassword2").value;
+  if (next.length < 6) { $("passwordStatus").textContent = "Use a password with at least 6 characters."; return; }
+  if (next !== next2) { $("passwordStatus").textContent = "The two passwords don't match."; return; }
+  $("passwordStatus").textContent = "Saving…";
+  try {
+    const { error } = await sbClient.auth.updateUser({ password: next });
+    if (error) throw error;
+    $("passwordStatus").textContent = "Password changed.";
+    $("newPassword").value = "";
+    $("newPassword2").value = "";
+  } catch (err) {
+    $("passwordStatus").textContent = "Could not save: " + (err.message || "try again");
+  }
+}
+async function saveSecretWord() {
+  const word = $("secretWord").value.trim().toLowerCase();
+  if (!word) { $("secretWordStatus").textContent = "Type a secret word first."; return; }
+  $("secretWordStatus").textContent = "Saving…";
+  try {
+    const { error } = await sbClient.auth.updateUser({ data: { recovery_word: word.slice(0, 40) } });
+    if (error) throw error;
+    $("secretWordStatus").textContent = "Secret word saved.";
+    $("secretWord").value = "";
+    renderPasswordCard();
+  } catch (err) {
+    $("secretWordStatus").textContent = "Could not save: " + (err.message || "try again");
+  }
+}
+async function renderPasswordCard() {
+  const card = $("passwordCard");
+  if (!card) return;
+  if (guestMode) { card.classList.add("hidden"); return; }
+  card.classList.remove("hidden");
+  try {
+    const { data } = await sbClient.auth.getUser();
+    const meta = (data && data.user && data.user.user_metadata) || {};
+    $("secretWordNote").textContent = meta.recovery_word
+      ? "A secret word is set — it lets you reset your password from the sign-in page if you forget it."
+      : "No secret word set yet — set one above so you can reset your password if you forget it.";
+  } catch (err) { /* the note stays as-is */ }
 }
 /* Delete answer recordings older than 7 days (runs when the pupil signs in). */
 async function cleanupOldAudio() {
@@ -3747,6 +3830,8 @@ async function ensureKidProfile() {
 async function initAuth() {
   $("authSignUpBtn").addEventListener("click", () => doAuth("signup"));
   $("authSignInBtn").addEventListener("click", () => doAuth("signin"));
+  $("forgotBtn").addEventListener("click", () => { $("resetBox").classList.toggle("hidden"); $("resetStatus").textContent = ""; });
+  $("resetBtn").addEventListener("click", doResetPassword);
   $("authSignOutBtn").addEventListener("click", async () => { if (sbClient) await sbClient.auth.signOut(); location.reload(); });
   $("guestP6Btn").addEventListener("click", () => enterGuest("P6"));
   $("guestP4Btn").addEventListener("click", () => enterGuest("P4"));

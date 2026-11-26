@@ -36,11 +36,27 @@
     <input id="authPassword" type="password" placeholder="Password (at least 6 characters)" autocomplete="current-password">
   </div>
   <div class="row">
+    <input id="authRecoveryWord" type="text" placeholder="Secret word (sign-up only) — e.g. your favourite animal" maxlength="40" autocomplete="off">
+  </div>
+  <div class="row">
     <button id="authSignUpBtn" class="btn primary">Sign up (new pupil)</button>
     <button id="authSignInBtn" class="btn primary">Sign in</button>
+    <button id="forgotBtn" class="btn">Forgot password?</button>
+  </div>
+  <div id="resetBox" class="hidden">
+    <p class="muted">Type your name and level above, then your secret word and a new password.</p>
+    <div class="row">
+      <input id="resetWord" type="text" placeholder="Secret word" maxlength="40" autocomplete="off">
+      <input id="resetPassword" type="password" placeholder="New password (at least 6 characters)" autocomplete="new-password">
+      <input id="resetPassword2" type="password" placeholder="New password again" autocomplete="new-password">
+    </div>
+    <div class="row">
+      <button id="resetBtn" class="btn primary">Reset password</button>
+    </div>
+    <p id="resetStatus" class="muted"></p>
   </div>
   <p id="authStatus" class="muted"></p>
-  <p class="muted small">Signing in is just your name and password. Pick the level only when you sign up — after that, your account remembers it.</p>
+  <p class="muted small">Signing in is just your name and password. Pick the level only when you sign up — after that, your account remembers it. Pick a secret word when you sign up too — it is how you reset your password if you forget it. Only you and your parent should know it.</p>
   <div class="guest-box">
     <h3>Just looking around?</h3>
     <p class="muted">Try everything without signing in — pick a demo level. Results stay only in this browser and are not saved online.</p>
@@ -406,6 +422,22 @@
       </div>
       <p class="muted small">PDFs are read in your browser (free). Photos are read by the AI, and organising needs the AI key — the same free Gemini key as AI marking. In guest mode this needs your own account — sign up to use it.</p>
     </div>
+    <div class="card" id="passwordCard">
+      <h2>Password &amp; secret word</h2>
+      <p class="muted">Change your password, or set the secret word that lets you reset your password from the sign-in page if you forget it. Only you and your parent should know the secret word.</p>
+      <div class="row">
+        <input id="newPassword" type="password" placeholder="New password (at least 6 characters)" autocomplete="new-password">
+        <input id="newPassword2" type="password" placeholder="New password again" autocomplete="new-password">
+        <button id="savePasswordBtn" class="btn primary">Change password</button>
+        <span id="passwordStatus" class="muted"></span>
+      </div>
+      <div class="row">
+        <input id="secretWord" type="text" placeholder="Secret word — e.g. your favourite animal" maxlength="40" autocomplete="off">
+        <button id="saveSecretWordBtn" class="btn primary">Save secret word</button>
+        <span id="secretWordStatus" class="muted"></span>
+      </div>
+      <p class="muted small" id="secretWordNote">No secret word set yet.</p>
+    </div>
   </section>
 </main>
 </div>
@@ -413,9 +445,9 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v24</p>
+<p class="muted small" id="appVersion">TalkPupils web · v25</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="app.js?v=24"></script>
+<script src="app.js?v=25"></script>
 </body>
 </html>
