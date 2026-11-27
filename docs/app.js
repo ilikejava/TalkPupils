@@ -4110,7 +4110,7 @@ async function migrateGuestToKid(kidName, kidLevel) {
   if (!store || !store.profiles || !store.profiles.length) return null;
   const uid = await sbUserId();
   const named = store.profiles.filter((p) => p.name !== "Guest pupil" && String(p.id).indexOf("guest-") !== 0);
-  if (!named.length) { guestClear(); return null; }
+  if (!named.length) return null; // no named trial: leave it in this browser
   const moving = named.filter((p) =>
     String(p.name).toLowerCase() === String(kidName || "").toLowerCase() &&
     String(p.level) === String(kidLevel || ""));
@@ -4367,10 +4367,13 @@ async function enterGuest(level) {
 function exitGuest() {
   // Go to the sign-in page WITHOUT deleting the trial: when the pupil
   // signs in, the trial profile with their name moves into their
-  // account (see migrateGuestToKid). A flag stops the guest trial
-  // resuming itself on the reload that follows.
-  try { sessionStorage.setItem("talktupils_exit_guest", "1"); } catch (err) { /* ignore */ }
-  location.reload();
+  // account (see migrateGuestToKid). No reload: the old reload +
+  // sessionStorage flag failed silently on some browsers, leaving the
+  // pupil stuck in guest mode with a dead button. Signing in reloads
+  // the page (see doAuth), so the move still runs then.
+  $("authCard").classList.remove("hidden");
+  $("appShell").classList.add("hidden");
+  window.scrollTo(0, 0);
 }
 /* First sign-in for this pupil: make sure they have exactly one
    profile — their own — created from the name and level saved at
@@ -4447,7 +4450,8 @@ async function initAuth() {
     return;
   }
   // No session: show the sign-in page — unless the guest trial is
-  // resuming (skipped when exitGuest sent the pupil here to sign in).
+  // resuming. (A stale "talktupils_exit_guest" flag from an older
+  // version is still honoured once, below.)
   let exitGuestFlag = null;
   try {
     exitGuestFlag = sessionStorage.getItem("talktupils_exit_guest");
