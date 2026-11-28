@@ -633,12 +633,15 @@ function selectPassage(id) {
   $("readResult").innerHTML = "";
   $("grammarCard").classList.add("hidden");
 }
-// First passage for this pupil: P3 starts on the shortest Primary
-// (built-in) passage — everyday words, not the PSLE Oracle set.
+// First passage for this pupil: P3 starts on "A Morning in the Park"
+// (built-in 6, the shortest everyday-words passage) — pinned, not the
+// shortest built-in, so adding a shorter cloze passage does not move it.
 // Everyone else starts on Passage 01, as before.
 function defaultPassageId() {
   const p = currentProfile();
   if (p && p.level === "P3") {
+    const start = state.passages.find((x) => x.id === "builtin-6");
+    if (start) return start.id;
     const builtins = state.passages.filter((x) => x.id.indexOf("builtin-") === 0)
       .sort((a, b) => wordCount(a.text) - wordCount(b.text));
     if (builtins[0]) return builtins[0].id;
@@ -2190,6 +2193,7 @@ function initType() {
 const study = { hideMeanings: false };
 function unitName(u) {
   if (u === "my") return "My words";
+  if (u === 201) return "Zeen's Cloze Words"; // P4 cloze workbook words (added v41)
   if (typeof u === "number" && u >= 101) return "Spelling Week " + (u - 100);
   const names = { 1: "Coolie Boy", 2: "Amazing Friends", 3: "Ten", 4: "The Promise",
     5: "A Game of Emails", 6: "Martial Arts", 7: "Dogs with Jobs",

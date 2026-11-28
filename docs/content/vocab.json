@@ -1,2993 +1,3028 @@
 [
- {
-  "word": "sprinted out",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrasal verbs",
-  "meaning": "ran out quickly",
-  "fromFile": true
- },
- {
-  "word": "dreaded voice",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "voice that causes fear",
-  "fromFile": true
- },
- {
-  "word": "shoved aside",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrasal verbs",
-  "meaning": "pushed out of the way",
-  "fromFile": true
- },
- {
-  "word": "rowdy gang",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "noisy, disorderly group",
-  "fromFile": true
- },
- {
-  "word": "smirked",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "smiled slyly or mockingly",
-  "fromFile": true
- },
- {
-  "word": "protested",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "disagreed strongly",
-  "fromFile": true
- },
- {
-  "word": "pinched his arm",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "squeezed his arm lightly",
-  "fromFile": true
- },
- {
-  "word": "yelped in pain",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "cried out in hurt",
-  "fromFile": true
- },
- {
-  "word": "constantly on his mind",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrases with adverbs",
-  "meaning": "always thinking about it",
-  "fromFile": true
- },
- {
-  "word": "moping around the house",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrases with adverbs",
-  "meaning": "moving sadly with no energy",
-  "fromFile": true
- },
- {
-  "word": "said hesitantly",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrases with adverbs",
-  "meaning": "spoke with uncertainty",
-  "fromFile": true
- },
- {
-  "word": "run errands",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrasal verbs",
-  "meaning": "do small tasks for someone",
-  "fromFile": true
- },
- {
-  "word": "said forlornly",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrases with adverbs",
-  "meaning": "spoke sadly or hopelessly",
-  "fromFile": true
- },
- {
-  "word": "pay off his debt",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrasal verbs",
-  "meaning": "finish repaying borrowed money",
-  "fromFile": true
- },
- {
-  "word": "humiliating",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "deeply embarrassing",
-  "fromFile": true
- },
- {
-  "word": "yearning to buy",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "strong desire to purchase",
-  "fromFile": true
- },
- {
-  "word": "overjoyed",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "extremely happy",
-  "fromFile": true
- },
- {
-  "word": "great sense of satisfaction",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "strong feeling of happiness",
-  "fromFile": true
- },
- {
-  "word": "well-defined muscles",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "muscles clearly shaped",
-  "fromFile": true
- },
- {
-  "word": "demanded",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "insisted forcefully",
-  "fromFile": true
- },
- {
-  "word": "beady eyes",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "small, sharp eyes",
-  "fromFile": true
- },
- {
-  "word": "bellowed",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "shouted loudly",
-  "fromFile": true
- },
- {
-  "word": "furious",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "very angry",
-  "fromFile": true
- },
- {
-  "word": "growled",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "made low angry sound",
-  "fromFile": true
- },
- {
-  "word": "henchmen",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "words & phrases",
-  "meaning": "loyal followers of a leader",
-  "fromFile": true
- },
- {
-  "word": "lunged at him",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "phrasal verbs",
-  "meaning": "jumped forward to attack",
-  "fromFile": true
- },
- {
-  "word": "outspoken",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "character traits describing personality",
-  "fromFile": true
- },
- {
-  "word": "bossy",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "character traits describing personality",
-  "fromFile": true
- },
- {
-  "word": "witty",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "character traits describing personality",
-  "fromFile": true
- },
- {
-  "word": "mature",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "character traits describing personality",
-  "fromFile": true
- },
- {
-  "word": "athletic",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "character traits describing personality",
-  "fromFile": true
- },
- {
-  "word": "dependable",
-  "unit": 1,
-  "unitName": "Coolie Boy",
-  "category": "collocations",
-  "meaning": "character traits describing personality",
-  "fromFile": true
- },
- {
-  "word": "devastating tsunami",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "extremely destructive sea wave",
-  "fromFile": true
- },
- {
-  "word": "destroyed homes",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "houses ruined or damaged",
-  "fromFile": true
- },
- {
-  "word": "impact of the tsunami",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "effect caused by the wave",
-  "fromFile": true
- },
- {
-  "word": "torrents of water",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "rushing flow of water",
-  "fromFile": true
- },
- {
-  "word": "stood stranded",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "left alone with no way to move",
-  "fromFile": false
- },
- {
-  "word": "flocked in",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "came in large numbers",
-  "fromFile": false
- },
- {
-  "word": "pin down the hippopotamus",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "hold it firmly to the ground",
-  "fromFile": true
- },
- {
-  "word": "rescued",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "words & phrases",
-  "meaning": "saved from danger",
-  "fromFile": true
- },
- {
-  "word": "tangled up in the net",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "caught and twisted in the net",
-  "fromFile": true
- },
- {
-  "word": "dragged slowly",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrases with adverbs",
-  "meaning": "pulled along slowly",
-  "fromFile": false
- },
- {
-  "word": "gently loaded onto the lorry",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrases with adverbs",
-  "meaning": "carefully placed into the truck",
-  "fromFile": true
- },
- {
-  "word": "separated abruptly",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrases with adverbs",
-  "meaning": "suddenly pulled apart",
-  "fromFile": true
- },
- {
-  "word": "suspicious",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "words & phrases",
-  "meaning": "feeling that something is wrong",
-  "fromFile": false
- },
- {
-  "word": "converted into",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "words & phrases",
-  "meaning": "changed into something new",
-  "fromFile": true
- },
- {
-  "word": "fixed up the fence",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "repaired or improved the fence",
-  "fromFile": true
- },
- {
-  "word": "scrambled from the lorry",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "climbed out quickly and clumsily",
-  "fromFile": true
- },
- {
-  "word": "crouched behind",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "bent low to hide behind something",
-  "fromFile": true
- },
- {
-  "word": "old and grumpy",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "bad-tempered and unfriendly",
-  "fromFile": true
- },
- {
-  "word": "hissed at",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "made an angry hissing sound at",
-  "fromFile": false
- },
- {
-  "word": "companion",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "words & phrases",
-  "meaning": "a friend who spends time with you",
-  "fromFile": false
- },
- {
-  "word": "content",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "words & phrases",
-  "meaning": "satisfied and at peace",
-  "fromFile": true
- },
- {
-  "word": "sprightly",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "words & phrases",
-  "meaning": "lively and energetic",
-  "fromFile": true
- },
- {
-  "word": "became used to",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "grew familiar or comfortable with",
-  "fromFile": true
- },
- {
-  "word": "witnessed an amazing sight",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "words & phrases",
-  "meaning": "saw something incredible",
-  "fromFile": true
- },
- {
-  "word": "snuggled up against",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrasal verbs",
-  "meaning": "moved close in a warm, loving way",
-  "fromFile": true
- },
- {
-  "word": "initially",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "phrases with adverbs",
-  "meaning": "at first",
-  "fromFile": true
- },
- {
-  "word": "special relationship",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "close and meaningful bond",
-  "fromFile": true
- },
- {
-  "word": "a phenomenon",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "remarkable or rare event",
-  "fromFile": true
- },
- {
-  "word": "extraordinary",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "words & phrases",
-  "meaning": "very unusual or remarkable",
-  "fromFile": true
- },
- {
-  "word": "a source of inspiration",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "something that motivates creativity",
-  "fromFile": true
- },
- {
-  "word": "contrasting personalities",
-  "unit": 2,
-  "unitName": "Amazing Friends",
-  "category": "collocations",
-  "meaning": "very different characters",
-  "fromFile": true
- },
- {
-  "word": "crazy about football",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "collocations",
-  "meaning": "love football very much",
-  "fromFile": true
- },
- {
-  "word": "absolutely frank",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "collocations",
-  "meaning": "completely honest",
-  "fromFile": true
- },
- {
-  "word": "interested in football",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "collocations",
-  "meaning": "enjoys learning or watching football",
-  "fromFile": true
- },
- {
-  "word": "yelling",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "words & phrases",
-  "meaning": "shouting loudly",
-  "fromFile": false
- },
- {
-  "word": "quarrel",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "words & phrases",
-  "meaning": "argued",
-  "fromFile": true
- },
- {
-  "word": "gruff",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "words & phrases",
-  "meaning": "rough",
-  "fromFile": true
- },
- {
-  "word": "shoving",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "words & phrases",
-  "meaning": "pushing",
-  "fromFile": true
- },
- {
-  "word": "acrobatic save",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "collocations",
-  "meaning": "skillful, athletic rescue or defence",
-  "fromFile": true
- },
- {
-  "word": "peep through the cracks between my fingers",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "collocations",
-  "meaning": "look secretly through the gaps between my fingers",
-  "fromFile": false
- },
- {
-  "word": "feigning injury",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "collocations",
-  "meaning": "pretending to be hurt",
-  "fromFile": true
- },
- {
-  "word": "save up",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "phrasal verbs",
-  "meaning": "keep money to use later",
-  "fromFile": true
- },
- {
-  "word": "break up the fight",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "phrasal verbs",
-  "meaning": "stop people from fighting",
-  "fromFile": true
- },
- {
-  "word": "go all limp with fear",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "collocations",
-  "meaning": "become weak from fright",
-  "fromFile": true
- },
- {
-  "word": "converts",
-  "unit": 3,
-  "unitName": "Ten",
-  "category": "words & phrases",
-  "meaning": "changes",
-  "fromFile": true
- },
- {
-  "word": "sprang out of bed",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrasal verbs",
-  "meaning": "got up suddenly and energetically",
-  "fromFile": true
- },
- {
-  "word": "burrow under her blanket",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrasal verbs",
-  "meaning": "hid or wriggled under the blanket",
-  "fromFile": true
- },
- {
-  "word": "added hastily",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrases with adverbs",
-  "meaning": "said quickly or without thought",
-  "fromFile": true
- },
- {
-  "word": "replied immediately",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrases with adverbs",
-  "meaning": "answered right away",
-  "fromFile": true
- },
- {
-  "word": "intriguing signboard",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "interesting or mysterious sign",
-  "fromFile": true
- },
- {
-  "word": "fantasised about",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrasal verbs",
-  "meaning": "imagined something pleasantly unreal",
-  "fromFile": true
- },
- {
-  "word": "tantalising treats",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "very tempting snacks",
-  "fromFile": true
- },
- {
-  "word": "painstakingly kept her room neat and tidy",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "maintained cleanliness with great effort",
-  "fromFile": true
- },
- {
-  "word": "absurd things",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "silly or unreasonable matters",
-  "fromFile": true
- },
- {
-  "word": "scrutinised",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "words & phrases",
-  "meaning": "examined very carefully",
-  "fromFile": true
- },
- {
-  "word": "unbelievably neat",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrases with adverbs",
-  "meaning": "very tidy and organised",
-  "fromFile": true
- },
- {
-  "word": "genuinely puzzled",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrases with adverbs",
-  "meaning": "truly confused",
-  "fromFile": true
- },
- {
-  "word": "narrowed her eyes",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "made her eyes smaller, looking closely or angrily",
-  "fromFile": false
- },
- {
-  "word": "innocently",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrases with adverbs",
-  "meaning": "without guilt or bad intent",
-  "fromFile": true
- },
- {
-  "word": "said indignantly",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrases with adverbs",
-  "meaning": "spoke angrily or offendedly",
-  "fromFile": true
- },
- {
-  "word": "weird",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "words & phrases",
-  "meaning": "odd",
-  "fromFile": true
- },
- {
-  "word": "strange",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "words & phrases",
-  "meaning": "odd",
-  "fromFile": true
- },
- {
-  "word": "convinced",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "words & phrases",
-  "meaning": "sure",
-  "fromFile": true
- },
- {
-  "word": "incentive",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "reason or reward for action",
-  "fromFile": true
- },
- {
-  "word": "groaned",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "words & phrases",
-  "meaning": "complained",
-  "fromFile": true
- },
- {
-  "word": "plopping back onto her pillow",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrasal verbs",
-  "meaning": "dropped down lazily onto the pillow",
-  "fromFile": true
- },
- {
-  "word": "tugging her arm",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrasal verbs",
-  "meaning": "pulling her arm gently or repeatedly",
-  "fromFile": true
- },
- {
-  "word": "shouted triumphantly",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrases with adverbs",
-  "meaning": "yelled with pride or joy",
-  "fromFile": true
- },
- {
-  "word": "crossed her arms and huffed",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "folded her arms and breathed out angrily",
-  "fromFile": false
- },
- {
-  "word": "on the verge of a tantrum",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "almost having an angry outburst",
-  "fromFile": true
- },
- {
-  "word": "suggested",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "words & phrases",
-  "meaning": "advised",
-  "fromFile": true
- },
- {
-  "word": "said insistently",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrases with adverbs",
-  "meaning": "spoke firmly and repeatedly",
-  "fromFile": true
- },
- {
-  "word": "burst out laughing",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrasal verbs",
-  "meaning": "started laughing suddenly and loudly",
-  "fromFile": true
- },
- {
-  "word": "her shoulders slumped",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "collocations",
-  "meaning": "her shoulders dropped sadly",
-  "fromFile": false
- },
- {
-  "word": "perked up",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "phrasal verbs",
-  "meaning": "became more cheerful or alert",
-  "fromFile": true
- },
- {
-  "word": "gritted her teeth",
-  "unit": 4,
-  "unitName": "The Promise",
-  "category": "words & phrases",
-  "meaning": "showed frustration",
-  "fromFile": true
- },
- {
-  "word": "spooky tunnel",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "scary or eerie tunnel",
-  "fromFile": true
- },
- {
-  "word": "jump over the spikes",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "phrasal verbs",
-  "meaning": "leap over the sharp points",
-  "fromFile": false
- },
- {
-  "word": "suggest the possibility",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "put forward an idea",
-  "fromFile": false
- },
- {
-  "word": "interactive",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "words & phrases",
-  "meaning": "engaging",
-  "fromFile": true
- },
- {
-  "word": "learn to strategise",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "learn to plan carefully",
-  "fromFile": false
- },
- {
-  "word": "epic",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "words & phrases",
-  "meaning": "grand",
-  "fromFile": true
- },
- {
-  "word": "awesome",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "words & phrases",
-  "meaning": "amazing",
-  "fromFile": true
- },
- {
-  "word": "admire your initiative",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "respect that you took action first",
-  "fromFile": false
- },
- {
-  "word": "wary of the risk",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "careful because of the danger",
-  "fromFile": false
- },
- {
-  "word": "gaming addiction",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "unhealthy habit of excessive gaming",
-  "fromFile": true
- },
- {
-  "word": "focused rather than distracted",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "phrases with adverbs",
-  "meaning": "paying attention, not losing",
-  "fromFile": true
- },
- {
-  "word": "appreciate the value",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "understand how useful or important it is",
-  "fromFile": false
- },
- {
-  "word": "appeal to your love of computers",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "attract you because you love computers",
-  "fromFile": false
- },
- {
-  "word": "look forward to hearing your suggestions",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "phrasal verbs",
-  "meaning": "eagerly await your ideas",
-  "fromFile": true
- },
- {
-  "word": "miserable",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "words & phrases",
-  "meaning": "very unhappy",
-  "fromFile": false
- },
- {
-  "word": "interested in creating apps",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "keen to make computer programs",
-  "fromFile": false
- },
- {
-  "word": "develop our creativity",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "grow our ability to think of new ideas",
-  "fromFile": false
- },
- {
-  "word": "think about our proposal",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "phrasal verbs",
-  "meaning": "consider our plan carefully",
-  "fromFile": true
- },
- {
-  "word": "impressed with your enthusiasm",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "pleased by how eager you are",
-  "fromFile": false
- },
- {
-  "word": "excellent idea",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "a very good idea",
-  "fromFile": false
- },
- {
-  "word": "considerable potential",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "collocations",
-  "meaning": "strong ability to improve or succeed",
-  "fromFile": true
- },
- {
-  "word": "benefit",
-  "unit": 5,
-  "unitName": "A Game of Emails",
-  "category": "words & phrases",
-  "meaning": "gain",
-  "fromFile": true
- },
- {
-  "word": "unique combat systems",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "successful or special methods",
-  "fromFile": true
- },
- {
-  "word": "distinct",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "clear",
-  "fromFile": true
- },
- {
-  "word": "defend themselves from wild animals",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "protect themselves against wild animals",
-  "fromFile": false
- },
- {
-  "word": "performance art",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "art form",
-  "fromFile": true
- },
- {
-  "word": "competitive sport",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "sport",
-  "fromFile": true
- },
- {
-  "word": "featured",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "shown or included as an important part",
-  "fromFile": false
- },
- {
-  "word": "technique",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "skill",
-  "fromFile": true
- },
- {
-  "word": "opponent's weaknesses",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "the weak points of the person you are against",
-  "fromFile": false
- },
- {
-  "word": "overcome weaknesses",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "defeat one’s flaws or limits",
-  "fromFile": true
- },
- {
-  "word": "fast and skilful",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "quick and clever at doing something",
-  "fromFile": false
- },
- {
-  "word": "a variety of weapons",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "many different weapons",
-  "fromFile": true
- },
- {
-  "word": "combines flexibility with strength and speed",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "joins agility, power, and quickness",
-  "fromFile": true
- },
- {
-  "word": "combat",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "fighting",
-  "fromFile": false
- },
- {
-  "word": "introduced as an Olympic sport",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "first included as a sport in the Olympics",
-  "fromFile": false
- },
- {
-  "word": "practised all over the world",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "done by people in many countries",
-  "fromFile": false
- },
- {
-  "word": "derived from",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "phrasal verbs",
-  "meaning": "came or developed from something",
-  "fromFile": true
- },
- {
-  "word": "extremely swift and fit",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "phrases with adverbs",
-  "meaning": "very fast and healthy",
-  "fromFile": true
- },
- {
-  "word": "limbs",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "arms & legs",
-  "fromFile": true
- },
- {
-  "word": "stance",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "posture",
-  "fromFile": true
- },
- {
-  "word": "tied around the waist",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "fastened around the middle of the body",
-  "fromFile": false
- },
- {
-  "word": "reserved for special events",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "kept only for special occasions",
-  "fromFile": false
- },
- {
-  "word": "athlete",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "sportsperson",
-  "fromFile": true
- },
- {
-  "word": "characteristics",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "special qualities or features",
-  "fromFile": false
- },
- {
-  "word": "many physical and mental benefits",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "health and emotional advantages",
-  "fromFile": true
- },
- {
-  "word": "effective way",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "successful or special methods",
-  "fromFile": true
- },
- {
-  "word": "developing discipline",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "building self-control and responsibility",
-  "fromFile": true
- },
- {
-  "word": "fantastic way",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "successful or special methods",
-  "fromFile": true
- },
- {
-  "word": "share the same interests",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "phrasal verbs",
-  "meaning": "enjoy similar activities",
-  "fromFile": true
- },
- {
-  "word": "military",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "to do with soldiers and the armed forces",
-  "fromFile": false
- },
- {
-  "word": "tribes",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "groups",
-  "fromFile": true
- },
- {
-  "word": "agile",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "quick",
-  "fromFile": true
- },
- {
-  "word": "depression",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "sadness",
-  "fromFile": true
- },
- {
-  "word": "anxiety",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "worry",
-  "fromFile": true
- },
- {
-  "word": "self-esteem",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "confidence",
-  "fromFile": true
- },
- {
-  "word": "relaxation",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "calmness",
-  "fromFile": true
- },
- {
-  "word": "practitioners",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "learners",
-  "fromFile": true
- },
- {
-  "word": "cultural heritage",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "collocations",
-  "meaning": "traditions passed through generations",
-  "fromFile": true
- },
- {
-  "word": "numerous",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "many",
-  "fromFile": true
- },
- {
-  "word": "relevant",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "appropriate or related",
-  "fromFile": false
- },
- {
-  "word": "focus",
-  "unit": 6,
-  "unitName": "Martial Arts",
-  "category": "words & phrases",
-  "meaning": "concentration",
-  "fromFile": true
- },
- {
-  "word": "alleviate loneliness",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "reduces feelings of being alone",
-  "fromFile": true
- },
- {
-  "word": "anxiety",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "worry",
-  "fromFile": true
- },
- {
-  "word": "decomposing remains",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "rotting dead bodies",
-  "fromFile": true
- },
- {
-  "word": "potential criminals",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "people who may commit crimes",
-  "fromFile": true
- },
- {
-  "word": "deployed",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "sent out to do a job",
-  "fromFile": false
- },
- {
-  "word": "traits",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "special qualities that a person or animal has",
-  "fromFile": false
- },
- {
-  "word": "human counterparts",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "people who do the same job",
-  "fromFile": false
- },
- {
-  "word": "intensive training",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "tough, concentrated practice",
-  "fromFile": true
- },
- {
-  "word": "bred",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "raised and trained (animals)",
-  "fromFile": false
- },
- {
-  "word": "inquisitive",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "curious",
-  "fromFile": true
- },
- {
-  "word": "courageous",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "brave",
-  "fromFile": true
- },
- {
-  "word": "tough circumstances",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "difficult situations",
-  "fromFile": false
- },
- {
-  "word": "responsive to immediate situations",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "quick to react to what is happening now",
-  "fromFile": false
- },
- {
-  "word": "amidst noise and distractions",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "surrounded by noise and things that disturb you",
-  "fromFile": false
- },
- {
-  "word": "effectively",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "phrases with adverbs",
-  "meaning": "successfully or efficiently",
-  "fromFile": true
- },
- {
-  "word": "reserved",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "quiet",
-  "fromFile": true
- },
- {
-  "word": "competent",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "capable",
-  "fromFile": true
- },
- {
-  "word": "invaluable source",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "a source too useful to measure",
-  "fromFile": false
- },
- {
-  "word": "stringent tests",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "strict or demanding exams",
-  "fromFile": true
- },
- {
-  "word": "ascertain",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "find out for certain",
-  "fromFile": false
- },
- {
-  "word": "negotiate safety",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "deal with dangers carefully",
-  "fromFile": false
- },
- {
-  "word": "different terrains",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "various land types or surfaces",
-  "fromFile": true
- },
- {
-  "word": "temperament",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "the way an animal usually behaves",
-  "fromFile": false
- },
- {
-  "word": "rubble",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "broken pieces of stone and brick",
-  "fromFile": false
- },
- {
-  "word": "sniff out",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "phrasal verbs",
-  "meaning": "detect by smell or search",
-  "fromFile": true
- },
- {
-  "word": "sensitive",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "quick to notice or feel things",
-  "fromFile": false
- },
- {
-  "word": "portable equipment",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "tools easy to carry",
-  "fromFile": true
- },
- {
-  "word": "identify the presence",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "phrasal verbs",
-  "meaning": "recognise that something exists",
-  "fromFile": true
- },
- {
-  "word": "ignitable",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "able to catch fire easily",
-  "fromFile": false
- },
- {
-  "word": "muzzles",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "covers put over an animal’s mouth",
-  "fromFile": false
- },
- {
-  "word": "speed and accuracy",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "being fast and correct",
-  "fromFile": false
- },
- {
-  "word": "visually impaired",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "unable to see well",
-  "fromFile": false
- },
- {
-  "word": "severe or permanent",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "serious or lasting a long time",
-  "fromFile": false
- },
- {
-  "word": "navigate routes",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "find the way along paths",
-  "fromFile": false
- },
- {
-  "word": "obstacles",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "things in the way",
-  "fromFile": false
- },
- {
-  "word": "unique relationship",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "a special one-of-a-kind bond",
-  "fromFile": false
- },
- {
-  "word": "work in sync",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "phrasal verbs",
-  "meaning": "move or act together smoothly",
-  "fromFile": true
- },
- {
-  "word": "steer through",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "phrasal verbs",
-  "meaning": "guide safely through something",
-  "fromFile": true
- },
- {
-  "word": "hazards",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "dangers",
-  "fromFile": false
- },
- {
-  "word": "mobility aid",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "device that helps movement",
-  "fromFile": true
- },
- {
-  "word": "manoeuvring",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "moving skilfully around something",
-  "fromFile": false
- },
- {
-  "word": "a range of benefits",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "many different advantages",
-  "fromFile": false
- },
- {
-  "word": "unconditional love",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "love without limits or conditions",
-  "fromFile": true
- },
- {
-  "word": "beneficial",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "helpful",
-  "fromFile": true
- },
- {
-  "word": "emotionally secure",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "emotionally stable",
-  "fromFile": true
- },
- {
-  "word": "agitation",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "restlessness",
-  "fromFile": true
- },
- {
-  "word": "instil feelings of empathy",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "collocations",
-  "meaning": "help someone learn to understand others’ feelings",
-  "fromFile": false
- },
- {
-  "word": "integrate socially",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "mix with others",
-  "fromFile": true
- },
- {
-  "word": "concentrate",
-  "unit": 7,
-  "unitName": "Dogs with Jobs",
-  "category": "words & phrases",
-  "meaning": "focus attention",
-  "fromFile": true
- },
- {
-  "word": "essential part",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "words & phrases",
-  "meaning": "important section",
-  "fromFile": true
- },
- {
-  "word": "rear farm animals",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "keep and look after farm animals",
-  "fromFile": false
- },
- {
-  "word": "availability",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "words & phrases",
-  "meaning": "how easy it is to get something",
-  "fromFile": false
- },
- {
-  "word": "big concern",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "serious problem or worry",
-  "fromFile": true
- },
- {
-  "word": "limited land area",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "small amount of land",
-  "fromFile": true
- },
- {
-  "word": "sustainable supply",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "continuous, long-lasting source",
-  "fromFile": true
- },
- {
-  "word": "water catchment area",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "land collecting rainwater",
-  "fromFile": true
- },
- {
-  "word": "imported from neighbouring countries",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "brought in from nearby countries",
-  "fromFile": false
- },
- {
-  "word": "innovative ways",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "creative new methods",
-  "fromFile": true
- },
- {
-  "word": "specially treated",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "cleaned and made safe by a special process",
-  "fromFile": false
- },
- {
-  "word": "advanced technologies",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "modern, developed tools",
-  "fromFile": true
- },
- {
-  "word": "desalination",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "words & phrases",
-  "meaning": "removing salt from water",
-  "fromFile": true
- },
- {
-  "word": "significant amount of water",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "large quantity of water",
-  "fromFile": true
- },
- {
-  "word": "frequent water shortages",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "often not enough water",
-  "fromFile": true
- },
- {
-  "word": "rationed",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "words & phrases",
-  "meaning": "limited use",
-  "fromFile": true
- },
- {
-  "word": "inconvenience",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "words & phrases",
-  "meaning": "trouble",
-  "fromFile": true
- },
- {
-  "word": "a problem that can cripple a country",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "a problem that can severely weaken a country",
-  "fromFile": false
- },
- {
-  "word": "water is precious",
-  "unit": 8,
-  "unitName": "Making Every Drop Count",
-  "category": "collocations",
-  "meaning": "water is very valuable",
-  "fromFile": false
- },
- {
-  "word": "nature reserves",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "protected natural areas",
-  "fromFile": true
- },
- {
-  "word": "full of wildlife",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "with many wild animals living there",
-  "fromFile": false
- },
- {
-  "word": "venture onto the streets",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrasal verbs",
-  "meaning": "go bravely or curiously outside",
-  "fromFile": true
- },
- {
-  "word": "delighted to see",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "very happy to see",
-  "fromFile": false
- },
- {
-  "word": "native to Singapore",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "originally from Singapore",
-  "fromFile": false
- },
- {
-  "word": "spotted more frequently",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrasal verbs",
-  "meaning": "seen more often",
-  "fromFile": true
- },
- {
-  "word": "draws people's attention",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "makes people notice it",
-  "fromFile": false
- },
- {
-  "word": "encounter with wildlife",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "a meeting with wild animals",
-  "fromFile": false
- },
- {
-  "word": "receive numerous complaints",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "get many complaints from people",
-  "fromFile": false
- },
- {
-  "word": "close-knit family groups",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "tightly bonded families",
-  "fromFile": true
- },
- {
-  "word": "associate plastic bags with food",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "think plastic bags mean food",
-  "fromFile": false
- },
- {
-  "word": "venturing into people's homes",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrasal verbs",
-  "meaning": "entering houses bravely or curiously",
-  "fromFile": true
- },
- {
-  "word": "approach people",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "go up to people",
-  "fromFile": false
- },
- {
-  "word": "snatch them directly from people",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrasal verbs",
-  "meaning": "grab suddenly from someone’s hands",
-  "fromFile": true
- },
- {
-  "word": "misinterpreted",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "words & phrases",
-  "meaning": "understood wrongly",
-  "fromFile": true
- },
- {
-  "word": "sign of aggression",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "act showing anger or attack",
-  "fromFile": true
- },
- {
-  "word": "assertive and defensive",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "confident and ready to protect themselves",
-  "fromFile": false
- },
- {
-  "word": "cornered or threatened",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "trapped or in danger",
-  "fromFile": false
- },
- {
-  "word": "occasionally",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrases with adverbs",
-  "meaning": "sometimes or now and then",
-  "fromFile": true
- },
- {
-  "word": "human-wildlife conflicts",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "problems between people and animals",
-  "fromFile": true
- },
- {
-  "word": "turn people against wildlife",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "make people dislike wild animals",
-  "fromFile": false
- },
- {
-  "word": "culled",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "words & phrases",
-  "meaning": "killed in a controlled way to reduce numbers",
-  "fromFile": false
- },
- {
-  "word": "in close proximity to nature",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "very near to nature",
-  "fromFile": false
- },
- {
-  "word": "co-exist with wildlife",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrasal verbs",
-  "meaning": "live peacefully with animals",
-  "fromFile": true
- },
- {
-  "word": "access food easily",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "get food without difficulty",
-  "fromFile": false
- },
- {
-  "word": "depend on humans",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrasal verbs",
-  "meaning": "rely on people for survival",
-  "fromFile": true
- },
- {
-  "word": "keep a safe distance from wildlife",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrasal verbs",
-  "meaning": "stay far enough for safety",
-  "fromFile": true
- },
- {
-  "word": "enrich our lives",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "make our lives better and fuller",
-  "fromFile": false
- },
- {
-  "word": "live together in harmony",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "live together peacefully",
-  "fromFile": false
- },
- {
-  "word": "large sanctuary",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "a big safe place for wildlife",
-  "fromFile": false
- },
- {
-  "word": "flora and fauna",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "plants and animals",
-  "fromFile": true
- },
- {
-  "word": "inscribed as a UNESCO World Heritate site",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "listed by UNESCO as a World Heritage site",
-  "fromFile": false
- },
- {
-  "word": "encompasses a diverse mix",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "includes many different kinds",
-  "fromFile": false
- },
- {
-  "word": "rich ecosystem",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "diverse living environment",
-  "fromFile": true
- },
- {
-  "word": "network of trails",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "connected walking paths",
-  "fromFile": true
- },
- {
-  "word": "wind through the forest",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrasal verbs",
-  "meaning": "curve or twist through trees",
-  "fromFile": true
- },
- {
-  "word": "offers an impeded overview",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "gives a view over the area",
-  "fromFile": false
- },
- {
-  "word": "thriving with wildlife",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "full of healthy animals",
-  "fromFile": true
- },
- {
-  "word": "leisurely stroll",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "phrases with adverbs",
-  "meaning": "slow, relaxed walk",
-  "fromFile": true
- },
- {
-  "word": "squirrels scurrying up trees",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "squirrels running quickly up trees",
-  "fromFile": false
- },
- {
-  "word": "opportunistic",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "words & phrases",
-  "meaning": "quick to take any chance that comes",
-  "fromFile": false
- },
- {
-  "word": "solitary creatures",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "animals that live alone",
-  "fromFile": true
- },
- {
-  "word": "scavenging for food",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "searching for leftover food",
-  "fromFile": true
- },
- {
-  "word": "will not attack unless provoked",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "collocations",
-  "meaning": "will only attack if made angry first",
-  "fromFile": false
- },
- {
-  "word": "unpredictable",
-  "unit": 9,
-  "unitName": "Urban Wildlife: Friend or Foe?",
-  "category": "words & phrases",
-  "meaning": "cannot be guessed",
-  "fromFile": true
- },
- {
-  "category": "spelling lists",
-  "meaning": "determined not to change your mind",
-  "unit": 101,
-  "unitName": "Spelling Week 1",
-  "word": "adamant"
- },
- {
-  "category": "spelling lists",
-  "meaning": "having enough skill or knowledge to do something well",
-  "unit": 101,
-  "unitName": "Spelling Week 1",
-  "word": "competent"
- },
- {
-  "category": "spelling lists",
-  "meaning": "so satisfied with yourself that you do not feel any change is necessary",
-  "unit": 101,
-  "unitName": "Spelling Week 1",
-  "word": "complacent"
- },
- {
-  "category": "spelling lists",
-  "meaning": "skilled and experienced",
-  "unit": 101,
-  "unitName": "Spelling Week 1",
-  "word": "proficient"
- },
- {
-  "category": "spelling lists",
-  "meaning": "admirably purposeful, determined, and unwavering",
-  "unit": 101,
-  "unitName": "Spelling Week 1",
-  "word": "resolute"
- },
- {
-  "category": "spelling lists",
-  "meaning": "an event that causes great damage to people's lives and property",
-  "unit": 102,
-  "unitName": "Spelling Week 2",
-  "word": "calamity"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a sudden event that causes great trouble or destruction",
-  "unit": 102,
-  "unitName": "Spelling Week 2",
-  "word": "catastrophe"
- },
- {
-  "category": "spelling lists",
-  "meaning": "severe punishment for something seriously wrong that somebody has done",
-  "unit": 102,
-  "unitName": "Spelling Week 2",
-  "word": "retribution"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a very sad event or situation, especially one involving death or suffering",
-  "unit": 102,
-  "unitName": "Spelling Week 2",
-  "word": "tragedy"
- },
- {
-  "category": "spelling lists",
-  "meaning": "punishing of someone for harming you or your friends or family, or the wish for such punishment to happen",
-  "unit": 102,
-  "unitName": "Spelling Week 2",
-  "word": "vengeance"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to make someone or something so famous that that person or thing is remembered for a very long time",
-  "unit": 103,
-  "unitName": "Spelling Week 3",
-  "word": "immortalise"
- },
- {
-  "category": "spelling lists",
-  "meaning": "that cannot be moved or changed",
-  "unit": 103,
-  "unitName": "Spelling Week 3",
-  "word": "immovable"
- },
- {
-  "category": "spelling lists",
-  "meaning": "not supporting any of the sides involved in an argument",
-  "unit": 103,
-  "unitName": "Spelling Week 3",
-  "word": "impartial"
- },
- {
-  "category": "spelling lists",
-  "meaning": "impossible to go through",
-  "unit": 103,
-  "unitName": "Spelling Week 3",
-  "word": "impassable"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a situation in which progress is impossible, especially because the people involved cannot agree",
-  "unit": 103,
-  "unitName": "Spelling Week 3",
-  "word": "impasse"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a person who is very good at sports or physical exercise",
-  "unit": 104,
-  "unitName": "Spelling Week 4",
-  "word": "athlete"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a person who comments on a certain event or subject",
-  "unit": 104,
-  "unitName": "Spelling Week 4",
-  "word": "commentator"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a person whose job is to collect and write news",
-  "unit": 104,
-  "unitName": "Spelling Week 4",
-  "word": "journalist"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a person that you are playing or fighting against",
-  "unit": 104,
-  "unitName": "Spelling Week 4",
-  "word": "opponent"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a person who watches, usually a sports event",
-  "unit": 104,
-  "unitName": "Spelling Week 4",
-  "word": "spectator"
- },
- {
-  "category": "spelling lists",
-  "meaning": "in a way that continues without interruption",
-  "unit": 105,
-  "unitName": "Spelling Week 5",
-  "word": "continually"
- },
- {
-  "category": "spelling lists",
-  "meaning": "often",
-  "unit": 105,
-  "unitName": "Spelling Week 5",
-  "word": "frequently"
- },
- {
-  "category": "spelling lists",
-  "meaning": "in a way that stops and starts often over a period of time; not regularly",
-  "unit": 105,
-  "unitName": "Spelling Week 5",
-  "word": "intermittently"
- },
- {
-  "category": "spelling lists",
-  "meaning": "sometimes but not often",
-  "unit": 105,
-  "unitName": "Spelling Week 5",
-  "word": "occasionally"
- },
- {
-  "category": "spelling lists",
-  "meaning": "happening fairly often and regularly",
-  "unit": 105,
-  "unitName": "Spelling Week 5",
-  "word": "periodic"
- },
- {
-  "category": "spelling lists",
-  "meaning": "so interesting that you give it all your attention and time",
-  "unit": 106,
-  "unitName": "Spelling Week 6",
-  "word": "engross"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to keep someone completely interested",
-  "unit": 106,
-  "unitName": "Spelling Week 6",
-  "word": "enthral"
- },
- {
-  "category": "spelling lists",
-  "meaning": "fascinate",
-  "unit": 106,
-  "unitName": "Spelling Week 6",
-  "word": "mesmerise"
- },
- {
-  "category": "spelling lists",
-  "meaning": "be constantly talking or worrying about something",
-  "unit": 106,
-  "unitName": "Spelling Week 6",
-  "word": "obsess"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to be the main thought in someone's mind, causing other things to be forgotten",
-  "unit": 106,
-  "unitName": "Spelling Week 6",
-  "word": "preoccupy"
- },
- {
-  "word": "clank",
-  "unit": 107,
-  "unitName": "Spelling Week 7",
-  "category": "spelling lists",
-  "meaning": "a loud sound made by pieces of metal hitting each other"
- },
- {
-  "word": "clatter",
-  "unit": 107,
-  "unitName": "Spelling Week 7",
-  "category": "spelling lists",
-  "meaning": "the sound of hard objects knocking together"
- },
- {
-  "word": "clink",
-  "unit": 107,
-  "unitName": "Spelling Week 7",
-  "category": "spelling lists",
-  "meaning": "a sharp ringing sound, like glasses being hit against each other"
- },
- {
-  "word": "cluster",
-  "unit": 107,
-  "unitName": "Spelling Week 7",
-  "category": "spelling lists",
-  "meaning": "a group of things of the same type that grow or appear close together"
- },
- {
-  "word": "clutter",
-  "unit": 107,
-  "unitName": "Spelling Week 7",
-  "category": "spelling lists",
-  "meaning": "to fill a place with too many things"
- },
- {
-  "category": "spelling lists",
-  "meaning": "hide",
-  "unit": 108,
-  "unitName": "Spelling Week 8",
-  "word": "conceal"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to hide your real feelings or intentions, often by pretending to have different ones",
-  "unit": 108,
-  "unitName": "Spelling Week 8",
-  "word": "dissemble"
- },
- {
-  "category": "spelling lists",
-  "meaning": "take somebody's attention away from what they are trying to do",
-  "unit": 108,
-  "unitName": "Spelling Week 8",
-  "word": "distract"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to take someone's attention away from something; to cause something or someone to change direction",
-  "unit": 108,
-  "unitName": "Spelling Week 8",
-  "word": "divert"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to avoid or escape from someone or something",
-  "unit": 108,
-  "unitName": "Spelling Week 8",
-  "word": "evade"
- },
- {
-  "word": "coincidence",
-  "unit": 109,
-  "unitName": "Spelling Week 9",
-  "category": "spelling lists",
-  "meaning": "the fact of two things happening at the same time by chance"
- },
- {
-  "word": "consecutive",
-  "unit": 109,
-  "unitName": "Spelling Week 9",
-  "category": "spelling lists",
-  "meaning": "following one after another"
- },
- {
-  "word": "correlation",
-  "unit": 109,
-  "unitName": "Spelling Week 9",
-  "category": "spelling lists",
-  "meaning": "a connection between two or more things"
- },
- {
-  "word": "simultaneous",
-  "unit": 109,
-  "unitName": "Spelling Week 9",
-  "category": "spelling lists",
-  "meaning": "happening or done at the same time"
- },
- {
-  "word": "synchronise",
-  "unit": 109,
-  "unitName": "Spelling Week 9",
-  "category": "spelling lists",
-  "meaning": "to cause to happen at the same time"
- },
- {
-  "category": "spelling lists",
-  "meaning": "able to express thoughts and feelings easily and clearly; to express in words, pronounce",
-  "unit": 110,
-  "unitName": "Spelling Week 10",
-  "word": "articulate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "(of an argument or plan) describing that each part connects logically; (of a person) able to be understood",
-  "unit": 110,
-  "unitName": "Spelling Week 10",
-  "word": "coherent"
- },
- {
-  "category": "spelling lists",
-  "meaning": "able to use language and express your opinions well",
-  "unit": 110,
-  "unitName": "Spelling Week 10",
-  "word": "eloquent"
- },
- {
-  "category": "spelling lists",
-  "meaning": "relating to your ability to think and understand things, especially complicated ideas",
-  "unit": 110,
-  "unitName": "Spelling Week 10",
-  "word": "intellectual"
- },
- {
-  "category": "spelling lists",
-  "meaning": "able to do many different things",
-  "unit": 110,
-  "unitName": "Spelling Week 10",
-  "word": "versatile"
- },
- {
-  "category": "spelling lists",
-  "meaning": "difficult, needing a lot of effort and energy",
-  "unit": 111,
-  "unitName": "Spelling Week 11",
-  "word": "arduous"
- },
- {
-  "category": "spelling lists",
-  "meaning": "very hungry",
-  "unit": 111,
-  "unitName": "Spelling Week 11",
-  "word": "famished"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a feeling of being extremely tired",
-  "unit": 111,
-  "unitName": "Spelling Week 11",
-  "word": "fatigue"
- },
- {
-  "category": "spelling lists",
-  "meaning": "the feeling of having little energy or of being unable or unwilling to do anything",
-  "unit": 111,
-  "unitName": "Spelling Week 11",
-  "word": "lethargy"
- },
- {
-  "category": "spelling lists",
-  "meaning": "very dry or thirsty",
-  "unit": 111,
-  "unitName": "Spelling Week 11",
-  "word": "parched"
- },
- {
-  "category": "spelling lists",
-  "meaning": "make something, especially a feeling, less strong",
-  "unit": 112,
-  "unitName": "Spelling Week 12",
-  "word": "allay"
- },
- {
-  "category": "spelling lists",
-  "meaning": "make somebody calmer or less angry",
-  "unit": 112,
-  "unitName": "Spelling Week 12",
-  "word": "appease"
- },
- {
-  "category": "spelling lists",
-  "meaning": "not affected by or do not have to do something",
-  "unit": 112,
-  "unitName": "Spelling Week 12",
-  "word": "exempt"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to cause someone who is angry or upset to be calm and satisfied",
-  "unit": 112,
-  "unitName": "Spelling Week 12",
-  "word": "pacify"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to stop someone from feeling angry",
-  "unit": 112,
-  "unitName": "Spelling Week 12",
-  "word": "placate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "give somebody the desire, confidence or enthusiasm to do something well; to give someone an idea",
-  "unit": 113,
-  "unitName": "Spelling Week 13",
-  "word": "inspire"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to make someone feel fresher, healthier, and more energetic",
-  "unit": 113,
-  "unitName": "Spelling Week 13",
-  "word": "invigorate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to make somebody want to do something, especially something that involves hard work and effort",
-  "unit": 113,
-  "unitName": "Spelling Week 13",
-  "word": "motivate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to make an organisation more effective by introducing new ideas or people; to make someone look or feel young and energetic again",
-  "unit": 113,
-  "unitName": "Spelling Week 13",
-  "word": "rejuvenate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to make something develop or become more active",
-  "unit": 113,
-  "unitName": "Spelling Week 13",
-  "word": "stimulate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a small booklet or pamphlet, especially one that contains pictures and is used for advertising purposes",
-  "unit": 114,
-  "unitName": "Spelling Week 14",
-  "word": "brochure"
- },
- {
-  "category": "spelling lists",
-  "meaning": "an organised list of things (book titles, goods for sale)",
-  "unit": 114,
-  "unitName": "Spelling Week 14",
-  "word": "catalogue"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a list of names and addresses of people or businesses",
-  "unit": 114,
-  "unitName": "Spelling Week 14",
-  "word": "directory"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a book of instructions; having to do with use of the hands",
-  "unit": 114,
-  "unitName": "Spelling Week 14",
-  "word": "manual"
- },
- {
-  "category": "spelling lists",
-  "meaning": "a list of ingredients and instructions for making a food dish",
-  "unit": 114,
-  "unitName": "Spelling Week 14",
-  "word": "recipe"
- },
- {
-  "category": "spelling lists",
-  "meaning": "behaving confidently and able to say in a direct way what you want or believe",
-  "unit": 115,
-  "unitName": "Spelling Week 15",
-  "word": "assertive"
- },
- {
-  "category": "spelling lists",
-  "meaning": "very important for the final result of a particular situation; able to make decisions quickly and confidently",
-  "unit": 115,
-  "unitName": "Spelling Week 15",
-  "word": "decisive"
- },
- {
-  "category": "spelling lists",
-  "meaning": "strong and determined in speech or action, so that what is said or done gets attention",
-  "unit": 115,
-  "unitName": "Spelling Week 15",
-  "word": "emphatic"
- },
- {
-  "category": "spelling lists",
-  "meaning": "true, and impossible to doubt",
-  "unit": 115,
-  "unitName": "Spelling Week 15",
-  "word": "indisputable"
- },
- {
-  "category": "spelling lists",
-  "meaning": "total, or expressed in a clear and certain way",
-  "unit": 115,
-  "unitName": "Spelling Week 15",
-  "word": "unequivocal"
- },
- {
-  "category": "spelling lists",
-  "meaning": "delicious",
-  "unit": 116,
-  "unitName": "Spelling Week 16",
-  "word": "scrumptious"
- },
- {
-  "category": "spelling lists",
-  "meaning": "always doing what is right",
-  "unit": 116,
-  "unitName": "Spelling Week 16",
-  "word": "scrupulous"
- },
- {
-  "category": "spelling lists",
-  "meaning": "large or splendid",
-  "unit": 116,
-  "unitName": "Spelling Week 16",
-  "word": "sumptuous"
- },
- {
-  "category": "spelling lists",
-  "meaning": "consuming large amounts of food with greed",
-  "unit": 116,
-  "unitName": "Spelling Week 16",
-  "word": "voracious"
- },
- {
-  "category": "spelling lists",
-  "meaning": "enthusiastic and eager",
-  "unit": 116,
-  "unitName": "Spelling Week 16",
-  "word": "zealous"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to use something in a way that helps you; to use someone or something unfairly for your own advantage",
-  "unit": 117,
-  "unitName": "Spelling Week 17",
-  "word": "exploit"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to continue to have; to keep in existence, or not allow to become less",
-  "unit": 117,
-  "unitName": "Spelling Week 17",
-  "word": "maintain"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to control something or someone to your advantage, often unfairly or dishonestly",
-  "unit": 117,
-  "unitName": "Spelling Week 17",
-  "word": "manipulate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to cause or allow something to continue; food",
-  "unit": 117,
-  "unitName": "Spelling Week 17",
-  "word": "sustain"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to use something in an effective way",
-  "unit": 117,
-  "unitName": "Spelling Week 17",
-  "word": "utilise"
- },
- {
-  "category": "spelling lists",
-  "meaning": "pleasant smell",
-  "unit": 118,
-  "unitName": "Spelling Week 18",
-  "word": "aroma"
- },
- {
-  "category": "spelling lists",
-  "meaning": "smoke, gas",
-  "unit": 118,
-  "unitName": "Spelling Week 18",
-  "word": "fumes"
- },
- {
-  "category": "spelling lists",
-  "meaning": "smell (especially one that is unpleasant)",
-  "unit": 118,
-  "unitName": "Spelling Week 18",
-  "word": "odour"
- },
- {
-  "category": "spelling lists",
-  "meaning": "having a strong taste or smell",
-  "unit": 118,
-  "unitName": "Spelling Week 18",
-  "word": "pungent"
- },
- {
-  "category": "spelling lists",
-  "meaning": "unpleasant smell",
-  "unit": 118,
-  "unitName": "Spelling Week 18",
-  "word": "stench"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to cause someone to be completely unable to understand or explain something",
-  "unit": 119,
-  "unitName": "Spelling Week 19",
-  "word": "baffled"
- },
- {
-  "category": "spelling lists",
-  "meaning": "confused",
-  "unit": 119,
-  "unitName": "Spelling Week 19",
-  "word": "befuddled"
- },
- {
-  "category": "spelling lists",
-  "meaning": "slightly confused",
-  "unit": 119,
-  "unitName": "Spelling Week 19",
-  "word": "bemused"
- },
- {
-  "category": "spelling lists",
-  "meaning": "confused and uncertain",
-  "unit": 119,
-  "unitName": "Spelling Week 19",
-  "word": "bewildered"
- },
- {
-  "category": "spelling lists",
-  "meaning": "confused and not knowing where to go or what to do",
-  "unit": 119,
-  "unitName": "Spelling Week 19",
-  "word": "disoriented"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to wave something in the air in a threatening or excited way",
-  "unit": 120,
-  "unitName": "Spelling Week 20",
-  "word": "brandish"
- },
- {
-  "category": "spelling lists",
-  "meaning": "show something you are proud of",
-  "unit": 120,
-  "unitName": "Spelling Week 20",
-  "word": "flaunt"
- },
- {
-  "category": "spelling lists",
-  "meaning": "not well known or difficult to understand",
-  "unit": 120,
-  "unitName": "Spelling Week 20",
-  "word": "obscure"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to cover or hide something",
-  "unit": 120,
-  "unitName": "Spelling Week 20",
-  "word": "shroud"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to put an end to or prevent something from being known",
-  "unit": 120,
-  "unitName": "Spelling Week 20",
-  "word": "suppress"
- },
- {
-  "category": "spelling lists",
-  "meaning": "make something smaller in size or number",
-  "unit": 121,
-  "unitName": "Spelling Week 21",
-  "word": "decrease"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to make somebody feel less confident; to let air or gas out of a tyre, balloon etc",
-  "unit": 121,
-  "unitName": "Spelling Week 21",
-  "word": "deflate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "go down from a higher level to lower level",
-  "unit": 121,
-  "unitName": "Spelling Week 21",
-  "word": "descend"
- },
- {
-  "category": "spelling lists",
-  "meaning": "become worse",
-  "unit": 121,
-  "unitName": "Spelling Week 21",
-  "word": "deteriorate"
- },
- {
-  "category": "spelling lists",
-  "meaning": "to reduce in value",
-  "unit": 121,
-  "unitName": "Spelling Week 21",
-  "word": "devalue"
- }
+  {
+    "word": "sprinted out",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrasal verbs",
+    "meaning": "ran out quickly",
+    "fromFile": true
+  },
+  {
+    "word": "dreaded voice",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "voice that causes fear",
+    "fromFile": true
+  },
+  {
+    "word": "shoved aside",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrasal verbs",
+    "meaning": "pushed out of the way",
+    "fromFile": true
+  },
+  {
+    "word": "rowdy gang",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "noisy, disorderly group",
+    "fromFile": true
+  },
+  {
+    "word": "smirked",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "smiled slyly or mockingly",
+    "fromFile": true
+  },
+  {
+    "word": "protested",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "disagreed strongly",
+    "fromFile": true
+  },
+  {
+    "word": "pinched his arm",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "squeezed his arm lightly",
+    "fromFile": true
+  },
+  {
+    "word": "yelped in pain",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "cried out in hurt",
+    "fromFile": true
+  },
+  {
+    "word": "constantly on his mind",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrases with adverbs",
+    "meaning": "always thinking about it",
+    "fromFile": true
+  },
+  {
+    "word": "moping around the house",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrases with adverbs",
+    "meaning": "moving sadly with no energy",
+    "fromFile": true
+  },
+  {
+    "word": "said hesitantly",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrases with adverbs",
+    "meaning": "spoke with uncertainty",
+    "fromFile": true
+  },
+  {
+    "word": "run errands",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrasal verbs",
+    "meaning": "do small tasks for someone",
+    "fromFile": true
+  },
+  {
+    "word": "said forlornly",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrases with adverbs",
+    "meaning": "spoke sadly or hopelessly",
+    "fromFile": true
+  },
+  {
+    "word": "pay off his debt",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrasal verbs",
+    "meaning": "finish repaying borrowed money",
+    "fromFile": true
+  },
+  {
+    "word": "humiliating",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "deeply embarrassing",
+    "fromFile": true
+  },
+  {
+    "word": "yearning to buy",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "strong desire to purchase",
+    "fromFile": true
+  },
+  {
+    "word": "overjoyed",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "extremely happy",
+    "fromFile": true
+  },
+  {
+    "word": "great sense of satisfaction",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "strong feeling of happiness",
+    "fromFile": true
+  },
+  {
+    "word": "well-defined muscles",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "muscles clearly shaped",
+    "fromFile": true
+  },
+  {
+    "word": "demanded",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "insisted forcefully",
+    "fromFile": true
+  },
+  {
+    "word": "beady eyes",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "small, sharp eyes",
+    "fromFile": true
+  },
+  {
+    "word": "bellowed",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "shouted loudly",
+    "fromFile": true
+  },
+  {
+    "word": "furious",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "very angry",
+    "fromFile": true
+  },
+  {
+    "word": "growled",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "made low angry sound",
+    "fromFile": true
+  },
+  {
+    "word": "henchmen",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "words & phrases",
+    "meaning": "loyal followers of a leader",
+    "fromFile": true
+  },
+  {
+    "word": "lunged at him",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "phrasal verbs",
+    "meaning": "jumped forward to attack",
+    "fromFile": true
+  },
+  {
+    "word": "outspoken",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "character traits describing personality",
+    "fromFile": true
+  },
+  {
+    "word": "bossy",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "character traits describing personality",
+    "fromFile": true
+  },
+  {
+    "word": "witty",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "character traits describing personality",
+    "fromFile": true
+  },
+  {
+    "word": "mature",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "character traits describing personality",
+    "fromFile": true
+  },
+  {
+    "word": "athletic",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "character traits describing personality",
+    "fromFile": true
+  },
+  {
+    "word": "dependable",
+    "unit": 1,
+    "unitName": "Coolie Boy",
+    "category": "collocations",
+    "meaning": "character traits describing personality",
+    "fromFile": true
+  },
+  {
+    "word": "devastating tsunami",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "extremely destructive sea wave",
+    "fromFile": true
+  },
+  {
+    "word": "destroyed homes",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "houses ruined or damaged",
+    "fromFile": true
+  },
+  {
+    "word": "impact of the tsunami",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "effect caused by the wave",
+    "fromFile": true
+  },
+  {
+    "word": "torrents of water",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "rushing flow of water",
+    "fromFile": true
+  },
+  {
+    "word": "stood stranded",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "left alone with no way to move",
+    "fromFile": false
+  },
+  {
+    "word": "flocked in",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "came in large numbers",
+    "fromFile": false
+  },
+  {
+    "word": "pin down the hippopotamus",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "hold it firmly to the ground",
+    "fromFile": true
+  },
+  {
+    "word": "rescued",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "words & phrases",
+    "meaning": "saved from danger",
+    "fromFile": true
+  },
+  {
+    "word": "tangled up in the net",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "caught and twisted in the net",
+    "fromFile": true
+  },
+  {
+    "word": "dragged slowly",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrases with adverbs",
+    "meaning": "pulled along slowly",
+    "fromFile": false
+  },
+  {
+    "word": "gently loaded onto the lorry",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrases with adverbs",
+    "meaning": "carefully placed into the truck",
+    "fromFile": true
+  },
+  {
+    "word": "separated abruptly",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrases with adverbs",
+    "meaning": "suddenly pulled apart",
+    "fromFile": true
+  },
+  {
+    "word": "suspicious",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "words & phrases",
+    "meaning": "feeling that something is wrong",
+    "fromFile": false
+  },
+  {
+    "word": "converted into",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "words & phrases",
+    "meaning": "changed into something new",
+    "fromFile": true
+  },
+  {
+    "word": "fixed up the fence",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "repaired or improved the fence",
+    "fromFile": true
+  },
+  {
+    "word": "scrambled from the lorry",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "climbed out quickly and clumsily",
+    "fromFile": true
+  },
+  {
+    "word": "crouched behind",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "bent low to hide behind something",
+    "fromFile": true
+  },
+  {
+    "word": "old and grumpy",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "bad-tempered and unfriendly",
+    "fromFile": true
+  },
+  {
+    "word": "hissed at",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "made an angry hissing sound at",
+    "fromFile": false
+  },
+  {
+    "word": "companion",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "words & phrases",
+    "meaning": "a friend who spends time with you",
+    "fromFile": false
+  },
+  {
+    "word": "content",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "words & phrases",
+    "meaning": "satisfied and at peace",
+    "fromFile": true
+  },
+  {
+    "word": "sprightly",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "words & phrases",
+    "meaning": "lively and energetic",
+    "fromFile": true
+  },
+  {
+    "word": "became used to",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "grew familiar or comfortable with",
+    "fromFile": true
+  },
+  {
+    "word": "witnessed an amazing sight",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "words & phrases",
+    "meaning": "saw something incredible",
+    "fromFile": true
+  },
+  {
+    "word": "snuggled up against",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrasal verbs",
+    "meaning": "moved close in a warm, loving way",
+    "fromFile": true
+  },
+  {
+    "word": "initially",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "phrases with adverbs",
+    "meaning": "at first",
+    "fromFile": true
+  },
+  {
+    "word": "special relationship",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "close and meaningful bond",
+    "fromFile": true
+  },
+  {
+    "word": "a phenomenon",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "remarkable or rare event",
+    "fromFile": true
+  },
+  {
+    "word": "extraordinary",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "words & phrases",
+    "meaning": "very unusual or remarkable",
+    "fromFile": true
+  },
+  {
+    "word": "a source of inspiration",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "something that motivates creativity",
+    "fromFile": true
+  },
+  {
+    "word": "contrasting personalities",
+    "unit": 2,
+    "unitName": "Amazing Friends",
+    "category": "collocations",
+    "meaning": "very different characters",
+    "fromFile": true
+  },
+  {
+    "word": "crazy about football",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "collocations",
+    "meaning": "love football very much",
+    "fromFile": true
+  },
+  {
+    "word": "absolutely frank",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "collocations",
+    "meaning": "completely honest",
+    "fromFile": true
+  },
+  {
+    "word": "interested in football",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "collocations",
+    "meaning": "enjoys learning or watching football",
+    "fromFile": true
+  },
+  {
+    "word": "yelling",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "words & phrases",
+    "meaning": "shouting loudly",
+    "fromFile": false
+  },
+  {
+    "word": "quarrel",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "words & phrases",
+    "meaning": "argued",
+    "fromFile": true
+  },
+  {
+    "word": "gruff",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "words & phrases",
+    "meaning": "rough",
+    "fromFile": true
+  },
+  {
+    "word": "shoving",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "words & phrases",
+    "meaning": "pushing",
+    "fromFile": true
+  },
+  {
+    "word": "acrobatic save",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "collocations",
+    "meaning": "skillful, athletic rescue or defence",
+    "fromFile": true
+  },
+  {
+    "word": "peep through the cracks between my fingers",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "collocations",
+    "meaning": "look secretly through the gaps between my fingers",
+    "fromFile": false
+  },
+  {
+    "word": "feigning injury",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "collocations",
+    "meaning": "pretending to be hurt",
+    "fromFile": true
+  },
+  {
+    "word": "save up",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "phrasal verbs",
+    "meaning": "keep money to use later",
+    "fromFile": true
+  },
+  {
+    "word": "break up the fight",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "phrasal verbs",
+    "meaning": "stop people from fighting",
+    "fromFile": true
+  },
+  {
+    "word": "go all limp with fear",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "collocations",
+    "meaning": "become weak from fright",
+    "fromFile": true
+  },
+  {
+    "word": "converts",
+    "unit": 3,
+    "unitName": "Ten",
+    "category": "words & phrases",
+    "meaning": "changes",
+    "fromFile": true
+  },
+  {
+    "word": "sprang out of bed",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrasal verbs",
+    "meaning": "got up suddenly and energetically",
+    "fromFile": true
+  },
+  {
+    "word": "burrow under her blanket",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrasal verbs",
+    "meaning": "hid or wriggled under the blanket",
+    "fromFile": true
+  },
+  {
+    "word": "added hastily",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrases with adverbs",
+    "meaning": "said quickly or without thought",
+    "fromFile": true
+  },
+  {
+    "word": "replied immediately",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrases with adverbs",
+    "meaning": "answered right away",
+    "fromFile": true
+  },
+  {
+    "word": "intriguing signboard",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "interesting or mysterious sign",
+    "fromFile": true
+  },
+  {
+    "word": "fantasised about",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrasal verbs",
+    "meaning": "imagined something pleasantly unreal",
+    "fromFile": true
+  },
+  {
+    "word": "tantalising treats",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "very tempting snacks",
+    "fromFile": true
+  },
+  {
+    "word": "painstakingly kept her room neat and tidy",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "maintained cleanliness with great effort",
+    "fromFile": true
+  },
+  {
+    "word": "absurd things",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "silly or unreasonable matters",
+    "fromFile": true
+  },
+  {
+    "word": "scrutinised",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "words & phrases",
+    "meaning": "examined very carefully",
+    "fromFile": true
+  },
+  {
+    "word": "unbelievably neat",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrases with adverbs",
+    "meaning": "very tidy and organised",
+    "fromFile": true
+  },
+  {
+    "word": "genuinely puzzled",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrases with adverbs",
+    "meaning": "truly confused",
+    "fromFile": true
+  },
+  {
+    "word": "narrowed her eyes",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "made her eyes smaller, looking closely or angrily",
+    "fromFile": false
+  },
+  {
+    "word": "innocently",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrases with adverbs",
+    "meaning": "without guilt or bad intent",
+    "fromFile": true
+  },
+  {
+    "word": "said indignantly",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrases with adverbs",
+    "meaning": "spoke angrily or offendedly",
+    "fromFile": true
+  },
+  {
+    "word": "weird",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "words & phrases",
+    "meaning": "odd",
+    "fromFile": true
+  },
+  {
+    "word": "strange",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "words & phrases",
+    "meaning": "odd",
+    "fromFile": true
+  },
+  {
+    "word": "convinced",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "words & phrases",
+    "meaning": "sure",
+    "fromFile": true
+  },
+  {
+    "word": "incentive",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "reason or reward for action",
+    "fromFile": true
+  },
+  {
+    "word": "groaned",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "words & phrases",
+    "meaning": "complained",
+    "fromFile": true
+  },
+  {
+    "word": "plopping back onto her pillow",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrasal verbs",
+    "meaning": "dropped down lazily onto the pillow",
+    "fromFile": true
+  },
+  {
+    "word": "tugging her arm",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrasal verbs",
+    "meaning": "pulling her arm gently or repeatedly",
+    "fromFile": true
+  },
+  {
+    "word": "shouted triumphantly",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrases with adverbs",
+    "meaning": "yelled with pride or joy",
+    "fromFile": true
+  },
+  {
+    "word": "crossed her arms and huffed",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "folded her arms and breathed out angrily",
+    "fromFile": false
+  },
+  {
+    "word": "on the verge of a tantrum",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "almost having an angry outburst",
+    "fromFile": true
+  },
+  {
+    "word": "suggested",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "words & phrases",
+    "meaning": "advised",
+    "fromFile": true
+  },
+  {
+    "word": "said insistently",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrases with adverbs",
+    "meaning": "spoke firmly and repeatedly",
+    "fromFile": true
+  },
+  {
+    "word": "burst out laughing",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrasal verbs",
+    "meaning": "started laughing suddenly and loudly",
+    "fromFile": true
+  },
+  {
+    "word": "her shoulders slumped",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "collocations",
+    "meaning": "her shoulders dropped sadly",
+    "fromFile": false
+  },
+  {
+    "word": "perked up",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "phrasal verbs",
+    "meaning": "became more cheerful or alert",
+    "fromFile": true
+  },
+  {
+    "word": "gritted her teeth",
+    "unit": 4,
+    "unitName": "The Promise",
+    "category": "words & phrases",
+    "meaning": "showed frustration",
+    "fromFile": true
+  },
+  {
+    "word": "spooky tunnel",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "scary or eerie tunnel",
+    "fromFile": true
+  },
+  {
+    "word": "jump over the spikes",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "phrasal verbs",
+    "meaning": "leap over the sharp points",
+    "fromFile": false
+  },
+  {
+    "word": "suggest the possibility",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "put forward an idea",
+    "fromFile": false
+  },
+  {
+    "word": "interactive",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "words & phrases",
+    "meaning": "engaging",
+    "fromFile": true
+  },
+  {
+    "word": "learn to strategise",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "learn to plan carefully",
+    "fromFile": false
+  },
+  {
+    "word": "epic",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "words & phrases",
+    "meaning": "grand",
+    "fromFile": true
+  },
+  {
+    "word": "awesome",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "words & phrases",
+    "meaning": "amazing",
+    "fromFile": true
+  },
+  {
+    "word": "admire your initiative",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "respect that you took action first",
+    "fromFile": false
+  },
+  {
+    "word": "wary of the risk",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "careful because of the danger",
+    "fromFile": false
+  },
+  {
+    "word": "gaming addiction",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "unhealthy habit of excessive gaming",
+    "fromFile": true
+  },
+  {
+    "word": "focused rather than distracted",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "phrases with adverbs",
+    "meaning": "paying attention, not losing",
+    "fromFile": true
+  },
+  {
+    "word": "appreciate the value",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "understand how useful or important it is",
+    "fromFile": false
+  },
+  {
+    "word": "appeal to your love of computers",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "attract you because you love computers",
+    "fromFile": false
+  },
+  {
+    "word": "look forward to hearing your suggestions",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "phrasal verbs",
+    "meaning": "eagerly await your ideas",
+    "fromFile": true
+  },
+  {
+    "word": "miserable",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "words & phrases",
+    "meaning": "very unhappy",
+    "fromFile": false
+  },
+  {
+    "word": "interested in creating apps",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "keen to make computer programs",
+    "fromFile": false
+  },
+  {
+    "word": "develop our creativity",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "grow our ability to think of new ideas",
+    "fromFile": false
+  },
+  {
+    "word": "think about our proposal",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "phrasal verbs",
+    "meaning": "consider our plan carefully",
+    "fromFile": true
+  },
+  {
+    "word": "impressed with your enthusiasm",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "pleased by how eager you are",
+    "fromFile": false
+  },
+  {
+    "word": "excellent idea",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "a very good idea",
+    "fromFile": false
+  },
+  {
+    "word": "considerable potential",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "collocations",
+    "meaning": "strong ability to improve or succeed",
+    "fromFile": true
+  },
+  {
+    "word": "benefit",
+    "unit": 5,
+    "unitName": "A Game of Emails",
+    "category": "words & phrases",
+    "meaning": "gain",
+    "fromFile": true
+  },
+  {
+    "word": "unique combat systems",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "successful or special methods",
+    "fromFile": true
+  },
+  {
+    "word": "distinct",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "clear",
+    "fromFile": true
+  },
+  {
+    "word": "defend themselves from wild animals",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "protect themselves against wild animals",
+    "fromFile": false
+  },
+  {
+    "word": "performance art",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "art form",
+    "fromFile": true
+  },
+  {
+    "word": "competitive sport",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "sport",
+    "fromFile": true
+  },
+  {
+    "word": "featured",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "shown or included as an important part",
+    "fromFile": false
+  },
+  {
+    "word": "technique",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "skill",
+    "fromFile": true
+  },
+  {
+    "word": "opponent's weaknesses",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "the weak points of the person you are against",
+    "fromFile": false
+  },
+  {
+    "word": "overcome weaknesses",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "defeat one’s flaws or limits",
+    "fromFile": true
+  },
+  {
+    "word": "fast and skilful",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "quick and clever at doing something",
+    "fromFile": false
+  },
+  {
+    "word": "a variety of weapons",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "many different weapons",
+    "fromFile": true
+  },
+  {
+    "word": "combines flexibility with strength and speed",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "joins agility, power, and quickness",
+    "fromFile": true
+  },
+  {
+    "word": "combat",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "fighting",
+    "fromFile": false
+  },
+  {
+    "word": "introduced as an Olympic sport",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "first included as a sport in the Olympics",
+    "fromFile": false
+  },
+  {
+    "word": "practised all over the world",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "done by people in many countries",
+    "fromFile": false
+  },
+  {
+    "word": "derived from",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "phrasal verbs",
+    "meaning": "came or developed from something",
+    "fromFile": true
+  },
+  {
+    "word": "extremely swift and fit",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "phrases with adverbs",
+    "meaning": "very fast and healthy",
+    "fromFile": true
+  },
+  {
+    "word": "limbs",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "arms & legs",
+    "fromFile": true
+  },
+  {
+    "word": "stance",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "posture",
+    "fromFile": true
+  },
+  {
+    "word": "tied around the waist",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "fastened around the middle of the body",
+    "fromFile": false
+  },
+  {
+    "word": "reserved for special events",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "kept only for special occasions",
+    "fromFile": false
+  },
+  {
+    "word": "athlete",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "sportsperson",
+    "fromFile": true
+  },
+  {
+    "word": "characteristics",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "special qualities or features",
+    "fromFile": false
+  },
+  {
+    "word": "many physical and mental benefits",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "health and emotional advantages",
+    "fromFile": true
+  },
+  {
+    "word": "effective way",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "successful or special methods",
+    "fromFile": true
+  },
+  {
+    "word": "developing discipline",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "building self-control and responsibility",
+    "fromFile": true
+  },
+  {
+    "word": "fantastic way",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "successful or special methods",
+    "fromFile": true
+  },
+  {
+    "word": "share the same interests",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "phrasal verbs",
+    "meaning": "enjoy similar activities",
+    "fromFile": true
+  },
+  {
+    "word": "military",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "to do with soldiers and the armed forces",
+    "fromFile": false
+  },
+  {
+    "word": "tribes",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "groups",
+    "fromFile": true
+  },
+  {
+    "word": "agile",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "quick",
+    "fromFile": true
+  },
+  {
+    "word": "depression",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "sadness",
+    "fromFile": true
+  },
+  {
+    "word": "anxiety",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "worry",
+    "fromFile": true
+  },
+  {
+    "word": "self-esteem",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "confidence",
+    "fromFile": true
+  },
+  {
+    "word": "relaxation",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "calmness",
+    "fromFile": true
+  },
+  {
+    "word": "practitioners",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "learners",
+    "fromFile": true
+  },
+  {
+    "word": "cultural heritage",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "collocations",
+    "meaning": "traditions passed through generations",
+    "fromFile": true
+  },
+  {
+    "word": "numerous",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "many",
+    "fromFile": true
+  },
+  {
+    "word": "relevant",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "appropriate or related",
+    "fromFile": false
+  },
+  {
+    "word": "focus",
+    "unit": 6,
+    "unitName": "Martial Arts",
+    "category": "words & phrases",
+    "meaning": "concentration",
+    "fromFile": true
+  },
+  {
+    "word": "alleviate loneliness",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "reduces feelings of being alone",
+    "fromFile": true
+  },
+  {
+    "word": "anxiety",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "worry",
+    "fromFile": true
+  },
+  {
+    "word": "decomposing remains",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "rotting dead bodies",
+    "fromFile": true
+  },
+  {
+    "word": "potential criminals",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "people who may commit crimes",
+    "fromFile": true
+  },
+  {
+    "word": "deployed",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "sent out to do a job",
+    "fromFile": false
+  },
+  {
+    "word": "traits",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "special qualities that a person or animal has",
+    "fromFile": false
+  },
+  {
+    "word": "human counterparts",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "people who do the same job",
+    "fromFile": false
+  },
+  {
+    "word": "intensive training",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "tough, concentrated practice",
+    "fromFile": true
+  },
+  {
+    "word": "bred",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "raised and trained (animals)",
+    "fromFile": false
+  },
+  {
+    "word": "inquisitive",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "curious",
+    "fromFile": true
+  },
+  {
+    "word": "courageous",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "brave",
+    "fromFile": true
+  },
+  {
+    "word": "tough circumstances",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "difficult situations",
+    "fromFile": false
+  },
+  {
+    "word": "responsive to immediate situations",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "quick to react to what is happening now",
+    "fromFile": false
+  },
+  {
+    "word": "amidst noise and distractions",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "surrounded by noise and things that disturb you",
+    "fromFile": false
+  },
+  {
+    "word": "effectively",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "phrases with adverbs",
+    "meaning": "successfully or efficiently",
+    "fromFile": true
+  },
+  {
+    "word": "reserved",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "quiet",
+    "fromFile": true
+  },
+  {
+    "word": "competent",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "capable",
+    "fromFile": true
+  },
+  {
+    "word": "invaluable source",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "a source too useful to measure",
+    "fromFile": false
+  },
+  {
+    "word": "stringent tests",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "strict or demanding exams",
+    "fromFile": true
+  },
+  {
+    "word": "ascertain",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "find out for certain",
+    "fromFile": false
+  },
+  {
+    "word": "negotiate safety",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "deal with dangers carefully",
+    "fromFile": false
+  },
+  {
+    "word": "different terrains",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "various land types or surfaces",
+    "fromFile": true
+  },
+  {
+    "word": "temperament",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "the way an animal usually behaves",
+    "fromFile": false
+  },
+  {
+    "word": "rubble",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "broken pieces of stone and brick",
+    "fromFile": false
+  },
+  {
+    "word": "sniff out",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "phrasal verbs",
+    "meaning": "detect by smell or search",
+    "fromFile": true
+  },
+  {
+    "word": "sensitive",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "quick to notice or feel things",
+    "fromFile": false
+  },
+  {
+    "word": "portable equipment",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "tools easy to carry",
+    "fromFile": true
+  },
+  {
+    "word": "identify the presence",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "phrasal verbs",
+    "meaning": "recognise that something exists",
+    "fromFile": true
+  },
+  {
+    "word": "ignitable",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "able to catch fire easily",
+    "fromFile": false
+  },
+  {
+    "word": "muzzles",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "covers put over an animal’s mouth",
+    "fromFile": false
+  },
+  {
+    "word": "speed and accuracy",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "being fast and correct",
+    "fromFile": false
+  },
+  {
+    "word": "visually impaired",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "unable to see well",
+    "fromFile": false
+  },
+  {
+    "word": "severe or permanent",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "serious or lasting a long time",
+    "fromFile": false
+  },
+  {
+    "word": "navigate routes",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "find the way along paths",
+    "fromFile": false
+  },
+  {
+    "word": "obstacles",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "things in the way",
+    "fromFile": false
+  },
+  {
+    "word": "unique relationship",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "a special one-of-a-kind bond",
+    "fromFile": false
+  },
+  {
+    "word": "work in sync",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "phrasal verbs",
+    "meaning": "move or act together smoothly",
+    "fromFile": true
+  },
+  {
+    "word": "steer through",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "phrasal verbs",
+    "meaning": "guide safely through something",
+    "fromFile": true
+  },
+  {
+    "word": "hazards",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "dangers",
+    "fromFile": false
+  },
+  {
+    "word": "mobility aid",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "device that helps movement",
+    "fromFile": true
+  },
+  {
+    "word": "manoeuvring",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "moving skilfully around something",
+    "fromFile": false
+  },
+  {
+    "word": "a range of benefits",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "many different advantages",
+    "fromFile": false
+  },
+  {
+    "word": "unconditional love",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "love without limits or conditions",
+    "fromFile": true
+  },
+  {
+    "word": "beneficial",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "helpful",
+    "fromFile": true
+  },
+  {
+    "word": "emotionally secure",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "emotionally stable",
+    "fromFile": true
+  },
+  {
+    "word": "agitation",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "restlessness",
+    "fromFile": true
+  },
+  {
+    "word": "instil feelings of empathy",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "collocations",
+    "meaning": "help someone learn to understand others’ feelings",
+    "fromFile": false
+  },
+  {
+    "word": "integrate socially",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "mix with others",
+    "fromFile": true
+  },
+  {
+    "word": "concentrate",
+    "unit": 7,
+    "unitName": "Dogs with Jobs",
+    "category": "words & phrases",
+    "meaning": "focus attention",
+    "fromFile": true
+  },
+  {
+    "word": "essential part",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "words & phrases",
+    "meaning": "important section",
+    "fromFile": true
+  },
+  {
+    "word": "rear farm animals",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "keep and look after farm animals",
+    "fromFile": false
+  },
+  {
+    "word": "availability",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "words & phrases",
+    "meaning": "how easy it is to get something",
+    "fromFile": false
+  },
+  {
+    "word": "big concern",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "serious problem or worry",
+    "fromFile": true
+  },
+  {
+    "word": "limited land area",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "small amount of land",
+    "fromFile": true
+  },
+  {
+    "word": "sustainable supply",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "continuous, long-lasting source",
+    "fromFile": true
+  },
+  {
+    "word": "water catchment area",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "land collecting rainwater",
+    "fromFile": true
+  },
+  {
+    "word": "imported from neighbouring countries",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "brought in from nearby countries",
+    "fromFile": false
+  },
+  {
+    "word": "innovative ways",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "creative new methods",
+    "fromFile": true
+  },
+  {
+    "word": "specially treated",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "cleaned and made safe by a special process",
+    "fromFile": false
+  },
+  {
+    "word": "advanced technologies",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "modern, developed tools",
+    "fromFile": true
+  },
+  {
+    "word": "desalination",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "words & phrases",
+    "meaning": "removing salt from water",
+    "fromFile": true
+  },
+  {
+    "word": "significant amount of water",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "large quantity of water",
+    "fromFile": true
+  },
+  {
+    "word": "frequent water shortages",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "often not enough water",
+    "fromFile": true
+  },
+  {
+    "word": "rationed",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "words & phrases",
+    "meaning": "limited use",
+    "fromFile": true
+  },
+  {
+    "word": "inconvenience",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "words & phrases",
+    "meaning": "trouble",
+    "fromFile": true
+  },
+  {
+    "word": "a problem that can cripple a country",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "a problem that can severely weaken a country",
+    "fromFile": false
+  },
+  {
+    "word": "water is precious",
+    "unit": 8,
+    "unitName": "Making Every Drop Count",
+    "category": "collocations",
+    "meaning": "water is very valuable",
+    "fromFile": false
+  },
+  {
+    "word": "nature reserves",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "protected natural areas",
+    "fromFile": true
+  },
+  {
+    "word": "full of wildlife",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "with many wild animals living there",
+    "fromFile": false
+  },
+  {
+    "word": "venture onto the streets",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrasal verbs",
+    "meaning": "go bravely or curiously outside",
+    "fromFile": true
+  },
+  {
+    "word": "delighted to see",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "very happy to see",
+    "fromFile": false
+  },
+  {
+    "word": "native to Singapore",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "originally from Singapore",
+    "fromFile": false
+  },
+  {
+    "word": "spotted more frequently",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrasal verbs",
+    "meaning": "seen more often",
+    "fromFile": true
+  },
+  {
+    "word": "draws people's attention",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "makes people notice it",
+    "fromFile": false
+  },
+  {
+    "word": "encounter with wildlife",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "a meeting with wild animals",
+    "fromFile": false
+  },
+  {
+    "word": "receive numerous complaints",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "get many complaints from people",
+    "fromFile": false
+  },
+  {
+    "word": "close-knit family groups",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "tightly bonded families",
+    "fromFile": true
+  },
+  {
+    "word": "associate plastic bags with food",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "think plastic bags mean food",
+    "fromFile": false
+  },
+  {
+    "word": "venturing into people's homes",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrasal verbs",
+    "meaning": "entering houses bravely or curiously",
+    "fromFile": true
+  },
+  {
+    "word": "approach people",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "go up to people",
+    "fromFile": false
+  },
+  {
+    "word": "snatch them directly from people",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrasal verbs",
+    "meaning": "grab suddenly from someone’s hands",
+    "fromFile": true
+  },
+  {
+    "word": "misinterpreted",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "words & phrases",
+    "meaning": "understood wrongly",
+    "fromFile": true
+  },
+  {
+    "word": "sign of aggression",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "act showing anger or attack",
+    "fromFile": true
+  },
+  {
+    "word": "assertive and defensive",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "confident and ready to protect themselves",
+    "fromFile": false
+  },
+  {
+    "word": "cornered or threatened",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "trapped or in danger",
+    "fromFile": false
+  },
+  {
+    "word": "occasionally",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrases with adverbs",
+    "meaning": "sometimes or now and then",
+    "fromFile": true
+  },
+  {
+    "word": "human-wildlife conflicts",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "problems between people and animals",
+    "fromFile": true
+  },
+  {
+    "word": "turn people against wildlife",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "make people dislike wild animals",
+    "fromFile": false
+  },
+  {
+    "word": "culled",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "words & phrases",
+    "meaning": "killed in a controlled way to reduce numbers",
+    "fromFile": false
+  },
+  {
+    "word": "in close proximity to nature",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "very near to nature",
+    "fromFile": false
+  },
+  {
+    "word": "co-exist with wildlife",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrasal verbs",
+    "meaning": "live peacefully with animals",
+    "fromFile": true
+  },
+  {
+    "word": "access food easily",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "get food without difficulty",
+    "fromFile": false
+  },
+  {
+    "word": "depend on humans",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrasal verbs",
+    "meaning": "rely on people for survival",
+    "fromFile": true
+  },
+  {
+    "word": "keep a safe distance from wildlife",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrasal verbs",
+    "meaning": "stay far enough for safety",
+    "fromFile": true
+  },
+  {
+    "word": "enrich our lives",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "make our lives better and fuller",
+    "fromFile": false
+  },
+  {
+    "word": "live together in harmony",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "live together peacefully",
+    "fromFile": false
+  },
+  {
+    "word": "large sanctuary",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "a big safe place for wildlife",
+    "fromFile": false
+  },
+  {
+    "word": "flora and fauna",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "plants and animals",
+    "fromFile": true
+  },
+  {
+    "word": "inscribed as a UNESCO World Heritate site",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "listed by UNESCO as a World Heritage site",
+    "fromFile": false
+  },
+  {
+    "word": "encompasses a diverse mix",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "includes many different kinds",
+    "fromFile": false
+  },
+  {
+    "word": "rich ecosystem",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "diverse living environment",
+    "fromFile": true
+  },
+  {
+    "word": "network of trails",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "connected walking paths",
+    "fromFile": true
+  },
+  {
+    "word": "wind through the forest",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrasal verbs",
+    "meaning": "curve or twist through trees",
+    "fromFile": true
+  },
+  {
+    "word": "offers an impeded overview",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "gives a view over the area",
+    "fromFile": false
+  },
+  {
+    "word": "thriving with wildlife",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "full of healthy animals",
+    "fromFile": true
+  },
+  {
+    "word": "leisurely stroll",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "phrases with adverbs",
+    "meaning": "slow, relaxed walk",
+    "fromFile": true
+  },
+  {
+    "word": "squirrels scurrying up trees",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "squirrels running quickly up trees",
+    "fromFile": false
+  },
+  {
+    "word": "opportunistic",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "words & phrases",
+    "meaning": "quick to take any chance that comes",
+    "fromFile": false
+  },
+  {
+    "word": "solitary creatures",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "animals that live alone",
+    "fromFile": true
+  },
+  {
+    "word": "scavenging for food",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "searching for leftover food",
+    "fromFile": true
+  },
+  {
+    "word": "will not attack unless provoked",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "collocations",
+    "meaning": "will only attack if made angry first",
+    "fromFile": false
+  },
+  {
+    "word": "unpredictable",
+    "unit": 9,
+    "unitName": "Urban Wildlife: Friend or Foe?",
+    "category": "words & phrases",
+    "meaning": "cannot be guessed",
+    "fromFile": true
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "determined not to change your mind",
+    "unit": 101,
+    "unitName": "Spelling Week 1",
+    "word": "adamant"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "having enough skill or knowledge to do something well",
+    "unit": 101,
+    "unitName": "Spelling Week 1",
+    "word": "competent"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "so satisfied with yourself that you do not feel any change is necessary",
+    "unit": 101,
+    "unitName": "Spelling Week 1",
+    "word": "complacent"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "skilled and experienced",
+    "unit": 101,
+    "unitName": "Spelling Week 1",
+    "word": "proficient"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "admirably purposeful, determined, and unwavering",
+    "unit": 101,
+    "unitName": "Spelling Week 1",
+    "word": "resolute"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "an event that causes great damage to people's lives and property",
+    "unit": 102,
+    "unitName": "Spelling Week 2",
+    "word": "calamity"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a sudden event that causes great trouble or destruction",
+    "unit": 102,
+    "unitName": "Spelling Week 2",
+    "word": "catastrophe"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "severe punishment for something seriously wrong that somebody has done",
+    "unit": 102,
+    "unitName": "Spelling Week 2",
+    "word": "retribution"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a very sad event or situation, especially one involving death or suffering",
+    "unit": 102,
+    "unitName": "Spelling Week 2",
+    "word": "tragedy"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "punishing of someone for harming you or your friends or family, or the wish for such punishment to happen",
+    "unit": 102,
+    "unitName": "Spelling Week 2",
+    "word": "vengeance"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to make someone or something so famous that that person or thing is remembered for a very long time",
+    "unit": 103,
+    "unitName": "Spelling Week 3",
+    "word": "immortalise"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "that cannot be moved or changed",
+    "unit": 103,
+    "unitName": "Spelling Week 3",
+    "word": "immovable"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "not supporting any of the sides involved in an argument",
+    "unit": 103,
+    "unitName": "Spelling Week 3",
+    "word": "impartial"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "impossible to go through",
+    "unit": 103,
+    "unitName": "Spelling Week 3",
+    "word": "impassable"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a situation in which progress is impossible, especially because the people involved cannot agree",
+    "unit": 103,
+    "unitName": "Spelling Week 3",
+    "word": "impasse"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a person who is very good at sports or physical exercise",
+    "unit": 104,
+    "unitName": "Spelling Week 4",
+    "word": "athlete"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a person who comments on a certain event or subject",
+    "unit": 104,
+    "unitName": "Spelling Week 4",
+    "word": "commentator"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a person whose job is to collect and write news",
+    "unit": 104,
+    "unitName": "Spelling Week 4",
+    "word": "journalist"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a person that you are playing or fighting against",
+    "unit": 104,
+    "unitName": "Spelling Week 4",
+    "word": "opponent"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a person who watches, usually a sports event",
+    "unit": 104,
+    "unitName": "Spelling Week 4",
+    "word": "spectator"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "in a way that continues without interruption",
+    "unit": 105,
+    "unitName": "Spelling Week 5",
+    "word": "continually"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "often",
+    "unit": 105,
+    "unitName": "Spelling Week 5",
+    "word": "frequently"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "in a way that stops and starts often over a period of time; not regularly",
+    "unit": 105,
+    "unitName": "Spelling Week 5",
+    "word": "intermittently"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "sometimes but not often",
+    "unit": 105,
+    "unitName": "Spelling Week 5",
+    "word": "occasionally"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "happening fairly often and regularly",
+    "unit": 105,
+    "unitName": "Spelling Week 5",
+    "word": "periodic"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "so interesting that you give it all your attention and time",
+    "unit": 106,
+    "unitName": "Spelling Week 6",
+    "word": "engross"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to keep someone completely interested",
+    "unit": 106,
+    "unitName": "Spelling Week 6",
+    "word": "enthral"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "fascinate",
+    "unit": 106,
+    "unitName": "Spelling Week 6",
+    "word": "mesmerise"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "be constantly talking or worrying about something",
+    "unit": 106,
+    "unitName": "Spelling Week 6",
+    "word": "obsess"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to be the main thought in someone's mind, causing other things to be forgotten",
+    "unit": 106,
+    "unitName": "Spelling Week 6",
+    "word": "preoccupy"
+  },
+  {
+    "word": "clank",
+    "unit": 107,
+    "unitName": "Spelling Week 7",
+    "category": "spelling lists",
+    "meaning": "a loud sound made by pieces of metal hitting each other"
+  },
+  {
+    "word": "clatter",
+    "unit": 107,
+    "unitName": "Spelling Week 7",
+    "category": "spelling lists",
+    "meaning": "the sound of hard objects knocking together"
+  },
+  {
+    "word": "clink",
+    "unit": 107,
+    "unitName": "Spelling Week 7",
+    "category": "spelling lists",
+    "meaning": "a sharp ringing sound, like glasses being hit against each other"
+  },
+  {
+    "word": "cluster",
+    "unit": 107,
+    "unitName": "Spelling Week 7",
+    "category": "spelling lists",
+    "meaning": "a group of things of the same type that grow or appear close together"
+  },
+  {
+    "word": "clutter",
+    "unit": 107,
+    "unitName": "Spelling Week 7",
+    "category": "spelling lists",
+    "meaning": "to fill a place with too many things"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "hide",
+    "unit": 108,
+    "unitName": "Spelling Week 8",
+    "word": "conceal"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to hide your real feelings or intentions, often by pretending to have different ones",
+    "unit": 108,
+    "unitName": "Spelling Week 8",
+    "word": "dissemble"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "take somebody's attention away from what they are trying to do",
+    "unit": 108,
+    "unitName": "Spelling Week 8",
+    "word": "distract"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to take someone's attention away from something; to cause something or someone to change direction",
+    "unit": 108,
+    "unitName": "Spelling Week 8",
+    "word": "divert"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to avoid or escape from someone or something",
+    "unit": 108,
+    "unitName": "Spelling Week 8",
+    "word": "evade"
+  },
+  {
+    "word": "coincidence",
+    "unit": 109,
+    "unitName": "Spelling Week 9",
+    "category": "spelling lists",
+    "meaning": "the fact of two things happening at the same time by chance"
+  },
+  {
+    "word": "consecutive",
+    "unit": 109,
+    "unitName": "Spelling Week 9",
+    "category": "spelling lists",
+    "meaning": "following one after another"
+  },
+  {
+    "word": "correlation",
+    "unit": 109,
+    "unitName": "Spelling Week 9",
+    "category": "spelling lists",
+    "meaning": "a connection between two or more things"
+  },
+  {
+    "word": "simultaneous",
+    "unit": 109,
+    "unitName": "Spelling Week 9",
+    "category": "spelling lists",
+    "meaning": "happening or done at the same time"
+  },
+  {
+    "word": "synchronise",
+    "unit": 109,
+    "unitName": "Spelling Week 9",
+    "category": "spelling lists",
+    "meaning": "to cause to happen at the same time"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "able to express thoughts and feelings easily and clearly; to express in words, pronounce",
+    "unit": 110,
+    "unitName": "Spelling Week 10",
+    "word": "articulate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "(of an argument or plan) describing that each part connects logically; (of a person) able to be understood",
+    "unit": 110,
+    "unitName": "Spelling Week 10",
+    "word": "coherent"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "able to use language and express your opinions well",
+    "unit": 110,
+    "unitName": "Spelling Week 10",
+    "word": "eloquent"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "relating to your ability to think and understand things, especially complicated ideas",
+    "unit": 110,
+    "unitName": "Spelling Week 10",
+    "word": "intellectual"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "able to do many different things",
+    "unit": 110,
+    "unitName": "Spelling Week 10",
+    "word": "versatile"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "difficult, needing a lot of effort and energy",
+    "unit": 111,
+    "unitName": "Spelling Week 11",
+    "word": "arduous"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "very hungry",
+    "unit": 111,
+    "unitName": "Spelling Week 11",
+    "word": "famished"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a feeling of being extremely tired",
+    "unit": 111,
+    "unitName": "Spelling Week 11",
+    "word": "fatigue"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "the feeling of having little energy or of being unable or unwilling to do anything",
+    "unit": 111,
+    "unitName": "Spelling Week 11",
+    "word": "lethargy"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "very dry or thirsty",
+    "unit": 111,
+    "unitName": "Spelling Week 11",
+    "word": "parched"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "make something, especially a feeling, less strong",
+    "unit": 112,
+    "unitName": "Spelling Week 12",
+    "word": "allay"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "make somebody calmer or less angry",
+    "unit": 112,
+    "unitName": "Spelling Week 12",
+    "word": "appease"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "not affected by or do not have to do something",
+    "unit": 112,
+    "unitName": "Spelling Week 12",
+    "word": "exempt"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to cause someone who is angry or upset to be calm and satisfied",
+    "unit": 112,
+    "unitName": "Spelling Week 12",
+    "word": "pacify"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to stop someone from feeling angry",
+    "unit": 112,
+    "unitName": "Spelling Week 12",
+    "word": "placate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "give somebody the desire, confidence or enthusiasm to do something well; to give someone an idea",
+    "unit": 113,
+    "unitName": "Spelling Week 13",
+    "word": "inspire"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to make someone feel fresher, healthier, and more energetic",
+    "unit": 113,
+    "unitName": "Spelling Week 13",
+    "word": "invigorate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to make somebody want to do something, especially something that involves hard work and effort",
+    "unit": 113,
+    "unitName": "Spelling Week 13",
+    "word": "motivate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to make an organisation more effective by introducing new ideas or people; to make someone look or feel young and energetic again",
+    "unit": 113,
+    "unitName": "Spelling Week 13",
+    "word": "rejuvenate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to make something develop or become more active",
+    "unit": 113,
+    "unitName": "Spelling Week 13",
+    "word": "stimulate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a small booklet or pamphlet, especially one that contains pictures and is used for advertising purposes",
+    "unit": 114,
+    "unitName": "Spelling Week 14",
+    "word": "brochure"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "an organised list of things (book titles, goods for sale)",
+    "unit": 114,
+    "unitName": "Spelling Week 14",
+    "word": "catalogue"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a list of names and addresses of people or businesses",
+    "unit": 114,
+    "unitName": "Spelling Week 14",
+    "word": "directory"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a book of instructions; having to do with use of the hands",
+    "unit": 114,
+    "unitName": "Spelling Week 14",
+    "word": "manual"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "a list of ingredients and instructions for making a food dish",
+    "unit": 114,
+    "unitName": "Spelling Week 14",
+    "word": "recipe"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "behaving confidently and able to say in a direct way what you want or believe",
+    "unit": 115,
+    "unitName": "Spelling Week 15",
+    "word": "assertive"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "very important for the final result of a particular situation; able to make decisions quickly and confidently",
+    "unit": 115,
+    "unitName": "Spelling Week 15",
+    "word": "decisive"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "strong and determined in speech or action, so that what is said or done gets attention",
+    "unit": 115,
+    "unitName": "Spelling Week 15",
+    "word": "emphatic"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "true, and impossible to doubt",
+    "unit": 115,
+    "unitName": "Spelling Week 15",
+    "word": "indisputable"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "total, or expressed in a clear and certain way",
+    "unit": 115,
+    "unitName": "Spelling Week 15",
+    "word": "unequivocal"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "delicious",
+    "unit": 116,
+    "unitName": "Spelling Week 16",
+    "word": "scrumptious"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "always doing what is right",
+    "unit": 116,
+    "unitName": "Spelling Week 16",
+    "word": "scrupulous"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "large or splendid",
+    "unit": 116,
+    "unitName": "Spelling Week 16",
+    "word": "sumptuous"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "consuming large amounts of food with greed",
+    "unit": 116,
+    "unitName": "Spelling Week 16",
+    "word": "voracious"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "enthusiastic and eager",
+    "unit": 116,
+    "unitName": "Spelling Week 16",
+    "word": "zealous"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to use something in a way that helps you; to use someone or something unfairly for your own advantage",
+    "unit": 117,
+    "unitName": "Spelling Week 17",
+    "word": "exploit"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to continue to have; to keep in existence, or not allow to become less",
+    "unit": 117,
+    "unitName": "Spelling Week 17",
+    "word": "maintain"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to control something or someone to your advantage, often unfairly or dishonestly",
+    "unit": 117,
+    "unitName": "Spelling Week 17",
+    "word": "manipulate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to cause or allow something to continue; food",
+    "unit": 117,
+    "unitName": "Spelling Week 17",
+    "word": "sustain"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to use something in an effective way",
+    "unit": 117,
+    "unitName": "Spelling Week 17",
+    "word": "utilise"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "pleasant smell",
+    "unit": 118,
+    "unitName": "Spelling Week 18",
+    "word": "aroma"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "smoke, gas",
+    "unit": 118,
+    "unitName": "Spelling Week 18",
+    "word": "fumes"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "smell (especially one that is unpleasant)",
+    "unit": 118,
+    "unitName": "Spelling Week 18",
+    "word": "odour"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "having a strong taste or smell",
+    "unit": 118,
+    "unitName": "Spelling Week 18",
+    "word": "pungent"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "unpleasant smell",
+    "unit": 118,
+    "unitName": "Spelling Week 18",
+    "word": "stench"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to cause someone to be completely unable to understand or explain something",
+    "unit": 119,
+    "unitName": "Spelling Week 19",
+    "word": "baffled"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "confused",
+    "unit": 119,
+    "unitName": "Spelling Week 19",
+    "word": "befuddled"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "slightly confused",
+    "unit": 119,
+    "unitName": "Spelling Week 19",
+    "word": "bemused"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "confused and uncertain",
+    "unit": 119,
+    "unitName": "Spelling Week 19",
+    "word": "bewildered"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "confused and not knowing where to go or what to do",
+    "unit": 119,
+    "unitName": "Spelling Week 19",
+    "word": "disoriented"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to wave something in the air in a threatening or excited way",
+    "unit": 120,
+    "unitName": "Spelling Week 20",
+    "word": "brandish"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "show something you are proud of",
+    "unit": 120,
+    "unitName": "Spelling Week 20",
+    "word": "flaunt"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "not well known or difficult to understand",
+    "unit": 120,
+    "unitName": "Spelling Week 20",
+    "word": "obscure"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to cover or hide something",
+    "unit": 120,
+    "unitName": "Spelling Week 20",
+    "word": "shroud"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to put an end to or prevent something from being known",
+    "unit": 120,
+    "unitName": "Spelling Week 20",
+    "word": "suppress"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "make something smaller in size or number",
+    "unit": 121,
+    "unitName": "Spelling Week 21",
+    "word": "decrease"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to make somebody feel less confident; to let air or gas out of a tyre, balloon etc",
+    "unit": 121,
+    "unitName": "Spelling Week 21",
+    "word": "deflate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "go down from a higher level to lower level",
+    "unit": 121,
+    "unitName": "Spelling Week 21",
+    "word": "descend"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "become worse",
+    "unit": 121,
+    "unitName": "Spelling Week 21",
+    "word": "deteriorate"
+  },
+  {
+    "category": "spelling lists",
+    "meaning": "to reduce in value",
+    "unit": 121,
+    "unitName": "Spelling Week 21",
+    "word": "devalue"
+  },
+  {
+    "word": "dissatisfied",
+    "unit": 201,
+    "unitName": "Zeen's Cloze Words",
+    "category": "cloze words",
+    "meaning": "not happy or satisfied with something"
+  },
+  {
+    "word": "persistent",
+    "unit": 201,
+    "unitName": "Zeen's Cloze Words",
+    "category": "cloze words",
+    "meaning": "determined to keep doing something, even when it is difficult"
+  },
+  {
+    "word": "clutching",
+    "unit": 201,
+    "unitName": "Zeen's Cloze Words",
+    "category": "cloze words",
+    "meaning": "holding something tightly"
+  },
+  {
+    "word": "misguided",
+    "unit": 201,
+    "unitName": "Zeen's Cloze Words",
+    "category": "cloze words",
+    "meaning": "wrong because you understood something in the wrong way"
+  },
+  {
+    "word": "rapidly",
+    "unit": 201,
+    "unitName": "Zeen's Cloze Words",
+    "category": "cloze words",
+    "meaning": "very quickly; at a great rate"
+  }
 ]
