@@ -81,6 +81,7 @@
 <div class="shell-body">
 <nav class="tabs" id="tabs">
   <button data-tab="read" class="active">Read Aloud</button>
+  <button data-tab="cloze">Cloze</button>
   <button data-tab="type">Typing Quest</button>
   <button data-tab="words">Words</button>
   <button data-tab="oral">Oral Partner</button>
@@ -150,6 +151,25 @@
         <summary>What the mark is based on (tap to read)</summary>
         <pre id="markingDisplay" class="marking"></pre>
       </details>
+    </div>
+  </section>
+
+  <!-- ============ CLOZE ============ -->
+  <section id="tab-cloze" class="tabpage">
+    <div class="card">
+      <h2>Cloze</h2>
+      <p class="muted">Zeen's Conquer English Cloze Workbook 4. Pick an exercise, choose the best word for each blank, then tap Check answers. Each word can be used only once.</p>
+      <div id="clozeList" class="row"></div>
+    </div>
+    <div class="card hidden" id="clozeCard">
+      <h2 id="clozeTitle"></h2>
+      <p id="clozeMeta" class="muted"></p>
+      <div id="clozeText" class="cloze-text"></div>
+      <div class="row">
+        <button id="clozeCheckBtn" class="btn primary">Check answers</button>
+        <button id="clozeAgainBtn" class="btn hidden">Try again</button>
+      </div>
+      <div id="clozeResult" class="feedback"></div>
     </div>
   </section>
 
@@ -485,9 +505,9 @@
 <footer class="muted small" id="siteFooter">
   All pupil data is saved in your TalkPupils account (Supabase) — sign in on any device to see the same pupils and progress. Works best in Google Chrome — microphone and speech need Chrome.
 </footer>
-<p class="muted small" id="appVersion">TalkPupils web · v41</p>
+<p class="muted small" id="appVersion">TalkPupils web · v42</p>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="app.js?v=41"></script>
+<script src="app.js?v=42"></script>
 </body>
 </html>

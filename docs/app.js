@@ -470,6 +470,8 @@ const state = {
   vocab: [],        // {word, unit, unitName, category, meaning}
   customVocab: [],  // [{id, word, meaning, unit, category, createdAt}]
   grammar: {},      // passage id -> {highlights: [{text, type, note}]}
+  cloze: [],        // cloze exercises [{id, exercise, title, level, words[12], answers[10], text with [[n]]}]
+  clozeCurrent: null,
   mastery: { words: {}, passages: {}, oral: {} },  // per-word / per-passage / per-topic spaced-repetition records
   passages: [],     // unified list {id, num, group, title, text}
   sbc: null,        // built-in Oral Partner bank {topics: [...], starters: {...}}
@@ -584,6 +586,7 @@ function initTabs() {
     if (b.dataset.tab === "settings") renderSettings();
     if (b.dataset.tab === "oral") renderOralTopics();
     if (b.dataset.tab === "words") renderQuestCard();
+    if (b.dataset.tab === "cloze") renderClozeList();
   });
 }
 
@@ -4038,29 +4041,115 @@ function initProfiles() {
   });
 }
 
+/* ---------------- cloze ---------------- */
+// Word-bank letters in the workbook: A-M with I omitted.
+const CLOZE_LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M"];
+function initCloze() {
+  $("clozeCheckBtn").addEventListener("click", checkCloze);
+  $("clozeAgainBtn").addEventListener("click", () => { if (state.clozeCurrent) renderCloze(state.clozeCurrent); });
+}
+function renderClozeList() {
+  const el = $("clozeList");
+  if (!el) return;
+  el.innerHTML = "";
+  for (const ex of state.cloze) {
+    const b = document.createElement("button");
+    b.className = "btn" + (state.clozeCurrent && state.clozeCurrent.id === ex.id ? " primary" : "");
+    b.textContent = "Exercise " + ex.exercise + " — " + ex.title;
+    b.addEventListener("click", () => renderCloze(ex));
+    el.appendChild(b);
+  }
+}
+function renderCloze(ex) {
+  state.clozeCurrent = ex;
+  $("clozeCard").classList.remove("hidden");
+  $("clozeTitle").textContent = "Exercise " + ex.exercise + " — " + ex.title;
+  $("clozeMeta").textContent = ex.level + " · 10 blanks · each word can be used only once";
+  // Split the text on [[n]] tokens; odd parts are blank numbers.
+  const parts = ex.text.split(/\[\[(\d+)\]\]/g);
+  const host = $("clozeText");
+  host.innerHTML = "";
+  for (let i = 0; i < parts.length; i++) {
+    if (i % 2 === 0) {
+      if (parts[i]) host.appendChild(document.createTextNode(parts[i]));
+    } else {
+      const n = +parts[i];
+      const sel = document.createElement("select");
+      sel.className = "cloze-blank";
+      sel.dataset.blank = n;
+      const ph = document.createElement("option");
+      ph.value = "";
+      ph.textContent = "— " + n + " —";
+      sel.appendChild(ph);
+      ex.words.forEach((w, wi) => {
+        const o = document.createElement("option");
+        o.value = w;
+        o.textContent = CLOZE_LETTERS[wi] + " — " + w;
+        sel.appendChild(o);
+      });
+      host.appendChild(sel);
+    }
+  }
+  $("clozeResult").innerHTML = "";
+  $("clozeAgainBtn").classList.add("hidden");
+  $("clozeCheckBtn").classList.remove("hidden");
+  renderClozeList();
+}
+function checkCloze() {
+  const ex = state.clozeCurrent;
+  if (!ex) return;
+  const sels = Array.from(document.querySelectorAll("#clozeText select.cloze-blank"));
+  let correct = 0;
+  for (const sel of sels) {
+    const n = +sel.dataset.blank;
+    const want = ex.answers[n - 1];
+    const ok = sel.value === want;
+    if (ok) correct++;
+    sel.classList.toggle("right", ok);
+    sel.classList.toggle("wrong", !ok);
+    sel.disabled = true;
+    if (!ok) {
+      const tag = document.createElement("span");
+      tag.className = "cloze-fix";
+      tag.textContent = " → " + want;
+      sel.insertAdjacentElement("afterend", tag);
+    }
+  }
+  $("clozeResult").innerHTML = "<b>" + correct + " / 10 correct.</b> " +
+    (correct === 10 ? "Perfect! 🎉" :
+     correct >= 7 ? "Well done — have another look at the ones in red." :
+     "Good try — the right words are shown in green. Try again!");
+  $("clozeAgainBtn").classList.remove("hidden");
+  $("clozeCheckBtn").classList.add("hidden");
+  saveSession({ kind: "cloze", game: "Cloze — Exercise " + ex.exercise, passageTitle: ex.title, score: correct, total: 10 }).catch(() => {});
+}
+
 /* ---------------- init ---------------- */
 async function init() {
   initTabs();
   initProfiles();
   initRead();
+  initCloze();
   initType();
   initWords();
   initOral();
   initSettings();
   initBackup();
   try {
-    const [oracle, builtin, vocab, marking, grammarData, customVocab] = await Promise.all([
+    const [oracle, builtin, vocab, marking, grammarData, customVocab, clozeData] = await Promise.all([
       fetch("content/oracle_passages.json").then((r) => r.json()),
       fetch("content/built_in_passages.json").then((r) => r.json()),
       fetch("content/vocab.json").then((r) => r.json()),
       fetch("content/marking_requirements.txt").then((r) => r.text()),
       fetch("content/grammar.json").then((r) => r.json()),
       apiGet("/api/custom-vocab"),
+      fetch("content/cloze.json").then((r) => r.json()),
     ]);
     state.oracle = oracle;
     state.builtin = builtin;
     state.vocab = vocab;
     state.grammar = grammarData;
+    state.cloze = clozeData;
     state.customVocab = customVocab.customVocab || [];
     state.markingDefault = marking.trim();
     // vocab entries are {word, unit, category, meaning}; add unit names
@@ -4071,6 +4160,7 @@ async function init() {
     renderCustomVocabList();
     renderMasteryLists();
     renderQuestCard();
+    renderClozeList();
     const [settings, customs, aiCfg] = await Promise.all([
       apiGet("/api/settings/marking"),
       apiGet("/api/custom-passages"),

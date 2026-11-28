@@ -60,6 +60,7 @@ body {
 .tabs button[data-tab="progress"] { background: #fce7f3; border-color: #f9a8d4; color: #9d174d; }
 .tabs button[data-tab="progress"].active { background: #ec4899; border-color: #ec4899; color: #fff; }
 .tabs button[data-tab="settings"] { background: #e8edf4; border-color: #cbd5e1; color: #475569; }
+.tabs button[data-tab="cloze"].active { background: #14b8a6; border-color: #14b8a6; color: #fff; }
 .tabs button[data-tab="settings"].active { background: #64748b; border-color: #64748b; color: #fff; }
 /* Each tab's page carries a matching coloured top edge on its cards. */
 #tab-read .card { border-top: 4px solid #0ea5e9; }
@@ -67,6 +68,7 @@ body {
 #tab-words .card { border-top: 4px solid #22c55e; }
 #tab-oral .card { border-top: 4px solid #a855f7; }
 #tab-progress .card { border-top: 4px solid #ec4899; }
+#tab-cloze .card { border-top: 4px solid #14b8a6; }
 #tab-settings .card { border-top: 4px solid #64748b; }
 main { padding: 12px; max-width: 980px; margin: 0 auto; }
 .tabpage { display: none; }
@@ -390,3 +392,10 @@ audio.answer-audio { width: 100%; margin: 6px 0; }
 @media (max-width: 700px) {
   #progressContent .progress-grid { grid-template-columns: 1fr; }
 }
+
+/* Cloze tab */
+.cloze-text { line-height: 2.4; font-size: 17px; white-space: pre-wrap; }
+.cloze-blank { font-size: 16px; padding: 4px 6px; margin: 0 2px; border: 2px solid #94a3b8; border-radius: 6px; background: #fff; max-width: 190px; }
+.cloze-blank.right { border-color: #22c55e; background: #f0fdf4; }
+.cloze-blank.wrong { border-color: #ef4444; background: #fef2f2; }
+.cloze-fix { color: #16a34a; font-weight: 700; }
