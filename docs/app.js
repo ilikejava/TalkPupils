@@ -1907,6 +1907,13 @@ function rainLevel() {
 }
 const rain = { words: [], pool: [], timer: null, dropTimer: null, spawnTimer: null, timeLeft: 60, score: 0, caught: 0, missed: 0, active: false, fallStep: 1.5, spawnMs: 3000, maxOnScreen: 6 };
 function startRain() {
+  // A round is already running — ignore extra clicks. Without this guard,
+  // a second click started a second set of timers: the countdown, the word
+  // spawn and the fall all ran twice as fast, and the orphaned first set
+  // kept running into later rounds too (their handles were overwritten).
+  if (rain.active) return;
+  clearInterval(rain.timer); clearInterval(rain.dropTimer); clearInterval(rain.spawnTimer);
+  rain.timer = rain.dropTimer = rain.spawnTimer = null;
   const p = passageById($("rainPassageSelect").value);
   if (!p) return;
   if (!currentProfile()) { alert("Add a pupil profile first (top right)."); return; }
@@ -1929,6 +1936,8 @@ function startRain() {
   $("rainStatus").textContent = "";
   $("rainTime").textContent = "60s left";
   $("rainInput").focus();
+  $("rainStartBtn").disabled = true;
+  $("rainStartBtn").textContent = "Playing…";
   startRainMusic();
   const lvl = RAIN_LEVELS[rainLevel() - 1];
   rain.fallStep = lvl.fall; rain.spawnMs = lvl.spawn; rain.maxOnScreen = lvl.max;
@@ -2010,6 +2019,9 @@ async function endRain() {
   clearInterval(rain.timer);
   clearInterval(rain.dropTimer);
   clearInterval(rain.spawnTimer);
+  rain.timer = rain.dropTimer = rain.spawnTimer = null;
+  $("rainStartBtn").disabled = false;
+  $("rainStartBtn").textContent = "Start Word Rain (60 seconds)";
   document.querySelectorAll(".rain-word").forEach((el) => el.remove());
   $("rainArea").classList.add("hidden");
   const total = rain.caught + rain.missed;
