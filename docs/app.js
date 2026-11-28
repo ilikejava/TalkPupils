@@ -2196,7 +2196,7 @@ function initType() {
 const study = { hideMeanings: false };
 function unitName(u) {
   if (u === "my") return "My words";
-  if (u === 201) return "Zeen's Cloze Words"; // P4 cloze workbook words (added v41)
+  if (typeof u === "number" && u >= 201 && u <= 235) return "Zeen's Cloze Words " + (u - 200); // P4 cloze workbook words, split into small units (v45)
   if (typeof u === "number" && u >= 101) return "Spelling Week " + (u - 100);
   const names = { 1: "Coolie Boy", 2: "Amazing Friends", 3: "Ten", 4: "The Promise",
     5: "A Game of Emails", 6: "Martial Arts", 7: "Dogs with Jobs",
